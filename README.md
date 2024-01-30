@@ -3,6 +3,8 @@ App for field workers to extend health service from the hospital to the home
 
 Docs: https://docs.google.com/document/d/1HOCAGck4yl1OeI3txnPmTXfqWbdXOTvZbh_p6G-KVW8/edit?usp=sharing
 
+Figma Design Files: https://www.figma.com/files/project/198350664/Team-project?fuid=1113531776039202105
+
 ## Project Structure
 
 1. Frontend Application
@@ -11,7 +13,6 @@ Docs: https://docs.google.com/document/d/1HOCAGck4yl1OeI3txnPmTXfqWbdXOTvZbh_p6G
    3. [Supervisor Admin Web Application](./supervisor-admin-web-app)
 2. Backend (common server for all frontend applications)
    1. [Server](./server) 
-
 
 ### Use Case Diagram Link
 
