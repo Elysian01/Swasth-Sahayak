@@ -1,0 +1,19 @@
+.primary-btn {
+    background-color: var(--primary);
+    border: none;
+    float: center;
+    color: #fff;
+    padding: 10px 55px;
+    font-size: 22px;
+    border-radius: 20px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.primary-btn:hover {
+    scale: 1.1;
+    border: 1px solid var(--primary);
+    background-color: transparent;
+    color: var(--primary);
+    transition: 0.4s;
+}
