@@ -12,7 +12,17 @@ Figma Design Files: https://www.figma.com/files/project/198350664/Team-project?f
    2. [Doctor Web Application](./doctor-web-app)
    3. [Supervisor Admin Web Application](./supervisor-admin-web-app)
 2. Backend (common server for all frontend applications)
-   1. [Server](./server) 
+   1. [Server](./server)
+  
+## Major Challenge Encountered
+
+1. Multilingual Integration:
+2. Tablet App working in offline mode
+3. System Design for hospital, doctor, health-worker, patient management
+4. 
+
+## Assumptions
+
 
 ### Use Case Diagram Link
 
