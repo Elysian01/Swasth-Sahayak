@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="./css/config.css">
+    <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/doctor-dashboard.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +17,137 @@
 </head>
 
 <body>
-    
+    <br><br><br>
+    <main class = "main-container">
+        <div class="row1">
+            <div class="col1">
+                <div class="statistics">
+                    <div class="appointments">
+                        <div id="title">Visits for Today</div>
+                        <div class="font-64">26</div>
+                    </div>
+                    <div class="patient-details">
+                        <div class="white-bg">
+                            <label>New Patient</label>
+                            <label>16</label>
+                        </div>
+                        <div class="white-bg">
+                            <label>Old Patient</label>
+                            <label>10</label>
+                        </div>
+                    </div>
+                </div>
+                <img src="./static/doctor-dashboard-card-bg-1.png" alt="">
+            </div>
+            <div class="col2">
+                <img src="./static/doctor-dashboard-card-bg-2.png" alt="doctor avatar">
+                <div class="contents">
+                    <h1>Chat with a Doctor</h1>
+                    <button class="white-btn">Chat</button>
+                </div>
+            </div>
+            <div class="col3">
+                <img src="./static/doctor-dashboard-card-bg-3.png" alt="doctor avatar">
+                <div class="contents">
+                    <h1>Region & Disease</h1>
+                    <button class="white-btn">Search Records</button>
+                </div>
+            </div>
+        </div>
+        <br>
+
+
+
+        <div class="row2">
+            <div class="col1">
+                <div class="section1">
+                    <h2>Appointments</h2>
+                    <ul class="cards">
+                        <li class="card">
+                            <div class="inner">
+                                <div class="avatar-holder">
+                                    <span class="named-avatar">
+                                        AB
+                                    </span>
+                                </div>
+                                <div class="info-holder">
+                                    <p class="name">
+                                        Abhishek Gupta
+                                    </p>
+                                    <p class="score">
+                                        Score: 23/30
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="pink-btn">View</div>
+                        </li>
+                        <li class="card">
+                            <div class="inner">
+                                <div class="avatar-holder">
+                                    <span class="named-avatar">
+                                        AB
+                                    </span>
+                                </div>
+                                <div class="info-holder">
+                                    <p class="name">
+                                        Abhishek Gupta
+                                    </p>
+                                    <p class="score">
+                                        Score: 23/30
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="pink-btn">View</div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="section2">
+                    <h2>Recently Diagnosed</h2>
+                    <ul class="cards">
+                        <li class="card">
+                            <div class="inner">
+                                <div class="avatar-holder">
+                                    <span class="named-avatar">
+                                        JS
+                                    </span>
+                                </div>
+                                <div class="info-holder">
+                                    <p class="name">
+                                        Jass Sadana
+                                    </p>
+                                    <p class="score">
+                                        Score: 06/30
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="pink-btn">View</div>
+                        </li>
+                        <li class="card">
+                            <div class="inner">
+                                <div class="avatar-holder">
+                                    <span class="named-avatar">
+                                        PG
+                                    </span>
+                                </div>
+                                <div class="info-holder">
+                                    <p class="name">
+                                        Priyanshu Gupta
+                                    </p>
+                                    <p class="score">
+                                        Score: 15/30
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="pink-btn">View</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col2"></div>
+        </div>
+    </main>
 </body>
 
 </html>
