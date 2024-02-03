@@ -36,7 +36,7 @@
 
 .nav-item {
     color: var(--primary);
-    font-size: 20px;
+    font-size: 18px;
     padding: 0px 10px;
     text-transform: uppercase;
     font-weight: 700;
@@ -171,7 +171,8 @@
 }
 
 .login-bg img{
-    width: 700px;
+    /* width: 700px; */
+    max-height: 80vh;
 }
 
 .greetings {
@@ -296,17 +297,29 @@
     transition: 0.4s;
 }
 
+.quote {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    font-style: italic;
+}
+
 @media only screen and (max-width: 1200px) {
     .login {
-        flex-direction: column;
+        flex-direction: row;
     }
     
     .login-bg img {
-        width: 90%;
+        /* display: none; */
+        width: 80%;
     }
 
     .login .content {
-        width: 80%;
+        margin: 0 50px;
+    }
+
+    .login .content {
+        width: 60%;
     }
 
     .forgot-password {
@@ -316,4 +329,10 @@
     .login-submit { 
         margin-top: 10px;
     }
+}
+
+@media only screen and (max-width: 600px) { 
+    .login-bg img {
+            display: none;
+        }
 }
