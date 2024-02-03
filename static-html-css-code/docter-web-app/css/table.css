@@ -14,6 +14,13 @@
     text-align: left;
     font-weight: bold;
 }
+.content-table th {
+    text-align: center;
+}
+
+.cell-centered {
+    text-align: center;
+}
 
 .content-table th,
 .content-table td {
@@ -25,8 +32,9 @@
 }
 
 .content-table tbody tr:nth-of-type(even) {
-    /* background-color: #f3f3f3; */
-    background-color: #deeff5;
+    background-color: #f3f3f3;
+    /* background-color: #deeff5; */
+    background-color: #F0FFFF;
 }
 
 .content-table tbody tr:last-of-type {
