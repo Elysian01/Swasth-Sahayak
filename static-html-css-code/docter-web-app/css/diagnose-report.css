@@ -1,0 +1,29 @@
+.red-highlight {
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 5px;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    font-weight: 800;
+}
+
+.yellow-highlight {
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    padding: 5px;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    font-weight: 800;
+}
+
+.green-highlight {
+    color: var(--green);
+        border: 1px solid var(--green);
+        padding: 5px;
+        border-radius: 10px;
+        margin: 10px;
+        text-align: center;
+        font-weight: 800;
+}

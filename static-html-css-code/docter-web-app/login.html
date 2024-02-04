@@ -32,9 +32,9 @@
     
         <ul class="nav-links">
             <li><a class="nav-item" href="/">Home</a></li>
-            <li><a class="nav-item" href="#">Search Patient</a></li>
-            <li><a class="nav-item" href="#">Chat with Doctor</a></li>
-            <li><a class="nav-item" href="./webpages/profile.html">Profile</a></li>
+            <li><a class="nav-item" href="/">Search Patient</a></li>
+            <li><a class="nav-item" href="/">Chat with Doctor</a></li>
+            <li><a class="nav-item" href="/">Profile</a></li>
         </ul>
     </nav>
 
@@ -51,11 +51,11 @@
             </div>
             <h2 class = "login-heading">Login</h2>
             <div class="login-input">
-                <label for="loginemail"><i class="fa fa-solid fa-envelope icon"></i></label>
+                <label for="loginEmail"><i class="fa fa-solid fa-envelope icon"></i></label>
                 <input type="email" id="loginEmail" placeholder="Enter your Employee Email" />
             </div>
             <div class="login-input">
-                <label for="loginpassword"><i class="fa fa-solid fa-lock icon"></i></label>
+                <label for="loginPassword"><i class="fa fa-solid fa-lock icon"></i></label>
                 <input type="password" id="loginPassword" placeholder="Enter your Password" />
                 <i class="fa fa-solid fa-eye"></i>
             </div>
@@ -66,8 +66,39 @@
                 <button class="login-btn">Login</button>
             </div>
         </div>
-        
     </div>
+    <br><br>
+
+    <script>
+        $(document).ready(function () {
+                $('.fa-bars').click(function () {
+                    $('.nav-links').slideToggle(1500);
+                })
+            })
+
+            $(window).scroll(function () {
+                let scroll = $(window).scrollTop();
+                let width = $(window).width()
+
+                if (scroll >= 70 && width >= 995) {
+                    $('nav').addClass("new-nav");
+                }
+
+                else if (scroll == 0 && width >= 995) {
+                    $('nav').removeClass("new-nav");
+                }
+                else if (scroll >= 70 && width < 995) {
+                    $('nav').addClass("new-nav");
+                }
+
+                else if (scroll == 0 && width < 995) {
+                    $('nav').removeClass("new-nav");
+                    $('.nav-heading span').removeClass("black")
+                }
+            })
+        
+
+    </script>
 
     <script>
         const buttons = document.querySelectorAll(".toggle-button");
