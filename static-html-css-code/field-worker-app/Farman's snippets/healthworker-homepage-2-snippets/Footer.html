@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Page Title</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .main-container {
+      background-color: #000;
+      margin-top: 89px;
+      width: 745px;
+      max-width: 100%;
+      height: 1px;
+    }
+
+    @media (max-width: 991px) {
+      .main-container {
+        margin-top: 40px;
+      }
+    }
+
+    .main-title {
+      color: #000;
+      text-align: center;
+      margin-top: 48px;
+      white-space: nowrap;
+      font: 600 24px Playfair Display, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    @media (max-width: 991px) {
+      .main-title {
+        margin-top: 40px;
+        white-space: initial;
+      }
+    }
+
+    .find-patient {
+      border-radius: 9px;
+      box-shadow: 0px 4px 61px 0px rgba(77, 71, 195, 0.4);
+      background-color: #7140fd;
+      margin-top: 37px;
+      width: 369px;
+      max-width: 100%;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+      padding: 22px 60px;
+      font: 700 20px Playfair Display, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    @media (max-width: 991px) {
+      .find-patient {
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="main-container"></header>
+  <header class="main-title">Free Visits On Sector 12</header>
+  <header class="find-patient">Find Patient</header>
+</body>
+</html>
