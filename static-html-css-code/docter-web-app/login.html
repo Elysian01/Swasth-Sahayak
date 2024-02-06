@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a658a7b479.js" crossorigin="anonymous"></script>
+    <title>NavBar & Login</title>
+    <link rel="stylesheet" href="./css/config.css">
+    <link rel="stylesheet" href="./css/login.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nova+Square&display=swap"
+        rel="stylesheet">
+
+    <script src="http://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav id="nav">
+        <div class="nav-logo">
+            <div class="nav-heading">
+                <span href="#"><img id = "logo" src="./static/logo.png" alt="">Swasth Sahayak</span>
+            </div>
+    
+            <div class="hamburger">
+                <a href="#"><i class="fas fa-bars "></i></a>
+            </div>
+        </div>
+    
+        <ul class="nav-links">
+            <li><a class="nav-item" href="/">Home</a></li>
+            <li><a class="nav-item" href="/">Search Patient</a></li>
+            <li><a class="nav-item" href="/">Chat with Doctor</a></li>
+            <li><a class="nav-item" href="/">Profile</a></li>
+        </ul>
+    </nav>
+
+    <br><br><br><br>
+
+    <div class="login">
+        <div class="login-bg">
+            <img src="./static/login-bg-4.png" alt="">
+        </div>
+        <div class="content">
+            <div class="greetings">
+                <h1 class="greetings-1">Welcome to</h1>
+                <h1 class ="greetings-2">Swasth Sahayak</h1>
+            </div>
+            <h2 class = "login-heading">Login</h2>
+            <div class="login-input">
+                <label for="loginEmail"><i class="fa fa-solid fa-envelope icon"></i></label>
+                <input type="email" id="loginEmail" placeholder="Enter your Employee Email" />
+            </div>
+            <div class="login-input">
+                <label for="loginPassword"><i class="fa fa-solid fa-lock icon"></i></label>
+                <input type="password" id="loginPassword" placeholder="Enter your Password" />
+                <i class="fa fa-solid fa-eye"></i>
+            </div>
+            <div class="login-subtext-right">
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </div>
+            <div class="login-submit">
+                <button class="login-btn">Login</button>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+    <script>
+        $(document).ready(function () {
+                $('.fa-bars').click(function () {
+                    $('.nav-links').slideToggle(1500);
+                })
+            })
+
+            $(window).scroll(function () {
+                let scroll = $(window).scrollTop();
+                let width = $(window).width()
+
+                if (scroll >= 70 && width >= 995) {
+                    $('nav').addClass("new-nav");
+                }
+
+                else if (scroll == 0 && width >= 995) {
+                    $('nav').removeClass("new-nav");
+                }
+                else if (scroll >= 70 && width < 995) {
+                    $('nav').addClass("new-nav");
+                }
+
+                else if (scroll == 0 && width < 995) {
+                    $('nav').removeClass("new-nav");
+                    $('.nav-heading span').removeClass("black")
+                }
+            })
+        
+
+    </script>
+
+    <script>
+        const buttons = document.querySelectorAll(".toggle-button");
+            const inputs = document.querySelectorAll("input");
+
+        
+            inputs.forEach((input) => {
+                input.autocomplete = "off";
+                input.spellcheck = false;
+                input.required = true;
+            });
+
+            document.querySelectorAll("button[type='submit']").forEach((submit) => {
+                submit.addEventListener("click", () => {
+                    inputs.forEach((input) => (input.value = ""));
+                });
+            });
+
+            document.querySelectorAll(".fa-eye").forEach((eye) => {
+                eye.addEventListener("click", () => {
+                    const passwordInput = eye.previousElementSibling;
+
+                    if (passwordInput.type === "password") {
+                        passwordInput.type = "text";
+                        eye.classList.remove("fa-eye");
+                        eye.classList.add("fa-eye-slash");
+                    } else {
+                        passwordInput.type = "password";
+                        eye.classList.remove("fa-eye-slash");
+                        eye.classList.add("fa-eye");
+                    }
+                });
+            });
+
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

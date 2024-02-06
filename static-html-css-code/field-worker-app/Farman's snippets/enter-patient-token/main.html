@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 29px;
+      padding: 0 20px;
+      font-size: 20px;
+      box-sizing: border-box;
+    }
+
+    .header {
+      color: #7140fd;
+      text-align: center;
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .details-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px; /* Adjusted gap value */
+      margin-top: 27px;
+      font-size: 18px;
+      color: #000;
+      text-align: left;
+      box-sizing: border-box;
+    }
+
+    .name {
+      font-family: Playfair Display SC, -apple-system, Roboto, Helvetica, sans-serif;
+      font-weight: 700;
+      flex-grow: 1;
+      flex-basis: auto;
+      text-align: left;
+    }
+
+    .id {
+      font-family: Playfair Display, sans-serif;
+      font-weight: 600;
+      text-align: left;
+      margin-top: 0;
+    }
+
+    .patient-token-label,
+    .find-patient-label {
+      color: #000;
+      text-align: left;
+      margin-top: 20px; /* Adjusted margin value */
+      font: 600 24px Playfair Display, -apple-system, Roboto, Helvetica, sans-serif;
+      box-sizing: border-box;
+    }
+
+    .patient-token-input {
+      border-radius: 8px;
+      border: 1px solid #7140fd;
+      background-color: #f0efff;
+      margin-top: 10px; /* Adjusted margin value */
+      width: 100%;
+      padding: 16px;
+      box-sizing: border-box;
+      font: 400 16px/150% Playfair Display, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    .submit-button {
+      color: #fff;
+      text-align: center;
+      font-family: Playfair Display, sans-serif;
+      font-weight: 700;
+      margin-top: 20px; /* Adjusted margin value */
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">A doctor is a person who heals, while a nurse is a person who cares</header>
+  <div class="main-container">
+    <div class="details-container">
+      <div class="name">Hello, Abhishek Gupta</div>
+      <div class="id">ID: 430176</div>
+    </div>
+    <label class="patient-token-label">Enter Patient Token</label>
+    <input class="patient-token-input" type="text" aria-label="Patient Token" aria-role="input" />
+    <div class="submit-button">Submit</div>
+    <div class="find-patient-label">Find Patient</div>
+  </div>
+</body>
+</html>

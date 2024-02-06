@@ -1,0 +1,17 @@
+## Icons
+
+1. https://iconscout.com/icons
+
+## Images
+
+1. https://www.vecteezy.com/vector-art/2065280-medicine-and-healthcare-icon-concept
+
+## Inspiration
+
+1. https://freebiesupply.com/s/medical/
+
+## Codepens
+
+1. https://codepen.io/ecemgo/pen/YzBZjjb
+2. https://medium.com/@AppCode/15-css-chat-box-examples-and-code-ce47c84fba8e
+3. https://www.free-css.com/
