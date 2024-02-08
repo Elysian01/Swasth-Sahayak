@@ -1,23 +1,25 @@
 import './App.css';
-// import Homepage from './pages/Homepage';
-// import Cart from './pages/Cart';
-// import ProductDetail from './pages/ProductDetail';
-// import Profile from './pages/Profile';
+
+import DoctorChat from './pages/DoctorChat';
+import SearchPatient from './pages/SearchPatient';
+import Profile from './pages/Profile';
+import DoctorDashboard from './pages/DoctorDashboard';
+import PageNotFound from './pages/PageNotFound';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      {/* <Router>
+      <Router>
         <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="cart" element={<Cart />} />
+          <Route path="/" element={<DoctorDashboard />} />
+          <Route path="search-patient" element={<SearchPatient />} />
+          <Route path="doctor-chat" element={<DoctorChat />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="product-detail" element={<ProductDetail />} /> */}
-              {/* <Route path="*" element={<NoPage />} /> */}
-      {/* </Routes>
-    </Router> */}
+          <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </Router>
     </div>
   );
 }

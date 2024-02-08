@@ -6,7 +6,7 @@ import "./css/common.css";
 import Navbar from "../components/misc/Navbar";
 
 
-function SearchPatient() {
+function DoctorChat() {
     return (
         <div>
             <Navbar />
@@ -14,4 +14,4 @@ function SearchPatient() {
     )
 }
 
-export default SearchPatient;
+export default DoctorChat;
