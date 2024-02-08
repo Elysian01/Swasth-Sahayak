@@ -1,0 +1,115 @@
+.primary-btn {
+    background-color: var(--primary);
+    border: none;
+    float: center;
+    color: #fff;
+    padding: 10px 55px;
+    font-size: 22px;
+    border-radius: 20px;
+    margin: 10px auto;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+}
+
+.primary-btn:hover {
+    scale: 1.1;
+    border: 1px solid var(--primary);
+    background-color: transparent;
+    color: var(--primary);
+    transition: 0.4s;
+}
+
+.white-btn {
+    background-color: white;
+    border: none;
+    float: center;
+    color: #000;
+    padding: 10px 25px;
+    font-size: 18px;
+    border-radius: 20px;
+    margin: 10px auto;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+}
+
+.white-btn:hover {
+    scale: 1.1;
+    border: 1px solid white;
+    font-weight: bold;
+    background-color: transparent;
+    color: white;
+    transition: 0.4s;
+}
+
+.font-64 {
+    font-size: 64px;
+}
+
+.pink-btn {
+    background-color: transparent;
+    border: none;
+    float: center;
+    font-weight: bold;
+    color: var(--pink);
+    border: 1px solid var(--pink);
+    padding: 10px 25px;
+    font-size: 12px;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+}
+
+.pink-btn:hover {
+    color: #fff;
+    background-color: var(--pink);
+    transition: 0.4s;
+}
+
+
+.purple-btn {
+    background-color: transparent;
+    border: none;
+    float: center;
+    font-weight: bold;
+    color: var(--purple);
+    border: 1px solid var(--purple);
+    padding: 10px 25px;
+    font-size: 12px;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+}
+
+.purple-btn:hover {
+    color: #fff;
+    background-color: var(--purple);
+    transition: 0.4s;
+}
+
+.green-btn {
+    background-color: transparent;
+    border: none;
+    float: center;
+    font-weight: bold;
+    color: var(--green);
+    border: 1px solid var(--green);
+    padding: 10px 25px;
+    font-size: 12px;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+}
+
+.green-btn:hover {
+    color: #fff;
+    background-color: var(--green);
+    transition: 0.4s;
+}
