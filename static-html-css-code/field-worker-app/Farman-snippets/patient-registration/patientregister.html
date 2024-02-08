@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .align-form {
+        display: flex;
+        flex-direction: column;
+        margin: 100px;
+        margin-top: 12px;
+      }
+      .group-2 {
+        display: flex;
+        flex-direction: row;
+      }
+      .button-css {
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        border: none;
+        color: #fff;
+        background-color: #7140fd;
+        border-radius: 8px;
+        text-align: center;
+        height: 50px;
+        width: 200px;
+        font-family: Playfair Display, sans-serif;
+        font-weight: 700;
+        margin-top: 20px; /* Adjusted margin value */
+        box-sizing: border-box;
+        padding-top: 18px;
+        align-self: center;
+      }
+      .first-name,
+      .last-name,
+      .gender,
+      .dob,
+      .Abha-ID,
+      .Phone-Number,
+      .Address,
+      .sector,
+      .pincode,
+      .password,
+      .confirm-password {
+        margin: 10px;
+        flex-grow: 1;
+        align-self: stretch;
+        border-radius: 8px;
+        border: 1px solid #7140fd;
+        background-color: #f0efff;
+        justify-content: center;
+        color: #666;
+        padding: 16px;
+        font: 400 16px/150% Playfair Display, -apple-system, Roboto, Helvetica,
+          sans-serif;
+      }
+      .div-2 {
+        color: #7140fd;
+        font: 600 20px Poppins, sans-serif;
+        text-align: center;
+        padding: 25px;
+      }
+      .div-3{
+        display: flex;
+        justify-content: space-around;
+        font-size: 18px;
+      }
+      .div-6{
+        font-size: 24px;
+        text-align: center;
+        padding: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div">
+      <div class="div-2">
+        A doctor is a person who heals, while a nurse is a person who cares
+      </div>
+      <div class="div-3">
+        <div class="div-4">Hello, Abhishek Gupta</div>
+        <div class="div-5">ID: 430176</div>
+      </div>
+      <div class="div-6">Register User</div>
+      <div class="align-form">
+        <div class="group-2">
+          <input class="first-name" placeholder="First Name" />
+          <input class="last-name" placeholder="Last Name" />
+        </div>
+        <div class="group-2">
+          <input class="gender" placeholder="Gender" />
+          <input class="dob" placeholder="Dob" />
+        </div>
+        <input class="Abha-ID" placeholder="Abha-ID" />
+        <input class="Phone-Number" placeholder="Phone Number" />
+        <input class="Address" placeholder="Address" />
+        <div class="group-2">
+          <input class="sector" placeholder="sector" />
+          <input class="pincode" placeholder="pincode" />
+        </div>
+        <input class="password" placeholder="password" />
+        <input class="confirm-password" placeholder="confirm password" />
+        <button class="button-css">Submit</button>
+      </div>
+    </div>
+  </body>
+</html>

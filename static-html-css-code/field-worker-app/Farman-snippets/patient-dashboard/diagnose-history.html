@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Playfair Display, sans-serif;
+    }
+
+    .main-header {
+      text-align: center;
+      margin-top: 44px;
+      font: 600 26px Playfair Display, -apple-system, Roboto, Helvetica, sans-serif;
+    }
+
+    @media (max-width: 991px) {
+      .main-header {
+        max-width: 100%;
+        margin-top: 40px;
+      }
+    }
+    .table-adjustments{
+      padding: 50px;
+    }
+    table {
+      width:100%;
+      border-collapse: collapse;
+      padding: 20px; /* Padding around the table */
+    }
+
+    th, td {
+      border-top: 1px solid #000; /* Only top border */
+      border-bottom: 1px solid #000; /* Only bottom border */
+      padding: 8px;
+      text-align: center;
+    }
+
+    th:first-child, td:first-child {
+      border-left: none; /* Remove left border for first column */
+    }
+
+    th:last-child, td:last-child {
+      border-right: none; /* Remove right border for last column */
+    }
+
+    .header {
+      font-weight: bold;
+    }
+
+    .image {
+      width: 28px;
+      height: 39.48px; /* Adjusted height for aspect ratio */
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #F7F6FE; /* Set odd row background color to blue */
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #FFFFFF; /* Set even row background color to red */
+    }
+  </style>
+</head>
+<body>
+  <header class="main-header">Diagnose History</header>
+  <div class="table-adjustments">
+  <table>
+    <thead>
+      <tr>
+        <th class="header">Date</th>
+        <th class="header">Disease</th>
+        <th class="header">Questionnaire Score</th>
+        <th class="header">Prescription</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2nd Jan</td>
+        <td>Malaria</td>
+        <td>20/30</td>
+        <td><img loading="lazy" src="eyesvg.svg" class="image" /></td>
+      </tr>
+      <tr>
+        <td>29th Dec</td>
+        <td>Malaria</td>
+        <td>15/30</td>
+        <td><img loading="lazy" src="eyesvg.svg" class="image" /></td>
+      </tr>
+      <tr>
+        <td>29th Dec</td>
+        <td>Malaria</td>
+        <td>15/30</td>
+        <td><img loading="lazy" src="eyesvg.svg" class="image" /></td>
+      </tr>
+      <tr>
+        <td>29th Dec</td>
+        <td>Malaria</td>
+        <td>15/30</td>
+        <td><img loading="lazy" src="eyesvg.svg" class="image" /></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

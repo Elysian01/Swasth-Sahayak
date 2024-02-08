@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
   <style>
+    @font-face {
+      font-family: 'Playfair Display';
+      src: url('static-html-css-code/field-worker-app/Farman-snippets/font.ttf');
+    }
     body {
-      margin: 0;
-      padding: 0;
+      margin: 50px;
+      padding: 50px;
     }
 
     .main-container {
@@ -54,6 +58,8 @@
 
     .patient-token-label,
     .find-patient-label {
+      justify-content: center;
+      display: flex;
       color: #000;
       text-align: left;
       margin-top: 20px; /* Adjusted margin value */
@@ -66,19 +72,33 @@
       border: 1px solid #7140fd;
       background-color: #f0efff;
       margin-top: 10px; /* Adjusted margin value */
-      width: 100%;
+      width: 70%;
       padding: 16px;
       box-sizing: border-box;
       font: 400 16px/150% Playfair Display, -apple-system, Roboto, Helvetica, sans-serif;
     }
 
     .submit-button {
+      cursor: pointer;
+      border: none;
       color: #fff;
+      background-color: #7140fd;
+      border-radius: 8px;
       text-align: center;
+      height: 50px;
+      width: 200px;
       font-family: Playfair Display, sans-serif;
       font-weight: 700;
       margin-top: 20px; /* Adjusted margin value */
       box-sizing: border-box;
+      
+    }
+    .patient-button-alignment {
+      display: flex;
+      justify-content: center;      
+    }
+    .patient-token-input-alignment{
+      padding-left: 25%;
     }
   </style>
 </head>
@@ -90,9 +110,8 @@
       <div class="id">ID: 430176</div>
     </div>
     <label class="patient-token-label">Enter Patient Token</label>
-    <input class="patient-token-input" type="text" aria-label="Patient Token" aria-role="input" />
-    <div class="submit-button">Submit</div>
-    <div class="find-patient-label">Find Patient</div>
+    <div class="patient-token-input-alignment"><input class="patient-token-input" type="text" aria-label="Patient Token" aria-role="input" placeholder="Enter Patient Token"/></div>
+    <div class="patient-button-alignment"><button class="submit-button" >Submit</button></div>
   </div>
 </body>
-</html>
+</html> 
