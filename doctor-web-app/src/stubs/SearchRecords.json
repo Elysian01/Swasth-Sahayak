@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "Patient Name": "Domenic",
+      "Date": "1",
+      "Score": "88,110",
+      "Diagnosis": "https://example.com/diagnosis/domenic",
+      "Prescription": "https://example.com/prescription/domenic"
+    },
+    {
+      "Patient Name": "Sally",
+      "Date": "2",
+      "Score": "72,400",
+      "Diagnosis": "https://example.com/diagnosis/sally",
+      "Prescription": "https://example.com/prescription/sally"
+    },
+    {
+      "Patient Name": "Nick",
+      "Date": "3",
+      "Score": "52,300",
+      "Diagnosis": "https://example.com/diagnosis/nick",
+      "Prescription": "https://example.com/prescription/nick"
+    }
+  ]
+}

@@ -5,15 +5,19 @@ import SearchPatient from './pages/SearchPatient';
 import Profile from './pages/Profile';
 import DoctorDashboard from './pages/DoctorDashboard';
 import PageNotFound from './pages/PageNotFound';
+import SearchRecords from './pages/SearchRecords'
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import DiagnoseReport from './pages/DiagnoseReport';
+import DiagnoseRequest from './pages/DiagnoseRequest';
+
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<DoctorDashboard />} />
+          <Route path="/" element={<SearchRecords />} />
           <Route path="search-patient" element={<SearchPatient />} />
           <Route path="doctor-chat" element={<DoctorChat />} />
           <Route path="profile" element={<Profile />} />
