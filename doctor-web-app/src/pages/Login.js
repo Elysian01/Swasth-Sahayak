@@ -10,37 +10,6 @@ import LoginBG from "../components/misc/LoginBG";
 import InputField from "../components/input_fields/InputField";
 
 function Login() {
-	const buttons = document.querySelectorAll(".toggle-button");
-	const inputs = document.querySelectorAll("input");
-
-	inputs.forEach((input) => {
-		input.autocomplete = "off";
-		input.spellcheck = false;
-		input.required = true;
-	});
-
-	document.querySelectorAll("button[type='submit']").forEach((submit) => {
-		submit.addEventListener("click", () => {
-			inputs.forEach((input) => (input.value = ""));
-		});
-	});
-
-	document.querySelectorAll(".fa-eye").forEach((eye) => {
-		eye.addEventListener("click", () => {
-			const passwordInput = eye.previousElementSibling;
-
-			if (passwordInput.type === "password") {
-				passwordInput.type = "text";
-				eye.classList.remove("fa-eye");
-				eye.classList.add("fa-eye-slash");
-			} else {
-				passwordInput.type = "password";
-				eye.classList.remove("fa-eye-slash");
-				eye.classList.add("fa-eye");
-			}
-		});
-	});
-
 	return (
 		<div>
 			<Navbar />
@@ -58,10 +27,16 @@ function Login() {
 						<h1 className="greetings-2">Swasth Sahayak</h1>
 					</div>
 					<h2 className="login-heading">Login</h2>
+					<div className="subtext">
+						<h3>Please Enter Below Details</h3>
+					</div>
 
-					<InputField type="email" />
+					<InputField
+						type="email"
+						placeholder="Employee Email"
+					/>
 
-					<InputField type="password" />
+					<InputField type="password" placeholder="Password" />
 
 					<div className="login-subtext-right">
 						<Link

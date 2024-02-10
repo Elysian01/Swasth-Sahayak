@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 function InputField(props) {
 	return (
 		<div>
@@ -9,7 +11,10 @@ function InputField(props) {
 					<input
 						type="email"
 						id="loginEmail"
-						placeholder="Enter your Employee Email"
+						placeholder={props.placeholder}
+						required
+						spellCheck={false}
+						autoComplete={false}
 					/>
 				</div>
 			)}
@@ -22,9 +27,11 @@ function InputField(props) {
 					<input
 						type="password"
 						id="loginPassword"
-						placeholder="Enter your Password"
+						placeholder={props.placeholder}
+						required
+						spellCheck={false}
+						autoComplete={false}
 					/>
-					<i className="fa fa-solid fa-eye"></i>
 				</div>
 			)}
 		</div>

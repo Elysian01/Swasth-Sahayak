@@ -29,10 +29,13 @@ function ForgotPassword() {
 					<h2 className="login-heading">Forgot Password</h2>
 
 					<div className="subtext">
-						<h3>Enter Below Details</h3>
+						<h3>Please Enter Below Details</h3>
 					</div>
 
-					<InputField type="email" />
+					<InputField
+						type="email"
+						placeholder="Employee Email"
+					/>
 					<div className="login-submit">
 						<button className="login-btn">Get OTP</button>
 					</div>

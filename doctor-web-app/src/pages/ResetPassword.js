@@ -21,24 +21,27 @@ function ResetPassword() {
 			<div className="login">
 				<LoginBG />
 				<div className="content">
-					<div className="greetings">
-						<h1 className="greetings-1">Welcome to</h1>
-						<h1 className="greetings-2">Swasth Sahayak</h1>
+					<h2 className="login-heading">Reset Password</h2>
+					<div className="subtext">
+						<h3>Please Enter Below Details</h3>
 					</div>
-					<h2 className="login-heading">Login</h2>
 
-					<InputField type="email" />
+					<InputField
+						type="password"
+						placeholder="Old Password"
+					/>
+					<InputField
+						type="password"
+						placeholder="New Password"
+					/>
 
-					<InputField type="password" />
-
-					<div className="login-subtext-right">
-						<a href="#" className="forgot-password">
-							Forgot Password?
-						</a>
-					</div>
+					<InputField
+						type="password"
+						placeholder="Confirm Password"
+					/>
 
 					<div className="login-submit">
-						<button className="login-btn">Login</button>
+						<button className="login-btn">Reset</button>
 					</div>
 				</div>
 			</div>
