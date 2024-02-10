@@ -3,15 +3,46 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import "./css/common.css";
+import "./css/login.css";
 import Navbar from "../components/misc/Navbar";
-
+import LoginBG from "../components/misc/LoginBG";
+import InputField from "../components/input_fields/InputField";
 
 function ForgotPassword() {
-    return (
-        <div>
-            <Navbar />
-        </div>
-    )
+	return (
+		<div>
+			<Navbar />
+
+			<br />
+			<br />
+			<br />
+			<br />
+
+			<div className="login">
+				<LoginBG />
+				<div className="content">
+					<div className="greetings">
+						<h1 className="greetings-1">Welcome to</h1>
+						<h1 className="greetings-2">Swasth Sahayak</h1>
+					</div>
+
+					<h2 className="login-heading">Forgot Password</h2>
+
+					<div className="subtext">
+						<h3>Enter Below Details</h3>
+					</div>
+
+					<InputField type="email" />
+					<div className="login-submit">
+						<button className="login-btn">Get OTP</button>
+					</div>
+				</div>
+			</div>
+			<br />
+			<br />
+			<br />
+		</div>
+	);
 }
 
 export default ForgotPassword;

@@ -1,134 +1,98 @@
-// import "../css/navbar.css";
-// import { useEffect } from "react";
-
-// function Navbar() {
-
-// 	return (
-// 		<nav id="nav">
-// 			<div className="nav-logo">
-// 				<div className="nav-heading">
-// 					<span href="#">
-// 						<img
-// 							id="logo"
-// 							src={require(`../../static/logo.png`)}
-// 							alt=""
-// 						/>
-// 						Swasth Sahayak
-// 					</span>
-// 				</div>
-
-// 				<div className="hamburger">
-// 					<a href="#">
-// 						<i className="fas fa-bars "></i>
-// 					</a>
-// 				</div>
-// 			</div>
-
-// 			<ul className="nav-links">
-// 				<li>
-// 					<a className="nav-item" href="/">
-// 						Home
-// 					</a>
-// 				</li>
-// 				<li>
-// 					<a className="nav-item" href="/">
-// 						Search Patient
-// 					</a>
-// 				</li>
-// 				<li>
-// 					<a className="nav-item" href="/">
-// 						Chat with Doctor
-// 					</a>
-// 				</li>
-// 				<li>
-// 					<a className="nav-item" href="/">
-// 						Profile
-// 					</a>
-// 				</li>
-// 			</ul>
-// 		</nav>
-// 	);
-// }
-
-// export default Navbar;
-
-import React, { useState, useEffect } from "react";
 import "../css/navbar.css";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
-	const [showNavLinks, setShowNavLinks] = useState(false);
-	const [newNav, setNewNav] = useState(false);
-
-	const handleScroll = () => {
-		const scroll = window.scrollY;
-		const width = window.innerWidth;
-
-		if (scroll > 10 && width > 995) {
-			setNewNav(true);
-		} else if (scroll === 0 && width > 995) {
-			setNewNav(false);
-		}
-
-		if (scroll >= 70 && width < 995) {
-			setNewNav(true);
-		} else if (scroll === 0 && width < 995) {
-			setNewNav(false);
-		}
-	};
-
-	const handleToggle = () => {
-		setShowNavLinks(!showNavLinks);
-	};
-
 	useEffect(() => {
+		const handleToggleNav = () => {
+			const navLinks = document.querySelector(".nav-links");
+			navLinks.style.transition = "height 0.3s"; // Adjust transition duration as needed
+
+			if (navLinks.style.display === "block") {
+				navLinks.style.height = "0";
+				setTimeout(() => {
+					navLinks.style.display = "none";
+				}, 50); // Match transition duration
+			} else {
+				navLinks.style.display = "block";
+				setTimeout(() => {
+					navLinks.style.height = "auto";
+				}, 50); // Allow time for display to change before setting height to auto
+			}
+		};
+
+		const handleScroll = () => {
+			const scroll = window.scrollY;
+			const width = window.innerWidth;
+			const nav = document.querySelector("#nav");
+
+			if (scroll >= 70 && width >= 995) {
+				nav.classList.add("new-nav");
+			} else if (scroll === 0 && width >= 995) {
+				nav.classList.remove("new-nav");
+			} else if (scroll >= 70 && width < 995) {
+				nav.classList.add("new-nav");
+			} else if (scroll === 0 && width < 995) {
+				nav.classList.remove("new-nav");
+			}
+		};
+
+		document
+			.querySelector(".hamburger")
+			.addEventListener("click", handleToggleNav);
 		window.addEventListener("scroll", handleScroll);
+
 		return () => {
+			document
+				.querySelector(".hamburger")
+				.removeEventListener("click", handleToggleNav);
 			window.removeEventListener("scroll", handleScroll);
 		};
 	}, []);
 
 	return (
-		<nav className={`nav ${newNav ? "new-nav" : ""}`}>
+		<nav id="nav">
 			<div className="nav-logo">
-				<div className="nav-heading">
-					<span href="#">
-						<img
-							id="logo"
-							src={require(`../../static/logo.png`)}
-							alt=""
-						/>
-						Swasth Sahayak
-					</span>
-				</div>
+				<Link to="/login">
+					<div className="nav-heading">
+						<span>
+							<img
+								id="logo"
+								src={require(`../../static/logo.png`)}
+								alt=""
+							/>
+							Swasth Sahayak
+						</span>
+					</div>
+				</Link>
 
-				<div className="hamburger" onClick={handleToggle}>
-					<i className="fas fa-bars"></i>
+				<div className="hamburger">
+					<a href="#">
+						<i className="fas fa-bars "></i>
+					</a>
 				</div>
 			</div>
 
-			<ul
-				className="nav-links"
-				style={{ display: showNavLinks ? "block" : "none" }}
-			>
+			<ul className="nav-links">
 				<li>
-					<a className="nav-item" href="/">
+					<Link className="nav-item" to="/doctor-dashboard">
 						Home
-					</a>
+					</Link>
 				</li>
 				<li>
-					<a className="nav-item" href="/">
+					<Link className="nav-item" to="/search-patient">
 						Search Patient
-					</a>
+					</Link>
 				</li>
 				<li>
-					<a className="nav-item" href="/">
+					<Link className="nav-item" to="/doctor-chat">
 						Chat with Doctor
-					</a>
+					</Link>
 				</li>
 				<li>
-					<a className="nav-item" href="/">
+					<Link className="nav-item" to="/profile">
 						Profile
-					</a>
+					</Link>
 				</li>
 			</ul>
 		</nav>
