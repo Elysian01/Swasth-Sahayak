@@ -34,7 +34,7 @@ function App() {
 					/>
 					<Route
 						path="search-patient"
-						element={<SearchPatient />}
+						element={<SearchRecords />}
 					/>
 					<Route
 						path="search-records"

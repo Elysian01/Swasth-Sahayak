@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "artifact_id": 1,
+      "field_worker_assigned": "John",
+      "date": "2024-02-10",
+      "score": "88,110",
+      "diagnosis": "https://example.com/diagnosis1",
+      "prescription": "https://example.com/prescription1",
+      "download": "https://example.com/download1"
+    },
+    {
+      "artifact_id": 2,
+      "field_worker_assigned": "Alice",
+      "date": "2024-02-11",
+      "score": "72,400",
+      "diagnosis": "https://example.com/diagnosis2",
+      "prescription": "https://example.com/prescription2",
+      "download": "https://example.com/download2"
+    },
+    {
+      "artifact_id": 3,
+      "field_worker_assigned": "Bob",
+      "date": "2024-02-12",
+      "score": "52,300",
+      "diagnosis": "https://example.com/diagnosis3",
+      "prescription": "https://example.com/prescription3",
+      "download": "https://example.com/download3"
+    }
+  ]
+}

@@ -56,7 +56,7 @@ function SearchRecords() {
   return (
     <div>
       <Navbar />
-      <header className="main-header">Patient Diagnose Request</header>
+      <header className="main-header">Search Records</header>
       {loading ? (
         <p>Loading...</p>
       ) : (
