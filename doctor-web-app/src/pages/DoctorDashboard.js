@@ -103,7 +103,7 @@ function DoctorDashboard() {
 							noOfCards="3"
 						/>
 					</div>
-					<div class="col2">
+					<div class="col2" style={{ paddingLeft: "50px" }}>
             <br></br>
 						<h2>Patient Diagnosed Request</h2>
 						{loading ? (
