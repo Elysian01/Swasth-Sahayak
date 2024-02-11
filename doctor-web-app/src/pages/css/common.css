@@ -47,6 +47,52 @@
     font-size: 64px;
 }
 
+
+.small-primary-btn {
+    background-color: transparent;
+        border: none;
+        float: center;
+        font-weight: bold;
+        color: var(--primary);
+        border: 1px solid var(--primary);
+        padding: 10px 25px;
+        font-size: 12px;
+        border-radius: 10px;
+        margin: 10px;
+        text-align: center;
+        outline: none;
+        cursor: pointer;
+}
+
+.small-primary-btn:hover {
+    color: #fff;
+    background-color: var(--primary);
+    transition: 0.4s;
+}
+
+.dark-primary-small-btn {
+    background-color: transparent;
+        border: none;
+        float: center;
+        font-weight: bold;
+        color: var(--primary-dark);
+        border: 1px solid var(--primary-dark);
+        padding: 10px 25px;
+        font-size: 12px;
+        border-radius: 10px;
+        margin: 10px;
+        text-align: center;
+        outline: none;
+        cursor: pointer;
+}
+
+.dark-primary-small-btn:hover {
+    color: #fff;
+    background-color: var(--primary-dark);
+    scale: 1.08;
+    transition: 0.4s;
+}
+
 .pink-btn {
     background-color: transparent;
     border: none;
@@ -69,11 +115,31 @@
     transition: 0.4s;
 }
 
+.dark-primary-btn {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    color: var(--primary-dark);
+    border: 1px solid var(--primary-dark);
+    padding: 10px 25px;
+    font-size: 1rem;
+    margin: auto;
+    border-radius: 10px;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+}
+
+.dark-primary-btn:hover {
+    color: #fff;
+    background-color: var(--primary-dark);
+    transition: 0.4s;
+}
+
 
 .purple-btn {
     background-color: transparent;
     border: none;
-    float: center;
     font-weight: bold;
     color: var(--purple);
     border: 1px solid var(--purple);

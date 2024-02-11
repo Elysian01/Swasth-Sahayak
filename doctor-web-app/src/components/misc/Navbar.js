@@ -53,7 +53,7 @@ function Navbar() {
 	return (
 		<nav id="nav">
 			<div className="nav-logo">
-				<Link to="/login">
+				<Link to="/doctor-dashboard">
 					<div className="nav-heading">
 						<span>
 							<img

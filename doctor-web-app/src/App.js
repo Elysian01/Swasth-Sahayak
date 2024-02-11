@@ -24,7 +24,7 @@ function App() {
 						path="/doctor-dashboard"
 						element={<DoctorDashboard />}
 					/>
-					<Route path="/login" element={<Login />} />
+					<Route path="/" element={<Login />} />
 					<Route
 						path="/forgot-password"
 						element={<ForgotPassword />}
