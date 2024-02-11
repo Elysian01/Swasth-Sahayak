@@ -42,7 +42,7 @@ function App() {
 						element={<SearchRecords />}
 					/>
 					<Route path="doctor-chat" element={<DoctorChat />} />
-					<Route path="profile" element={<DoctorDashboard />} />
+					<Route path="profile" element={<DiagnoseRequest />} />
 					<Route
 						path="diagnose-report"
 						element={<DiagnoseReport />}

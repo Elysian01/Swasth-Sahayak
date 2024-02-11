@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Table from "../components/tables/Listings";
 import axios from "axios";
 import "./css/common.css";
+import "./css/searchRecords.css";
 import Navbar from "../components/misc/Navbar";
-import viewIcon from "../static/icons/eye.png"
+import viewIcon from "../static/icons/eye.png";
+import diagnoseImage from "../static/imgs/diagnose-request.png";
 
 function DiagnoseRequest() {
   const [tableData, setTableData] = useState([]);
@@ -36,35 +38,49 @@ function DiagnoseRequest() {
     "Questionnaire Score",
     "Appointment Date & Time",
     "Chat",
-    "View"
+    "View",
   ];
 
   const renderChatButton = (chatUrl) => (
-    <button onClick={() => handleChatClick(chatUrl)}className="chat-button">Chat</button>
+    <button onClick={() => handleChatClick(chatUrl)} className="chat-button">
+      Chat
+    </button>
   );
 
   const renderViewButton = (viewUrl) => (
-    <button onClick={() => handleViewClick(viewUrl)}className="view-button">
-        <img src={viewIcon} alt="View" />
-        </button>
+    <button onClick={() => handleViewClick(viewUrl)} className="view-button">
+      <img src={viewIcon} alt="View" />
+    </button>
   );
 
   return (
     <div>
       <Navbar />
-      <header className="main-header">Patient Diagnose Request</header>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <Table
-          columns={columns}
-          data={tableData.map((row) => ({
-            ...row,
-            Chat: renderChatButton(row.Chat),
-            View: renderViewButton(row.View)
-          }))}
-        />
-      )}
+      <div className="page-setup">
+        <div className="table-container">
+          <header className="main-header">Patient Diagnose Request</header>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <Table
+              columns={columns}
+              data={tableData.map((row) => ({
+                ...row,
+                Chat: renderChatButton(row.Chat),
+                View: renderViewButton(row.View),
+              }))}
+            />
+          )}
+          <button className="pink-btn">Go back to dashboard</button>
+        </div>
+        <div className="diagnose-options">
+          <img
+            src={diagnoseImage}
+            alt="diagnose-photo"
+            className="diagnose-request"
+          />
+        </div>
+      </div>
     </div>
   );
 }
