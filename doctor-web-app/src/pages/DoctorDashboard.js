@@ -43,15 +43,14 @@ function DoctorDashboard() {
 	const columns = [
 		"Name",
 		"Questionnaire",
-		"Chat",
-		"View",
+		"View Diagnose",
 	];
 
-  const renderChatButton = (chatUrl) => (
-    <button onClick={() => handleChatClick(chatUrl)} className="chat-button">
-      Chat
-    </button>
-  );
+  // const renderChatButton = (chatUrl) => (
+  //   <button onClick={() => handleChatClick(chatUrl)} className="primary-btn">
+  //     Chat
+  //   </button>
+  // );
 
 	const renderViewButton = (viewUrl) => (
 		<button
@@ -105,6 +104,7 @@ function DoctorDashboard() {
 						/>
 					</div>
 					<div class="col2">
+            <br></br>
 						<h2>Patient Diagnosed Request</h2>
 						{loading ? (
 							<p>Loading...</p>
@@ -114,8 +114,7 @@ function DoctorDashboard() {
 								data={tableData.map((row) => ({
 									Name: row.name,
                   Questionnaire: row.questionnaire,
-                  Chat: renderChatButton(row.Chat),
-                  View: renderViewButton(row.View),
+                  "View Diagnose": renderViewButton(row.View),
 								}))}
 							/>
 						)}
