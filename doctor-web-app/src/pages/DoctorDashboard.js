@@ -32,19 +32,26 @@ function DoctorDashboard() {
 		fetchData();
 	}, []);
 
+  const handleChatClick = (chatUrl) => {
+    window.open(chatUrl, "_blank");
+  };
+  
 	const handleViewClick = (viewUrl) => {
 		window.open(viewUrl, "_blank");
 	};
 
 	const columns = [
-		"First Name",
-		"Last Name",
-		"VisitID",
-		"Appointment Date & Time",
-		"Status",
-		"Disease",
+		"Name",
+		"Questionnaire",
+		"Chat",
 		"View",
 	];
+
+  const renderChatButton = (chatUrl) => (
+    <button onClick={() => handleChatClick(chatUrl)} className="chat-button">
+      Chat
+    </button>
+  );
 
 	const renderViewButton = (viewUrl) => (
 		<button
@@ -55,15 +62,7 @@ function DoctorDashboard() {
 		</button>
 	);
 
-	const getStatusClassName = (status) => {
-		if (status === "cured") {
-			return "status-cured"; // Apply CSS class for cured status
-		} else if (status === "severe") {
-			return "status-severe"; // Apply CSS class for severe status
-		} else {
-			return "status-on-going"; // No additional CSS class for other statuses
-		}
-	};
+	
 
 	return (
 		<div>
@@ -106,32 +105,20 @@ function DoctorDashboard() {
 						/>
 					</div>
 					<div class="col2">
-						<h2>Recently Diagnosed Patient</h2>
-						{/* {loading ? (
+						<h2>Patient Diagnosed Request</h2>
+						{loading ? (
 							<p>Loading...</p>
 						) : (
 							<Table
 								columns={columns}
 								data={tableData.map((row) => ({
-									"First Name": row.firstName,
-									"Last Name": row.lastName,
-									VisitID: row.visitID,
-									"Appointment Date & Time":
-										row.appointmentDateTime,
-									Status: (
-										<span
-											className={getStatusClassName(
-												row.status
-											)}
-										>
-											{row.status}
-										</span>
-									),
-									Disease: row.disease,
-									View: renderViewButton(row.view),
+									Name: row.name,
+                  Questionnaire: row.questionnaire,
+                  Chat: renderChatButton(row.Chat),
+                  View: renderViewButton(row.View),
 								}))}
 							/>
-						)} */}
+						)}
 					</div>
 				</div>
 			</main>
