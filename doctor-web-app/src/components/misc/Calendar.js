@@ -10,7 +10,7 @@ function Calendar() {
   };
 
   return (
-    <div>
+    <div style={{padding: 90}}>
       <h2>Select a Date:</h2>
       <DatePicker selected={selectedDate} onChange={handleDateChange} />
     </div>

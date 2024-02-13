@@ -14,6 +14,7 @@ import DoctorDashboard from "./pages/DoctorDashboard";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Artifacts from "./pages/Artifacts";
+import Calendar from "./components/misc/Calendar";
 
 function App() {
 	return (
@@ -42,7 +43,7 @@ function App() {
 						element={<SearchRecords />}
 					/>
 					<Route path="doctor-chat" element={<DoctorChat />} />
-					<Route path="profile" element={<DiagnoseRequest />} />
+					<Route path="profile" element={<Calendar />} />
 					<Route
 						path="diagnose-report"
 						element={<DiagnoseReport />}
