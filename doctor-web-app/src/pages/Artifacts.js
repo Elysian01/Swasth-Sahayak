@@ -3,11 +3,13 @@ import Table from "../components/tables/Listings";
 import axios from "axios";
 import "./css/common.css";
 import Navbar from "../components/misc/Navbar";
-import DownloadIcon from "../static/icons/DownloadPdf.png"
+import DownloadIcon from "../static/icons/DownloadPdf.png";
 
 function Artifacts() {
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(5);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +32,7 @@ function Artifacts() {
   const handlePrescriptionClick = (viewUrl) => {
     window.open(viewUrl, "_blank");
   };
+
   const handleDownloadClick = (viewUrl) => {
     window.open(viewUrl, "_blank");
   };
@@ -43,20 +46,53 @@ function Artifacts() {
     "Prescription",
     "Download",
   ];
-  
 
   const renderDiagnosisButton = (chatUrl) => (
-    <button onClick={() => handleDiagnosisClick(chatUrl)}className="chat-button">View</button>
+    <button onClick={() => handleDiagnosisClick(chatUrl)} className="pink-btn">
+      View
+    </button>
   );
 
   const renderPrescriptionButton = (viewUrl) => (
-    <button onClick={() => handlePrescriptionClick(viewUrl)}className="chat-button">View</button>
+    <button
+      onClick={() => handlePrescriptionClick(viewUrl)}
+      className="pink-btn"
+    >
+      View
+    </button>
   );
-  const renderDownloadnButton = (viewUrl) => (
-    <button onClick={() => handleDownloadClick(viewUrl)}className="download-button">
-        <img src={DownloadIcon} alt="View" />
-        </button>
+
+  const renderDownloadButton = (viewUrl) => (
+    <button
+      onClick={() => handleDownloadClick(viewUrl)}
+      className="download-button"
+    >
+      <img src={DownloadIcon} alt="Download" />
+    </button>
   );
+
+  // Calculate total pages
+  const totalPages = Math.ceil(tableData.length / perPage);
+
+  // Get current entries for the current page
+  const currentEntries = tableData.slice(
+    (currentPage - 1) * perPage,
+    currentPage * perPage
+  );
+
+  // Function to handle next page
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Function to handle previous page
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <div>
@@ -67,17 +103,32 @@ function Artifacts() {
       ) : (
         <Table
           columns={columns}
-          data={tableData.map((row) => ({
+          data={currentEntries.map((row) => ({
             "Artifact ID": row.artifact_id,
             "Field Worker Assigned": row.field_worker_assigned,
-            "Date": row.date,
-            "Score": row.score,
-            "Diagnosis": renderDiagnosisButton(row.diagnosis),
-            "Prescription": renderPrescriptionButton(row.prescription),
-            "Download": renderDownloadnButton(row.download)
+            Date: row.date,
+            Score: row.score,
+            Diagnosis: renderDiagnosisButton(row.diagnosis),
+            Prescription: renderPrescriptionButton(row.prescription),
+            Download: renderDownloadButton(row.download),
           }))}
         />
       )}
+      <div style={{ textAlign: "center" }}>
+        {tableData.length > perPage && currentPage > 1 && (
+          <button className="pink-btn" onClick={prevPage}>
+            Previous
+          </button>
+        )}
+        {tableData.length > perPage && currentPage < totalPages && (
+          <button className="pink-btn" onClick={nextPage}>
+            Next
+          </button>
+        )}
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <button className="pink-btn">Go back to patient dashboard</button>
+      </div>
     </div>
   );
 }

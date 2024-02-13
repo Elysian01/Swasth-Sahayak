@@ -8,6 +8,7 @@ import viewIcon from "../static/icons/eye.png";
 
 function SearchRecords() {
   const [tableData, setTableData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dropdown1Value, setDropdown1Value] = useState(""); // State for the first dropdown
   const [dropdown2Value, setDropdown2Value] = useState(""); // State for the second dropdown
@@ -25,6 +26,25 @@ function SearchRecords() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // Apply filters based on dropdown values
+    let filtered = tableData;
+    if (dropdown1Value && !dropdown2Value) {
+      filtered = filtered.filter((row) => row["Region"] === dropdown1Value);
+    } else if (!dropdown1Value && dropdown2Value) {
+      filtered = filtered.filter(
+        (row) => row["Disease Name"] === dropdown2Value
+      );
+    } else if (dropdown1Value && dropdown2Value) {
+      filtered = filtered.filter(
+        (row) =>
+          row["Region"] === dropdown1Value &&
+          row["Disease Name"] === dropdown2Value
+      );
+    }
+    setFilteredData(filtered);
+  }, [tableData, dropdown1Value, dropdown2Value]);
 
   const handleViewClick = (viewUrl) => {
     window.open(viewUrl, "_blank");
@@ -56,9 +76,13 @@ function SearchRecords() {
     </button>
   );
 
-  // Dummy data for dropdowns
-  const dropdown1Options = ["Option 1", "Option 2", "Option 3"];
-  const dropdown2Options = ["Choice A", "Choice B", "Choice C"];
+  // Extracting dropdown options from tableData
+  const dropdown1Options = tableData
+    .map((row) => row["Region"])
+    .filter((value, index, self) => self.indexOf(value) === index);
+  const dropdown2Options = tableData
+    .map((row) => row["Disease Name"])
+    .filter((value, index, self) => self.indexOf(value) === index);
 
   return (
     <div>
@@ -96,7 +120,7 @@ function SearchRecords() {
         ) : (
           <Table
             columns={columns}
-            data={tableData.map((row) => ({
+            data={filteredData.map((row) => ({
               ...row,
               Diagnosis: renderDiagnosis(row.Diagnosis),
               Prescription: renderPrescription(row.Prescription),
