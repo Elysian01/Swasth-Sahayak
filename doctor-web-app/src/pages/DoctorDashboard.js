@@ -32,25 +32,21 @@ function DoctorDashboard() {
 		fetchData();
 	}, []);
 
-  const handleChatClick = (chatUrl) => {
-    window.open(chatUrl, "_blank");
-  };
-  
+	const handleChatClick = (chatUrl) => {
+		window.open(chatUrl, "_blank");
+	};
+
 	const handleViewClick = (viewUrl) => {
 		window.open(viewUrl, "_blank");
 	};
 
-	const columns = [
-		"Name",
-		"Questionnaire",
-		"View Diagnose",
-	];
+	const columns = ["Name", "Questionnaire", "View Diagnose"];
 
-  // const renderChatButton = (chatUrl) => (
-  //   <button onClick={() => handleChatClick(chatUrl)} className="primary-btn">
-  //     Chat
-  //   </button>
-  // );
+	// const renderChatButton = (chatUrl) => (
+	//   <button onClick={() => handleChatClick(chatUrl)} className="primary-btn">
+	//     Chat
+	//   </button>
+	// );
 
 	const renderViewButton = (viewUrl) => (
 		<button
@@ -60,8 +56,6 @@ function DoctorDashboard() {
 			<img src={viewIcon} alt="View" />
 		</button>
 	);
-
-	
 
 	return (
 		<div>
@@ -104,8 +98,8 @@ function DoctorDashboard() {
 						/>
 					</div>
 					<div class="col2" style={{ paddingLeft: "50px" }}>
-            <br></br>
 						<h2>Patient Diagnosed Request</h2>
+						<br />
 						{loading ? (
 							<p>Loading...</p>
 						) : (
@@ -113,8 +107,11 @@ function DoctorDashboard() {
 								columns={columns}
 								data={tableData.map((row) => ({
 									Name: row.name,
-                  Questionnaire: row.questionnaire,
-                  "View Diagnose": renderViewButton(row.View),
+									Questionnaire:
+										row.questionnaire + "/30",
+									"View Diagnose": renderViewButton(
+										row.View
+									),
 								}))}
 							/>
 						)}

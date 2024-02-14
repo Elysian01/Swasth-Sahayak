@@ -90,7 +90,8 @@ td:last-child {
   height: 100%;
 }
 tbody tr:nth-child(odd) {
-  background-color: #f7f6fe; /* Set odd row background color to blue */
+  /* background-color: #d4ebf2;  */
+  background-color: #e8f4f8; /* Set odd row background color to blue */
 }
 
 tbody tr:nth-child(even) {

@@ -80,18 +80,28 @@
     background: transparent;
 }
 
+.login-input input{
+    width: 100%;
+    height: 35px;
+    padding: 0 5px;
+    background: transparent;
+}
+/* 
 .login-input #loginEmail,
 .login-input #loginPassword {
     width: 100%;
     height: 35px;
     padding: 0 5px;
     background: transparent;
-}
+} */
 
-.login-input #loginEmail:focus,
-.login-input #loginPassword:focus {
+.login-input input:focus {
     outline: none;
 }
+/* .login-input #loginEmail:focus,
+.login-input #loginPassword:focus {
+    outline: none;
+} */
 
 .login-input .fa-eye,
 .login-input .fa-eye-slash {
