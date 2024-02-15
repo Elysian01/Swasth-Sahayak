@@ -19,9 +19,32 @@ function DoctorDashboard() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get(
-					"http://localhost:9001/data"
-				);
+				// const response = await axios.get(
+				// 	"http://localhost:9001/data"
+				// );
+				const response = {
+					"data": [
+						{
+							"name": "John Doe",
+							"questionnaire": 10,
+							"chat": "https://example.com/chat1",
+							"view": "https://example.com/view1"
+						},
+						{
+							"name": "Alice Smith",
+							"questionnaire": 20,
+							"chat": "https://example.com/chat2",
+							"view": "https://example.com/view2"
+						},
+						{
+							"name": "Bob Johnson",
+							"questionnaire": 30,
+							"chat": "https://example.com/chat3",
+							"view": "https://example.com/view3"
+						}
+					]
+				}
+				
 				setTableData(response.data); // Accessing data property of the response
 				setLoading(false);
 			} catch (error) {

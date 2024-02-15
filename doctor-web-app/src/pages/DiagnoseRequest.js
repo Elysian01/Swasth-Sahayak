@@ -14,7 +14,33 @@ function DiagnoseRequest() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:9001/data");
+        //const response = await axios.get("http://localhost:9001/data");
+        const response = {
+          "data": [
+            {
+              "Name": "John Doe",
+              "Questionnaire Score": 85,
+              "Appointment Date & Time": "2024-02-10T10:00:00",
+              "Chat": "https://example.com/chat/john_doe",
+              "View": "https://example.com/view/john_doe"
+            },
+            {
+              "Name": "Jane Smith",
+              "Questionnaire Score": 92,
+              "Appointment Date & Time": "2024-02-12T14:30:00",
+              "Chat": "https://example.com/chat/jane_smith",
+              "View": "https://example.com/view/jane_smith"
+            },
+            {
+              "Name": "Michael Johnson",
+              "Questionnaire Score": 78,
+              "Appointment Date & Time": "2024-02-15T09:15:00",
+              "Chat": "https://example.com/chat/michael_johnson",
+              "View": "https://example.com/view/michael_johnson"
+            }
+          ]
+        }
+        
         setTableData(response.data);
         setLoading(false);
       } catch (error) {

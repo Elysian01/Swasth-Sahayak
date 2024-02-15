@@ -14,7 +14,39 @@ function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:9001/data");
+        // const response = await axios.get("http://localhost:9001/data");
+        const response = {
+          "data": [
+            {
+              "firstName": "John",
+              "lastName": "Doe",
+              "visitID": 1,
+              "appointmentDateTime": "2024-02-10T09:00:00",
+              "status": "cured",
+              "disease": "Flu",
+              "view": "https://example.com"
+            },
+            {
+              "firstName": "Alice",
+              "lastName": "Smith",
+              "visitID": 2,
+              "appointmentDateTime": "2024-02-11T10:30:00",
+              "status": "ongoing",
+              "disease": "COVID-19",
+              "view": "https://example.com"
+            },
+            {
+              "firstName": "Bob",
+              "lastName": "Johnson",
+              "visitID": 3,
+              "appointmentDateTime": "2024-02-12T13:45:00",
+              "status": "severe",
+              "disease": "Pneumonia",
+              "view": "https://example.com"
+            }
+          ]
+        }
+        
         setTableData(response.data); // Accessing data property of the response
         setLoading(false);
       } catch (error) {
