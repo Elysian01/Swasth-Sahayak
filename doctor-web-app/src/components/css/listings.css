@@ -20,8 +20,10 @@ body {
   padding: 50px;
 }
 table {
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
+  /* display: flex; */
+  margin: 0 auto;
   padding: 20px; /* Padding around the table */
 }
 

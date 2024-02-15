@@ -23,28 +23,28 @@ function DoctorDashboard() {
 				// 	"http://localhost:9001/data"
 				// );
 				const response = {
-					"data": [
+					data: [
 						{
-							"name": "John Doe",
-							"questionnaire": 10,
-							"chat": "https://example.com/chat1",
-							"view": "https://example.com/view1"
+							name: "John Doe",
+							questionnaire: 10,
+							chat: "https://example.com/chat1",
+							view: "https://example.com/view1",
 						},
 						{
-							"name": "Alice Smith",
-							"questionnaire": 20,
-							"chat": "https://example.com/chat2",
-							"view": "https://example.com/view2"
+							name: "Alice Smith",
+							questionnaire: 20,
+							chat: "https://example.com/chat2",
+							view: "https://example.com/view2",
 						},
 						{
-							"name": "Bob Johnson",
-							"questionnaire": 30,
-							"chat": "https://example.com/chat3",
-							"view": "https://example.com/view3"
-						}
-					]
-				}
-				
+							name: "Bob Johnson",
+							questionnaire: 30,
+							chat: "https://example.com/chat3",
+							view: "https://example.com/view3",
+						},
+					],
+				};
+
 				setTableData(response.data); // Accessing data property of the response
 				setLoading(false);
 			} catch (error) {
@@ -94,7 +94,7 @@ function DoctorDashboard() {
 							image="doctor-chat.png"
 							title="Chat with a Doctor"
 							btnText="Chat"
-							link="doctor-chat"
+							link="/doctor-chat"
 						/>
 
 						<FeatureCard
@@ -114,12 +114,14 @@ function DoctorDashboard() {
 							listingClass="section1"
 							title="Appointments"
 							noOfCards="3"
+							link="/appointments"
 						/>
 
 						<ShortListings
 							listingClass="section2"
-							title="Recently Diagnosed"
+							title="Recently Treated"
 							noOfCards="3"
+							link="/recent-diagnose"
 						/>
 					</div>
 					<div class="col2" style={{ paddingLeft: "50px" }}>

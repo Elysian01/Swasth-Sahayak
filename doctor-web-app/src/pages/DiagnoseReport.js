@@ -20,34 +20,37 @@ function DiagnoseReport() {
 				// 	"http://localhost:9001/data"
 				// );
 				const response = {
-					"data": [
+					data: [
 						{
-							"Date": "1",
+							Date: "1",
 							"Field Worker Assigned": "Domenic",
 							"Questionnaire Score": "88,110",
-							"Diagnosis": "https://example.com/diagnosis1",
-							"Prescription": "https://example.com/prescription1",
-							"Comments": "dcode"
+							Diagnosis: "https://example.com/diagnosis1",
+							Prescription:
+								"https://example.com/prescription1",
+							Comments: "dcode",
 						},
 						{
-							"Date": "2",
+							Date: "2",
 							"Field Worker Assigned": "Sally",
 							"Questionnaire Score": "72,400",
-							"Diagnosis": "https://example.com/diagnosis2",
-							"Prescription": "https://example.com/prescription2",
-							"Comments": "Students"
+							Diagnosis: "https://example.com/diagnosis2",
+							Prescription:
+								"https://example.com/prescription2",
+							Comments: "Students",
 						},
 						{
-							"Date": "3",
+							Date: "3",
 							"Field Worker Assigned": "Nick",
 							"Questionnaire Score": "52,300",
-							"Diagnosis": "https://example.com/diagnosis3",
-							"Prescription": "https://example.com/prescription3",
-							"Comments": "dcode"
-						}
-					]
-				}
-				
+							Diagnosis: "https://example.com/diagnosis3",
+							Prescription:
+								"https://example.com/prescription3",
+							Comments: "dcode",
+						},
+					],
+				};
+
 				setTableData(response.data);
 				setLoading(false);
 			} catch (error) {
@@ -98,7 +101,11 @@ function DiagnoseReport() {
 	return (
 		<div>
 			<Navbar />
+			<h1>Patient Progress</h1>
+
 			<header className="main-header">Patient History</header>
+			<br />
+
 			{loading ? (
 				<p>Loading...</p>
 			) : (

@@ -64,7 +64,23 @@
         cursor: pointer;
 }
 
-.small-primary-btn:hover {
+.medium-primary-btn {
+    background-color: transparent;
+    border: none;
+    float: center;
+    font-weight: bold;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 10px 25px;
+    font-size: 18px;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+}
+
+.small-primary-btn:hover, .medium-primary-btn:hover {
     color: #fff;
     background-color: var(--primary);
     transition: 0.4s;
@@ -179,6 +195,6 @@
     background-color: var(--green);
     transition: 0.4s;
 }
-.main-header{
+/* .main-header{
     padding: 10px;
-  }
+  } */

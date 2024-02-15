@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../css/short-listings.css";
 import ShortListingsCard from "../cards/ShortListingsCard";
 
@@ -23,7 +24,10 @@ function ShortListings(props) {
 					score="23"
 				/>
 			</ul>
-			<button className="dark-primary-btn">View More</button>
+
+			<button className="dark-primary-btn">
+				<Link to={props.link}>View More</Link>
+			</button>
 		</div>
 	);
 }
