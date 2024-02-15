@@ -71,6 +71,7 @@ function DoctorDashboard() {
 							image="doctor-chat.png"
 							title="Chat with a Doctor"
 							btnText="Chat"
+							link="doctor-chat"
 						/>
 
 						<FeatureCard
@@ -78,6 +79,7 @@ function DoctorDashboard() {
 							image="search.png"
 							title="Region & Disease"
 							btnText="Search Records"
+							link="/search-records"
 						/>
 					</div>
 				</div>

@@ -56,6 +56,24 @@ function InputField(props) {
 					/>
 				</div>
 			)}
+
+			{props.type === "text" && (
+				<div className="login-input">
+					<label htmlFor={props.id}>
+						<i className="fa fa-solid fa-key icon"></i>
+					</label>
+					<input
+						type="text"
+						id={props.id}
+						placeholder={props.placeholder}
+						required
+						spellCheck={false}
+						autoComplete="off"
+						onChange={props.onChange}
+						value={props.value}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

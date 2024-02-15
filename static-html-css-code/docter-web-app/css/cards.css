@@ -1,0 +1,76 @@
+.patient-profile-card {
+    display: flex;
+    background-color: var(--primary);
+    color: white;
+    flex-direction: row;
+    padding: 4px 5px;
+    max-width: 350px;
+    margin: 20px;
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.patient-profile-card img {
+    width: 25%;
+    float: left;
+    margin:0;
+    padding: 5px;
+    border-right: 1px solid white;
+
+    /* height: 50px; */
+}
+
+.patient-profile-card .info {
+    padding: 10px;
+    margin-left: 15px;
+}
+
+.patient-profile-card .info-heading {
+    font-weight: bold;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.patient-profile-card .info-text{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+ }
+
+
+.current-diagnosis-card {
+    display: flex;
+    background-color: #DFFDDD;
+    color: black;
+    flex-direction: row;
+    padding: 15px 5px;
+    max-width: 60%;
+    margin: 10px;
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-diagnosis-card .col {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+    align-items: center;
+}
+
+.current-diagnosis-card .col h1 {
+    font-size: 22px;
+}
+
+.current-diagnosis-card .col .col-value {
+    font-size: 20px;
+    padding: 2px;
+}
+
+.current-diagnosis-card .col .col-value img {
+    width: 24px;
+}
+
+
+
