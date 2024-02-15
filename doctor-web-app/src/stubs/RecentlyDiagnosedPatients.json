@@ -4,7 +4,7 @@
       "firstName": "John",
       "lastName": "Doe",
       "visitID": 1,
-      "appointmentDateTime": "2024-02-10T09:00:00",
+      "appointmentDate": "2024-02-10",
       "status": "cured",
       "disease": "Flu",
       "view": "https://example.com"
@@ -13,7 +13,7 @@
       "firstName": "Alice",
       "lastName": "Smith",
       "visitID": 2,
-      "appointmentDateTime": "2024-02-11T10:30:00",
+      "appointmentDate": "2024-02-11",
       "status": "ongoing",
       "disease": "COVID-19",
       "view": "https://example.com"
@@ -22,7 +22,7 @@
       "firstName": "Bob",
       "lastName": "Johnson",
       "visitID": 3,
-      "appointmentDateTime": "2024-02-12T13:45:00",
+      "appointmentDate": "2024-02-12",
       "status": "severe",
       "disease": "Pneumonia",
       "view": "https://example.com"

@@ -8,6 +8,8 @@ import Navbar from "../components/misc/Navbar";
 // Import your diagnosis and prescription images
 import diagnosisImage from "../static/icons/eye.png";
 import prescriptionImage from "../static/icons/eye.png";
+import { Chart } from "chart.js";
+import LineGraph from "../components/misc/LineGraph";
 
 function DiagnoseReport() {
 	const [tableData, setTableData] = useState([]);
@@ -16,41 +18,9 @@ function DiagnoseReport() {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				// const response = await axios.get(
-				// 	"http://localhost:9001/data"
-				// );
-				const response = {
-					data: [
-						{
-							Date: "1",
-							"Field Worker Assigned": "Domenic",
-							"Questionnaire Score": "88,110",
-							Diagnosis: "https://example.com/diagnosis1",
-							Prescription:
-								"https://example.com/prescription1",
-							Comments: "dcode",
-						},
-						{
-							Date: "2",
-							"Field Worker Assigned": "Sally",
-							"Questionnaire Score": "72,400",
-							Diagnosis: "https://example.com/diagnosis2",
-							Prescription:
-								"https://example.com/prescription2",
-							Comments: "Students",
-						},
-						{
-							Date: "3",
-							"Field Worker Assigned": "Nick",
-							"Questionnaire Score": "52,300",
-							Diagnosis: "https://example.com/diagnosis3",
-							Prescription:
-								"https://example.com/prescription3",
-							Comments: "dcode",
-						},
-					],
-				};
-
+				const response = await axios.get(
+					"http://localhost:9001/data"
+				);
 				setTableData(response.data);
 				setLoading(false);
 			} catch (error) {
@@ -101,8 +71,8 @@ function DiagnoseReport() {
 	return (
 		<div>
 			<Navbar />
-			<h1>Patient Progress</h1>
-
+			<h1 className="main-header">Patient Progress</h1>
+			<div className="line-graph"><LineGraph /></div>
 			<header className="main-header">Patient History</header>
 			<br />
 

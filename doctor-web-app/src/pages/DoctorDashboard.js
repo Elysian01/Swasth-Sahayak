@@ -142,6 +142,8 @@ function DoctorDashboard() {
 								}))}
 							/>
 						)}
+						<br/>
+						<button className="medium-primary-btn">View More</button>
 					</div>
 				</div>
 			</main>

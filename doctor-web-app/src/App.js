@@ -61,6 +61,10 @@ function App() {
 						path="/appointments"
 						element={<Appointments />}
 					/>
+					<Route
+						path="/doctor-dashboard"
+						element={<DoctorDashboard />}
+					/>
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>
 			</Router>
