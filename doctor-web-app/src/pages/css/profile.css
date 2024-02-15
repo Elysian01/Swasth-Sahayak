@@ -69,3 +69,7 @@
   padding: 8px 28px;
   font: 12px Playfair Display, sans-serif;
 }
+.button-arrangement{
+  display: flex;
+  flex-direction: column;
+}
