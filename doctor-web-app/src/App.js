@@ -16,6 +16,7 @@ import DoctorDashboard from "./pages/DoctorDashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Calendar from "./components/misc/Calendar";
 import Appointments from "./pages/Appointments";
+import PatientDashboard from "./pages/PatientDashboard";
 
 function App() {
 	return (
@@ -64,6 +65,10 @@ function App() {
 					<Route
 						path="/doctor-dashboard"
 						element={<DoctorDashboard />}
+					/>
+					<Route
+						path="/patient-dashboard"
+						element={<PatientDashboard />}
 					/>
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>

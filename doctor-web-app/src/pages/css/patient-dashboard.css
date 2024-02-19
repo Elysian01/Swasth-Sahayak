@@ -1,0 +1,10 @@
+.header-alignment{
+  display: flex;
+  justify-content: space-around;
+}
+.patient-profile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:50%;
+}

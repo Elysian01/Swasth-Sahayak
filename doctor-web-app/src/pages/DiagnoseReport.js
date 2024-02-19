@@ -1,10 +1,10 @@
+// it should be changed
 import React, { useEffect, useState } from "react";
 import Table from "../components/tables/Listings";
 import axios from "axios";
 import "./css/common.css";
 import "../components/css/listings.css";
 import Navbar from "../components/misc/Navbar";
-
 // Import your diagnosis and prescription images
 import diagnosisImage from "../static/icons/eye.png";
 import prescriptionImage from "../static/icons/eye.png";
