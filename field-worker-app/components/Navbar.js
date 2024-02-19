@@ -6,17 +6,12 @@ import "../AppStyles";
 
 const Navbar = () => {
 	const navigation = useNavigation();
-	const [showNavLinks, setShowNavLinks] = useState(false);
-
-	const toggleNavLinks = () => {
-		setShowNavLinks(!showNavLinks);
-	};
 
 	return (
 		<View style={styles.nav}>
 			<View style={styles.navLogo}>
 				<TouchableOpacity
-					onPress={() => navigation.navigate("DoctorDashboard")}
+					onPress={() => navigation.navigate("Home")}
 				>
 					<View style={styles.navHeading}>
 						<Image
@@ -28,49 +23,38 @@ const Navbar = () => {
 						</Text>
 					</View>
 				</TouchableOpacity>
+			</View>
+
+			<View style={styles.navLinks}>
 				<TouchableOpacity
-					style={styles.hamburger}
-					onPress={toggleNavLinks}
+					onPress={() => navigation.navigate("Home")}
 				>
-					<Text style={styles.hamburgerIcon}>☰</Text>
+					<Text style={styles.navItem}>Home</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => navigation.navigate("RegisterPatient")}
+				>
+					<Text style={styles.navItem}>Register</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => navigation.navigate("PatientLogin")}
+				>
+					<Text style={styles.navItem}>Patient Login</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => navigation.navigate("Profile")}
+				>
+					<Text style={styles.navItem}>Profile</Text>
 				</TouchableOpacity>
 			</View>
-			{showNavLinks && (
-				<View style={styles.navLinks}>
-					{/* <TouchableOpacity
-						onPress={() =>
-							navigation.navigate("DoctorDashboard")
-						}
-					>
-						<Text style={styles.navItem}>Home</Text>
-					</TouchableOpacity> */}
-					<TouchableOpacity
-						onPress={() =>
-							navigation.navigate("SearchPatient")
-						}
-					>
-						<Text style={styles.navItem}>Register</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => navigation.navigate("DoctorChat")}
-					>
-						<Text style={styles.navItem}>Patient Login</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => navigation.navigate("Profile")}
-					>
-						<Text style={styles.navItem}>Profile</Text>
-					</TouchableOpacity>
-				</View>
-			)}
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	nav: {
-		flexDirection: "column",
-		paddingHorizontal: "10%",
+		flexDirection: "row",
+		paddingHorizontal: 25,
 		backgroundColor: "#fff",
 		shadowColor: "#000",
 		shadowOffset: { width: 0, height: 4 },
@@ -101,21 +85,16 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		marginLeft: 10,
 	},
-	hamburger: {
-		marginRight: 10,
-	},
-	hamburgerIcon: {
-		fontSize: 24,
-	},
 	navLinks: {
 		marginTop: 10,
+		flexDirection: "row",
 	},
 	navItem: {
 		color: AppStyles.color.primary,
 		fontSize: 18,
-		fontWeight: 900,
+		fontWeight: "600",
 		paddingVertical: 15,
-		paddingHorizontal: 10,
+		paddingHorizontal: 15,
 	},
 });
 

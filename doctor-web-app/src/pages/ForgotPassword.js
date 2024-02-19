@@ -147,7 +147,7 @@ function ForgotPassword() {
 									className="login-btn"
 									onClick={resetPassword}
 								>
-									Reset to this New Password
+									Reset this as New Password
 								</button>
 							</div>
 						</div>

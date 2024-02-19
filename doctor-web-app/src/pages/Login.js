@@ -36,7 +36,10 @@ function Login() {
 						placeholder="Employee Email"
 					/>
 
-					<InputField type="password" placeholder="Password" />
+					<InputField
+						type="password"
+						placeholder="Enter Password"
+					/>
 
 					<div className="login-subtext-right">
 						<Link

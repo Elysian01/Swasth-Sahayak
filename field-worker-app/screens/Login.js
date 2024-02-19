@@ -1,52 +1,76 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import {
 	View,
 	Text,
-	TextInput,
 	TouchableOpacity,
 	StyleSheet,
+	Image,
+	ScrollView,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
+import "../AppStyles";
 import Navbar from "../components/Navbar";
+import InputField from "../components/InputField";
 
 const Login = () => {
+	const navigation = useNavigation();
+
 	return (
 		<View style={styles.container}>
 			<Navbar />
-			{/* <View style={styles.loginContainer}>
-				<View style={styles.greetings}>
-					<Text style={styles.greetingsText1}>Welcome to</Text>
-					<Text style={styles.greetingsText2}>
-						Swasth Sahayak
-					</Text>
+
+			<ScrollView automaticallyAdjustKeyboardInsets={true}>
+				<View style={styles.loginContainer}>
+					<View style={styles.greetings}>
+						<Text style={styles.greetingsText1}>
+							Welcome to
+						</Text>
+						<Text style={styles.greetingsText2}>
+							Swasth Sahayak
+						</Text>
+					</View>
+
+					<Image
+						style={styles.image}
+						source={require("../assets/images/login-bg.png")}
+					></Image>
+
+					<Text style={styles.loginHeading}>Login</Text>
+					<View>
+						<Text style={styles.subtext}>
+							Please Enter Below Details
+						</Text>
+					</View>
+
+					<InputField
+						type="email"
+						placeholder="Enter Employee Email"
+					/>
+
+					<InputField
+						type="password"
+						placeholder="Enter Password"
+					/>
+
+					<TouchableOpacity
+						onPress={() =>
+							navigation.navigate("ForgotPassword")
+						}
+					>
+						<View style={styles.forgotPasswordDiv}>
+							<Text style={styles.forgotPassword}>
+								Forgot Password?
+							</Text>
+						</View>
+					</TouchableOpacity>
+
+					<TouchableOpacity style={styles.loginButton}>
+						<Text style={styles.loginButtonText}>Login</Text>
+					</TouchableOpacity>
 				</View>
-				<Text style={styles.loginHeading}>Login</Text>
-				<View style={styles.subtext}>
-					<Text>Please Enter Below Details</Text>
-				</View>
-
-				<TextInput
-					style={styles.input}
-					placeholder="Employee Email"
-					keyboardType="email-address"
-				/>
-
-				<TextInput
-					style={styles.input}
-					placeholder="Password"
-					secureTextEntry={true}
-				/>
-
-				<TouchableOpacity>
-					<Text style={styles.forgotPassword}>
-						Forgot Password?
-					</Text>
-				</TouchableOpacity>
-
-				<TouchableOpacity style={styles.loginButton}>
-					<Text style={styles.loginButtonText}>Login</Text>
-				</TouchableOpacity>
-			</View> */}
+			</ScrollView>
 		</View>
 	);
 };
@@ -54,56 +78,59 @@ const Login = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		// Add styles for Navbar
+		margin: 0,
+		padding: 0,
 	},
 	loginContainer: {
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		padding: 20,
+		paddingHorizontal: 20,
 	},
 	greetings: {
+		marginVertical: 40,
 		alignItems: "center",
-		marginBottom: 30,
 	},
 	greetingsText1: {
-		fontSize: 24,
+		fontSize: 40,
 	},
 	greetingsText2: {
-		color: "blue", // your primary color
-		fontSize: 28,
+		color: AppStyles.color.primary,
+		fontSize: 50,
+	},
+	image: {
+		height: 400,
 	},
 	loginHeading: {
-		fontSize: 24,
+		fontSize: 30,
 		marginBottom: 10,
 	},
 	subtext: {
 		marginBottom: 10,
+		fontSize: 18,
 	},
-	input: {
-		width: "100%",
-		height: 40,
-		borderWidth: 1,
-		borderColor: "gray",
-		borderRadius: 5,
-		marginBottom: 10,
-		paddingHorizontal: 10,
+	forgotPasswordDiv: {
+		marginLeft: 350,
+		marginTop: 5,
 	},
 	forgotPassword: {
-		color: "blue", // your primary color
-		textAlign: "right",
-		marginBottom: 10,
+		color: AppStyles.color.primary,
+		fontSize: 16,
+		textDecorationLine: "underline",
 	},
 	loginButton: {
-		backgroundColor: "blue", // your primary color
-		borderRadius: 5,
+		backgroundColor: AppStyles.color.primary,
+		borderRadius: 7,
 		paddingVertical: 10,
-		paddingHorizontal: 20,
+		paddingHorizontal: 50,
+
+		marginTop: 20,
 	},
 	loginButtonText: {
 		color: "white",
 		textAlign: "center",
-		fontSize: 18,
+		fontSize: 24,
+		fontWeight: "600",
 	},
 });
 

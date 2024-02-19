@@ -12,6 +12,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Login from "./screens/Login";
 import HomeScreen from "./screens/HomeScreen";
+import ForgotPassword from "./screens/ForgotPassword";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,10 @@ function App() {
 			>
 				<Stack.Screen name="Login" component={Login} />
 				<Stack.Screen name="Home" component={HomeScreen} />
+				<Stack.Screen
+					name="ForgotPassword"
+					component={ForgotPassword}
+				/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
