@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import "../AppStyles";
+import "../../AppStyles";
 
 const Navbar = () => {
 	const navigation = useNavigation();
@@ -16,7 +16,7 @@ const Navbar = () => {
 					<View style={styles.navHeading}>
 						<Image
 							style={styles.logo}
-							source={require("../assets/logo.png")}
+							source={require("../../assets/logo.png")}
 						/>
 						<Text style={styles.headingText}>
 							Swasth Sahayak
@@ -37,9 +37,9 @@ const Navbar = () => {
 					<Text style={styles.navItem}>Register</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
-					onPress={() => navigation.navigate("PatientLogin")}
+					onPress={() => navigation.navigate("FindPatient")}
 				>
-					<Text style={styles.navItem}>Patient Login</Text>
+					<Text style={styles.navItem}>Find Patient</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
 					onPress={() => navigation.navigate("Profile")}
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		paddingHorizontal: 25,
 		backgroundColor: "#fff",
+		justifyContent: "space-between",
 		shadowColor: "#000",
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.2,

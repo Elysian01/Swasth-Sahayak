@@ -8,7 +8,7 @@ import Navbar from "../components/misc/Navbar";
 // Import your diagnosis and prescription images
 import diagnosisImage from "../static/icons/eye.png";
 import prescriptionImage from "../static/icons/eye.png";
-import { Chart } from "chart.js";
+// import { Chart } from "chart.js";
 import LineGraph from "../components/misc/LineGraph";
 
 function DiagnoseReport() {
@@ -72,7 +72,9 @@ function DiagnoseReport() {
 		<div>
 			<Navbar />
 			<h1 className="main-header">Patient Progress</h1>
-			<div className="line-graph"><LineGraph /></div>
+			<div className="line-graph">
+				<LineGraph />
+			</div>
 			<header className="main-header">Patient History</header>
 			<br />
 

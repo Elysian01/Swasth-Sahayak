@@ -11,8 +11,8 @@ import {
 } from "react-native";
 
 import "../AppStyles";
-import Navbar from "../components/Navbar";
-import InputField from "../components/InputField";
+import Navbar from "../components/headers/Navbar";
+import InputField from "../components/inputs/InputField";
 
 const ForgotPassword = () => {
 	const [email, setEmail] = useState("");
@@ -26,7 +26,6 @@ const ForgotPassword = () => {
 
 	const emailChangeHandler = (e) => {
 		setEmail(e.target.value);
-		// console.log(email);
 	};
 
 	const otpChangeHandler = (e) => {

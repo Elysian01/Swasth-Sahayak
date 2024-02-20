@@ -11,11 +11,22 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 import "../AppStyles";
-import Navbar from "../components/Navbar";
-import InputField from "../components/InputField";
+import Navbar from "../components/headers/Navbar";
+import InputField from "../components/inputs/InputField";
 
 const Login = () => {
 	const navigation = useNavigation();
+
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const emailChangeHandler = (e) => {
+		setEmail(e.target.value);
+	};
+
+	const passwordChangeHandler = (e) => {
+		setPassword(e.target.value);
+	};
 
 	return (
 		<View style={styles.container}>
@@ -45,13 +56,19 @@ const Login = () => {
 					</View>
 
 					<InputField
+						id="email1"
 						type="email"
 						placeholder="Enter Employee Email"
+						onChange={emailChangeHandler}
+						value={email}
 					/>
 
 					<InputField
+						id="pass1"
 						type="password"
 						placeholder="Enter Password"
+						onChange={passwordChangeHandler}
+						value={password}
 					/>
 
 					<TouchableOpacity
@@ -66,7 +83,10 @@ const Login = () => {
 						</View>
 					</TouchableOpacity>
 
-					<TouchableOpacity style={styles.loginButton}>
+					<TouchableOpacity
+						onPress={() => navigation.navigate("Home")}
+						style={styles.loginButton}
+					>
 						<Text style={styles.loginButtonText}>Login</Text>
 					</TouchableOpacity>
 				</View>
@@ -123,8 +143,8 @@ const styles = StyleSheet.create({
 		borderRadius: 7,
 		paddingVertical: 10,
 		paddingHorizontal: 50,
-
 		marginTop: 20,
+		marginBottom: 50,
 	},
 	loginButtonText: {
 		color: "white",

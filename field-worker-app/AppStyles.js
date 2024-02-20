@@ -1,10 +1,8 @@
 export default AppStyles = {
 	color: {
 		red: "#f40d30",
-		// primary: "#0093E4",
+		primaryLight: "#d9f0ef",
 		primary: "#40B5AD",
-		// primary: "blue",
-		// primary: "blue",
 		// primary: "blue",
 		primaryDark: "#0073C2",
 		green: "#009879",
