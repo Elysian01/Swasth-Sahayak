@@ -23,7 +23,7 @@ export default Button;
 const styles = StyleSheet.create({
 	primary: {
 		backgroundColor: AppStyles.color.primary,
-		maxWidth: 250,
+		maxWidth: 300,
 		borderRadius: 7,
 		paddingVertical: 15,
 		paddingHorizontal: 25,

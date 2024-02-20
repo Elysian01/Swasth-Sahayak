@@ -43,8 +43,6 @@ const PatientToken = () => {
 	);
 };
 
-export default PatientToken;
-
 const styles = StyleSheet.create({
 	pageHeading: {
 		textAlign: "center",
@@ -62,3 +60,5 @@ const styles = StyleSheet.create({
 		marginVertical: 18,
 	},
 });
+
+export default PatientToken;

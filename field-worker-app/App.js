@@ -17,7 +17,10 @@ import PatientToken from "./screens/PatientToken";
 import LanguageSelection from "./screens/LanguageSelection";
 import ResetPassword from "./screens/ResetPassword";
 import FindPatient from "./screens/FindPatient";
-
+import Followup from "./screens/Followup";
+import VerifyPatient from "./screens/PatientToken";
+import PatientDashboard from "./screens/PatientDashboard";
+import Profile from "./screens/Profile";
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -47,6 +50,13 @@ function App() {
 					component={ResetPassword}
 				/>
 				<Stack.Screen name="FindPatient" component={FindPatient} />
+				<Stack.Screen name="HomeScreen" component={HomeScreen} />
+				<Stack.Screen name="Profile" component={Profile} />
+				<Stack.Screen name="Followup" component={Followup} />
+				<Stack.Screen
+					name="PatientDashboard"
+					component={PatientDashboard}
+				/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
