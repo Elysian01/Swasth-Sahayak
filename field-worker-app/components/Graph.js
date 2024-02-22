@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { LineChart, Grid } from "react-native-svg-charts";
+// import { LineChart, Grid } from "react-native-svg-charts";
 
 const Graph = () => {
   const data = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80];
