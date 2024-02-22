@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
-
 const PatientInfo = () => {
   const navigation = useNavigation(); // Get navigation object
 
@@ -102,8 +101,8 @@ const styles = StyleSheet.create({
   visitedButton: {
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#7140fd",
-    backgroundColor: "#fff",
+    borderColor: "white",
+    backgroundColor:  AppStyles.color.primary,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 35,
   },
   visitedButtonText: {
-    color: "#7140fd",
+    color: "white",
     fontWeight: "600",
     fontSize: 14,
   },
@@ -127,8 +126,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 12,
     textDecorationLine: "underline",
-    textShadowColor: "rgba(0, 0, 0, 0.25)",
-    textShadowOffset: { width: 0, height: 4 },
     textShadowRadius: 4,
     textAlign: "center",
   },

@@ -1,29 +1,45 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
-
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+} from "react-native";
+import InputField from "../components/inputs/InputField";
 const CurrentDiagnose = () => {
-  const [text, setText] = useState(""); // State to hold the text input value
-
+  const [token, setToken] = useState("");
+  const tokenChangeHandler = (e) => {
+    setToken(e.target.value);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.div2}></View>
       <Text style={styles.div3}>Current Diagnose</Text>
       <View style={styles.alignView}>
         <View style={styles.div4}>
-          <Image source={require("../assets/icons/Doctor.png")} style={styles.img} />
+          <Image
+            source={require("../assets/icons/Doctor.png")}
+            style={styles.img}
+          />
           <View style={styles.div5}>
             <Text style={styles.title}>Dr. Aakash</Text>
-            <Text style={styles.description}>added a comment on Abhishek’s Followup</Text>
+            <Text style={styles.description}>
+              added a comment on Abhishek’s Followup
+            </Text>
           </View>
         </View>
-        <TextInput
-          style={styles.div6}
-          placeholder="Enter text"
-          multiline={true} // Enable multiline
-          numberOfLines={undefined} // Allow dynamic growth
-          value={text}
-          onChangeText={(value) => setText(value)}
-        />
+        <View style={styles.inputs}>
+          <InputField
+            id="token"
+            type="patientDetail"
+            placeholder="Enter Text"
+            onChange={tokenChangeHandler}
+            value={token}
+            lightBackground={true}
+          />
+        </View>
       </View>
       <TouchableOpacity style={styles.submitButton}>
         <Text style={styles.submitButtonText}>Proceed to Diagnosis</Text>
@@ -86,21 +102,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "400",
   },
-  div6: {
-    borderWidth: 1,
-    borderColor: "#000",
-    backgroundColor: "#f5f5f5",
-    borderRadius: 50,
-    marginTop: 22,
-    minHeight: 50,
-    maxHeight: 300, // Set a maximum height for the input
-    width: "100%",
-    paddingHorizontal: 20,
-    paddingVertical: 20, // Reduce vertical padding for better appearance
-    textAlignVertical: 'top', // Align text to the top
+  inputs:{
+    display: "flex",
+		flexDirection: "column",
+    alignSelf: "center",
   },
   submitButton: {
-    backgroundColor: "#7140fd",
+    backgroundColor: AppStyles.color.primary,
     borderRadius: 8,
     height: 50,
     width: 200,

@@ -34,7 +34,7 @@ const PatientToken = () => {
 				<View style={styles.btn}>
 					<Button
 						type="primary"
-						navigateTo="Home"
+						navigateTo="PatientDashboard"
 						text="Submit"
 					/>
 				</View>
