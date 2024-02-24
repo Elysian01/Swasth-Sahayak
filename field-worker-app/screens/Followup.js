@@ -2,17 +2,15 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import PatientRecords from "../components/PatientRecords"; // Import the PatientRecords component
 import Footer from "../components/Footer";
-
+import Navbar from "../components/headers/Navbar";
+import WorkerDetails from "../components/headers/WorkerDetails";
 const Followup = () => {
-  const abhishekName = "Abhishek"; // Replace with actual name
-  const randomId = Math.floor(Math.random() * 1000); // Generate random ID
+ 
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>Hello {abhishekName}</Text>
-        <Text>Random ID: {randomId}</Text>
-      </View>
+      <Navbar />
+      <WorkerDetails />
       <Text style={styles.text}>Followup Schedule</Text>
       <PatientRecords /> 
       <Footer/>
@@ -23,9 +21,9 @@ const Followup = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 40,
   },
   header: {
+    padding:20,
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 20,

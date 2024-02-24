@@ -36,14 +36,7 @@ const styles = StyleSheet.create({
   findPatientButton: {
     borderWidth: 0,
     borderRadius: 9,
-    shadowColor: "#4D47C3",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 61,
-    backgroundColor: "#7140fd",
+    backgroundColor: AppStyles.color.primary,
     marginTop: 37,
     width: 369,
     maxWidth: "100%",
