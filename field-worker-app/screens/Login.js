@@ -1,9 +1,8 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
 	View,
 	Text,
-	TouchableOpacity,
+	Pressable,
 	StyleSheet,
 	Image,
 	ScrollView,
@@ -14,8 +13,20 @@ import "../AppStyles";
 import Navbar from "../components/headers/Navbar";
 import InputField from "../components/inputs/InputField";
 
+import { loginAPI } from "../api/UserAPI";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { lang } from "../language";
+
+const getLanguage = async () => {
+	return await AsyncStorage.getItem("Language");
+};
+
 const Login = () => {
 	const navigation = useNavigation();
+	const [preferredlangauge, setPreferredLanguage] = useState("English");
+	AsyncStorage.getItem("Language").then((lang) => {
+		setPreferredLanguage(lang);
+	});
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -28,6 +39,27 @@ const Login = () => {
 		setPassword(e.target.value);
 	};
 
+	function handleLogin() {
+		if (email !== "" && password !== "") {
+			loginAPI({
+				email: email,
+				password: password,
+			})
+				.then((result) => {
+					if (result.status == 200) {
+						AsyncStorage.setItem(
+							"AccessToken",
+							result.data.token
+						);
+						navigation.navigate("Home");
+					}
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
+	}
+
 	return (
 		<View style={styles.container}>
 			<Navbar />
@@ -36,10 +68,10 @@ const Login = () => {
 				<View style={styles.loginContainer}>
 					<View style={styles.greetings}>
 						<Text style={styles.greetingsText1}>
-							Welcome to
+							{lang[preferredlangauge]["Welcome to"]}
 						</Text>
 						<Text style={styles.greetingsText2}>
-							Swasth Sahayak
+							{lang[preferredlangauge]["Swasth Sahayak"]}
 						</Text>
 					</View>
 
@@ -48,10 +80,16 @@ const Login = () => {
 						source={require("../assets/images/login-bg.png")}
 					></Image>
 
-					<Text style={styles.loginHeading}>Login</Text>
+					<Text style={styles.loginHeading}>
+						{lang[preferredlangauge]["login"]}
+					</Text>
 					<View>
 						<Text style={styles.subtext}>
-							Please Enter Below Details
+							{
+								lang[preferredlangauge][
+									"Please Enter Below Details"
+								]
+							}
 						</Text>
 					</View>
 
@@ -71,7 +109,7 @@ const Login = () => {
 						value={password}
 					/>
 
-					<TouchableOpacity
+					<Pressable
 						onPress={() =>
 							navigation.navigate("ForgotPassword")
 						}
@@ -81,14 +119,18 @@ const Login = () => {
 								Forgot Password?
 							</Text>
 						</View>
-					</TouchableOpacity>
+					</Pressable>
 
-					<TouchableOpacity
-						onPress={() => navigation.navigate("Home")}
+					<Pressable
+						onPress={() => {
+							handleLogin();
+						}}
 						style={styles.loginButton}
 					>
-						<Text style={styles.loginButtonText}>Login</Text>
-					</TouchableOpacity>
+						<Text style={styles.loginButtonText}>
+							{lang[preferredlangauge]["login"]}
+						</Text>
+					</Pressable>
 				</View>
 			</ScrollView>
 		</View>

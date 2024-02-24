@@ -1,0 +1,11 @@
+/* .table-container {
+  padding: 30px;
+} */
+.dropdown-container{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+.dropdown-container select {
+  margin-right: 10px; /* Add margin between dropdowns */
+}

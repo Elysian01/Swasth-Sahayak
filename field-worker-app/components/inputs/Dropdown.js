@@ -5,18 +5,20 @@ import "../../AppStyles";
 import AppStyles from "../../AppStyles";
 
 const data = [
-	{ id: 1, label: "English" },
-	{ id: 2, label: "हिन्दी" },
+	{ id: 1, label: "English", labelInEnglish: "English" },
+	{ id: 2, label: "हिन्दी", labelInEnglish: "Hindi" },
 ];
 
-const Dropdown = () => {
+const Dropdown = (props) => {
 	const [isOpen, setOpen] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);
 
 	const toggleDropdown = () => setOpen(!isOpen);
 
-	const handleItemClick = (id) => {
+	const handleItemClick = (id, label) => {
 		selectedItem == id ? setSelectedItem(null) : setSelectedItem(id);
+		console.log(label);
+		props.setLang(label);
 		toggleDropdown();
 	};
 
@@ -42,7 +44,12 @@ const Dropdown = () => {
 						<TouchableOpacity
 							key={item.id}
 							style={styles.dropdownItem}
-							onPress={() => handleItemClick(item.id)}
+							onPress={() =>
+								handleItemClick(
+									item.id,
+									item.labelInEnglish
+								)
+							}
 						>
 							<Text
 								style={[

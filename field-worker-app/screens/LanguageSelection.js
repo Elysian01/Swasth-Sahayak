@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Dropdown from "../components/inputs/Dropdown";
 
 const LanguageSelection = () => {
 	const navigation = useNavigation();
+	const [preferredlangauge, setPreferredLanguage] = useState("");
+
+	const checkForLogin = async () => {
+		const token = await AsyncStorage.getItem("AccessToken");
+		if (!token) {
+			navigation.navigate("LanguageSelection");
+		} else {
+			navigation.navigate("Home");
+		}
+	};
+
+	function setLanguage() {
+		if (preferredlangauge !== "") {
+			AsyncStorage.setItem("Language", preferredlangauge);
+			// AsyncStorage.getItem("Language").then((l) => {
+			// 	console.log(l);
+			// });
+			navigation.navigate("Login");
+		}
+	}
+
+	useEffect(() => {
+		setTimeout(() => {
+			checkForLogin();
+		}, 100);
+	});
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.greetings}>
@@ -19,10 +47,13 @@ const LanguageSelection = () => {
 			<Text style={styles.subtext}>
 				Please Enter Your Prefered Language
 			</Text>
-			<Dropdown />
+			<Dropdown
+				lang={preferredlangauge}
+				setLang={setPreferredLanguage}
+			/>
 			<TouchableOpacity
 				style={styles.Button}
-				onPress={() => navigation.navigate("Login")}
+				onPress={() => setLanguage()}
 			>
 				<Text style={styles.ButtonText}>&#x2192;</Text>
 			</TouchableOpacity>
