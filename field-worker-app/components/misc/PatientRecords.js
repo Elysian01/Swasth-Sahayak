@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
-const PatientInfo = () => {
+
+const PatientRecords = () => {
   const navigation = useNavigation(); // Get navigation object
 
   const handleViewRecords = () => {
@@ -135,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PatientInfo;
+export default PatientRecords;

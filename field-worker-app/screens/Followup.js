@@ -1,9 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import PatientRecords from "../components/PatientRecords"; // Import the PatientRecords component
-import Footer from "../components/Footer";
+import PatientRecords from "../components/misc/PatientRecords"; // Import the PatientRecords component
+import Footer from "../components/misc/Footer";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
+
+
 const Followup = () => {
  
 

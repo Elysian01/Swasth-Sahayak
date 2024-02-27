@@ -4,7 +4,16 @@ import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
 import Button from "../components/misc/Button";
 
-const HomeScreen = ({ navigation }) => {
+import { useNavigation } from "@react-navigation/native";
+
+
+const HomeScreen = () => {
+
+	const navigation = useNavigation();
+
+	function downloadData() {
+		navigation.navigate("Followup");
+	}
 	return (
 		<View>
 			<Navbar />
@@ -16,7 +25,7 @@ const HomeScreen = ({ navigation }) => {
 			<View style={styles.btn}>
 				<Button
 					type="primary"
-					navigateTo="Followup"
+					onPress={downloadData()}
 					text="Download Sector Data"
 				/>
 			</View>

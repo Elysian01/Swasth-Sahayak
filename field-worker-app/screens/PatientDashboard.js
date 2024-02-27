@@ -8,11 +8,12 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import CurrentDiagnose from "../components/CurrentDiagnose";
-import DiagnoseHistory from "../components/DiagnoseHistory";
-import Graph from "../components/Graph";
+import CurrentDiagnose from "../components/misc/CurrentDiagnose";
+import DiagnoseHistory from "../components/misc/DiagnoseHistory";
+import Graph from "../components/misc/Graph";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
+
 const PatientDashboard = () => {
   const [text, setText] = useState(""); // State to hold the text input value
 
@@ -21,7 +22,7 @@ const PatientDashboard = () => {
       <Navbar />
       <WorkerDetails />
       <CurrentDiagnose />
-      {/* <Graph/> */}
+      <Graph/>
       <DiagnoseHistory />
     </ScrollView>
   );

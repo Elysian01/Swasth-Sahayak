@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Image,
 } from "react-native";
-import InputField from "../components/inputs/InputField";
+import InputField from "../inputs/InputField";
 const CurrentDiagnose = () => {
   const [token, setToken] = useState("");
   const tokenChangeHandler = (e) => {
@@ -20,7 +20,7 @@ const CurrentDiagnose = () => {
       <View style={styles.alignView}>
         <View style={styles.div4}>
           <Image
-            source={require("../assets/icons/Doctor.png")}
+            source={require("../../assets/icons/Doctor.png")}
             style={styles.img}
           />
           <View style={styles.div5}>

@@ -74,7 +74,6 @@ const Login = () => {
 							{lang[preferredlangauge]["Swasth Sahayak"]}
 						</Text>
 					</View>
-
 					<Image
 						style={styles.image}
 						source={require("../assets/images/login-bg.png")}

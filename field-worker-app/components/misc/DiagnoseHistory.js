@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-
+import Eye from "../../assets/icons/eye.svg";
 const DiagnoseHistory = () => {
   return (
     <View style={styles.container}>
@@ -18,25 +18,33 @@ const DiagnoseHistory = () => {
           <Text style={styles.tableData}>2nd Jan</Text>
           <Text style={styles.tableData}>Malaria</Text>
           <Text style={styles.tableData}>20/30</Text>
-          <Text style={styles.tableData}>View</Text>
+          <View style={styles.eyeContainer}>
+            <Eye />
+          </View>
         </View>
         <View style={styles.tableRow}>
           <Text style={styles.tableData}>2nd Jan</Text>
           <Text style={styles.tableData}>Malaria</Text>
           <Text style={styles.tableData}>20/30</Text>
-          <Text style={styles.tableData}>View</Text>
+          <View style={styles.eyeContainer}>
+            <Eye />
+          </View>
         </View>
         <View style={styles.tableRow}>
           <Text style={styles.tableData}>2nd Jan</Text>
           <Text style={styles.tableData}>Malaria</Text>
           <Text style={styles.tableData}>20/30</Text>
-          <Text style={styles.tableData}>View</Text>
+          <View style={styles.eyeContainer}>
+            <Eye />
+          </View>
         </View>
         <View style={styles.tableRow}>
           <Text style={styles.tableData}>2nd Jan</Text>
           <Text style={styles.tableData}>Malaria</Text>
           <Text style={styles.tableData}>20/30</Text>
-          <Text style={styles.tableData}>View</Text>
+          <View style={styles.eyeContainer}>
+            <Eye />
+          </View>
         </View>
       </View>
     </View>
@@ -77,6 +85,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     flex: 1,
   },
+  eyeContainer: {
+    flex: 1, 
+    alignItems: 'center', 
+  }
 });
 
 export default DiagnoseHistory;

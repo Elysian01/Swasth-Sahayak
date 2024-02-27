@@ -8,12 +8,13 @@ import ForgotPassword from "../screens/ForgotPassword";
 import LanguageSelection from "../screens/LanguageSelection";
 import ResetPassword from "../screens/ResetPassword";
 import FindPatient from "../screens/FindPatient";
-// import Followup from "../screens/Followup";
+import Followup from "../screens/Followup";
 import PatientToken from "../screens/PatientToken";
-// import PatientDashboard from "../screens/PatientDashboard";
 import Profile from "../screens/Profile";
 import RegisterPatient from "../screens/RegisterPatient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import PatientDashboard from "../screens/PatientDashboard"
+
 
 const Stack = createNativeStackNavigator();
 
@@ -46,15 +47,13 @@ const Navigation = () => {
 				/>
 				<Stack.Screen name="FindPatient" component={FindPatient} />
 				<Stack.Screen name="Profile" component={Profile} />
+				<Stack.Screen name="PatientDashboard" component={PatientDashboard} />
 				<Stack.Screen
 					name="RegisterPatient"
 					component={RegisterPatient}
 				/>
-				{/* <Stack.Screen name="Followup" component={Followup} />
-				<Stack.Screen
-					name="PatientDashboard"
-					component={PatientDashboard}
-				/> */}
+				<Stack.Screen name="Followup" component={Followup} />
+			
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
