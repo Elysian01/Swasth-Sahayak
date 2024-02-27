@@ -1,19 +1,18 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
 import Button from "../components/misc/Button";
 
 import { useNavigation } from "@react-navigation/native";
 
-
-const HomeScreen = () => {
-
+const Home = () => {
 	const navigation = useNavigation();
 
 	function downloadData() {
-		navigation.navigate("Followup");
+		console.log("Downloading data...");
 	}
+
 	return (
 		<View>
 			<Navbar />
@@ -23,11 +22,15 @@ const HomeScreen = () => {
 				<Text style={styles.downloadStatus}> Not Downloaded</Text>
 			</Text>
 			<View style={styles.btn}>
-				<Button
-					type="primary"
-					onPress={downloadData()}
-					text="Download Sector Data"
-				/>
+				<Pressable
+					onPress={() => navigation.navigate("Followup", {})}
+				>
+					<Button
+						type="primary"
+						onPress={downloadData()}
+						text="Download Sector Data"
+					/>
+				</Pressable>
 			</View>
 		</View>
 	);
@@ -48,4 +51,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default HomeScreen;
+export default Home;

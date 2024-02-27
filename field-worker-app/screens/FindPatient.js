@@ -7,6 +7,7 @@ import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
 import InputField from "../components/inputs/InputField";
 import Button from "../components/misc/Button";
+import PageHeading from "../components/headers/PageHeading";
 
 const FindPatient = () => {
 	const navigation = useNavigation();
@@ -20,7 +21,8 @@ const FindPatient = () => {
 			<Navbar />
 			<WorkerDetails />
 
-			<Text style={styles.pageHeading}>Find Patient</Text>
+			{/* <Text style={styles.pageHeading}>Find Patient</Text> */}
+			<PageHeading text="find patient" />
 
 			<View style={styles.inputs}>
 				<InputField
