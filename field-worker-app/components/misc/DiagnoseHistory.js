@@ -54,6 +54,7 @@ const DiagnoseHistory = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding:40,
   },
   mainHeader: {
     textAlign: "center",
