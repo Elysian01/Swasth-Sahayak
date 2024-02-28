@@ -66,13 +66,12 @@ const RegisterPatient = () => {
               </Picker>
             )}
           </TouchableOpacity>
-          {/* <TextInput style={styles.input} placeholder="D.O.B" /> */}
           <TouchableOpacity
             style={styles.input}
             onPress={showDatePickerAndroid}
           >
-            <Text style={styles.datePickerButtonText}>
-              {selectedDate.toLocaleDateString()} {/* Display selected date */}
+            <Text style={styles.text}>
+              {selectedDate.toLocaleDateString()} 
             </Text>
 
           </TouchableOpacity>
@@ -143,7 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   text: {
-    color: "#7140fd",
+    color: "#666",
     fontSize: 20,
     fontWeight: "600",
     textAlign: "center",
