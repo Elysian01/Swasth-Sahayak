@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 	},
 	alignForm: {
 		justifyContent: "center",
-
+		alignSelf:"center",
 		margin: "auto",
 		padding: 0,
 		width: "85%",
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		borderWidth: 1,
 		borderColor: AppStyles.color.primary,
-		backgroundColor: "#f0efff",
+		backgroundColor: "#f2f2f2",
 		color: "#666",
 		padding: 16,
 		margin: 8,
