@@ -8,14 +8,14 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from "@react-native-community/datetimepicker";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
 import Button from "../components/misc/Button";
 import PageHeading from "../components/headers/PageHeading";
 import "../AppStyles";
 const RegisterPatient = () => {
-  const [gender, setGender] = useState("male");
+  const [gender, setGender] = useState("Male");
   const [pickerVisible, setPickerVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -24,7 +24,7 @@ const RegisterPatient = () => {
     setShowDatePicker(Platform.OS === "ios");
     if (newDate !== undefined) {
       setSelectedDate(newDate);
-			setShowDatePicker(false);
+      setShowDatePicker(false);
     }
   };
 
@@ -60,9 +60,9 @@ const RegisterPatient = () => {
                 selectedValue={gender}
                 onValueChange={(gender) => handleGenderSelect(gender)}
               >
-                <Picker.Item label="Male" value="male" />
-                <Picker.Item label="Female" value="female" />
-                <Picker.Item label="Other" value="other" />
+                <Picker.Item label="Male" value="Male" />
+                <Picker.Item label="Female" value="Female" />
+                <Picker.Item label="Other" value="Other" />
               </Picker>
             )}
           </TouchableOpacity>
@@ -70,10 +70,7 @@ const RegisterPatient = () => {
             style={styles.input}
             onPress={showDatePickerAndroid}
           >
-            <Text style={styles.text}>
-              {selectedDate.toLocaleDateString()} 
-            </Text>
-
+            <Text style={styles.text}>{selectedDate.toLocaleDateString()}</Text>
           </TouchableOpacity>
           {showDatePicker && (
             <DateTimePicker
@@ -143,9 +140,15 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#666",
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "600",
-    textAlign: "center",
+    textAlign: "auto",
+  },
+  genderText:{
+    alignSelf:'flex-start',
+    fontSize: 16,
+    color: "#666",
+    backgroundColor: "#f2f2f2",
   },
   btn: {
     alignItems: "center",
