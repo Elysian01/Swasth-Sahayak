@@ -6,11 +6,13 @@ import "../../AppStyles";
 
 const Button = (props) => {
 	const navigation = useNavigation();
-
+	console.log("Navi:", props.navigateTo);
 	let btnStyle = "styles." + props.type;
 	return (
 		<TouchableOpacity
-			onPress={() => navigation.navigate(props.navigateTo)}
+			onPress={() =>
+				props.navigateTo && navigation.navigate(props.navigateTo)
+			}
 			style={styles.primary}
 		>
 			<Text style={styles.ButtonText}>{props.text}</Text>

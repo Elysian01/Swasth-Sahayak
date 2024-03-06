@@ -6,6 +6,7 @@ import {
 	StyleSheet,
 	Image,
 	ScrollView,
+	Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -46,16 +47,22 @@ const Login = () => {
 				password: password,
 			})
 				.then((result) => {
-					if (result.status == 200) {
+					if (result.status === 200) {
+						console.log(result);
 						AsyncStorage.setItem(
 							"AccessToken",
-							result.data.token
+							result.data.jwtToken
 						);
+						console.log(result.data.jwtToken);
 						navigation.navigate("Home");
+					} else if (result.status === 401) {
+						console.log(result.status);
+						Alert.alert("Error", result.data, []);
 					}
 				})
 				.catch((error) => {
 					console.log(error);
+					Alert.alert("Error", error);
 				});
 		}
 	}

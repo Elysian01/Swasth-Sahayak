@@ -4,7 +4,7 @@ import { BASE_URL } from "../config";
 const ApiManager = axios.create({
 	baseURL: BASE_URL,
 	responseType: "json",
-	withCredentials: true,
+	withCredentials: false,
 });
 
 export default ApiManager;

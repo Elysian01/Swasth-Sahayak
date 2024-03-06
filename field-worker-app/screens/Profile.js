@@ -1,9 +1,33 @@
-import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
+import {
+	StyleSheet,
+	Text,
+	View,
+	Image,
+	Pressable,
+	TouchableOpacity,
+} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+
 import Navbar from "../components/headers/Navbar";
 import Button from "../components/misc/Button";
 import PageHeading from "../components/headers/PageHeading";
+
 const Profile = () => {
+	const navigation = useNavigation();
+
+	async function logout() {
+		try {
+			console.log("logout");
+			await AsyncStorage.removeItem("AccessToken");
+			console.log("removed access token");
+			navigation.navigate("LanguageSelection");
+		} catch (exception) {
+			console.error(exception);
+			alert("Access Token was not removed");
+		}
+	}
 	return (
 		<View>
 			<Navbar />
@@ -15,19 +39,26 @@ const Profile = () => {
 			<Text style={styles.doctorName}>Aakash Bhardwaj</Text>
 			<Text style={styles.qualification}>Neurosurgeon</Text>
 			<View style={styles.buttonArrangement}>
-				<View style={styles.btn}>
+				<Pressable
+					onPress={() => {
+						navigation.navigate("ResetPassword");
+					}}
+					style={styles.btn}
+				>
 					<Button
 						type="primary"
 						navigateTo="ResetPassword"
 						text="Reset Password"
 					/>
-				</View>
+				</Pressable>
+
 				<View style={styles.btn}>
-					<Button
-						type="primary"
-						navigateTo="Login"
-						text="Logout"
-					/>
+					<TouchableOpacity
+						onPress={() => logout()}
+						style={styles.primary}
+					>
+						<Text style={styles.ButtonText}>Logout</Text>
+					</TouchableOpacity>
 				</View>
 			</View>
 		</View>
@@ -64,5 +95,20 @@ const styles = StyleSheet.create({
 	},
 	btn: {
 		alignSelf: "center",
+	},
+	primary: {
+		backgroundColor: AppStyles.color.primary,
+		maxWidth: 300,
+		borderRadius: 7,
+		paddingVertical: 15,
+		paddingHorizontal: 25,
+		marginVertical: 20,
+		marginHorizontal: 20,
+	},
+	ButtonText: {
+		color: "white",
+		textAlign: "center",
+		fontSize: 20,
+		fontWeight: "600",
 	},
 });

@@ -4,10 +4,10 @@ export const loginAPI = async (data) => {
 	try {
 		console.log("Sending: ", data);
 		proxyData = {
-			username: "a1",
-			password: "a1",
+			username: "xyz",
+			password: "xdyz",
 		};
-		const result = await ApiManager("/login", {
+		const result = await ApiManager("/auth/login", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
