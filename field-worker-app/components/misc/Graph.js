@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-
+import '../../AppStyles';
 const Graph = () => {
   // Sample data for the chart
   const screenWidth = Dimensions.get("window").width;
   const data = {
-    labels: ['Malaria', 'Malaria', 'Malaria', 'Malaria'],
+    labels: ['Malaria', 'Malaria', 'Malaria', 'Malaria', 'Malaria'],
     datasets: [
       {
-        data: [20, 45, 28, 80],
+        data: [20, 45, 28, 80, 66]
       },
     ],
   };
@@ -26,7 +26,7 @@ const Graph = () => {
     <View style={styles.container}>
       <LineChart
         data={data}
-        width={screenWidth}
+        width={screenWidth*0.8}
         height={400}
         chartConfig={chartConfig}
         bezier

@@ -98,6 +98,8 @@ const styles = StyleSheet.create({
 		marginHorizontal: "auto",
 		width: "85%",
 		padding: 15,
+		alignSelf: "center",
+		backgroundColor:'#f2f2f2',
 	},
 	header: {
 		flexDirection: "row",
