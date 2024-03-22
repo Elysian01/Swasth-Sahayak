@@ -8,7 +8,21 @@ import {
   Image,
 } from "react-native";
 import InputField from "../inputs/InputField";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { lang } from "../../database/language";
+
+const getLanguage = async () => {
+	return await AsyncStorage.getItem("Language");
+}
+
 const CurrentDiagnose = () => {
+
+  const [preferredlangauge, setPreferredLanguage] = useState("English");
+	AsyncStorage.getItem("Language").then((lang) => {
+		setPreferredLanguage(lang);
+	});
+
   const [token, setToken] = useState("");
   const tokenChangeHandler = (e) => {
     setToken(e.target.value);
@@ -16,7 +30,7 @@ const CurrentDiagnose = () => {
   return (
     <View style={styles.container}>
       <View style={styles.div2}></View>
-      <Text style={styles.div3}>Current Diagnose</Text>
+      <Text style={styles.div3}>{lang[preferredlangauge]["Current Diagnose"]}</Text>
       <View style={styles.alignView}>
         <View style={styles.div4}>
           <Image
@@ -26,7 +40,8 @@ const CurrentDiagnose = () => {
           <View style={styles.div5}>
             <Text style={styles.title}>Dr. Aakash</Text>
             <Text style={styles.description}>
-              added a comment on Abhishek’s Followup
+            {lang[preferredlangauge]["added a comment on Followup"]}
+              
             </Text>
           </View>
         </View>
@@ -34,7 +49,7 @@ const CurrentDiagnose = () => {
           <InputField
             id="token"
             type="patientDetail"
-            placeholder="Enter Text"
+            placeholder={lang[preferredlangauge]["Enter Text"]}
             onChange={tokenChangeHandler}
             value={token}
             lightBackground={true}
@@ -42,7 +57,7 @@ const CurrentDiagnose = () => {
         </View>
       </View>
       <TouchableOpacity style={styles.submitButton}>
-        <Text style={styles.submitButtonText}>Proceed to Diagnosis</Text>
+        <Text style={styles.submitButtonText}>{lang[preferredlangauge]["Proceed to Diagnosis"]}</Text>
       </TouchableOpacity>
     </View>
   );

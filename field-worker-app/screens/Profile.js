@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {
 	StyleSheet,
 	Text,
@@ -14,7 +14,19 @@ import Navbar from "../components/headers/Navbar";
 import Button from "../components/misc/Button";
 import PageHeading from "../components/headers/PageHeading";
 
+import { lang } from "../database/language";
+
+const getLanguage = async () => {
+	return await AsyncStorage.getItem("Language");
+}
+
 const Profile = () => {
+
+	const [preferredlangauge, setPreferredLanguage] = useState("English");
+	AsyncStorage.getItem("Language").then((lang) => {
+		setPreferredLanguage(lang);
+	});
+
 	const navigation = useNavigation();
 
 	async function logout() {
@@ -31,13 +43,13 @@ const Profile = () => {
 	return (
 		<View>
 			<Navbar />
-			<PageHeading text="Profile" />
+			<PageHeading text={lang[preferredlangauge]["Profile"]} />
 			<Image
 				source={require("../assets/images/doctor-page-profile-photo.png")}
 				style={styles.doctorImage}
 			/>
 			<Text style={styles.doctorName}>Aakash Bhardwaj</Text>
-			<Text style={styles.qualification}>Neurosurgeon</Text>
+			<Text style={styles.qualification}>{lang[preferredlangauge]["Neurosurgeon"]}</Text>
 			<View style={styles.buttonArrangement}>
 				<Pressable
 					onPress={() => {
@@ -48,7 +60,7 @@ const Profile = () => {
 					<Button
 						type="primary"
 						navigateTo="ResetPassword"
-						text="Reset Password"
+						text={lang[preferredlangauge]["Reset Password"]}
 					/>
 				</Pressable>
 
@@ -57,7 +69,7 @@ const Profile = () => {
 						onPress={() => logout()}
 						style={styles.primary}
 					>
-						<Text style={styles.ButtonText}>Logout</Text>
+						<Text style={styles.ButtonText}>{lang[preferredlangauge]["Logout"]}</Text>
 					</TouchableOpacity>
 				</View>
 			</View>

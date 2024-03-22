@@ -1,18 +1,32 @@
-import React from "react";
+import React,{useState} from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Eye from "../../assets/icons/eye.svg";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { lang } from "../../database/language";
+
+const getLanguage = async () => {
+	return await AsyncStorage.getItem("Language");
+}
+
 const DiagnoseHistory = () => {
+
+  const [preferredlangauge, setPreferredLanguage] = useState("English");
+	AsyncStorage.getItem("Language").then((lang) => {
+		setPreferredLanguage(lang);
+	});
+
   return (
     <View style={styles.container}>
-      <Text style={styles.mainHeader}>Diagnose History</Text>
+      <Text style={styles.mainHeader}>{lang[preferredlangauge]["Diagnose History"]}</Text>
       <View style={styles.table}>
         <View style={styles.tableRow}>
-          <Text style={[styles.tableHeader, styles.header]}>Date</Text>
-          <Text style={[styles.tableHeader, styles.header]}>Disease</Text>
+          <Text style={[styles.tableHeader, styles.header]}>{lang[preferredlangauge]["Date"]}</Text>
+          <Text style={[styles.tableHeader, styles.header]}>{lang[preferredlangauge]["Disease"]}</Text>
           <Text style={[styles.tableHeader, styles.header]}>
-            Questionnaire Score
+          {lang[preferredlangauge]["Questionnaire Score"]}
           </Text>
-          <Text style={[styles.tableHeader, styles.header]}>Prescription</Text>
+          <Text style={[styles.tableHeader, styles.header]}>{lang[preferredlangauge]["Prescription"]}</Text>
         </View>
         <View style={styles.tableRow}>
           <Text style={styles.tableData}>2nd Jan</Text>
