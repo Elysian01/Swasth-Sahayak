@@ -102,7 +102,7 @@ const Login = () => {
 					<InputField
 						id="email1"
 						type="email"
-						placeholder="Enter Employee Email"
+						placeholder={lang[preferredlangauge]["Enter Employee Email"]}
 						onChange={emailChangeHandler}
 						value={email}
 					/>
@@ -110,7 +110,7 @@ const Login = () => {
 					<InputField
 						id="pass1"
 						type="password"
-						placeholder="Enter Password"
+						placeholder={lang[preferredlangauge]["Enter Password"]}
 						onChange={passwordChangeHandler}
 						value={password}
 					/>
@@ -122,7 +122,7 @@ const Login = () => {
 					>
 						<View style={styles.forgotPasswordDiv}>
 							<Text style={styles.forgotPassword}>
-								Forgot Password?
+							{lang[preferredlangauge]["Forgot Password"]}
 							</Text>
 						</View>
 					</Pressable>
