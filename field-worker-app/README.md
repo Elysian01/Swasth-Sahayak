@@ -19,6 +19,13 @@
 
 - [`react-native-reanimated` docs](https://docs.swmansion.com/react-native-reanimated/)
 
+## AsyncStorage Keys
+
+```md
+1. AccessToken
+2. Language
+```
+
 ## Download Region Data Format
 
 ```json
@@ -39,6 +46,7 @@ data = {
       "visited-status": false, 
     }
   ],
+
   // list of all patient details sectorwise and alloted to fieldworker
   "patient-details": [
     {
@@ -62,11 +70,6 @@ data = {
         "date": "12-05-2014",
         "object": "0b0101101",
       }],
-      "docter-assigned": NULL,
-      "questionnaire": {
-        "ICD10-code": 1264,
-        "responses": [1,0,3,2]
-      }
     }
   ],
   "doctors": [
@@ -75,16 +78,56 @@ data = {
       "available-slots": {"12-05-2014": 20, "13-05-2014":15}
     }
   ],
-  "ICD10": {
-    "1234": "pagal hai",
-    "13456": "Mental diaaherra"
-  },
+
   // donot upload questionnaire data
   "questionnaire" :{
-    "default" : ["str", "str" ,"str"],
-    "ICD10-code1" : ["str", "str" ,"str"],
-    "ICD10-code2" : ["str", "str" ,"str"],
+    "default" : [
+      {
+      "type": "MCQ",
+      "question": "xyz",
+      "options": ["Not qualified","agree","disagree","neutral"],
+      },
+      {
+      "type": "NAT",
+      "question": "xyz",
+      },
+      {
+      "type": "TEXT",
+      "question": "xyz",
+      },
+    ],
+    "ICD10-code1" : [
+      {
+      "type": "MCQ",
+      "question": "xyz",
+      "options": ["Not qualified","agree","disagree","neutral"],
+      },
+      {
+      "type": "NAT",
+      "question": "xyz",
+      },
+      {
+      "type": "TEXT",
+      "question": "xyz",
+      },
+    ],
+    "ICD10-code2" : [
+      {
+      "type": "MCQ",
+      "question": "xyz",
+      "options": ["Not qualified","agree","disagree","neutral"],
+      },
+      {
+      "type": "NAT",
+      "question": "xyz",
+      },
+      {
+      "type": "TEXT",
+      "question": "xyz",
+      },
+    ],
   },
+
   // upload section
   "register-patient": [
     {
@@ -122,5 +165,77 @@ data = {
   ]
 }
 ```
+
+
+## Upload Data Format
+
+```json
+data = {
+  // list of all modified patient details 
+  "modified-patient-details": [
+    {
+      "patient-id": 123,
+      "fieldworker-id": 1234,
+      "patient-name": "Abhishek Gupta",
+      "patient-abhaid": 1234-4567-1534-4821,
+      "fieldworker-comments": "xyz",
+      "artifacts": [
+        {
+        "date": "12-05-2014",
+        "object": "0b0101101",
+        },
+        {
+        "date": "12-05-2014",
+        "object": "0b0101101",
+        }
+      ],
+      "docter-assigned": "Aakash Bhardwaj",
+      "questionnaire": {
+        "ICD10-code1": 1264,
+        "responses": [1,0,3,2]
+      },
+      "slot-booked-date": "12-05-2014"
+    }
+  ],
+
+  // docters slot booked
+  "doctors": [
+    {
+      "doctor-name": "Abhishek Gupta",
+      "available-slots": {"12-05-2014": 20, "13-05-2014":15}
+    }
+  ],
+
+  // upload section
+  "register-patient": [
+    {
+      "fieldworker-id": 1234,
+      "patient-name": "Abhishek Gupta",
+      "patient-address": "xyz",
+      "patient-token": 48464651, 
+      "patient-abhaid": 1234-4567-1534-4821,
+      "artifacts": [
+        {
+        "date": "12-05-2014",
+        "object": "0b0101101",
+        },
+        {
+        "date": "12-05-2014",
+        "object": "0b0101101",
+        },
+      ],
+      "fieldworker-comments": "xyz",
+      "docter-assigned": "Aakash Bhardwaj",
+      "questionnaire": {
+        "ICD10-code": "default",
+        "responses": [1,0,3,2]
+      },
+      "slot-booked-date": "12-05-2014"
+    }
+  ]
+}
+```
+
+
 
 
