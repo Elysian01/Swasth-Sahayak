@@ -9,6 +9,7 @@ import "./css/login.css";
 import Navbar from "../components/misc/Navbar";
 import LoginBG from "../components/misc/LoginBG";
 import InputField from "../components/input_fields/InputField";
+import { authApi } from "../login/authApi";
 
 function Login() {
   const navigate = useNavigate();
@@ -21,15 +22,9 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:9191/auth/login", {
-        username: email,
-        password: password,
-      });
-      const userData = response.data; // Assuming response contains user data
+      const userData = await authApi.login({ username: email, password });
       console.log(userData.jwtToken);
-      dispatch(setCredentials(userData)); // Dispatch action to store user data in Redux store
-      // Redirect to doctor-dashboard upon successful login
-      navigate("/doctor-dashboard");
+      dispatch(setCredentials(userData));
     } catch (err) {
       setError("Invalid email or password"); // Set error message for invalid credentials
     }

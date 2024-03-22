@@ -72,8 +72,8 @@ const RegisterPatient = () => {
 
       <View style={styles.alignForm}>
         <View style={styles.group2}>
-          <TextInput style={styles.input} placeholder="First Name" placeholderTextColor="#666" />
-          <TextInput style={styles.input} placeholder="Last Name" placeholderTextColor="#666"/>
+          <TextInput style={styles.input} placeholder={lang[preferredlangauge]["First Name"]} placeholderTextColor="#666" />
+          <TextInput style={styles.input} placeholder={lang[preferredlangauge]["Last Name"]} placeholderTextColor="#666"/>
         </View>
         <View style={styles.group2}>
           <TouchableOpacity style={styles.input} onPress={handleGenderPress}>
@@ -84,9 +84,9 @@ const RegisterPatient = () => {
                 selectedValue={gender}
                 onValueChange={(gender) => handleGenderSelect(gender)}
               >
-                <Picker.Item label="Male" value="Male" />
-                <Picker.Item label="Female" value="Female" />
-                <Picker.Item label="Other" value="Other" />
+                <Picker.Item label={lang[preferredlangauge]["Male"]} value={lang[preferredlangauge]["Male"]} />
+                <Picker.Item label={lang[preferredlangauge]["Female"]} value={lang[preferredlangauge]["Female"]} />
+                <Picker.Item label={lang[preferredlangauge]["Other"]} value={lang[preferredlangauge]["Other"]} />
               </Picker>
             )}
           </TouchableOpacity>
@@ -105,12 +105,12 @@ const RegisterPatient = () => {
             />
           )}
         </View>
-        <TextInput style={styles.input} placeholder="Abha-ID" placeholderTextColor="#666"/>
-        <TextInput style={styles.input} placeholder="Phone Number" placeholderTextColor="#666"/>
-        <TextInput style={styles.input} placeholder="Address" placeholderTextColor="#666"/>
+        <TextInput style={styles.input} placeholder={lang[preferredlangauge]["Abha-ID"]} placeholderTextColor="#666"/>
+        <TextInput style={styles.input} placeholder={lang[preferredlangauge]["Phone Number"]} placeholderTextColor="#666"/>
+        <TextInput style={styles.input} placeholder={lang[preferredlangauge]["Address"]} placeholderTextColor="#666"/>
         <View style={styles.group2}>
-          <TextInput style={styles.input} placeholder="Sector" placeholderTextColor="#666"/>
-          <TextInput style={styles.input} placeholder="Pincode" placeholderTextColor="#666"/>
+          <TextInput style={styles.input} placeholder={lang[preferredlangauge]["Sector"]} placeholderTextColor="#666"/>
+          <TextInput style={styles.input} placeholder={lang[preferredlangauge]["Pincode"]} placeholderTextColor="#666"/>
         </View>
         <TouchableOpacity style={styles.input} onPress={handleLanguagePress}>
             <Text style={styles.pickerText}>{Language}</Text>
