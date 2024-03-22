@@ -14,9 +14,25 @@ import WorkerDetails from "../components/headers/WorkerDetails";
 import Button from "../components/misc/Button";
 import PageHeading from "../components/headers/PageHeading";
 import "../AppStyles";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { lang } from "../database/language";
+
+const getLanguage = async () => {
+	return await AsyncStorage.getItem("Language");
+}
+
 const RegisterPatient = () => {
+
+  const [preferredlangauge, setPreferredLanguage] = useState("English");
+	AsyncStorage.getItem("Language").then((lang) => {
+		setPreferredLanguage(lang);
+	});
+
   const [gender, setGender] = useState("Male");
-  const [pickerVisible, setPickerVisible] = useState(false);
+  const [Language, setLanguage] = useState("English");
+  const [pickerGenderVisible, setPickerGenderVisible] = useState(false)
+  const [pickerLanguageVisible, setpickerLanguageVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
@@ -33,28 +49,36 @@ const RegisterPatient = () => {
   };
   const handleGenderPress = () => {
     // Open the dropdown here
-    setPickerVisible(true);
+    setPickerGenderVisible(true);
   };
   const handleGenderSelect = (gender) => {
     setGender(gender);
-    setPickerVisible(false);
+    setPickerGenderVisible(false);
+  };
+  const handleLanguagePress = () => {
+    // Open the dropdown here
+    setpickerLanguageVisible(true);
+  };
+  const handleLanguageSelect = (Language) => {
+    setLanguage(Language);
+    setpickerLanguageVisible(false);
   };
 
   return (
     <ScrollView>
       <Navbar />
       <WorkerDetails />
-      <PageHeading text="Patient Registeration" />
+      <PageHeading text={lang[preferredlangauge]["Patient Registeration"]} />
 
       <View style={styles.alignForm}>
         <View style={styles.group2}>
-          <TextInput style={styles.input} placeholder="First Name" />
-          <TextInput style={styles.input} placeholder="Last Name" />
+          <TextInput style={styles.input} placeholder="First Name" placeholderTextColor="#666" />
+          <TextInput style={styles.input} placeholder="Last Name" placeholderTextColor="#666"/>
         </View>
         <View style={styles.group2}>
           <TouchableOpacity style={styles.input} onPress={handleGenderPress}>
-            <Text style={styles.genderText}>{gender}</Text>
-            {pickerVisible && (
+            <Text style={styles.pickerText}>{gender}</Text>
+            {pickerGenderVisible && (
               <Picker
                 style={styles.picker}
                 selectedValue={gender}
@@ -81,21 +105,29 @@ const RegisterPatient = () => {
             />
           )}
         </View>
-        <TextInput style={styles.input} placeholder="Abha-ID" />
-        <TextInput style={styles.input} placeholder="Phone Number" />
-        <TextInput style={styles.input} placeholder="Address" />
+        <TextInput style={styles.input} placeholder="Abha-ID" placeholderTextColor="#666"/>
+        <TextInput style={styles.input} placeholder="Phone Number" placeholderTextColor="#666"/>
+        <TextInput style={styles.input} placeholder="Address" placeholderTextColor="#666"/>
         <View style={styles.group2}>
-          <TextInput style={styles.input} placeholder="Sector" />
-          <TextInput style={styles.input} placeholder="Pincode" />
+          <TextInput style={styles.input} placeholder="Sector" placeholderTextColor="#666"/>
+          <TextInput style={styles.input} placeholder="Pincode" placeholderTextColor="#666"/>
         </View>
-        <TextInput
-          style={styles.input}
-          placeholder="Preferred Language"
-          secureTextEntry={true}
-        />
+        <TouchableOpacity style={styles.input} onPress={handleLanguagePress}>
+            <Text style={styles.pickerText}>{Language}</Text>
+            {pickerLanguageVisible && (
+              <Picker
+                style={styles.picker}
+                selectedValue={Language}
+                onValueChange={(Language) => handleLanguageSelect(Language)}
+              >
+                <Picker.Item label="English" value="English" />
+                <Picker.Item label="हिंदी" value="हिंदी" />
+              </Picker>
+            )}
+          </TouchableOpacity>
 
         <View style={styles.btn}>
-          <Button type="primary" navigateTo="Followup" text="Submit" />
+          <Button type="primary" navigateTo="Followup" text={lang[preferredlangauge]["Submit"]} />
         </View>
       </View>
     </ScrollView>
@@ -144,7 +176,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "auto",
   },
-  genderText:{
+  pickerText:{
     alignSelf:'flex-start',
     fontSize: 16,
     color: "#666",

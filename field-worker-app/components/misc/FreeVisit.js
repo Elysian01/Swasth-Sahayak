@@ -1,22 +1,34 @@
-import React from "react";
+import React,{useState} from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { lang } from "../../database/language";
+
+const getLanguage = async () => {
+	return await AsyncStorage.getItem("Language");
+}
+
+
 const FreeVisit = () => {
+	const [preferredlangauge, setPreferredLanguage] = useState("English");
+	AsyncStorage.getItem("Language").then((lang) => {
+		setPreferredLanguage(lang);
+	});
 	const navigation = useNavigation();
 	return (
 		<View style={styles.container}>
 			<View style={styles.mainContainer}></View>
 			<Text style={styles.mainTitle}>
-				Free Visits On
-				<Text style={styles.sectorInfo}> Sector 12</Text>
+			{lang[preferredlangauge]["Free Visits On"]}
+				<Text style={styles.sectorInfo}> {lang[preferredlangauge]["Sector 12"]}</Text>
 			</Text>
 			<Pressable
 				style={styles.findPatientButton}
 				onPress={() => navigation.navigate("FindPatient")}
 			>
 				<Text style={styles.findPatientButtonText}>
-					Find Patient
+				{lang[preferredlangauge]["Find Patient"]}
 				</Text>
 			</Pressable>
 		</View>

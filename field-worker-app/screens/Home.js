@@ -30,14 +30,14 @@ const Home = () => {
 			<WorkerDetails />
 			<Text style={styles.downloadText}>
 				{lang[preferredlangauge]["Sector Data"]}
-				<Text style={styles.downloadStatus}> Not Downloaded</Text>
+				<Text style={styles.downloadStatus}> {lang[preferredlangauge]["Not Downloaded"]}</Text>
 			</Text>
 			<View style={styles.btn}>
 				<Pressable onPress={() => navigation.navigate("Followup")}>
 					<Button
 						type="primary"
 						onPress={downloadData()}
-						text="Download Sector Data"
+						text={lang[preferredlangauge]["Download Sector Data"]}
 					/>
 				</Pressable>
 			</View>

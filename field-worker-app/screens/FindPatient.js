@@ -9,7 +9,20 @@ import InputField from "../components/inputs/InputField";
 import Button from "../components/misc/Button";
 import PageHeading from "../components/headers/PageHeading";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { lang } from "../database/language";
+
+const getLanguage = async () => {
+	return await AsyncStorage.getItem("Language");
+}
+
 const FindPatient = () => {
+
+	const [preferredlangauge, setPreferredLanguage] = useState("English");
+	AsyncStorage.getItem("Language").then((lang) => {
+		setPreferredLanguage(lang);
+	});
+
 	const navigation = useNavigation();
 
 	const [abhaId, setAbhaId] = useState("");
@@ -22,13 +35,13 @@ const FindPatient = () => {
 			<WorkerDetails />
 
 			{/* <Text style={styles.pageHeading}>Find Patient</Text> */}
-			<PageHeading text="find patient" />
+			<PageHeading text={lang[preferredlangauge]["Find Patient"]} />
 
 			<View style={styles.inputs}>
 				<InputField
 					id="abhaId"
 					type="patientDetail"
-					placeholder="Enter ABHA ID"
+					placeholder={lang[preferredlangauge]["Enter ABHA ID"]}
 					onChange={abhaIdChangeHandler}
 					value={abhaId}
 					lightBackground={true}
@@ -37,12 +50,12 @@ const FindPatient = () => {
 					<Button
 						type="primary"
 						navigateTo="Home"
-						text="Find Patient"
+						text={lang[preferredlangauge]["Find Patient"]}
 					/>
 					<Button
 						type="primary"
 						navigateTo="RegisterPatient"
-						text="Register Patient"
+						text={lang[preferredlangauge]["Register Patient"]}
 					/>
 				</View>
 			</View>

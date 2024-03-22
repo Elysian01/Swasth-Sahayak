@@ -8,7 +8,19 @@ import WorkerDetails from "../components/headers/WorkerDetails";
 import InputField from "../components/inputs/InputField";
 import Button from "../components/misc/Button";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { lang } from "../database/language";
+
+const getLanguage = async () => {
+	return await AsyncStorage.getItem("Language");
+}
+
+
 const PatientToken = () => {
+	const [preferredlangauge, setPreferredLanguage] = useState("English");
+	AsyncStorage.getItem("Language").then((lang) => {
+		setPreferredLanguage(lang);
+	});
 	const navigation = useNavigation();
 
 	const [token, setToken] = useState("");
@@ -20,13 +32,13 @@ const PatientToken = () => {
 			<Navbar />
 			<WorkerDetails />
 
-			<Text style={styles.pageHeading}>Patient Token</Text>
+			<Text style={styles.pageHeading}>{lang[preferredlangauge]["Patient Token"]}</Text>
 
 			<View style={styles.inputs}>
 				<InputField
 					id="token"
 					type="patientDetail"
-					placeholder="Enter Patient Token"
+					placeholder={lang[preferredlangauge]["Enter Patient Token"]}
 					onChange={tokenChangeHandler}
 					value={token}
 					lightBackground={true}
@@ -35,7 +47,7 @@ const PatientToken = () => {
 					<Button
 						type="primary"
 						navigateTo="PatientDashboard"
-						text="Submit"
+						text={lang[preferredlangauge]["Submit"]}
 					/>
 				</View>
 			</View>

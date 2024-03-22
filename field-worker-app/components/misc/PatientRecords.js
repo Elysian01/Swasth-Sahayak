@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {
 	View,
 	Text,
@@ -8,7 +8,22 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native"; // Import the useNavigation hook
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { lang } from "../../database/language";
+
+const getLanguage = async () => {
+	return await AsyncStorage.getItem("Language");
+}
+
+
+
 const PatientRecords = () => {
+
+	const [preferredlangauge, setPreferredLanguage] = useState("English");
+	AsyncStorage.getItem("Language").then((lang) => {
+		setPreferredLanguage(lang);
+	});
+
 	const navigation = useNavigation(); // Get navigation object
 
 	const handleViewRecords = () => {
@@ -35,7 +50,7 @@ const PatientRecords = () => {
 					<View style={styles.column2}>
 						<TouchableOpacity style={styles.visitedButton}>
 							<Text style={styles.visitedButtonText}>
-								Visited
+							{lang[preferredlangauge]["Visited"]}
 							</Text>
 						</TouchableOpacity>
 					</View>
@@ -45,7 +60,7 @@ const PatientRecords = () => {
 							onPress={handleViewRecords}
 						>
 							<Text style={styles.viewRecordsButtonText}>
-								View Patient Records
+							{lang[preferredlangauge]["View Patient Records"]}
 							</Text>
 						</TouchableOpacity>
 					</View>
@@ -67,7 +82,7 @@ const PatientRecords = () => {
 					<View style={styles.column2}>
 						<TouchableOpacity style={styles.visitedButton}>
 							<Text style={styles.visitedButtonText}>
-								Visited
+							{lang[preferredlangauge]["Visited"]}
 							</Text>
 						</TouchableOpacity>
 					</View>
@@ -77,7 +92,7 @@ const PatientRecords = () => {
 							onPress={handleViewRecords}
 						>
 							<Text style={styles.viewRecordsButtonText}>
-								View Patient Records
+							{lang[preferredlangauge]["View Patient Records"]}
 							</Text>
 						</TouchableOpacity>
 					</View>

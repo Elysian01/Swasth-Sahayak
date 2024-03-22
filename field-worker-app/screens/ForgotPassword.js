@@ -138,7 +138,11 @@ const ForgotPassword = () => {
 							<InputField
 								id="otp"
 								type="otp"
-								placeholder="Enter OTP"
+								placeholder={
+									lang[preferredlangauge][
+										"Enter OTP"
+									]
+								}
 								onChange={otpChangeHandler}
 								value={otp}
 							/>
@@ -148,7 +152,11 @@ const ForgotPassword = () => {
 								style={styles.loginButton}
 							>
 								<Text style={styles.loginButtonText}>
-									Verify OTP
+                {
+									lang[preferredlangauge][
+										"Verify OTP"
+									]
+								}
 								</Text>
 							</TouchableOpacity>
 						</View>
@@ -158,14 +166,22 @@ const ForgotPassword = () => {
 							<InputField
 								id="password1"
 								type="password"
-								placeholder="Enter Password"
+								placeholder={
+									lang[preferredlangauge][
+										"Enter Password"
+									]
+                }
 								onChange={newPasswordChangeHandler}
 								value={newPassword}
 							/>
 							<InputField
 								id="password2"
 								type="password"
-								placeholder="Confirm Password"
+								placeholder={
+									lang[preferredlangauge][
+										"Confirm Password"
+									]
+                }
 								onChange={
 									reEnterNewPasswordChangeHandler
 								}
@@ -177,7 +193,11 @@ const ForgotPassword = () => {
 								style={styles.loginButton}
 							>
 								<Text style={styles.loginButtonText}>
-									Reset this as New Password
+									{
+									lang[preferredlangauge][
+										"Reset this as new password"
+									]
+                }
 								</Text>
 							</TouchableOpacity>
 						</View>
