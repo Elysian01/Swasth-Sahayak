@@ -21,7 +21,7 @@
 
 ## Download Region Data Format
 
-```json
+```js
 data = {
   "follow-up": [
     {
