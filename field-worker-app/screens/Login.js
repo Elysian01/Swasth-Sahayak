@@ -16,7 +16,7 @@ import InputField from "../components/inputs/InputField";
 
 import { loginAPI } from "../api/UserAPI";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { lang } from "../language";
+import { lang } from "../database/language";
 
 const getLanguage = async () => {
 	return await AsyncStorage.getItem("Language");
@@ -41,30 +41,31 @@ const Login = () => {
 	};
 
 	function handleLogin() {
-		if (email !== "" && password !== "") {
-			loginAPI({
-				email: email,
-				password: password,
-			})
-				.then((result) => {
-					if (result.status === 200) {
-						console.log(result);
-						AsyncStorage.setItem(
-							"AccessToken",
-							result.data.jwtToken
-						);
-						console.log(result.data.jwtToken);
-						navigation.navigate("Home");
-					} else if (result.status === 401) {
-						console.log(result.status);
-						Alert.alert("Error", result.data, []);
-					}
-				})
-				.catch((error) => {
-					console.log(error);
-					Alert.alert("Error", error);
-				});
-		}
+		// if (email !== "" && password !== "") {
+		// 	loginAPI({
+		// 		email: email,
+		// 		password: password,
+		// 	})
+		// 		.then((result) => {
+		// 			if (result.status === 200) {
+		// 				console.log(result);
+		// 				AsyncStorage.setItem(
+		// 					"AccessToken",
+		// 					result.data.jwtToken
+		// 				);
+		// 				console.log(result.data.jwtToken);
+		// 				navigation.navigate("Home");
+		// 			} else if (result.status === 401) {
+		// 				console.log(result.status);
+		// 				Alert.alert("Error", result.data, []);
+		// 			}
+		// 		})
+		// 		.catch((error) => {
+		// 			console.log(error);
+		// 			Alert.alert("Error", error);
+		// 		});
+		// }
+		navigation.navigate("Home");
 	}
 
 	return (
@@ -102,7 +103,11 @@ const Login = () => {
 					<InputField
 						id="email1"
 						type="email"
-						placeholder={lang[preferredlangauge]["Enter Employee Email"]}
+						placeholder={
+							lang[preferredlangauge][
+								"Enter Employee Email"
+							]
+						}
 						onChange={emailChangeHandler}
 						value={email}
 					/>
@@ -110,7 +115,9 @@ const Login = () => {
 					<InputField
 						id="pass1"
 						type="password"
-						placeholder={lang[preferredlangauge]["Enter Password"]}
+						placeholder={
+							lang[preferredlangauge]["Enter Password"]
+						}
 						onChange={passwordChangeHandler}
 						value={password}
 					/>
@@ -122,7 +129,11 @@ const Login = () => {
 					>
 						<View style={styles.forgotPasswordDiv}>
 							<Text style={styles.forgotPassword}>
-							{lang[preferredlangauge]["Forgot Password"]}
+								{
+									lang[preferredlangauge][
+										"Forgot Password"
+									]
+								}
 							</Text>
 						</View>
 					</Pressable>

@@ -1,7 +1,9 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const FreeVisit = () => {
+	const navigation = useNavigation();
 	return (
 		<View style={styles.container}>
 			<View style={styles.mainContainer}></View>
@@ -9,11 +11,14 @@ const FreeVisit = () => {
 				Free Visits On
 				<Text style={styles.sectorInfo}> Sector 12</Text>
 			</Text>
-			<TouchableOpacity style={styles.findPatientButton}>
+			<Pressable
+				style={styles.findPatientButton}
+				onPress={() => navigation.navigate("FindPatient")}
+			>
 				<Text style={styles.findPatientButtonText}>
 					Find Patient
 				</Text>
-			</TouchableOpacity>
+			</Pressable>
 		</View>
 	);
 };
