@@ -169,7 +169,7 @@ data = {
 
 ## Upload Data Format
 
-```json
+```js
 data = {
   // list of all modified patient details 
   "modified-patient-details": [
