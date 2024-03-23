@@ -166,7 +166,7 @@ data = {
   ],
 
   // upload section
-  "register-patient": [
+  "patient-registeration": [
     {
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
