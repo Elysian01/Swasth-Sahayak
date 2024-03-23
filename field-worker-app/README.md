@@ -65,11 +65,7 @@ data = {
         "ICD10-code": 1264,
         "prescription": "xyz",
         "date": "12-05-2014"
-      }],
-      "artifacts": [{
-        "date": "12-05-2014",
-        "object": "0b0101101",
-      }],
+      }]
     }
   ],
   "doctors": [
