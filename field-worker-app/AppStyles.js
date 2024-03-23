@@ -29,4 +29,10 @@ export default AppStyles = {
 		fontSize: 20,
 		fontWeight: "600",
 	},
+	primaryBtnLargeText: {
+		color: "white",
+		textAlign: "center",
+		fontSize: 32,
+		fontWeight: "600",
+	},
 };

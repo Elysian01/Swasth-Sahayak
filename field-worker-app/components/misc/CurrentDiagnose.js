@@ -30,7 +30,7 @@ const CurrentDiagnose = () => {
 		<View style={styles.container}>
 			<View style={styles.div2}></View>
 			<Text style={styles.div3}>
-				{lang[preferredlangauge]["Current Diagnose"]}
+				{lang[preferredlangauge]["Ongoing medication orders"]}
 			</Text>
 			<View style={styles.alignView}>
 				<View style={styles.div4}>

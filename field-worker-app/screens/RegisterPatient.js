@@ -13,7 +13,7 @@ import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
-import Button from "../components/misc/Button";
+import { useNavigation } from "@react-navigation/native";
 import PageHeading from "../components/headers/PageHeading";
 import "../AppStyles";
 
@@ -21,6 +21,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
 
 const RegisterPatient = () => {
+	const navigation = useNavigation();
+
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
@@ -70,18 +72,10 @@ const RegisterPatient = () => {
 	};
 
 	const handleRegisterPatient = async () => {
-		if (
-			!firstname ||
-			!lastname ||
-			!abhaID ||
-			!phoneNumber ||
-			!address ||
-			!sector ||
-			!pincode
-		) {
-			Alert.alert("Incomplete Form", "Please fill in all fields.");
-			return;
-		}
+		// if (!firstname || !lastname || !abhaID || !phoneNumber || !address || !sector || !pincode) {
+		// 	Alert.alert("Incomplete Form", "Please fill in all fields.");
+		// 	return;
+		// }
 
 		const patientData = {
 			"fieldworker-id": 1234,
@@ -108,6 +102,8 @@ const RegisterPatient = () => {
 				JSON.stringify(uploadData)
 			);
 
+			const tempAbhaid = abhaID;
+
 			// Clear all fields
 			setFirstname("");
 			setLastname("");
@@ -121,6 +117,10 @@ const RegisterPatient = () => {
 			setRegisterLanguage("English"); // Assuming 'English' is the default value
 
 			Alert.alert("Success", "Patient Registered Successfully.");
+			navigation.navigate("PatientDashboard", {
+				"patient-abhaid": tempAbhaid,
+				"new-patient": true,
+			});
 		} catch (error) {
 			console.error("Error saving data, please retry:", error);
 		}

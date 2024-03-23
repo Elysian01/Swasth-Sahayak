@@ -57,6 +57,7 @@ const PatientToken = (props) => {
 		} else {
 			navigation.navigate("PatientDashboard", {
 				"patient-abhaid": abhaid,
+				"new-patient": false,
 			});
 		}
 	}
