@@ -18,10 +18,26 @@ const Home = () => {
 		setPreferredLanguage(lang);
 	});
 
-	function downloadData() {
+	const downloadData = async () => {
 		console.log("Downloading data...");
-		setDataDownloaded(true);
-	}
+
+		const uploadTemplate = {
+			// list of all modified patient details
+			"modified-patient-details": [],
+			// docters slot booked
+			doctors: [],
+			// upload section
+			"patient-registeration": [],
+		};
+		try {
+			await AsyncStorage.setItem("uploadData", JSON.stringify(uploadTemplate));
+			setDataDownloaded(true);
+		} catch (error) {
+			console.log(
+				"Error setting upload data, please re-download " + error
+			);
+		}
+	};
 
 	return (
 		<View>

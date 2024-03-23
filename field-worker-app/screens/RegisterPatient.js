@@ -19,7 +19,6 @@ import "../AppStyles";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
-import * as FileSystem from "expo-file-system";
 
 const RegisterPatient = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
@@ -98,37 +97,16 @@ const RegisterPatient = () => {
 			"patient-preferred-langauge": registerLanguage,
 		};
 
-		const fileInfo = await FileSystem.getInfoAsync(
-			FileSystem.documentDirectory + "database/upload.json"
-		);
-
-		if (!fileInfo.exists) {
-			// If the file doesn't exist, create it with an empty array
-			await FileSystem.writeAsStringAsync(
-				FileSystem.documentDirectory + "database/upload.json",
-				JSON.stringify({ "register-patient": [] })
-			);
-			console.log("Upload file created successfully");
-		}
 		try {
-			// Read existing data from the file
-			let existingData = await FileSystem.readAsStringAsync(
-				FileSystem.documentDirectory + "database/upload.json"
+			uploadData = await AsyncStorage.getItem("uploadData");
+			uploadData = JSON.parse(uploadData);
+			console.log(uploadData);
+			uploadData["patient-registeration"].push(patientData);
+			console.log(uploadData);
+			await AsyncStorage.setItem(
+				"uploadData",
+				JSON.stringify(uploadData)
 			);
-			existingData = JSON.parse(existingData);
-
-			// Append the new patient data
-			existingData["register-patient"] =
-				existingData["register-patient"] || [];
-			existingData["register-patient"].push(patientData);
-
-			// Write the updated data back to the file
-			await FileSystem.writeAsStringAsync(
-				FileSystem.documentDirectory + "database/upload.json",
-				JSON.stringify(existingData)
-			);
-
-			console.log("Data successfully written to upload.json");
 
 			// Clear all fields
 			setFirstname("");
@@ -142,7 +120,7 @@ const RegisterPatient = () => {
 			setSelectedDate(new Date());
 			setRegisterLanguage("English"); // Assuming 'English' is the default value
 		} catch (error) {
-			console.error("Error writing data to upload.json:", error);
+			console.error("Error saving data, please retry:", error);
 		}
 	};
 
