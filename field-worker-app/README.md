@@ -24,6 +24,7 @@
 ```md
 1. AccessToken
 2. Language
+3. uploadData
 ```
 
 ## Download Region Data Format
@@ -165,7 +166,7 @@ data = {
   ],
 
   // upload section
-  "register-patient": [
+  "patient-registeration": [
     {
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
