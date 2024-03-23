@@ -1,19 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
-import React,{useState} from "react";
+import React, { useState } from "react";
 
 import "../../AppStyles";
 import AppStyles from "../../AppStyles";
 
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../../database/language";
 
-const getLanguage = async () => {
-	return await AsyncStorage.getItem("Language");
-}
-
 const WorkerDetails = () => {
-
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
@@ -24,10 +18,16 @@ const WorkerDetails = () => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.quote}>
-			{lang[preferredlangauge]["A doctor is a person who heals, while a nurse is a person who cares"]}
+				{
+					lang[preferredlangauge][
+						"A doctor is a person who heals, while a nurse is a person who cares"
+					]
+				}
 			</Text>
 			<View style={styles.workerDetails}>
-				<Text style={styles.details}>{lang[preferredlangauge]["Hello"]}, {name}</Text>
+				<Text style={styles.details}>
+					{lang[preferredlangauge]["Hello"]}, {name}
+				</Text>
 				<Text style={styles.details}>ID: {id}</Text>
 			</View>
 		</View>

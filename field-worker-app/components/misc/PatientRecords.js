@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
 	View,
 	Text,
@@ -6,35 +6,24 @@ import {
 	StyleSheet,
 	ScrollView,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native"; // Import the useNavigation hook
-
+import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../../database/language";
 
-const getLanguage = async () => {
-	return await AsyncStorage.getItem("Language");
-}
-
-
+import FollowUpCard from "../cards/FollowUpCard";
 
 const PatientRecords = () => {
+	const navigation = useNavigation();
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
 
-	const navigation = useNavigation(); // Get navigation object
-
-	const handleViewRecords = () => {
-		// Navigate to VerifyPatient screen
-		navigation.navigate("PatientToken");
-	};
-
 	return (
 		<ScrollView style={styles.scrollView}>
 			<View style={styles.mainContainer}>
-				<View style={styles.header}>
+				{/* <View style={styles.header}>
 					<View style={styles.column}>
 						<View style={styles.addressContainer}>
 							<Text style={styles.name}>
@@ -50,7 +39,7 @@ const PatientRecords = () => {
 					<View style={styles.column2}>
 						<TouchableOpacity style={styles.visitedButton}>
 							<Text style={styles.visitedButtonText}>
-							{lang[preferredlangauge]["Visited"]}
+								{lang[preferredlangauge]["Visited"]}
 							</Text>
 						</TouchableOpacity>
 					</View>
@@ -60,13 +49,27 @@ const PatientRecords = () => {
 							onPress={handleViewRecords}
 						>
 							<Text style={styles.viewRecordsButtonText}>
-							{lang[preferredlangauge]["View Patient Records"]}
+								{
+									lang[preferredlangauge][
+										"View Patient Records"
+									]
+								}
 							</Text>
 						</TouchableOpacity>
 					</View>
-				</View>
+				</View> */}
 
-				<View style={styles.header}>
+				<FollowUpCard
+					name="Aakash Bhardwaj"
+					address="26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100"
+				></FollowUpCard>
+
+				<FollowUpCard
+					name="Aakash Bhardwaj"
+					address="26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100"
+				></FollowUpCard>
+
+				{/* <View style={styles.header}>
 					<View style={styles.column}>
 						<View style={styles.addressContainer}>
 							<Text style={styles.name}>
@@ -82,7 +85,7 @@ const PatientRecords = () => {
 					<View style={styles.column2}>
 						<TouchableOpacity style={styles.visitedButton}>
 							<Text style={styles.visitedButtonText}>
-							{lang[preferredlangauge]["Visited"]}
+								{lang[preferredlangauge]["Visited"]}
 							</Text>
 						</TouchableOpacity>
 					</View>
@@ -92,11 +95,15 @@ const PatientRecords = () => {
 							onPress={handleViewRecords}
 						>
 							<Text style={styles.viewRecordsButtonText}>
-							{lang[preferredlangauge]["View Patient Records"]}
+								{
+									lang[preferredlangauge][
+										"View Patient Records"
+									]
+								}
 							</Text>
 						</TouchableOpacity>
 					</View>
-				</View>
+				</View> */}
 			</View>
 			<View style={styles.padding}></View>
 		</ScrollView>
@@ -114,7 +121,7 @@ const styles = StyleSheet.create({
 		width: "85%",
 		padding: 15,
 		alignSelf: "center",
-		backgroundColor:'#f2f2f2',
+		backgroundColor: "#f2f2f2",
 	},
 	header: {
 		flexDirection: "row",

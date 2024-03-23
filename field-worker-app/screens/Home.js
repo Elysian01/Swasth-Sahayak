@@ -3,44 +3,69 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useState } from "react";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
-import Button from "../components/misc/Button";
+import PatientRecords from "../components/misc/PatientRecords";
+import FreeVisit from "../components/misc/FreeVisit";
+import PageHeading from "../components/headers/PageHeading";
 
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
 
-const getLanguage = async () => {
-	return await AsyncStorage.getItem("Language");
-};
 const Home = () => {
+	const navigation = useNavigation();
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
+	const [dataDownloaded, setDataDownloaded] = useState(false);
+
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
-	const navigation = useNavigation();
 
 	function downloadData() {
 		console.log("Downloading data...");
-		navigation.navigate("Followup");
+		setDataDownloaded(true);
 	}
 
 	return (
 		<View>
 			<Navbar />
 			<WorkerDetails />
-			<Text style={styles.downloadText}>
-				{lang[preferredlangauge]["Sector Data"]}
-				<Text style={styles.downloadStatus}> {lang[preferredlangauge]["Not Downloaded"]}</Text>
-			</Text>
-			<View style={styles.btn}>
-				<Pressable onPress={() => navigation.navigate("Followup")}>
-					<Button
-						type="primary"
-						onPress={downloadData()}
-						text={lang[preferredlangauge]["Download Sector Data"]}
+			{!dataDownloaded && (
+				<View>
+					<Text style={styles.downloadText}>
+						{lang[preferredlangauge]["Sector Data"]}
+						<Text style={styles.downloadStatus}>
+							{" "}
+							{lang[preferredlangauge]["Not Downloaded"]}
+						</Text>
+					</Text>
+					<View style={styles.btn}>
+						<Pressable
+							onPress={downloadData}
+							style={styles.primary}
+						>
+							<Text style={styles.ButtonText}>
+								{
+									lang[preferredlangauge][
+										"Download Sector Data"
+									]
+								}
+							</Text>
+						</Pressable>
+					</View>
+				</View>
+			)}
+
+			{dataDownloaded && (
+				<View>
+					<PageHeading
+						text={
+							lang[preferredlangauge]["Follow-Up Schedule"]
+						}
 					/>
-				</Pressable>
-			</View>
+					<PatientRecords />
+					<FreeVisit />
+				</View>
+			)}
 		</View>
 	);
 };
@@ -57,6 +82,30 @@ const styles = StyleSheet.create({
 	},
 	btn: {
 		alignItems: "center",
+	},
+	primary: {
+		backgroundColor: AppStyles.color.primary,
+		maxWidth: 300,
+		borderRadius: 7,
+		paddingVertical: 15,
+		paddingHorizontal: 25,
+		marginVertical: 20,
+		marginHorizontal: 20,
+	},
+	ButtonText: {
+		color: "white",
+		textAlign: "center",
+		fontSize: 20,
+		fontWeight: "600",
+	},
+	container: {
+		flex: 1,
+	},
+	header: {
+		padding: 20,
+		flexDirection: "row",
+		justifyContent: "space-between",
+		marginBottom: 20,
 	},
 });
 

@@ -6,7 +6,7 @@ import "../../AppStyles";
 
 const Button = (props) => {
 	const navigation = useNavigation();
-	console.log("Navi:", props.navigateTo);
+	console.log("Button Navi:", props.navigateTo);
 	let btnStyle = "styles." + props.type;
 	return (
 		<TouchableOpacity

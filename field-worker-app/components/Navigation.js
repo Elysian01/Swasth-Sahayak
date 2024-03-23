@@ -9,7 +9,6 @@ import ForgotPassword from "../screens/ForgotPassword";
 import LanguageSelection from "../screens/LanguageSelection";
 import ResetPassword from "../screens/ResetPassword";
 import FindPatient from "../screens/FindPatient";
-import Followup from "../screens/Followup";
 import PatientToken from "../screens/PatientToken";
 import Profile from "../screens/Profile";
 import RegisterPatient from "../screens/RegisterPatient";
@@ -99,7 +98,6 @@ const Navigation = () => {
 				/>
 				<Stack.Screen name="Login" component={Login} />
 				<Stack.Screen name="Home" component={Home} />
-				<Stack.Screen name="Followup" component={Followup} />
 				<Stack.Screen
 					name="ForgotPassword"
 					component={ForgotPassword}
