@@ -1,0 +1,93 @@
+{
+  "follow-up": [
+    {
+      "patient-id": 123,
+      "fieldworker-id": 1234,
+      "patient-name": "Abhishek Gupta",
+      "patient-address": "xyz",
+      "visited-status": false, 
+    },
+    {
+      "patient-id": 124,
+      "fieldworker-id": 1234,
+      "patient-name": "Abhishek Gupta",
+      "patient-address": "xyz",
+      "visited-status": false, 
+    }
+  ],
+
+  "patient-details": [
+    {
+      "patient-id": 123,
+      "fieldworker-id": 1234,
+      "patient-name": "Abhishek Gupta",
+      "patient-address": "xyz",
+      "patient-token": 48464651, 
+      "patient-abhaid": "1234456715344821",
+      "ongoing-medication-orders": {
+        "ICD10-code": 1264,
+        "docters-comment": "xyz",
+        "date": "12-05-2014"
+      },   
+      "recent-3-prescriptions": [{
+        "ICD10-code": 1264,
+        "prescription": "xyz",
+        "date": "12-05-2014"
+      }]
+    }
+  ],
+  "doctors": [
+    {
+      "doctor-name": "Abhishek Gupta",
+      "available-slots": {"12-05-2014": 20, "13-05-2014":15}
+    }
+  ],
+
+  "questionnaire" :{
+    "default" : [
+      {
+      "type": "MCQ",
+      "question": "xyz",
+      "options": ["Not qualified","agree","disagree","neutral"],
+      },
+      {
+      "type": "NAT",
+      "question": "xyz",
+      },
+      {
+      "type": "TEXT",
+      "question": "xyz",
+      },
+    ],
+    "ICD10-code1" : [
+      {
+      "type": "MCQ",
+      "question": "xyz",
+      "options": ["Not qualified","agree","disagree","neutral"],
+      },
+      {
+      "type": "NAT",
+      "question": "xyz",
+      },
+      {
+      "type": "TEXT",
+      "question": "xyz",
+      },
+    ],
+    "ICD10-code2" : [
+      {
+      "type": "MCQ",
+      "question": "xyz",
+      "options": ["Not qualified","agree","disagree","neutral"],
+      },
+      {
+      "type": "NAT",
+      "question": "xyz",
+      },
+      {
+      "type": "TEXT",
+      "question": "xyz",
+      },
+    ],
+  }
+}

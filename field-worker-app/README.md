@@ -55,7 +55,7 @@ data = {
       "patient-name": "Abhishek Gupta",
       "patient-address": "xyz",
       "patient-token": 48464651, 
-      "patient-abhaid": 1234-4567-1534-4821,
+      "patient-abhaid": "1234456715344821",
       "ongoing-medication-orders": {
         "ICD10-code": 1264,
         "docters-comment": "xyz",
@@ -75,7 +75,6 @@ data = {
     }
   ],
 
-  // donot upload questionnaire data
   "questionnaire" :{
     "default" : [
       {
@@ -122,43 +121,7 @@ data = {
       "question": "xyz",
       },
     ],
-  },
-
-  // upload section
-  "register-patient": [
-    {
-      "fieldworker-id": 1234,
-      "patient-name": "Abhishek Gupta",
-      "patient-address": "xyz",
-      "patient-token": 48464651, 
-      "patient-abhaid": 1234-4567-1534-4821,
-      "artifacts": [{
-        "date": "12-05-2014",
-        "object": "0b0101101",
-      }],
-      "docter-assigned": NULL,
-      "questionnaire": {
-        "ICD10-code": "default",
-        "responses": [1,0,3,2]
-      }
-    },
-     {
-      "fieldworker-id": 1234,
-      "patient-name": "Abhishek Gupta",
-      "patient-address": "xyz",
-      "patient-token": 48464651, 
-      "patient-abhaid": 1234-4567-1534-4821,
-      "artifacts": [{
-        "date": "12-05-2014",
-        "object": "0b0101101",
-      }],
-      "docter-assigned": NULL,
-      "questionnaire": {
-        "ICD10-code": "default",
-        "responses": [1,0,3,2]
-      }
-    }
-  ]
+  }
 }
 ```
 
@@ -173,7 +136,7 @@ data = {
       "patient-id": 123,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
-      "patient-abhaid": 1234-4567-1534-4821,
+      "patient-abhaid": "1234456715344821",
       "fieldworker-comments": "xyz",
       "artifacts": [
         {
@@ -209,7 +172,7 @@ data = {
       "patient-name": "Abhishek Gupta",
       "patient-address": "xyz",
       "patient-token": 48464651, 
-      "patient-abhaid": 1234-4567-1534-4821,
+      "patient-abhaid": "1234456715344821",
       "artifacts": [
         {
         "date": "12-05-2014",
