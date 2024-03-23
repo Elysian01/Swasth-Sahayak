@@ -36,18 +36,17 @@ data = {
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
       "patient-address": "xyz",
-      "visited-status": false, 
+      "visited-status": false 
     },
     {
       "patient-id": 124,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
       "patient-address": "xyz",
-      "visited-status": false, 
+      "visited-status": false
     }
   ],
 
-  // list of all patient details sectorwise and alloted to fieldworker
   "patient-details": [
     {
       "patient-id": 123,
@@ -80,47 +79,47 @@ data = {
       {
       "type": "MCQ",
       "question": "xyz",
-      "options": ["Not qualified","agree","disagree","neutral"],
+      "options": ["Not qualified","agree","disagree","neutral"]
       },
       {
       "type": "NAT",
-      "question": "xyz",
+      "question": "xyz"
       },
       {
       "type": "TEXT",
-      "question": "xyz",
-      },
+      "question": "xyz"
+      }
     ],
     "ICD10-code1" : [
       {
       "type": "MCQ",
       "question": "xyz",
-      "options": ["Not qualified","agree","disagree","neutral"],
+      "options": ["Not qualified","agree","disagree","neutral"]
       },
       {
       "type": "NAT",
-      "question": "xyz",
+      "question": "xyz"
       },
       {
       "type": "TEXT",
-      "question": "xyz",
-      },
+      "question": "xyz"
+      }
     ],
     "ICD10-code2" : [
       {
       "type": "MCQ",
       "question": "xyz",
-      "options": ["Not qualified","agree","disagree","neutral"],
+      "options": ["Not qualified","agree","disagree","neutral"]
       },
       {
       "type": "NAT",
-      "question": "xyz",
+      "question": "xyz"
       },
       {
       "type": "TEXT",
-      "question": "xyz",
-      },
-    ],
+      "question": "xyz"
+      }
+    ]
   }
 }
 ```
