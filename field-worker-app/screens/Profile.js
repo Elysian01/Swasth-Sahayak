@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
 	StyleSheet,
 	Text,
@@ -18,10 +18,9 @@ import { lang } from "../database/language";
 
 const getLanguage = async () => {
 	return await AsyncStorage.getItem("Language");
-}
+};
 
 const Profile = () => {
-
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
@@ -49,7 +48,9 @@ const Profile = () => {
 				style={styles.doctorImage}
 			/>
 			<Text style={styles.doctorName}>Aakash Bhardwaj</Text>
-			<Text style={styles.qualification}>{lang[preferredlangauge]["Neurosurgeon"]}</Text>
+			<Text style={styles.qualification}>
+				{lang[preferredlangauge]["Neurosurgeon"]}
+			</Text>
 			<View style={styles.buttonArrangement}>
 				<Pressable
 					onPress={() => {
@@ -69,7 +70,9 @@ const Profile = () => {
 						onPress={() => logout()}
 						style={styles.primary}
 					>
-						<Text style={styles.ButtonText}>{lang[preferredlangauge]["Logout"]}</Text>
+						<Text style={styles.ButtonText}>
+							{lang[preferredlangauge]["Logout"]}
+						</Text>
 					</TouchableOpacity>
 				</View>
 			</View>

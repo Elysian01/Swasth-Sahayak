@@ -7,12 +7,10 @@ import PatientRecords from "../components/misc/PatientRecords";
 import FreeVisit from "../components/misc/FreeVisit";
 import PageHeading from "../components/headers/PageHeading";
 
-import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
 
 const Home = () => {
-	const navigation = useNavigation();
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	const [dataDownloaded, setDataDownloaded] = useState(false);
 

@@ -13,8 +13,7 @@ import { lang } from "../database/language";
 
 const getLanguage = async () => {
 	return await AsyncStorage.getItem("Language");
-}
-
+};
 
 const PatientToken = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
@@ -32,13 +31,17 @@ const PatientToken = () => {
 			<Navbar />
 			<WorkerDetails />
 
-			<Text style={styles.pageHeading}>{lang[preferredlangauge]["Patient Token"]}</Text>
+			<Text style={styles.pageHeading}>
+				{lang[preferredlangauge]["Patient Token"]}
+			</Text>
 
 			<View style={styles.inputs}>
 				<InputField
 					id="token"
 					type="patientDetail"
-					placeholder={lang[preferredlangauge]["Enter Patient Token"]}
+					placeholder={
+						lang[preferredlangauge]["Enter Patient Token"]
+					}
 					onChange={tokenChangeHandler}
 					value={token}
 					lightBackground={true}

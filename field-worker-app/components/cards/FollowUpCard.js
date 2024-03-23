@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { lang } from "../../database/language";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -35,6 +35,10 @@ const FollowUpCard = (props) => {
 					style={styles.viewRecordsButton}
 					onPress={handleViewRecords}
 				>
+					<Image
+						source={require("../../assets/icons/view-records.png")}
+						style={styles.image}
+					/>
 					<Text style={styles.viewRecordsButtonText}>
 						{lang[preferredlangauge]["View Patient Records"]}
 					</Text>
@@ -103,6 +107,12 @@ const styles = StyleSheet.create({
 		textDecorationLine: "underline",
 		textShadowRadius: 4,
 		textAlign: "center",
+	},
+	image: {
+		width: 40,
+		height: 40,
+		padding: 5,
+		marginBottom: 5,
 	},
 	padding: {
 		backgroundColor: "#fff",

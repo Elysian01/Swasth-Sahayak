@@ -1,118 +1,37 @@
-import React, { useState } from "react";
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	StyleSheet,
-	ScrollView,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { lang } from "../../database/language";
-
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, ScrollView, Text } from "react-native";
 import FollowUpCard from "../cards/FollowUpCard";
 
 const PatientRecords = () => {
-	const navigation = useNavigation();
+	const [followUps, setFollowUps] = useState([]);
 
-	const [preferredlangauge, setPreferredLanguage] = useState("English");
-	AsyncStorage.getItem("Language").then((lang) => {
-		setPreferredLanguage(lang);
+	useEffect(() => {
+		// Fetch data from JSON file for follow-ups
+		let data = require("../../database/DOWNLOADED_DATA.json");
+		if (data && data["follow-up"]) {
+			setFollowUps(data["follow-up"]);
+		}
 	});
 
 	return (
 		<ScrollView style={styles.scrollView}>
 			<View style={styles.mainContainer}>
-				{/* <View style={styles.header}>
-					<View style={styles.column}>
-						<View style={styles.addressContainer}>
-							<Text style={styles.name}>
-								Aakash Bhardwaj
-							</Text>
-							<Text style={styles.address}>
-								26/C, Hosur Rd, Electronics City Phase
-								1, Electronic City, Bengaluru, Karnataka
-								560100
-							</Text>
-						</View>
-					</View>
-					<View style={styles.column2}>
-						<TouchableOpacity style={styles.visitedButton}>
-							<Text style={styles.visitedButtonText}>
-								{lang[preferredlangauge]["Visited"]}
-							</Text>
-						</TouchableOpacity>
-					</View>
-					<View style={styles.column3}>
-						<TouchableOpacity
-							style={styles.viewRecordsButton}
-							onPress={handleViewRecords}
-						>
-							<Text style={styles.viewRecordsButtonText}>
-								{
-									lang[preferredlangauge][
-										"View Patient Records"
-									]
-								}
-							</Text>
-						</TouchableOpacity>
-					</View>
-				</View> */}
-
-				<FollowUpCard
-					name="Aakash Bhardwaj"
-					address="26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100"
-				></FollowUpCard>
-
-				<FollowUpCard
-					name="Aakash Bhardwaj"
-					address="26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100"
-				></FollowUpCard>
-
-				{/* <View style={styles.header}>
-					<View style={styles.column}>
-						<View style={styles.addressContainer}>
-							<Text style={styles.name}>
-								Abhishek Sharma
-							</Text>
-							<Text style={styles.address}>
-								26/C, Hosur Rd, Electronics City Phase
-								1, Electronic City, Bengaluru, Karnataka
-								560100
-							</Text>
-						</View>
-					</View>
-					<View style={styles.column2}>
-						<TouchableOpacity style={styles.visitedButton}>
-							<Text style={styles.visitedButtonText}>
-								{lang[preferredlangauge]["Visited"]}
-							</Text>
-						</TouchableOpacity>
-					</View>
-					<View style={styles.column3}>
-						<TouchableOpacity
-							style={styles.viewRecordsButton}
-							onPress={handleViewRecords}
-						>
-							<Text style={styles.viewRecordsButtonText}>
-								{
-									lang[preferredlangauge][
-										"View Patient Records"
-									]
-								}
-							</Text>
-						</TouchableOpacity>
-					</View>
-				</View> */}
+				{followUps.map((followUp, index) => (
+					<FollowUpCard
+						key={index}
+						name={followUp["patient-name"]}
+						address={followUp["patient-address"]}
+					/>
+				))}
 			</View>
-			<View style={styles.padding}></View>
+			{/* <View style={styles.padding}></View> */}
 		</ScrollView>
 	);
 };
 
 const styles = StyleSheet.create({
 	scrollView: {
-		flex: 1,
+		// flex: 1,
 	},
 	mainContainer: {
 		borderRadius: 10,

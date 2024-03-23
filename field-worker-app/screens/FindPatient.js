@@ -14,10 +14,9 @@ import { lang } from "../database/language";
 
 const getLanguage = async () => {
 	return await AsyncStorage.getItem("Language");
-}
+};
 
 const FindPatient = () => {
-
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);

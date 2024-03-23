@@ -152,11 +152,11 @@ const ForgotPassword = () => {
 								style={styles.loginButton}
 							>
 								<Text style={styles.loginButtonText}>
-                {
-									lang[preferredlangauge][
-										"Verify OTP"
-									]
-								}
+									{
+										lang[preferredlangauge][
+											"Verify OTP"
+										]
+									}
 								</Text>
 							</TouchableOpacity>
 						</View>
@@ -170,7 +170,7 @@ const ForgotPassword = () => {
 									lang[preferredlangauge][
 										"Enter Password"
 									]
-                }
+								}
 								onChange={newPasswordChangeHandler}
 								value={newPassword}
 							/>
@@ -181,7 +181,7 @@ const ForgotPassword = () => {
 									lang[preferredlangauge][
 										"Confirm Password"
 									]
-                }
+								}
 								onChange={
 									reEnterNewPasswordChangeHandler
 								}
@@ -194,10 +194,10 @@ const ForgotPassword = () => {
 							>
 								<Text style={styles.loginButtonText}>
 									{
-									lang[preferredlangauge][
-										"Reset this as new password"
-									]
-                }
+										lang[preferredlangauge][
+											"Reset this as new password"
+										]
+									}
 								</Text>
 							</TouchableOpacity>
 						</View>

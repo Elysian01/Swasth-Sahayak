@@ -20,10 +20,9 @@ import { lang } from "../database/language";
 
 const getLanguage = async () => {
 	return await AsyncStorage.getItem("Language");
-}
+};
 
 const PatientDashboard = () => {
-
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
@@ -35,7 +34,9 @@ const PatientDashboard = () => {
 		<ScrollView>
 			<Navbar />
 			<WorkerDetails />
-			<PageHeading text={lang[preferredlangauge]["Patient Dashboard"]} />
+			<PageHeading
+				text={lang[preferredlangauge]["Patient Dashboard"]}
+			/>
 			<CurrentDiagnose />
 			<Graph />
 			<DiagnoseHistory />
