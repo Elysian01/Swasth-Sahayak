@@ -18,11 +18,10 @@ import PageHeading from "../components/headers/PageHeading";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
 
-const getLanguage = async () => {
-	return await AsyncStorage.getItem("Language");
-};
+const PatientDashboard = (props) => {
+	const patientAbhaId = props.route.params["patient-abhaid"];
+	console.log(patientAbhaId);
 
-const PatientDashboard = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);

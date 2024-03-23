@@ -1,31 +1,66 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
 import InputField from "../components/inputs/InputField";
-import Button from "../components/misc/Button";
+import AppStyles from "../AppStyles";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
 
-const getLanguage = async () => {
-	return await AsyncStorage.getItem("Language");
-};
+const PatientToken = (props) => {
+	const navigation = useNavigation();
+	const patientId = props.route.params["patient-id"];
 
-const PatientToken = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
-	const navigation = useNavigation();
 
 	const [token, setToken] = useState("");
+	const [abhaid, setAbhaID] = useState("");
 	const tokenChangeHandler = (e) => {
 		setToken(e.target.value);
 	};
+
+	function isPatientInDownloadedJson(patientToken) {
+		let data = require("../database/DOWNLOADED_DATA.json");
+		for (const patient of data["follow-up"]) {
+			// Check if the patient's id and token match the input
+			if (
+				patient["patient-id"] === patientId &&
+				patient["patient-token"] === patientToken
+			) {
+				setAbhaID(patient["patient-abhaid"]);
+				return true; // Patient found
+			}
+		}
+		return false; // Patient not found
+	}
+
+	function checkToken() {
+		if (!token) {
+			Alert.alert("Incomplete Form", "Please fill in all fields.");
+			return;
+		}
+		const response = isPatientInDownloadedJson(token);
+		if (!response) {
+			Alert.alert(
+				"Token Incorrect",
+				"Please Enter correct token for this patient."
+			);
+			setToken("");
+			return;
+		} else {
+			navigation.navigate("PatientDashboard", {
+				"patient-abhaid": abhaid,
+			});
+		}
+	}
+
 	return (
 		<View>
 			<Navbar />
@@ -46,12 +81,16 @@ const PatientToken = () => {
 					value={token}
 					lightBackground={true}
 				/>
+
 				<View style={styles.btn}>
-					<Button
-						type="primary"
-						navigateTo="PatientDashboard"
-						text={lang[preferredlangauge]["Submit"]}
-					/>
+					<Pressable
+						onPress={checkToken}
+						style={AppStyles.primaryBtn}
+					>
+						<Text style={AppStyles.primaryBtnText}>
+							{lang[preferredlangauge]["Submit"]}
+						</Text>
+					</Pressable>
 				</View>
 			</View>
 		</View>

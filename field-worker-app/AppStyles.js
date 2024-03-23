@@ -14,4 +14,19 @@ export default AppStyles = {
 		black: "#000000",
 		darkRed: "#8b0000",
 	},
+	primaryBtn: {
+		backgroundColor: "#40B5AD",
+		maxWidth: 300,
+		borderRadius: 7,
+		paddingVertical: 15,
+		paddingHorizontal: 25,
+		marginVertical: 20,
+		marginHorizontal: 20,
+	},
+	primaryBtnText: {
+		color: "white",
+		textAlign: "center",
+		fontSize: 20,
+		fontWeight: "600",
+	},
 };

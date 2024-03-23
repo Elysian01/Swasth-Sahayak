@@ -1,20 +1,16 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
 import InputField from "../components/inputs/InputField";
-import Button from "../components/misc/Button";
 import PageHeading from "../components/headers/PageHeading";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
-
-const getLanguage = async () => {
-	return await AsyncStorage.getItem("Language");
-};
+import AppStyles from "../AppStyles";
 
 const FindPatient = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
@@ -28,12 +24,42 @@ const FindPatient = () => {
 	const abhaIdChangeHandler = (e) => {
 		setAbhaId(e.target.value);
 	};
+
+	function isPatientInDownloadedJson() {
+		let data = require("../database/DOWNLOADED_DATA.json");
+		for (const patient of data["patient-details"]) {
+			// Check if the patient's id and token match the input
+			if (patient["patient-abhaid"] === abhaId) {
+				return true; // Patient found
+			}
+		}
+		return false; // Patient not found
+	}
+
+	function handleFindPatient() {
+		const foundPatient = isPatientInDownloadedJson();
+		if (!foundPatient) {
+			Alert.alert(
+				"Token Incorrect",
+				"Please Enter correct token for this patient."
+			);
+			setAbhaId("");
+			return;
+		} else {
+			navigation.navigate("PatientDashboard", {
+				"patient-abhaid": abhaId,
+			});
+		}
+	}
+
+	function handleRegisterPatient() {
+		navigation.navigate("RegisterPatient");
+	}
+
 	return (
 		<View>
 			<Navbar />
 			<WorkerDetails />
-
-			{/* <Text style={styles.pageHeading}>Find Patient</Text> */}
 			<PageHeading text={lang[preferredlangauge]["Find Patient"]} />
 
 			<View style={styles.inputs}>
@@ -46,16 +72,33 @@ const FindPatient = () => {
 					lightBackground={true}
 				/>
 				<View style={styles.btn}>
-					<Button
+					<Pressable
+						onPress={handleFindPatient}
+						style={AppStyles.primaryBtn}
+					>
+						<Text style={AppStyles.primaryBtnText}>
+							{lang[preferredlangauge]["Find Patient"]}
+						</Text>
+					</Pressable>
+					<Pressable
+						onPress={handleRegisterPatient}
+						style={AppStyles.primaryBtn}
+					>
+						<Text style={AppStyles.primaryBtnText}>
+							{lang[preferredlangauge]["Register Patient"]}
+						</Text>
+					</Pressable>
+
+					{/* <Button
 						type="primary"
 						navigateTo="Home"
-						text={lang[preferredlangauge]["Find Patient"]}
+						text={}
 					/>
 					<Button
 						type="primary"
 						navigateTo="RegisterPatient"
-						text={lang[preferredlangauge]["Register Patient"]}
-					/>
+						text={}
+					/> */}
 				</View>
 			</View>
 		</View>

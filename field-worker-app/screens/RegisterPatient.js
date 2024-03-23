@@ -119,6 +119,8 @@ const RegisterPatient = () => {
 			setGender("Male"); // Assuming 'Male' is the default value
 			setSelectedDate(new Date());
 			setRegisterLanguage("English"); // Assuming 'English' is the default value
+
+			Alert.alert("Success", "Patient Registered Successfully.");
 		} catch (error) {
 			console.error("Error saving data, please retry:", error);
 		}

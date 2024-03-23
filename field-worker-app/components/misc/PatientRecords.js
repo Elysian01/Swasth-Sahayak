@@ -21,10 +21,10 @@ const PatientRecords = () => {
 						key={index}
 						name={followUp["patient-name"]}
 						address={followUp["patient-address"]}
+						patientId={followUp["patient-id"]}
 					/>
 				))}
 			</View>
-			{/* <View style={styles.padding}></View> */}
 		</ScrollView>
 	);
 };
@@ -98,10 +98,6 @@ const styles = StyleSheet.create({
 		textDecorationLine: "underline",
 		textShadowRadius: 4,
 		textAlign: "center",
-	},
-	padding: {
-		backgroundColor: "#fff",
-		marginTop: 12,
 	},
 });
 

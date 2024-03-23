@@ -13,7 +13,9 @@ const FollowUpCard = (props) => {
 	});
 
 	const handleViewRecords = () => {
-		navigation.navigate("PatientToken");
+		navigation.navigate("PatientToken", {
+			"patient-id": props.patientId,
+		});
 	};
 	return (
 		<View style={styles.header}>
