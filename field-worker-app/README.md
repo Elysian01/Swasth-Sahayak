@@ -195,17 +195,17 @@ data = {
 
   "patient-registeration": [
     {
-      "fieldworker-id": 1234,
-      "patient-firstname": "Abhishek",
-			"patient-lastname": "Gupta",
-      "patient-dob": "12-05-2000",
-			"patient-gender": "Male",
-			"patient-abhaid": "1234567812345678",
-			"patient-phoneNumber": "1234567891",
-			"patient-address": "xyz",
-			"patient-sector": "1",
-			"patient-pincode": "123456",
-			"patient-preferred-langauge": "English",
+        "fieldworker-id": 1234,
+        "patient-firstname": "Abhishek",
+        "patient-lastname": "Gupta",
+        "patient-dob": "12-05-2000",
+        "patient-gender": "Male",
+	"patient-abhaid": "1234567812345678",
+	"patient-phoneNumber": "1234567891",
+	"patient-address": "xyz",
+	"patient-sector": "1",
+	"patient-pincode": "123456",
+	"patient-preferred-langauge": "English",
     }
   ]
 }
