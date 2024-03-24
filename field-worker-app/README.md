@@ -175,12 +175,27 @@ data = {
 
 ```js
 data = {
-  // docters slots booked
+  // docters slots remaining
   "doctors": [
     {
-      "patient-abhaid": "1234456715344821",
+      "doctor-id": 1,
       "doctor-name": "Abhishek Gupta",
-      "booked-slots": "12-05-2014"
+      "open-slots": 2
+    },
+    {
+      "doctor-id": 2,
+      "doctor-name": "Aakash Bhardwaj",
+      "open-slots": 1
+    },
+    {
+      "doctor-id": 3,
+      "doctor-name": "Ajay Gupta",
+      "open-slots": 1
+    },
+    {
+      "doctor-id": 4,
+      "doctor-name": "Guru Bhardwaj",
+      "open-slots": 10
     }
   ],
 
