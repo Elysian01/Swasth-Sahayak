@@ -40,7 +40,21 @@
   "doctors": [
     {
       "doctor-name": "Abhishek Gupta",
-      "available-slots": {"12-05-2014": 20, "13-05-2014":15}
+      "slot-list": [
+        { "date": "12-05-2014", "open-slots": 0 },
+        { "date": "13-05-2014", "open-slots": 2 },
+        { "date": "14-05-2014", "open-slots": 3 },
+        { "date": "15-05-2014", "open-slots": 4 }
+      ]
+    },
+    {
+      "doctor-name": "Aakash Bhardwaj",
+      "slot-list": [
+        { "date": "12-05-2014", "open-slots": 1 },
+        { "date": "13-05-2014", "open-slots": 0 },
+        { "date": "14-05-2014", "open-slots": 3 },
+        { "date": "15-05-2014", "open-slots": 0 }
+      ]
     }
   ],
 

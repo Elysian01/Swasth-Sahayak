@@ -15,6 +15,7 @@ import RegisterPatient from "../screens/RegisterPatient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import PatientDashboard from "../screens/PatientDashboard";
 import Questionnaire from "../screens/Questionnaire";
+import DoctorSelection from "../screens/DoctorSelection";
 
 const Stack = createNativeStackNavigator();
 
@@ -96,6 +97,10 @@ const Navigation = () => {
 				<Stack.Screen
 					name="Questionnaire"
 					component={Questionnaire}
+				/>
+				<Stack.Screen
+					name="DoctorSelection"
+					component={DoctorSelection}
 				/>
 				<Stack.Screen
 					name="LanguageSelection"

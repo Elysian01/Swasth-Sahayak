@@ -73,38 +73,58 @@ data = {
   "doctors": [
     {
       "doctor-name": "Abhishek Gupta",
-      "available-slots": {"12-05-2014": 20, "13-05-2014":15}
+      "slot-list": [
+        { "date": "12-05-2014", "open-slots": 0 },
+        { "date": "13-05-2014", "open-slots": 2 },
+        { "date": "14-05-2014", "open-slots": 3 },
+        { "date": "15-05-2014", "open-slots": 4 }
+      ]
+    },
+    {
+      "doctor-name": "Aakash Bhardwaj",
+      "slot-list": [
+        { "date": "12-05-2014", "open-slots": 1 },
+        { "date": "13-05-2014", "open-slots": 0 },
+        { "date": "14-05-2014", "open-slots": 3 },
+        { "date": "15-05-2014", "open-slots": 0 }
+      ]
     }
   ],
 
-  "questionnaire" :{
+ "questionnaire" :{
     "default" : [
       {
       "type": "MCQ",
-      "question": "xyz",
+      "question-id": 1,
+      "question": "Trouble falling asleep, staying asleep, or sleeping too much",
       "options": ["Not qualified","agree","disagree","neutral"]
       },
       {
       "type": "NAT",
-      "question": "xyz"
+      "question-id": 2,
+      "question": "Feeling down, depressed or hopeless"
       },
       {
       "type": "TEXT",
-      "question": "xyz"
+      "question-id": 3,
+      "question": "Feeling bad about yourself - or that you’re a failure or have let yourself or your family down"
       }
     ],
     "ICD10-code1" : [
       {
       "type": "MCQ",
       "question": "xyz",
+      "question-id": 1,
       "options": ["Not qualified","agree","disagree","neutral"]
       },
       {
       "type": "NAT",
+      "question-id": 2,
       "question": "xyz"
       },
       {
       "type": "TEXT",
+      "question-id": 3,
       "question": "xyz"
       }
     ],
@@ -112,14 +132,17 @@ data = {
       {
       "type": "MCQ",
       "question": "xyz",
+      "question-id": 1,
       "options": ["Not qualified","agree","disagree","neutral"]
       },
       {
       "type": "NAT",
+      "question-id": 2,
       "question": "xyz"
       },
       {
       "type": "TEXT",
+      "question-id": 3,
       "question": "xyz"
       }
     ]
@@ -132,66 +155,57 @@ data = {
 
 ```js
 data = {
-  // list of all modified patient details 
-  "modified-patient-details": [
-    {
-      "patient-id": 123,
-      "fieldworker-id": 1234,
-      "patient-name": "Abhishek Gupta",
-      "patient-abhaid": "1234456715344821",
-      "fieldworker-comments": "xyz",
-      "artifacts": [
-        {
-        "date": "12-05-2014",
-        "object": "0b0101101",
-        },
-        {
-        "date": "12-05-2014",
-        "object": "0b0101101",
-        }
-      ],
-      "docter-assigned": "Aakash Bhardwaj",
-      "questionnaire": {
-        "ICD10-code1": 1264,
-        "responses": [1,0,3,2]
-      },
-      "slot-booked-date": "12-05-2014"
-    }
-  ],
-
-  // docters slot booked
+  // docters slots booked
   "doctors": [
     {
+      "patient-abhaid": "1234456715344821",
       "doctor-name": "Abhishek Gupta",
-      "available-slots": {"12-05-2014": 20, "13-05-2014":15}
+      "booked-slots": "12-05-2014"
     }
   ],
 
-  // upload section
+  "questionnaire-response": [
+    {
+      "patient-abhaid": "1234456715344821",
+      "questionnaire-type": "default",
+      "responses": [{"question-id": 1, "response": "not at all"}]
+    }
+  ],
+
+  "fieldworker-comments": [
+    {
+      "patient-abhaid": "1234456715344821",
+      "comment": "xyz",
+      "date": "12-05-2014"
+    }
+  ],
+
+  "artifacts": [
+  {
+    "patient-abhaid": "1234456715344821",
+    "date": "12-05-2014",
+    "object": "0b0101101",
+  },
+  {
+    "patient-abhaid": "1234456715344821",
+    "date": "12-05-2014",
+    "object": "0b0101101",
+  },
+],
+
   "patient-registeration": [
     {
       "fieldworker-id": 1234,
-      "patient-name": "Abhishek Gupta",
-      "patient-address": "xyz",
-      "patient-token": 48464651, 
-      "patient-abhaid": "1234456715344821",
-      "artifacts": [
-        {
-        "date": "12-05-2014",
-        "object": "0b0101101",
-        },
-        {
-        "date": "12-05-2014",
-        "object": "0b0101101",
-        },
-      ],
-      "fieldworker-comments": "xyz",
-      "docter-assigned": "Aakash Bhardwaj",
-      "questionnaire": {
-        "ICD10-code": "default",
-        "responses": [1,0,3,2]
-      },
-      "slot-booked-date": "12-05-2014"
+      "patient-firstname": "Abhishek",
+			"patient-lastname": "Gupta",
+      "patient-dob": "12-05-2000",
+			"patient-gender": "Male",
+			"patient-abhaid": "1234567812345678",
+			"patient-phoneNumber": "1234567891",
+			"patient-address": "xyz",
+			"patient-sector": "1",
+			"patient-pincode": "123456",
+			"patient-preferred-langauge": "English",
     }
   ]
 }

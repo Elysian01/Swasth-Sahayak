@@ -1,13 +1,16 @@
 import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
 import React from "react";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import Question from "../components/inputs/Question";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
 import PageHeading from "../components/headers/PageHeading";
 
 const Questionnaire = (props) => {
-	const QuestionnaireType = "default";
+	const navigation = useNavigation();
+    
+    const QuestionnaireType = "default";
 	// const QuestionnaireType = props.route.params["questionnaire-type"];
 	// const patientAbhaId = props.route.params["patient-abhaid"];
 
@@ -26,7 +29,8 @@ const Questionnaire = (props) => {
 
 	function submitQuestionnaire() {
 		console.log("Questionnaire submitted");
-		console.log("Response: ", questionResponses);
+        console.log("Response: ", questionResponses);
+        navigation.navigate("DoctorSelection")
 	}
 
 	function responseInput(response) {
