@@ -7,10 +7,11 @@ import {
 	ScrollView,
 } from "react-native";
 import React, { useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import Checkbox from "expo-checkbox";
 import { Dropdown } from "react-native-element-dropdown";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
@@ -18,33 +19,92 @@ import PageHeading from "../components/headers/PageHeading";
 
 import AppStyles from "../AppStyles";
 
-const DoctorSelection = () => {
+const DoctorSelection = (props) => {
+	const navigation = useNavigation();
+
+	const patientAbhaId = props.route.params["patient-abhaid"];
+
 	const [isChecked, setChecked] = useState(false);
-
 	const [selectedDoctor, setSelectedDoctor] = useState("");
-	const [bookedSlot, setBookedSlot] = useState([]);
-	const [slotList, setSlotList] = useState([]);
-	const [availableSlotsList, setAvailableSlotsList] = useState([]);
+	const [doctorList, setDoctorList] = useState([]);
+	// const [bookedSlot, setBookedSlot] = useState([]);
+	// const [slotList, setSlotList] = useState([]);
+	// const [availableSlotsList, setAvailableSlotsList] = useState([]);
 	const [isFocus1, setIsFocus1] = useState(false);
-	const [isFocus2, setIsFocus2] = useState(false);
+	// const [isFocus2, setIsFocus2] = useState(false);
 
-	let data = require("../database/DOWNLOADED_DATA.json");
-	data = data["doctors"];
+	const getDoctors = async () => {
+		uploadData = await AsyncStorage.getItem("uploadData");
+		uploadData = JSON.parse(uploadData);
+		console.log(uploadData);
+		tempDoctorList = uploadData["doctors"];
+		console.log(tempDoctorList);
+
+		availableDoctors = [];
+		for (const detail of tempDoctorList) {
+			if (detail["open-slots"] > 0) {
+				availableDoctors.push(detail);
+			}
+		}
+		setDoctorList(availableDoctors);
+	};
 
 	useEffect(() => {
-		openSlotList = [];
-		slotList.map((slot) => {
-			if (slot["open-slots"] > 0) {
-				openSlotList.push(slot);
-			}
-			setAvailableSlotsList(openSlotList);
-		});
-	}, [slotList]);
+		getDoctors();
+	}, []);
 
-	function submit() {
+	// useEffect(() => {
+	// 	openSlotList = [];
+	// 	slotList.map((slot) => {
+	// 		if (slot["open-slots"] > 0) {
+	// 			openSlotList.push(slot);
+	// 		}
+	// 		setAvailableSlotsList(openSlotList);
+	// 	});
+	// }, [slotList]);
+
+	const submit = async () => {
+		if (!selectedDoctor || !isChecked) {
+			Alert.alert("Incomplete", "Please Fill in all the details");
+			return;
+		}
 		console.log("Selected Doctor: ", selectedDoctor);
-		console.log("Booked Slot: ", bookedSlot);
-	}
+
+		// const updatedDoctors = availableDoctors.map((doctor) => {
+		// 	if (doctor["doctor-name"] === selectedDoctor) {
+		// 		return {
+		// 			...doctor,
+		// 			"open-slots": Math.max(0, doctor["open-slots"] - 1),
+		// 		};
+		// 	}
+		// 	return doctor;
+		// });
+
+		const updatedDoctors = availableDoctors.map((doctor) =>
+			doctor["doctor-name"] === selectedDoctor
+				? {
+						...doctor,
+						"open-slots": Math.max(
+							0,
+							doctor["open-slots"] - 1
+						),
+				  }
+				: doctor
+		);
+
+		chosenDoctorData = {
+			"doctor-id": selectedDoctor,
+			"patient-abhaid": patientAbhaId,
+		};
+
+		uploadData = await AsyncStorage.getItem("uploadData");
+		uploadData = JSON.parse(uploadData);
+		uploadData["doctors"] = updatedDoctors;
+		uploadData["chosen-doctor"].push(chosenDoctorData);
+		console.log("Updated: ", uploadData);
+		await AsyncStorage.setItem("uploadData", JSON.stringify(uploadData));
+		navigation.navigate("Home");
+	};
 
 	return (
 		<ScrollView>
@@ -66,25 +126,26 @@ const DoctorSelection = () => {
 					selectedTextStyle={styles.selectedTextStyle}
 					inputSearchStyle={styles.inputSearchStyle}
 					iconStyle={styles.iconStyle}
-					data={data}
+					// data={data}
+					data={doctorList}
 					search
 					maxHeight={300}
 					labelField="doctor-name"
-					valueField="doctor-name"
-					placeholder={!isFocus1 ? "Select item" : "..."}
-					searchPlaceholder="Search..."
+					valueField="doctor-id"
+					placeholder={!isFocus1 ? "Select Doctor" : "..."}
+					searchPlaceholder="Search Doctor..."
 					value={selectedDoctor}
 					onFocus={() => setIsFocus1(true)}
 					onBlur={() => setIsFocus1(false)}
 					onChange={(item) => {
 						// console.log("Item: ", item["doctor-name"]);
-						setSelectedDoctor(item["doctor-name"]);
-						setSlotList(item["slot-list"]);
+						setSelectedDoctor(item["doctor-id"]);
+						// setSlotList(item["slot-list"]);
 						setIsFocus1(false);
 					}}
 				/>
 
-				<Dropdown
+				{/* <Dropdown
 					style={[
 						styles.dropdown,
 						isFocus2 && {
@@ -110,7 +171,7 @@ const DoctorSelection = () => {
 						setBookedSlot(item["date"]);
 						setIsFocus2(false);
 					}}
-				/>
+				/> */}
 			</View>
 
 			<View style={styles.section2}>

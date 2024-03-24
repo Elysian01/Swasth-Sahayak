@@ -31,7 +31,7 @@ const InputField = (props) => {
 					style={inputStyles}
 					placeholder={props.placeholder}
 					placeholderTextColor="gray"
-					onChange={props.onChange}
+					onChangeText={props.onChange}
 					value={props.value}
 					secureTextEntry={props.type === "password"}
 					keyboardType={
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		padding: 8,
 		fontSize: 20,
-		outlineStyle: "none",
 	},
 	primaryColor: {
 		color: AppStyles.color.primary,

@@ -38,6 +38,7 @@ data = {
       "patient-name": "Abhishek Gupta",
       "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
       "patient-token": "123",
+      "patient-abhaid": "1234567812345678",
       "visited-status": false 
     },
     {
@@ -46,6 +47,7 @@ data = {
       "patient-name": "Abhishek Gupta",
       "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
       "patient-token": "123",
+      "patient-abhaid": "1234567812345678",
       "visited-status": false 
     }
   ],
@@ -55,43 +57,61 @@ data = {
       "patient-id": 123,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
-      "patient-address": "xyz",
-      "patient-token": 48464651, 
-      "patient-abhaid": "1234456715344821",
+      "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100", 
+      "patient-abhaid": "1234567812345678",
       "ongoing-medication-orders": {
         "ICD10-code": 1264,
-        "docters-comment": "xyz",
-        "date": "12-05-2014"
+        "doctor-name": "Abhishek Gupta",
+        "doctor-comment": "Abhishek lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "12-05-2014",
+        "questionnaire-type": "default"
       },   
-      "recent-3-prescriptions": [{
+      "recent-3-prescriptions": [
+        {
         "ICD10-code": 1264,
-        "prescription": "xyz",
-        "date": "12-05-2014"
-      }]
+        "prescription": "lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "12-05-2014",
+        "doctor-name":"Aakash Bhardwaj"
+        }, 
+        {
+        "ICD10-code": 1264,
+        "prescription": "lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "13-05-2014",
+        "doctor-name":"Aakash Bhardwaj"
+        }, 
+        {
+        "ICD10-code": 1264,
+        "prescription": "lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "14-05-2014",
+        "doctor-name":"Aakash Bhardwaj"
+        }
+    ]
     }
   ],
   "doctors": [
     {
+      "doctor-id": 1,
       "doctor-name": "Abhishek Gupta",
-      "slot-list": [
-        { "date": "12-05-2014", "open-slots": 0 },
-        { "date": "13-05-2014", "open-slots": 2 },
-        { "date": "14-05-2014", "open-slots": 3 },
-        { "date": "15-05-2014", "open-slots": 4 }
-      ]
+      "open-slots": 12
     },
     {
+      "doctor-id": 2,
       "doctor-name": "Aakash Bhardwaj",
-      "slot-list": [
-        { "date": "12-05-2014", "open-slots": 1 },
-        { "date": "13-05-2014", "open-slots": 0 },
-        { "date": "14-05-2014", "open-slots": 3 },
-        { "date": "15-05-2014", "open-slots": 0 }
-      ]
+      "open-slots": 1
+    },
+    {
+      "doctor-id": 3,
+      "doctor-name": "Ajay Gupta",
+      "open-slots": 1
+    },
+    {
+      "doctor-id": 4,
+      "doctor-name": "Guru Bhardwaj",
+      "open-slots": 10
     }
   ],
 
- "questionnaire" :{
+  "questionnaire" :{
     "default" : [
       {
       "type": "MCQ",
@@ -192,6 +212,13 @@ data = {
     "object": "0b0101101",
   },
 ],
+
+  "chosen-doctor": [
+    {
+      "doctor-id": 1,
+      "patient-abhaid": "1234456715344821",
+    }
+  ]
 
   "patient-registeration": [
     {

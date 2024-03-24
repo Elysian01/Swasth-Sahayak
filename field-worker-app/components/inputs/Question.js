@@ -48,6 +48,7 @@ const Question = (props) => {
 					style={styles.input}
 					inputMode="numeric"
 					placeholder="Enter your answer"
+					placeholderTextColor="gray"
 					onChangeText={handleInputChange}
 					value={userInput}
 				/>
@@ -57,6 +58,7 @@ const Question = (props) => {
 				<TextInput
 					style={styles.input}
 					placeholder="Enter your answer"
+					placeholderTextColor="gray"
 					onChangeText={handleInputChange}
 					value={userInput}
 				/>
@@ -82,8 +84,8 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	questionText: {
-		fontSize: 20,
-		fontWeight: "bold",
+		fontSize: 18,
+		fontWeight: "600",
 		paddingHorizontal: 10,
 		margin: 10,
 		width: "80%",

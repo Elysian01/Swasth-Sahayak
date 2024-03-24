@@ -28,11 +28,28 @@ export default AppStyles = {
 		textAlign: "center",
 		fontSize: 20,
 		fontWeight: "600",
+		textAlignVertical: "center",
 	},
 	primaryBtnLargeText: {
 		color: "white",
 		textAlign: "center",
 		fontSize: 32,
 		fontWeight: "600",
+	},
+	line: {
+		backgroundColor: "#000",
+		height: 2,
+		width: "80%",
+		alignSelf: "center",
+		marginBottom: 10,
+	},
+	btn: {
+		alignSelf: "center",
+		margin: 5,
+	},
+	subHeading: {
+		fontSize: 24,
+		marginVertical: 20,
+		fontWeight: "700",
 	},
 };

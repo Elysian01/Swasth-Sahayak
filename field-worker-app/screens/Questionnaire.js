@@ -1,20 +1,32 @@
-import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	ScrollView,
+	Pressable,
+	Alert,
+	TextInput,
+} from "react-native";
 import React from "react";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import Question from "../components/inputs/Question";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
 import PageHeading from "../components/headers/PageHeading";
+import AppStyles from "../AppStyles";
 
 const Questionnaire = (props) => {
 	const navigation = useNavigation();
-    
-    const QuestionnaireType = "default";
-	// const QuestionnaireType = props.route.params["questionnaire-type"];
-	// const patientAbhaId = props.route.params["patient-abhaid"];
+
+	// const QuestionnaireType = "default";
+	const QuestionnaireType = props.route.params["questionnaire-type"];
+	const patientAbhaId = props.route.params["patient-abhaid"];
 
 	const [questionResponses, setQuestionResponses] = useState([]);
+	const [fieldWorkerComments, setFieldWorkerComments] = useState("");
 
 	function getQuestionnaire() {
 		let data = require("../database/DOWNLOADED_DATA.json");
@@ -22,16 +34,64 @@ const Questionnaire = (props) => {
 			return data["questionnaire"][QuestionnaireType];
 		}
 		console.log("Can't fetch Questionnaire");
+		Alert.alert("Error", "Can't fetch Questionnaire");
 		return false;
 	}
 
 	const questions = getQuestionnaire();
 
-	function submitQuestionnaire() {
-		console.log("Questionnaire submitted");
-        console.log("Response: ", questionResponses);
-        navigation.navigate("DoctorSelection")
+	function getDate() {
+		var today = new Date();
+		var dd = String(today.getDate()).padStart(2, "0");
+		var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+		var yyyy = today.getFullYear();
+
+		today = dd + "-" + mm + "-" + yyyy;
+		return today;
 	}
+
+	const submitQuestionnaire = async () => {
+		console.log("Questionnaire submitted");
+		console.log("Response: ", questionResponses);
+		console.log("Field Worker Comments: ", fieldWorkerComments);
+
+		fieldWorkerData = {
+			"patient-abhaid": patientAbhaId,
+			comment: fieldWorkerComments,
+			date: getDate(),
+		};
+
+		questionnaireData = {
+			"patient-abhaid": patientAbhaId,
+			"questionnaire-type": QuestionnaireType,
+			responses: questionnaireData.responses.map((response) =>
+				JSON.stringify(response)
+			),
+		};
+
+
+		console.log("Hello: ", questionnaireData);
+
+		try {
+			uploadData = await AsyncStorage.getItem("uploadData");
+			uploadData = JSON.parse(uploadData);
+			console.log("Old Upload data: ", uploadData);
+			uploadData["fieldworker-comments"].push(fieldWorkerData);
+			uploadData["questionnaire-response"].push(questionnaireData);
+			console.log("Updated Upload data: ", uploadData);
+			await AsyncStorage.setItem(
+				"uploadData",
+				JSON.stringify(uploadData)
+			);
+
+			navigation.navigate("DoctorSelection", {
+				"patient-abhaid": patientAbhaId,
+			});
+		} catch (error) {
+			console.error("Error saving data, please retry:", error);
+			Alert.alert("Error", "Error saving data");
+		}
+	};
 
 	function responseInput(response) {
 		setQuestionResponses((prevResponses) => {
@@ -51,13 +111,17 @@ const Questionnaire = (props) => {
 		console.log("Response: ", response);
 	}
 
+	function handlefieldWorkerComments(text) {
+		setFieldWorkerComments(text);
+	}
+
 	return (
-		<ScrollView>
+		<ScrollView automaticallyAdjustKeyboardInsets={true}>
 			<Navbar />
 			<WorkerDetails />
 			<PageHeading text="Questionnaire" />
 			{/* <PageHeading text={lang[preferredlangauge]["Questionnaire"]} /> */}
-			<View style={styles.line}></View>
+			<View style={AppStyles.line}></View>
 			{questions.map((question, index) => (
 				<Question
 					key={index}
@@ -65,7 +129,22 @@ const Questionnaire = (props) => {
 					responseInput={responseInput}
 				/>
 			))}
-			<View style={styles.btn}>
+
+			<View style={styles.fieldWorkerComments}>
+				<Text style={AppStyles.subHeading}>
+					Field Worker Comments
+				</Text>
+				<TextInput
+					style={styles.textInput}
+					inputMode="text"
+					placeholder="Enter your comments for doctor to review"
+					placeholderTextColor="gray"
+					onChangeText={handlefieldWorkerComments}
+					value={fieldWorkerComments}
+				/>
+			</View>
+
+			<View style={AppStyles.btn}>
 				<Pressable
 					onPress={submitQuestionnaire}
 					style={AppStyles.primaryBtn}
@@ -83,15 +162,16 @@ const Questionnaire = (props) => {
 export default Questionnaire;
 
 const styles = StyleSheet.create({
-	line: {
-		backgroundColor: "#000",
-		height: 2,
+	fieldWorkerComments: {
+		display: "flex",
 		width: "80%",
 		alignSelf: "center",
-		marginBottom: 10,
 	},
-	btn: {
-		alignSelf: "center",
-		margin: 5,
+	textInput: {
+		padding: 25,
+		borderRadius: 10,
+		backgroundColor: "white",
+		fontSize: 18,
+		height: 200,
 	},
 });

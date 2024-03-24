@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
 		color: "#000",
 		textAlign: "center",
 		marginTop: 24,
-		whiteSpace: "nowrap",
 		fontSize: 24,
 		fontWeight: "600",
 		// fontFamily: "Playfair Display",

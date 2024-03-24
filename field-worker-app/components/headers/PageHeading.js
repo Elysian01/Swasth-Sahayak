@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		fontSize: 30,
 		fontWeight: "600",
-		marginVertical: 25,
+		marginBottom: 25,
 		textTransform: "capitalize",
 	},
 });

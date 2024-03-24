@@ -1,23 +1,27 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Eye from "../../assets/icons/eye.svg";
+import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 
+import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../../database/language";
-
-const getLanguage = async () => {
-	return await AsyncStorage.getItem("Language");
-};
+import AppStyles from "../../AppStyles";
 
 const DiagnoseHistory = () => {
+	const navigation = useNavigation();
+
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
 
+	function viewPrescription(date) {
+		console.log(date);
+		navigation.navigate("Prescription");
+	}
+
 	return (
 		<View style={styles.container}>
-			<Text style={styles.mainHeader}>
+			<Text style={AppStyles.subHeading}>
 				{lang[preferredlangauge]["Diagnose History"]}
 			</Text>
 			<View style={styles.table}>
@@ -29,43 +33,47 @@ const DiagnoseHistory = () => {
 						{lang[preferredlangauge]["Disease"]}
 					</Text>
 					<Text style={[styles.tableHeader, styles.header]}>
-						{lang[preferredlangauge]["Questionnaire Score"]}
-					</Text>
-					<Text style={[styles.tableHeader, styles.header]}>
 						{lang[preferredlangauge]["Prescription"]}
 					</Text>
 				</View>
 				<View style={styles.tableRow}>
-					<Text style={styles.tableData}>2nd Jan</Text>
+					<Text style={styles.tableData}>12-06-2015</Text>
 					<Text style={styles.tableData}>Malaria</Text>
-					<Text style={styles.tableData}>20/30</Text>
-					<View style={styles.eyeContainer}>
-						<Eye />
-					</View>
+					<Pressable
+						onPress={() => viewPrescription("12-06-2015")}
+						style={styles.eyeContainer}
+					>
+						<Image
+							source={require("../../assets/icons/eye.png")}
+							style={styles.img}
+						/>
+					</Pressable>
 				</View>
 				<View style={styles.tableRow}>
-					<Text style={styles.tableData}>2nd Jan</Text>
+					<Text style={styles.tableData}>13-06-2015</Text>
 					<Text style={styles.tableData}>Malaria</Text>
-					<Text style={styles.tableData}>20/30</Text>
-					<View style={styles.eyeContainer}>
-						<Eye />
-					</View>
+					<Pressable
+						onPress={() => viewPrescription("13-06-2015")}
+						style={styles.eyeContainer}
+					>
+						<Image
+							source={require("../../assets/icons/eye.png")}
+							style={styles.img}
+						/>
+					</Pressable>
 				</View>
 				<View style={styles.tableRow}>
-					<Text style={styles.tableData}>2nd Jan</Text>
+					<Text style={styles.tableData}>14-06-2015</Text>
 					<Text style={styles.tableData}>Malaria</Text>
-					<Text style={styles.tableData}>20/30</Text>
-					<View style={styles.eyeContainer}>
-						<Eye />
-					</View>
-				</View>
-				<View style={styles.tableRow}>
-					<Text style={styles.tableData}>2nd Jan</Text>
-					<Text style={styles.tableData}>Malaria</Text>
-					<Text style={styles.tableData}>20/30</Text>
-					<View style={styles.eyeContainer}>
-						<Eye />
-					</View>
+					<Pressable
+						onPress={() => viewPrescription("14-06-2015")}
+						style={styles.eyeContainer}
+					>
+						<Image
+							source={require("../../assets/icons/eye.png")}
+							style={styles.img}
+						/>
+					</Pressable>
 				</View>
 			</View>
 		</View>
@@ -74,8 +82,8 @@ const DiagnoseHistory = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		padding: 40,
+		width: "80%",
+		alignSelf: "center",
 	},
 	mainHeader: {
 		textAlign: "center",
@@ -95,17 +103,25 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	tableHeader: {
-		padding: 8,
+		padding: 15,
 		textAlign: "center",
+		fontSize: 20,
 		flex: 1,
+		backgroundColor: AppStyles.color.primaryLight,
 	},
 	header: {
 		fontWeight: "bold",
 	},
+	img: {
+		width: 35,
+		height: 20,
+	},
 	tableData: {
-		padding: 8,
+		padding: 12,
 		textAlign: "center",
+		fontSize: 18,
 		flex: 1,
+		fontWeight: "500",
 	},
 	eyeContainer: {
 		flex: 1,

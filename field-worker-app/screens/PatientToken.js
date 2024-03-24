@@ -20,10 +20,10 @@ const PatientToken = (props) => {
 		setPreferredLanguage(lang);
 	});
 
+	patientAbhaId = "";
 	const [token, setToken] = useState("");
-	const [abhaid, setAbhaID] = useState("");
 	const tokenChangeHandler = (e) => {
-		setToken(e.target.value);
+		setToken(e);
 	};
 
 	function isPatientInDownloadedJson(patientToken) {
@@ -34,7 +34,7 @@ const PatientToken = (props) => {
 				patient["patient-id"] === patientId &&
 				patient["patient-token"] === patientToken
 			) {
-				setAbhaID(patient["patient-abhaid"]);
+				patientAbhaId = patient["patient-abhaid"];
 				return true; // Patient found
 			}
 		}
@@ -56,7 +56,7 @@ const PatientToken = (props) => {
 			return;
 		} else {
 			navigation.navigate("PatientDashboard", {
-				"patient-abhaid": abhaid,
+				"patient-abhaid": patientAbhaId,
 				"new-patient": false,
 			});
 		}

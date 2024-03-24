@@ -61,6 +61,12 @@ export const lang = {
 		Sector: "Sector",
 		Pincode: "Pincode",
 		Questionnaire: "Questionnaire",
+		Prescription: "Prescription",
+		"Added new Follow-up Instructions":
+			"Added new Follow-up Instructions",
+		"Print via Bluetooth": "Print via Bluetooth",
+		"Back to Patient Dashboard": "Back to Patient Dashboard",
+		"Ask Questionnaire": "Ask Questionnaire",
 	},
 	Hindi: {
 		login: "लॉग इन",
@@ -103,6 +109,7 @@ export const lang = {
 		"Ongoing medication orders": "वर्तमान निदान",
 		"Questionnaire →": "प्रश्नावली →",
 		Questionnaire: "प्रश्नावली",
+		Prescription: "नुस्खा",
 		"added a comment on Followup": "फॉलोअप पर एक टिप्पणी जोड़ी",
 		"Enter Text": "पाठ दर्ज करें...",
 		"Proceed to Diagnosis": "निदान के लिए आगे बढ़ें",
@@ -124,5 +131,9 @@ export const lang = {
 		Address: "पता",
 		Sector: "क्षेत्र",
 		Pincode: "पिन कोड",
+		"Added new Follow-up Instructions": "नए अनुवर्ती निर्देश जोड़े गए",
+		"Print via Bluetooth": "ब्लूटूथ के माध्यम से प्रिंट करें",
+		"Back to Patient Dashboard": "रोगी डैशबोर्ड पर वापस जाएँ",
+		"Ask Questionnaire": "रश्नावली पूछें",
 	},
 };

@@ -21,16 +21,27 @@ const Home = () => {
 	const downloadData = async () => {
 		console.log("Downloading data...");
 
+		let data = require("../database/DOWNLOADED_DATA.json");
 		const uploadTemplate = {
-			// list of all modified patient details
-			"modified-patient-details": [],
+			// list of all questionnaire responses
+			"questionnaire-response": [],
+			// list of all field workers comments
+			"fieldworker-comments": [],
+			// list of all artifacts
+			artifacts: [],
 			// docters slot booked
-			doctors: [],
+			doctors: data["doctors"],
+			// list of doctor chosen by patient
+			"chosen-doctor": [],
 			// upload section
 			"patient-registeration": [],
 		};
+		console.log(uploadTemplate);
 		try {
-			await AsyncStorage.setItem("uploadData", JSON.stringify(uploadTemplate));
+			await AsyncStorage.setItem(
+				"uploadData",
+				JSON.stringify(uploadTemplate)
+			);
 			setDataDownloaded(true);
 		} catch (error) {
 			console.log(
