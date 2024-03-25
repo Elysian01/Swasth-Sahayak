@@ -14,6 +14,7 @@ import { lang } from "../database/language";
 const PatientToken = (props) => {
 	const navigation = useNavigation();
 	const patientId = props.route.params["patient-id"];
+	const followUpID = props.route.params["follow-up-id"];
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
@@ -41,6 +42,37 @@ const PatientToken = (props) => {
 		return false; // Patient not found
 	}
 
+	const updateFollowUpVisitedStatusToTrue = async (patientId) => {
+		try {
+			let uploadData = await AsyncStorage.getItem("uploadData");
+			if (uploadData) {
+				uploadData = JSON.parse(uploadData);
+				const updatedFollowUp = uploadData["follow-up"].map(
+					(followUp) => {
+						if (followUp["patient-id"] === patientId) {
+							return {
+								...followUp,
+								"visited-status": true,
+							};
+						}
+						return followUp;
+					}
+				);
+				uploadData["follow-up"] = updatedFollowUp;
+				console.log("Updated: ", uploadData);
+				await AsyncStorage.setItem(
+					"uploadData",
+					JSON.stringify(uploadData)
+				);
+			}
+		} catch (error) {
+			console.error(
+				"Error updating follow-up visited status: ",
+				error
+			);
+		}
+	};
+
 	function checkToken() {
 		if (!token) {
 			Alert.alert("Incomplete Form", "Please fill in all fields.");
@@ -55,6 +87,7 @@ const PatientToken = (props) => {
 			setToken("");
 			return;
 		} else {
+			updateFollowUpVisitedStatusToTrue(patientId);
 			navigation.navigate("PatientDashboard", {
 				"patient-abhaid": patientAbhaId,
 				"new-patient": false,

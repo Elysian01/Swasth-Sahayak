@@ -51,7 +51,6 @@ const Questionnaire = (props) => {
 	}
 
 	const submitQuestionnaire = async () => {
-		console.log("Questionnaire submitted");
 		console.log("Response: ", questionResponses);
 		console.log("Field Worker Comments: ", fieldWorkerComments);
 
@@ -64,11 +63,8 @@ const Questionnaire = (props) => {
 		questionnaireData = {
 			"patient-abhaid": patientAbhaId,
 			"questionnaire-type": QuestionnaireType,
-			responses: questionnaireData.responses.map((response) =>
-				JSON.stringify(response)
-			),
+			responses: questionResponses,
 		};
-
 
 		console.log("Hello: ", questionnaireData);
 
@@ -83,6 +79,7 @@ const Questionnaire = (props) => {
 				"uploadData",
 				JSON.stringify(uploadData)
 			);
+			console.log("Questionnaire submitted");
 
 			navigation.navigate("DoctorSelection", {
 				"patient-abhaid": patientAbhaId,

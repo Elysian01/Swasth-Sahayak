@@ -1,29 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import FollowUpCard from "../cards/FollowUpCard";
 
 const PatientRecords = () => {
 	const [followUps, setFollowUps] = useState([]);
+	const [dataSetted, setDataSetted] = useState(false);
 
 	useEffect(() => {
-		// Fetch data from JSON file for follow-ups
-		let data = require("../../database/DOWNLOADED_DATA.json");
-		if (data && data["follow-up"]) {
-			setFollowUps(data["follow-up"]);
-		}
+		const getData = async () => {
+			try {
+				const uploadData = await AsyncStorage.getItem("uploadData");
+				if (uploadData) {
+					const parsedData = JSON.parse(uploadData);
+					const followUpsData = parsedData["follow-up"] || [];
+					setFollowUps(followUpsData);
+					setDataSetted(true);
+				}
+			} catch (error) {
+				console.error("Error fetching data:", error);
+			}
+		};
+
+		getData();
 	});
 
 	return (
-		<ScrollView style={styles.scrollView}>
+		<ScrollView
+			automaticallyAdjustKeyboardInsets={true}
+			style={styles.scrollView}
+		>
 			<View style={styles.mainContainer}>
-				{followUps.map((followUp, index) => (
-					<FollowUpCard
-						key={index}
-						name={followUp["patient-name"]}
-						address={followUp["patient-address"]}
-						patientId={followUp["patient-id"]}
-					/>
-				))}
+				{dataSetted &&
+					followUps.map((followUp, index) => (
+						<FollowUpCard
+							key={index}
+							name={followUp["patient-name"]}
+							address={followUp["patient-address"]}
+							patientId={followUp["patient-id"]}
+							visitedStatus={followUp["visited-status"]}
+							followUpID={followUp["follow-up-id"]}
+						/>
+					))}
 			</View>
 		</ScrollView>
 	);

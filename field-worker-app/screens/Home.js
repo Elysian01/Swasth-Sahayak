@@ -23,6 +23,8 @@ const Home = () => {
 
 		let data = require("../database/DOWNLOADED_DATA.json");
 		const uploadTemplate = {
+			// list of all follow-ups
+			"follow-up": data["follow-up"],
 			// list of all questionnaire responses
 			"questionnaire-response": [],
 			// list of all field workers comments

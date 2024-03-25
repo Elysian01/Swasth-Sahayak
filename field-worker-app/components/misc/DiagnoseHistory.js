@@ -6,17 +6,36 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../../database/language";
 import AppStyles from "../../AppStyles";
 
-const DiagnoseHistory = () => {
+const DiagnoseHistory = (props) => {
 	const navigation = useNavigation();
+
+	const prescriptions = props.prescriptions;
+	const patientName = props.patientName;
+	const patientAbhaId = props.patientAbhaId;
+	const fieldWorkerId = props.fieldWorkerId;
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
 
-	function viewPrescription(date) {
-		console.log(date);
-		navigation.navigate("Prescription");
+	function viewPrescription(prescriptionData) {
+		navigation.navigate("Prescription", {
+			disease: getDiseaseName(prescriptionData["ICD10-code"]),
+			prescriptionDate: prescriptionData["date"],
+			doctorName: prescriptionData["doctor-name"],
+			prescription: prescriptionData["prescription"],
+			fieldWorkerName: "jass",
+			patientName: patientName,
+			patientAbhaId: patientAbhaId,
+			fieldWorkerId: fieldWorkerId,
+		});
+	}
+
+	function getDiseaseName(icd10Code) {
+		const icd10Codes = require("../../database/ICD10_CODES.json");
+		const entry = icd10Codes.find((entry) => entry.code === icd10Code);
+		return entry ? entry["disease-name"] : null;
 	}
 
 	return (
@@ -25,56 +44,39 @@ const DiagnoseHistory = () => {
 				{lang[preferredlangauge]["Diagnose History"]}
 			</Text>
 			<View style={styles.table}>
-				<View style={styles.tableRow}>
-					<Text style={[styles.tableHeader, styles.header]}>
+				<View style={[styles.tableRow, styles.headerRow]}>
+					<Text style={styles.tableHeader}>
 						{lang[preferredlangauge]["Date"]}
 					</Text>
-					<Text style={[styles.tableHeader, styles.header]}>
+					<Text style={styles.tableHeader}>
 						{lang[preferredlangauge]["Disease"]}
 					</Text>
-					<Text style={[styles.tableHeader, styles.header]}>
+					<Text style={styles.tableHeader}>
 						{lang[preferredlangauge]["Prescription"]}
 					</Text>
 				</View>
-				<View style={styles.tableRow}>
-					<Text style={styles.tableData}>12-06-2015</Text>
-					<Text style={styles.tableData}>Malaria</Text>
-					<Pressable
-						onPress={() => viewPrescription("12-06-2015")}
-						style={styles.eyeContainer}
-					>
-						<Image
-							source={require("../../assets/icons/eye.png")}
-							style={styles.img}
-						/>
-					</Pressable>
-				</View>
-				<View style={styles.tableRow}>
-					<Text style={styles.tableData}>13-06-2015</Text>
-					<Text style={styles.tableData}>Malaria</Text>
-					<Pressable
-						onPress={() => viewPrescription("13-06-2015")}
-						style={styles.eyeContainer}
-					>
-						<Image
-							source={require("../../assets/icons/eye.png")}
-							style={styles.img}
-						/>
-					</Pressable>
-				</View>
-				<View style={styles.tableRow}>
-					<Text style={styles.tableData}>14-06-2015</Text>
-					<Text style={styles.tableData}>Malaria</Text>
-					<Pressable
-						onPress={() => viewPrescription("14-06-2015")}
-						style={styles.eyeContainer}
-					>
-						<Image
-							source={require("../../assets/icons/eye.png")}
-							style={styles.img}
-						/>
-					</Pressable>
-				</View>
+
+				{prescriptions.map((prescription, index) => (
+					<View key={index} style={styles.tableRow}>
+						<Text style={styles.tableData}>
+							{prescription.date}
+						</Text>
+						<Text style={styles.tableData}>
+							{getDiseaseName(prescription["ICD10-code"])}
+						</Text>
+						<Pressable
+							onPress={() =>
+								viewPrescription(prescription)
+							}
+							style={styles.eyeContainer}
+						>
+							<Image
+								source={require("../../assets/icons/eye.png")}
+								style={styles.img}
+							/>
+						</Pressable>
+					</View>
+				))}
 			</View>
 		</View>
 	);
@@ -84,13 +86,7 @@ const styles = StyleSheet.create({
 	container: {
 		width: "80%",
 		alignSelf: "center",
-	},
-	mainHeader: {
-		textAlign: "center",
-		marginTop: 44,
-		fontSize: 26,
-		fontWeight: "600",
-		fontFamily: "Playfair Display",
+		marginBottom: 50,
 	},
 	table: {
 		width: "100%",
@@ -102,25 +98,26 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		alignItems: "center",
 	},
+	headerRow: {
+		backgroundColor: AppStyles.color.primaryLight,
+	},
 	tableHeader: {
+		flex: 1,
 		padding: 15,
 		textAlign: "center",
 		fontSize: 20,
-		flex: 1,
-		backgroundColor: AppStyles.color.primaryLight,
-	},
-	header: {
 		fontWeight: "bold",
 	},
+
 	img: {
 		width: 35,
 		height: 20,
 	},
 	tableData: {
+		flex: 1,
 		padding: 12,
 		textAlign: "center",
 		fontSize: 18,
-		flex: 1,
 		fontWeight: "500",
 	},
 	eyeContainer: {

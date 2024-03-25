@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet, Image } from "react-native";
-import InputField from "../inputs/InputField";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../../database/language";
@@ -50,9 +49,10 @@ const OngoingMedicationOrders = (props) => {
 							{lang[preferredlangauge]["Added new Follow-up Instructions"]}
 						</Text> */}
 					</View>
-
-					<Text style={styles.disease}>{disease}</Text>
 				</View>
+			</View>
+			<View style={styles.diseaseContainer}>
+				<Text style={styles.disease}>{disease}</Text>
 			</View>
 
 			<View style={styles.perscription}>
@@ -89,12 +89,16 @@ const styles = StyleSheet.create({
 	},
 	info: {
 		display: "flex",
-		flexDirection: "row",
-		justifyContent: "space-between",
+		flexDirection: "column",
+		gap: 20,
+	},
+	diseaseContainer: {
+		marginHorizontal: 20,
+		marginBottom: 10,
 	},
 	disease: {
 		color: "red",
-		fontSize: 24,
+		fontSize: 18,
 		fontWeight: "bold",
 	},
 	doctorInfo: {

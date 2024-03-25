@@ -72,10 +72,18 @@ const RegisterPatient = () => {
 	};
 
 	const handleRegisterPatient = async () => {
-		// if (!firstname || !lastname || !abhaID || !phoneNumber || !address || !sector || !pincode) {
-		// 	Alert.alert("Incomplete Form", "Please fill in all fields.");
-		// 	return;
-		// }
+		if (
+			!firstname ||
+			!lastname ||
+			!abhaID ||
+			!phoneNumber ||
+			!address ||
+			!sector ||
+			!pincode
+		) {
+			Alert.alert("Incomplete Form", "Please fill in all fields.");
+			return;
+		}
 
 		const patientData = {
 			"fieldworker-id": 1234,
@@ -127,7 +135,7 @@ const RegisterPatient = () => {
 	};
 
 	return (
-		<ScrollView>
+		<ScrollView automaticallyAdjustKeyboardInsets={true}>
 			<Navbar />
 			<WorkerDetails />
 			<PageHeading

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
@@ -11,14 +11,41 @@ import AppStyles from "../AppStyles";
 const Prescription = (props) => {
 	const navigation = useNavigation();
 
-	const doctorName = "Abhishek Gupta";
-	const diagnoseDate = "12-05-2013";
-	const fieldWorkerName = "Aakash Bhardaj";
-	const prescriptionDate = "13-05-2013";
-	const patientName = "Jass Sadana";
-	const patientAbhaId = "1234567812345678";
-	const prescription =
-		"lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it";
+	const [dataSetted, setDataSetted] = useState(false);
+
+	const [doctorName, setDoctorName] = useState("");
+	const [disease, setDisease] = useState("");
+	const [fieldWorkerName, setFieldWorkerName] = useState("");
+	const [prescriptionDate, setPrescriptionDate] = useState("");
+	const [patientName, setPatientName] = useState("");
+	const [patientAbhaId, setPatientAbhaId] = useState("");
+	const [prescription, setPrescription] = useState("");
+	const [fieldWorkerId, setFieldWorkerId] = useState("");
+
+	useEffect(() => {
+		if (props.route.params) {
+			const {
+				doctorName,
+				disease,
+				fieldWorkerName,
+				prescriptionDate,
+				patientName,
+				patientAbhaId,
+				prescription,
+				fieldWorkerId,
+			} = props.route.params;
+
+			setDoctorName(doctorName);
+			setDisease(disease);
+			setFieldWorkerName(fieldWorkerName);
+			setPrescriptionDate(prescriptionDate);
+			setPatientName(patientName);
+			setPatientAbhaId(patientAbhaId);
+			setPrescription(prescription);
+			setFieldWorkerId(fieldWorkerId);
+			setDataSetted(true);
+		}
+	}, [props.route.params]);
 
 	function goBackToDashboard() {
 		navigation.navigate("PatientDashboard", {
@@ -33,54 +60,78 @@ const Prescription = (props) => {
 			<PageHeading text="Prescription" />
 			{/* <PageHeading text={lang[preferredlangauge]["Prescription"]} /> */}
 			<View style={AppStyles.line}></View>
-			<View style={styles.info}>
-				<View style={styles.column}>
-					<Text style={styles.text}>
-						Field Worker: {fieldWorkerName}
-					</Text>
-					<Text style={styles.text}>Doctor: {doctorName}</Text>
-					<Text style={styles.text}>Patient: {patientName}</Text>
-				</View>
-				<View style={styles.column}>
-					<Text style={styles.text}>
-						Diagnose Date: {diagnoseDate}
-					</Text>
-					<Text style={styles.text}>
-						Prescription Date: {prescriptionDate}
-					</Text>
-					<Text style={styles.text}>
-						Patient ABHA-ID: {patientAbhaId}
-					</Text>
-				</View>
-			</View>
-			<View style={styles.perscriptionMain}>
-				<Text style={AppStyles.subHeading}>Prescription</Text>
-				<View style={styles.perscription}>
-					<Text style={styles.text}>{prescription}</Text>
-				</View>
-			</View>
+			{dataSetted && (
+				<View>
+					<View style={styles.info}>
+						<View style={styles.column}>
+							<Text style={styles.text}>
+								Field Worker: {fieldWorkerName}
+							</Text>
+							<Text style={styles.text}>
+								Doctor: {doctorName}
+							</Text>
+							<Text style={styles.text}>
+								Patient: {patientName}
+							</Text>
+						</View>
+						<View style={styles.column}>
+							<Text style={styles.text}>
+								Field Worker ID: {fieldWorkerId}
+							</Text>
+							<Text style={styles.text}>
+								Prescription Date: {prescriptionDate}
+							</Text>
+							<Text style={styles.text}>
+								Patient ABHA-ID: {patientAbhaId}
+							</Text>
+						</View>
+					</View>
+					<View style={styles.diseaseContainer}>
+						<Text style={styles.diseaseText}>
+							Disease:
+							<Text style={styles.disease}>
+								{" "}
+								{disease}
+							</Text>
+						</Text>
+					</View>
+					<View style={styles.perscriptionMain}>
+						<Text style={AppStyles.subHeading}>
+							Prescription
+						</Text>
+						<View style={styles.perscription}>
+							<Text style={styles.text}>
+								{prescription}
+							</Text>
+						</View>
+					</View>
 
-			<View style={styles.btns}>
-				<Pressable
-					onPress={goBackToDashboard}
-					style={AppStyles.primaryBtn}
-				>
-					{/* <Text style={AppStyles.primaryBtnText}>
+					<View style={styles.btns}>
+						<Pressable
+							onPress={() => goBackToDashboard()}
+							style={AppStyles.primaryBtn}
+						>
+							{/* <Text style={AppStyles.primaryBtnText}>
 						{lang[preferredlangauge]["Back to Patient Dashboard"]}
 					</Text> */}
-					<Text style={AppStyles.primaryBtnText}>
-						Back to Patient Dashboard
-					</Text>
-				</Pressable>
-				<Pressable style={AppStyles.primaryBtn}>
-					{/* <Text style={AppStyles.primaryBtnText}>
+							<Text style={AppStyles.primaryBtnText}>
+								Back to Patient Dashboard
+							</Text>
+						</Pressable>
+						<Pressable
+							onPress={() => goBackToDashboard()}
+							style={AppStyles.primaryBtn}
+						>
+							{/* <Text style={AppStyles.primaryBtnText}>
 						{lang[preferredlangauge]["Print via Bluetooth"]}
 					</Text> */}
-					<Text style={AppStyles.primaryBtnText}>
-						Print via Bluetooth
-					</Text>
-				</Pressable>
-			</View>
+							<Text style={AppStyles.primaryBtnText}>
+								Print via Bluetooth
+							</Text>
+						</Pressable>
+					</View>
+				</View>
+			)}
 		</ScrollView>
 	);
 };
@@ -100,12 +151,28 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 	},
 	text: {
-		fontSize: 20,
+		fontSize: 18,
 		fontWeight: "600",
 		// marginHorizontal: 25,
 		marginVertical: 10,
 		justifyContent: "flex-start",
 		textAlignVertical: "center",
+	},
+	diseaseContainer: {
+		width: "80%",
+		alignSelf: "center",
+		justifyContent: "center",
+		marginHorizontal: 10,
+	},
+	diseaseText: {
+		color: "black",
+		fontSize: 18,
+		fontWeight: "bold",
+	},
+	disease: {
+		color: "red",
+		fontSize: 18,
+		fontWeight: "bold",
 	},
 	perscriptionMain: {
 		width: "80%",

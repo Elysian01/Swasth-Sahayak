@@ -3,9 +3,13 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { lang } from "../../database/language";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AppStyles from "../../AppStyles";
 
 const FollowUpCard = (props) => {
 	const navigation = useNavigation();
+
+	const visitedStatus = props.visitedStatus;
+	const followUpID = props.followUpID;
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
@@ -15,6 +19,7 @@ const FollowUpCard = (props) => {
 	const handleViewRecords = () => {
 		navigation.navigate("PatientToken", {
 			"patient-id": props.patientId,
+			"follow-up-id": followUpID,
 		});
 	};
 	return (
@@ -26,11 +31,20 @@ const FollowUpCard = (props) => {
 				</View>
 			</View>
 			<View style={styles.column2}>
-				<TouchableOpacity style={styles.visitedButton}>
-					<Text style={styles.visitedButtonText}>
-						{lang[preferredlangauge]["Visited"]}
-					</Text>
-				</TouchableOpacity>
+				{visitedStatus && (
+					<View style={styles.visitedSection}>
+						<Text style={styles.visitedSectionText}>
+							{lang[preferredlangauge]["Visited"]}
+						</Text>
+					</View>
+				)}
+				{!visitedStatus && (
+					<View style={styles.notVisitedSection}>
+						<Text style={styles.notVisitedSectionText}>
+							{lang[preferredlangauge]["Not Visited"]}
+						</Text>
+					</View>
+				)}
 			</View>
 			<View style={styles.column3}>
 				<TouchableOpacity
@@ -79,21 +93,37 @@ const styles = StyleSheet.create({
 		width: "21%",
 		marginLeft: 20,
 	},
-	visitedButton: {
-		borderRadius: 8,
-		borderWidth: 1,
-		borderColor: "white",
-		backgroundColor: AppStyles.color.primary,
+	visitedSection: {
+		borderRadius: 20,
+		borderWidth: 2,
+		borderColor: AppStyles.color.primary,
+		color: AppStyles.color.primary,
 		justifyContent: "center",
 		alignItems: "center",
 		width: "100%",
-		paddingVertical: 13,
-		paddingHorizontal: 35,
+		paddingVertical: 10,
+		paddingHorizontal: 10,
 	},
-	visitedButtonText: {
-		color: "white",
+	notVisitedSection: {
+		borderRadius: 20,
+		borderWidth: 2,
+		borderColor: AppStyles.color.red,
+		color: AppStyles.color.red,
+		justifyContent: "center",
+		alignItems: "center",
+		width: "100%",
+		paddingVertical: 10,
+		paddingHorizontal: 10,
+	},
+	notVisitedSectionText: {
+		color: AppStyles.color.red,
 		fontWeight: "600",
-		fontSize: 14,
+		fontSize: 16,
+	},
+	visitedSectionText: {
+		color: AppStyles.color.primary,
+		fontWeight: "600",
+		fontSize: 16,
 	},
 	column3: {
 		width: "17%",

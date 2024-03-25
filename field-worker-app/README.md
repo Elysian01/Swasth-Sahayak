@@ -175,6 +175,29 @@ data = {
 
 ```js
 data = {
+  // for follow-up-status
+  "follow-up": [
+    {
+      "follow-up-id": 1,
+      "patient-id": 123,
+      "fieldworker-id": 1234,
+      "patient-name": "Abhishek Gupta",
+      "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
+      "patient-token": "123",
+      "patient-abhaid": "1234567812345678",
+      "visited-status": true 
+    },
+    {
+      "follow-up-id": 2,
+      "patient-id": 124,
+      "fieldworker-id": 1234,
+      "patient-name": "Abhishek Gupta",
+      "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
+      "patient-token": "123",
+      "patient-abhaid": "1234567812345678",
+      "visited-status": true 
+    }
+  ],
   // docters slots remaining
   "doctors": [
     {

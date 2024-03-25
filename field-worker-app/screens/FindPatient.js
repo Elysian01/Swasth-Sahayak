@@ -48,6 +48,7 @@ const FindPatient = () => {
 		} else {
 			navigation.navigate("PatientDashboard", {
 				"patient-abhaid": abhaId,
+				"new-patient": false,
 			});
 		}
 	}
