@@ -22,9 +22,11 @@
 ## AsyncStorage Keys
 
 ```md
-1. AccessToken
-2. Language
-3. uploadData
+1. FieldWorkerId
+2. FieldWorkerName
+3. AccessToken
+4. Language
+5. uploadData
 ```
 
 ## Download Region Data Format
