@@ -3,6 +3,7 @@ import "./css/doctor-dashboard.css";
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Table from "../components/tables/Listings";
 import Navbar from "../components/misc/Navbar";
@@ -12,13 +13,16 @@ import ShortListings from "../components/tables/ShortListings";
 
 import viewIcon from "../static/icons/eye.png";
 import { useSelector } from "react-redux";
-import { getRequest } from '../components/Api/api'; 
+import { getRequest } from "../components/Api/api";
 
 function DoctorDashboard() {
+  const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
+  
   useEffect(() => {
     const fetchTop3Patients = async () => {
       try {
@@ -39,7 +43,7 @@ function DoctorDashboard() {
   };
 
   const handleViewClick = (viewUrl) => {
-    window.open(viewUrl, "_blank");
+    navigate("/diagnose-request");
   };
 
   const columns = ["Patient ID", "Name", "View Diagnose"];
@@ -109,14 +113,16 @@ function DoctorDashboard() {
               <Table
                 columns={columns}
                 data={tableData.map((row) => ({
-                  "Name": row.name,
+                  Name: row.name,
                   "Patient ID": row.patientid,
                   "View Diagnose": renderViewButton(row.View),
                 }))}
               />
             )}
             <br />
-            <button className="medium-primary-btn">View More</button>
+            <button className="medium-primary-btn" onClick={handleViewClick}>
+              View More
+            </button>
           </div>
         </div>
       </main>

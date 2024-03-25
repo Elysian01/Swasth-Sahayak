@@ -7,41 +7,22 @@ import Navbar from "../components/misc/Navbar";
 import viewIcon from "../static/icons/eye.png";
 import diagnoseImage from "../static/imgs/diagnose-request.png";
 
+import { useSelector } from "react-redux";
+import { getRequest } from "../components/Api/api";
+
 function DiagnoseRequest() {
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //const response = await axios.get("http://localhost:9001/data");
-        const response = {
-          "data": [
-            {
-              "Name": "John Doe",
-              "Questionnaire Score": 85,
-              "Appointment Date & Time": "2024-02-10T10:00:00",
-              "Chat": "https://example.com/chat/john_doe",
-              "View": "https://example.com/view/john_doe"
-            },
-            {
-              "Name": "Jane Smith",
-              "Questionnaire Score": 92,
-              "Appointment Date & Time": "2024-02-12T14:30:00",
-              "Chat": "https://example.com/chat/jane_smith",
-              "View": "https://example.com/view/jane_smith"
-            },
-            {
-              "Name": "Michael Johnson",
-              "Questionnaire Score": 78,
-              "Appointment Date & Time": "2024-02-15T09:15:00",
-              "Chat": "https://example.com/chat/michael_johnson",
-              "View": "https://example.com/view/michael_johnson"
-            }
-          ]
-        }
-        
-        setTableData(response.data);
+        const headers = { Authorization: `Bearer ${token}` };
+        const response = await getRequest(`/doctor/findall/${user}`, headers);
+        setTableData(response);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -59,13 +40,7 @@ function DiagnoseRequest() {
     window.open(viewUrl, "_blank");
   };
 
-  const columns = [
-    "Name",
-    "Questionnaire Score",
-    "Appointment Date & Time",
-    "Chat",
-    "View",
-  ];
+  const columns = ["User ID", "Name", "Chat", "View"];
 
   const renderChatButton = (chatUrl) => (
     <button onClick={() => handleChatClick(chatUrl)} className="chat-button">
@@ -91,7 +66,8 @@ function DiagnoseRequest() {
             <Table
               columns={columns}
               data={tableData.map((row) => ({
-                ...row,
+                "User ID": row.patientid,
+                Name: row.name,
                 Chat: renderChatButton(row.Chat),
                 View: renderViewButton(row.View),
               }))}
