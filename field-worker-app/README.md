@@ -33,6 +33,9 @@
 
 ```js
 data = {
+  "field-worker-details": {
+    "field-worker-assigned-sector": 1234
+  },
   "follow-up": [
     {
       "patient-id": 123,
