@@ -34,10 +34,11 @@
 ```js
 data = {
   "field-worker-details": {
-    "field-worker-assigned-sector": 1234
+    "field-worker-assigned-sector": 7
   },
   "follow-up": [
     {
+      "follow-up-id": 1,
       "patient-id": 123,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
@@ -47,6 +48,7 @@ data = {
       "visited-status": false 
     },
     {
+      "follow-up-id": 2,
       "patient-id": 124,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
@@ -65,7 +67,7 @@ data = {
       "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100", 
       "patient-abhaid": "1234567812345678",
       "ongoing-medication-orders": {
-        "ICD10-code": 1264,
+        "ICD10-code": "F90.0",
         "doctor-name": "Abhishek Gupta",
         "doctor-comment": "Abhishek lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
         "date": "12-05-2014",
@@ -73,22 +75,22 @@ data = {
       },   
       "recent-3-prescriptions": [
         {
-        "ICD10-code": 1264,
-        "prescription": "lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "ICD10-code": "F90.0",
+        "prescription": "prescription-1 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
         "date": "12-05-2014",
-        "doctor-name":"Aakash Bhardwaj"
+        "doctor-name":"Aakash Bhardwaj 1"
         }, 
         {
-        "ICD10-code": 1264,
-        "prescription": "lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "ICD10-code": "F90.0",
+        "prescription": "prescription-2 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
         "date": "13-05-2014",
-        "doctor-name":"Aakash Bhardwaj"
+        "doctor-name":"Aakash Bhardwaj 2"
         }, 
         {
-        "ICD10-code": 1264,
-        "prescription": "lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "ICD10-code": "F90.0",
+        "prescription": "prescription-3 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
         "date": "14-05-2014",
-        "doctor-name":"Aakash Bhardwaj"
+        "doctor-name":"Aakash Bhardwaj 3"
         }
     ]
     }
@@ -153,7 +155,7 @@ data = {
       "question": "xyz"
       }
     ],
-    "ICD10-code2" : [
+    "F90.0" : [
       {
       "type": "MCQ",
       "question": "xyz",

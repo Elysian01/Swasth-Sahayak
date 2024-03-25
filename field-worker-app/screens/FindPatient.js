@@ -13,16 +13,16 @@ import { lang } from "../database/language";
 import AppStyles from "../AppStyles";
 
 const FindPatient = () => {
+	const navigation = useNavigation();
+
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
 
-	const navigation = useNavigation();
-
 	const [abhaId, setAbhaId] = useState("");
 	const abhaIdChangeHandler = (e) => {
-		setAbhaId(e.target.value);
+		setAbhaId(e);
 	};
 
 	function isPatientInDownloadedJson() {
@@ -40,12 +40,13 @@ const FindPatient = () => {
 		const foundPatient = isPatientInDownloadedJson();
 		if (!foundPatient) {
 			Alert.alert(
-				"Token Incorrect",
-				"Please Enter correct token for this patient."
+				"Abha-ID Not Found",
+				"Abha-ID Not Found, please enter correct Abha-ID or try registering the patient"
 			);
 			setAbhaId("");
 			return;
 		} else {
+			setAbhaId("");
 			navigation.navigate("PatientDashboard", {
 				"patient-abhaid": abhaId,
 				"new-patient": false,
@@ -66,11 +67,12 @@ const FindPatient = () => {
 			<View style={styles.inputs}>
 				<InputField
 					id="abhaId"
-					type="patientDetail"
+					type="number"
 					placeholder={lang[preferredlangauge]["Enter ABHA ID"]}
 					onChange={abhaIdChangeHandler}
 					value={abhaId}
 					lightBackground={true}
+					icon="PatientDetail"
 				/>
 				<View style={styles.btn}>
 					<Pressable
@@ -89,17 +91,6 @@ const FindPatient = () => {
 							{lang[preferredlangauge]["Register Patient"]}
 						</Text>
 					</Pressable>
-
-					{/* <Button
-						type="primary"
-						navigateTo="Home"
-						text={}
-					/>
-					<Button
-						type="primary"
-						navigateTo="RegisterPatient"
-						text={}
-					/> */}
 				</View>
 			</View>
 		</View>
