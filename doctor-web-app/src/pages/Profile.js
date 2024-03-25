@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../login/authSlice";
 import Table from "../components/tables/Listings";
 import axios from "axios";
 import "./css/common.css";
@@ -9,10 +11,15 @@ import viewIcon from "../static/icons/eye.png";
 import doctorImage from "../static/imgs/doctor-page-profile-photo.png";
 
 function Profile() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -101,7 +108,7 @@ function Profile() {
           
           <div className="button-arrangement">
             <button className="medium-primary-btn">Reset Password</button>
-            <button className="medium-primary-btn">Logout</button>
+            <button className="medium-primary-btn" onClick={handleLogout}>Logout</button>
           </div>
         </div>
         <div className="table-container">
