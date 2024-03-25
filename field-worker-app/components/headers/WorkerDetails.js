@@ -9,12 +9,19 @@ import { lang } from "../../database/language";
 
 const WorkerDetails = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
+	const [fieldWorkerId, setFieldWorkerId] = useState("");
+	const [fieldWorkerName, setFieldWorkerName] = useState("");
+
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
+	AsyncStorage.getItem("FieldWorkerId").then((id) => {
+		setFieldWorkerId(id);
+	});
+	AsyncStorage.getItem("FieldWorkerName").then((name) => {
+		setFieldWorkerName(name);
+	});
 
-	const name = "Abhishek Gupta";
-	const id = "430176";
 	return (
 		<View style={styles.container}>
 			<Text style={styles.quote}>
@@ -26,9 +33,9 @@ const WorkerDetails = () => {
 			</Text>
 			<View style={styles.workerDetails}>
 				<Text style={styles.details}>
-					{lang[preferredlangauge]["Hello"]}, {name}
+					{lang[preferredlangauge]["Hello"]}, {fieldWorkerName}
 				</Text>
-				<Text style={styles.details}>ID: {id}</Text>
+				<Text style={styles.details}>ID: {fieldWorkerId}</Text>
 			</View>
 		</View>
 	);

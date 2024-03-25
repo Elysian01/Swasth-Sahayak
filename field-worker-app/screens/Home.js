@@ -13,6 +13,7 @@ import { lang } from "../database/language";
 const Home = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	const [dataDownloaded, setDataDownloaded] = useState(false);
+	const [assignedSector, setAssignedSector] = useState();
 
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
@@ -22,6 +23,10 @@ const Home = () => {
 		console.log("Downloading data...");
 
 		let data = require("../database/DOWNLOADED_DATA.json");
+		setAssignedSector(
+			data["field-worker-details"]["field-worker-assigned-sector"]
+		);
+
 		const uploadTemplate = {
 			// list of all follow-ups
 			"follow-up": data["follow-up"],
@@ -90,7 +95,7 @@ const Home = () => {
 						}
 					/>
 					<PatientRecords />
-					<FreeVisit />
+					<FreeVisit assignedSector={assignedSector} />
 				</View>
 			)}
 		</View>

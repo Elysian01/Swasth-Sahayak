@@ -65,6 +65,14 @@ const Login = () => {
 		// 			Alert.alert("Error", error);
 		// 		});
 		// }
+
+		// const fieldWorkerId = result.data.fieldWorkerId;
+		// const fieldWorkerId = result.data.fieldWorkerName;
+		
+		const fieldWorkerId = "10597";
+		const fieldWorkerName = "Jass Sadana";
+		AsyncStorage.setItem("FieldWorkerId", fieldWorkerId);
+		AsyncStorage.setItem("FieldWorkerName", fieldWorkerName);
 		navigation.navigate("Home");
 	}
 

@@ -9,20 +9,23 @@ const getLanguage = async () => {
 	return await AsyncStorage.getItem("Language");
 };
 
-const FreeVisit = () => {
+const FreeVisit = (props) => {
+	const navigation = useNavigation();
+
+	const assignedSector = props.assignedSector;
+
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
-	const navigation = useNavigation();
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.mainContainer}></View>
 			<Text style={styles.mainTitle}>
-				{lang[preferredlangauge]["Free Visits On"]}
+				{lang[preferredlangauge]["Free Visits On: "]}
 				<Text style={styles.sectorInfo}>
-					{" "}
-					{lang[preferredlangauge]["Sector 12"]}
+					{lang[preferredlangauge]["Sector"]} {assignedSector}
 				</Text>
 			</Text>
 			<Pressable
