@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; 
+const persistConfig = {
+  key: "auth",
+  storage,
+};
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -9,12 +14,6 @@ const authSlice = createSlice({
     role: null,
   },
   reducers: {
-    // setUser: (state, action) => {
-    //   state.user = action.payload;
-    // },
-    // setToken: (state, action) => {
-    //   state.token = action.payload;
-    // },
     setCredentials: (state, action) => {
       state.user=action.payload.username;
       state.token=action.payload.jwtToken;
@@ -36,4 +35,5 @@ const authSlice = createSlice({
 });
 
 export const { setCredentials, setError, clearError, logout } = authSlice.actions;
-export default authSlice.reducer;
+const persistedReducer = persistReducer(persistConfig, authSlice.reducer);
+export default persistedReducer;
