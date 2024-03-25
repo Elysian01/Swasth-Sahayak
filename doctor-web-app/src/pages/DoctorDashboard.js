@@ -12,6 +12,7 @@ import ShortListings from "../components/tables/ShortListings";
 
 import viewIcon from "../static/icons/eye.png";
 import { useSelector } from "react-redux";
+import { getRequest } from '../components/Api/api'; 
 
 function DoctorDashboard() {
   const [tableData, setTableData] = useState([]);
@@ -21,12 +22,9 @@ function DoctorDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9191/doctor/top3/${user}`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include JWT token
-          },
-        });
-        setTableData(response.data); // Accessing data property of the response
+        const headers = { Authorization: `Bearer ${token}` };
+        const response = await getRequest(`/doctor/top3/${user}`, headers);
+        setTableData(response); // Accessing data property of the response
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
