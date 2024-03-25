@@ -5,9 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../../database/language";
 
-const getLanguage = async () => {
-	return await AsyncStorage.getItem("Language");
-};
 
 const FreeVisit = (props) => {
 	const navigation = useNavigation();

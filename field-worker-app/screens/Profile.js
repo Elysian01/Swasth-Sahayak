@@ -1,32 +1,28 @@
 import React, { useState } from "react";
-import {
-	StyleSheet,
-	Text,
-	View,
-	Image,
-	Pressable,
-	TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Image, Pressable, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
 import Navbar from "../components/headers/Navbar";
-import Button from "../components/misc/Button";
 import PageHeading from "../components/headers/PageHeading";
 
+import AppStyles from "../AppStyles";
 import { lang } from "../database/language";
 
-const getLanguage = async () => {
-	return await AsyncStorage.getItem("Language");
-};
-
 const Profile = () => {
+	const navigation = useNavigation();
+
+	const [syncDataStatus, setSyncDataStatus] = useState(false);
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
+	const [fieldWorkerName, setFieldWorkerName] = useState("");
+
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
 
-	const navigation = useNavigation();
+	AsyncStorage.getItem("FieldWorkerName").then((name) => {
+		setFieldWorkerName(name);
+	});
 
 	async function logout() {
 		try {
@@ -39,42 +35,81 @@ const Profile = () => {
 			alert("Access Token was not removed");
 		}
 	}
+
+	const synchronizeData = async () => {
+		uploadData = await AsyncStorage.getItem("uploadData");
+		if (uploadData) {
+			uploadData = JSON.parse(uploadData);
+			console.log("Data Uploading...", uploadData);
+
+			Alert.alert("Success", "Data Successfully Uploaded!!");
+			setSyncDataStatus(true);
+		}
+	};
+
+	function deletePatientAccount() {}
 	return (
 		<View>
 			<Navbar />
+			<View style={styles.marginVertical}></View>
 			<PageHeading text={lang[preferredlangauge]["Profile"]} />
+			<View style={AppStyles.line}></View>
 			<Image
-				source={require("../assets/images/doctor-page-profile-photo.png")}
+				source={require("../assets/images/fieldWorker-profile-pic.png")}
 				style={styles.doctorImage}
 			/>
-			<Text style={styles.doctorName}>Aakash Bhardwaj</Text>
+			<Text style={styles.doctorName}>{fieldWorkerName}</Text>
 			<Text style={styles.qualification}>
-				{lang[preferredlangauge]["Neurosurgeon"]}
+				{lang[preferredlangauge]["Health Worker"]}
 			</Text>
-			<View style={styles.buttonArrangement}>
+			<View style={AppStyles.btn}>
+				{!syncDataStatus && (
+					<Pressable
+						onPress={() => {
+							synchronizeData();
+						}}
+						style={AppStyles.redBtn}
+					>
+						<Text style={AppStyles.primaryBtnText}>
+							{lang[preferredlangauge]["Sync Data"]}
+						</Text>
+					</Pressable>
+				)}
+
+				{syncDataStatus && (
+					<Pressable
+						onPress={() => logout()}
+						style={AppStyles.goldBtn}
+					>
+						<Text style={AppStyles.primaryBtnText}>
+							{lang[preferredlangauge]["Logout"]}
+						</Text>
+					</Pressable>
+				)}
+
+				<Pressable
+					onPress={() => deletePatientAccount()}
+					style={AppStyles.darkRedBtn}
+				>
+					<Text style={AppStyles.primaryBtnText}>
+						{
+							lang[preferredlangauge][
+								"Delete Patient Account"
+							]
+						}
+					</Text>
+				</Pressable>
+
 				<Pressable
 					onPress={() => {
 						navigation.navigate("ResetPassword");
 					}}
-					style={styles.btn}
+					style={AppStyles.primaryBtn}
 				>
-					<Button
-						type="primary"
-						navigateTo="ResetPassword"
-						text={lang[preferredlangauge]["Reset Password"]}
-					/>
+					<Text style={AppStyles.primaryBtnText}>
+						{lang[preferredlangauge]["Reset Password"]}
+					</Text>
 				</Pressable>
-
-				<View style={styles.btn}>
-					<TouchableOpacity
-						onPress={() => logout()}
-						style={styles.primary}
-					>
-						<Text style={styles.ButtonText}>
-							{lang[preferredlangauge]["Logout"]}
-						</Text>
-					</TouchableOpacity>
-				</View>
 			</View>
 		</View>
 	);
@@ -83,6 +118,9 @@ const Profile = () => {
 export default Profile;
 
 const styles = StyleSheet.create({
+	marginVertical: {
+		marginVertical: 20,
+	},
 	profileName: {
 		textAlign: "center",
 		paddingTop: 11,
@@ -94,9 +132,9 @@ const styles = StyleSheet.create({
 	},
 	doctorImage: {
 		alignSelf: "center",
-		aspectRatio: 1,
-		width: 250,
-		height: 250,
+		marginTop: 15,
+		width: 230,
+		height: 350,
 	},
 	doctorName: {
 		textAlign: "center",

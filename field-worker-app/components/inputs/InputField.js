@@ -12,7 +12,10 @@ const InputField = (props) => {
 		iconSource = require("../../assets/icons/passwordIcon.png");
 	} else if (props.type === "otp") {
 		iconSource = require("../../assets/icons/passwordIcon.png");
-	} else if (props.type === "patientDetail") {
+	} else if (
+		props.type === "patientDetail" ||
+		props.icon === "PatientDetail"
+	) {
 		iconSource = require("../../assets/icons/userIcon.png");
 	}
 

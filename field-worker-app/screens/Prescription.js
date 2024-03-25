@@ -87,13 +87,8 @@ const Prescription = (props) => {
 						</View>
 					</View>
 					<View style={styles.diseaseContainer}>
-						<Text style={styles.diseaseText}>
-							Disease:
-							<Text style={styles.disease}>
-								{" "}
-								{disease}
-							</Text>
-						</Text>
+						<Text style={styles.diseaseText}>Disease:</Text>
+						<Text style={styles.disease}> {disease}</Text>
 					</View>
 					<View style={styles.perscriptionMain}>
 						<Text style={AppStyles.subHeading}>
@@ -152,7 +147,7 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 18,
-		fontWeight: "600",
+		fontWeight: "500",
 		// marginHorizontal: 25,
 		marginVertical: 10,
 		justifyContent: "flex-start",
@@ -160,9 +155,12 @@ const styles = StyleSheet.create({
 	},
 	diseaseContainer: {
 		width: "80%",
+		display: "flex",
+		flexDirection: "row",
 		alignSelf: "center",
-		justifyContent: "center",
+		// justifyContent: "space",
 		marginHorizontal: 10,
+		marginTop: 15,
 	},
 	diseaseText: {
 		color: "black",
@@ -177,7 +175,7 @@ const styles = StyleSheet.create({
 	perscriptionMain: {
 		width: "80%",
 		alignSelf: "center",
-		marginTop: 20,
+		marginTop: 15,
 	},
 	perscription: {
 		backgroundColor: "white",
