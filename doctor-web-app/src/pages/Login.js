@@ -10,7 +10,7 @@ import Navbar from "../components/misc/Navbar";
 import LoginBG from "../components/misc/LoginBG";
 import InputField from "../components/input_fields/InputField";
 import { authApi } from "../login/authApi";
-
+import store from "../login/store";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -23,8 +23,8 @@ function Login() {
     e.preventDefault();
     try {
       const userData = await authApi.login({ username: email, password });
-      console.log(userData.jwtToken);
       dispatch(setCredentials(userData));
+      navigate('/profile');
     } catch (err) {
       setError("Invalid email or password"); // Set error message for invalid credentials
     }
