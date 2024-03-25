@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Table from "../components/tables/Listings";
 import axios from "axios";
 import "./css/common.css";
@@ -8,6 +9,7 @@ import viewIcon from "../static/icons/eye.png";
 import doctorImage from "../static/imgs/doctor-page-profile-photo.png";
 
 function Profile() {
+  const user = useSelector((state) => state.auth.user);
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -94,7 +96,7 @@ function Profile() {
         <div className="profile-options">
           <h1 className="profile-name">Profile</h1>
           <img src={doctorImage} alt="profile-photo" className="doctor-image" />
-          <div className="doctor-name">Aakash Bhardwaj</div>
+          <div className="doctor-name">{user}</div>
           <div className="qualification">Neurosurgeon</div>
           
           <div className="button-arrangement">
