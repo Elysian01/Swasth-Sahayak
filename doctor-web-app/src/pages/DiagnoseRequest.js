@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Table from "../components/tables/Listings";
 import "./css/common.css";
 import "./css/diagnoseRequest.css";
@@ -11,6 +12,7 @@ import { useSelector } from "react-redux";
 import { getRequest } from "../components/Api/api";
 
 function DiagnoseRequest() {
+  const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,8 +38,8 @@ function DiagnoseRequest() {
     window.open(chatUrl, "_blank");
   };
 
-  const handleViewClick = (viewUrl) => {
-    window.open(viewUrl, "_blank");
+  const handleViewClick = (patientId) => {
+    navigate("/diagnose-report", { state: { patientId } });
   };
 
   const columns = ["User ID", "Name", "Chat", "View"];
@@ -48,8 +50,8 @@ function DiagnoseRequest() {
     </button>
   );
 
-  const renderViewButton = (viewUrl) => (
-    <button onClick={() => handleViewClick(viewUrl)} className="view-button">
+  const renderViewButton = (patientId) => (
+    <button onClick={() => handleViewClick(patientId)} className="view-button">
       <img src={viewIcon} alt="View" />
     </button>
   );
@@ -69,7 +71,7 @@ function DiagnoseRequest() {
                 "User ID": row.patientid,
                 Name: row.name,
                 Chat: renderChatButton(row.Chat),
-                View: renderViewButton(row.View),
+                View: renderViewButton(row.patientid),
               }))}
             />
           )}

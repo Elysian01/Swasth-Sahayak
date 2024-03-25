@@ -1,5 +1,7 @@
 // it should be changed
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import Table from "../components/tables/Listings";
 import axios from "axios";
 import "./css/common.css";
@@ -8,20 +10,29 @@ import Navbar from "../components/misc/Navbar";
 // Import your diagnosis and prescription images
 import diagnosisImage from "../static/icons/eye.png";
 import prescriptionImage from "../static/icons/eye.png";
-// import { Chart } from "chart.js";
+
+import { useSelector } from "react-redux";
+import { getRequest } from "../components/Api/api";
+
 import LineGraph from "../components/misc/LineGraph";
 
 function DiagnoseReport() {
 	const [tableData, setTableData] = useState([]);
 	const [loading, setLoading] = useState(true);
 
+	const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
+
+	const location = useLocation();
+  const { state } = location;
+  const patientId = state ? state.patientId : null;
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get(
-					"http://localhost:9001/data"
-				);
-				setTableData(response.data);
+				const headers = { Authorization: `Bearer ${token}` };
+        const response = await getRequest(`/doctor/patientdashboard/${patientId}`, headers);
+				setTableData(response);
 				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching data:", error);
@@ -34,9 +45,7 @@ function DiagnoseReport() {
 	const columns = [
 		"Date",
 		"Field Worker Assigned",
-		"Questionnaire Score",
 		"Diagnosis",
-		"Prescription",
 		"Comments",
 	];
 
@@ -82,15 +91,16 @@ function DiagnoseReport() {
 				<p>Loading...</p>
 			) : (
 				<Table
-					columns={columns}
-					data={tableData.map((row) => ({
-						...row,
-						Diagnosis: renderDiagnosis(row.Diagnosis),
-						Prescription: renderPrescription(
-							row.Prescription
-						),
-					}))}
-				/>
+          columns={columns}
+          data={[
+            {
+              Date: tableData.prescription[0].dateofprescription,
+              "Field Worker Assigned": tableData.prescription[0].feildworker,
+              Diagnosis: tableData.address,
+              Comments: tableData.prescription[0].doctorcomment,
+            }
+          ]}
+        />
 			)}
 		</div>
 	);
