@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Table from "../components/tables/Listings";
-import axios from "axios";
 import "./css/common.css";
-import "./css/searchRecords.css";
+import "./css/diagnoseRequest.css";
+
 import Navbar from "../components/misc/Navbar";
 import viewIcon from "../static/icons/eye.png";
 import diagnoseImage from "../static/imgs/diagnose-request.png";
