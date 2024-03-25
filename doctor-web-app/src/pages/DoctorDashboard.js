@@ -20,7 +20,7 @@ function DoctorDashboard() {
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchTop3Patients = async () => {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const response = await getRequest(`/doctor/top3/${user}`, headers);
@@ -31,7 +31,7 @@ function DoctorDashboard() {
       }
     };
 
-    fetchData();
+    fetchTop3Patients();
   }, []);
 
   const handleChatClick = (chatUrl) => {
