@@ -1,6 +1,20 @@
 {
   "expo": {
-    "name": "field-worker-app",
-    "slug": "field-worker-app"
+    "name": "Swasth-Sahayak-Health-Worker-App",
+    "slug": "Swasth-Sahayak-Health-Worker-App",
+    "version": "1.0.0",
+    "icon": "./assets/icon_with_bg.png",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.elysian01.SwasthSahayakHealthWorkerApp"
+    },
+    "android": {
+      "package": "com.elysian01.SwasthSahayakHealthWorkerApp"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fc215c36-8f92-4bd2-b0f5-0045166b7cd7"
+      }
+    }
   }
 }

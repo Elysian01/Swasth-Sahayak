@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
 import PatientRecords from "../components/misc/PatientRecords";
@@ -10,10 +10,35 @@ import PageHeading from "../components/headers/PageHeading";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
 
+import * as MediaLibrary from "expo-media-library";
+import * as FileSystem from "expo-file-system";
+import * as Permissions from "expo-permissions";
+
 const Home = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	const [dataDownloaded, setDataDownloaded] = useState(false);
 	const [assignedSector, setAssignedSector] = useState();
+
+	saveFile = async (saveData) => {
+		let fileUri = FileSystem.documentDirectory + "test.json";
+		await FileSystem.writeAsStringAsync(
+			fileUri,
+			JSON.stringify(saveData),
+			{
+				encoding: FileSystem.EncodingType.UTF8,
+			}
+		);
+
+		let data = await FileSystem.readAsStringAsync(fileUri);
+		console.log("File data: ", data);
+	};
+
+	// useEffect(() => {
+	// 	const saveData = {
+	// 		test: "working",
+	// 	};
+	// 	saveFile(saveData);
+	// }, []);
 
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
