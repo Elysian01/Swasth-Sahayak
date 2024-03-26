@@ -10,13 +10,12 @@ import Navbar from "../components/misc/Navbar";
 import LoginBG from "../components/misc/LoginBG";
 import InputField from "../components/input_fields/InputField";
 import { authApi } from "../login/authApi";
-import store from "../login/store";
+import {store} from "../login/store";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -24,7 +23,7 @@ function Login() {
     try {
       const userData = await authApi.login({ username: email, password });
       dispatch(setCredentials(userData));
-      navigate('/profile');
+      navigate('/doctor-dashboard');
     } catch (err) {
       setError("Invalid email or password"); // Set error message for invalid credentials
     }
@@ -51,7 +50,7 @@ function Login() {
 
           <form onSubmit={handleSubmit}>
             <InputField
-              type="email"
+              type="text"
               placeholder="Employee Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
