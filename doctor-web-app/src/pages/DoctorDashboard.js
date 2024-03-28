@@ -43,7 +43,7 @@ function DoctorDashboard() {
   };
 
   const handleViewClick = (patientId) => {
-    navigate("/diagnose-report", { state: { patientId } });
+    navigate("/patient-dashboard", { state: { patientId } });
   };
   const handleViewMoreClick = () => {
     navigate("/diagnose-request");
