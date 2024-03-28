@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import Table from "../components/tables/Listings";
-import axios from "axios";
 import "./css/common.css";
 import "../components/css/listings.css";
+import "./css/diagnose-report.css";
 import Navbar from "../components/misc/Navbar";
 // Import your diagnosis and prescription images
 import diagnosisImage from "../static/icons/eye.png";
@@ -13,14 +13,13 @@ import prescriptionImage from "../static/icons/eye.png";
 
 import { useSelector } from "react-redux";
 import { getRequest } from "../components/Api/api";
-
-import LineGraph from "../components/misc/LineGraph";
+import PatientProfileCard from "../components/cards/PatientProfileCard";
+import CurrentDiagnosisCard from "../components/cards/CurrentDiagnosisCard";
 
 function DiagnoseReport() {
 	const [tableData, setTableData] = useState([]);
 	const [loading, setLoading] = useState(true);
 
-	const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
 
 	const location = useLocation();
@@ -80,10 +79,17 @@ function DiagnoseReport() {
 	return (
 		<div>
 			<Navbar />
-			<h1 className="main-header">Patient Progress</h1>
-			<div className="line-graph">
-				<LineGraph />
+			<div className="patient-detail">
+				<div className="patients-profile">
+					<header className="main-header">Patient Profile</header>
+					<PatientProfileCard data={tableData}/>
+				</div>
+				<div className="current-diagnose">
+					<header className="main-header">Current Diagnose</header>
+					<CurrentDiagnosisCard data={tableData}/>
+				</div>
 			</div>
+			
 			<header className="main-header">Patient History</header>
 			<br />
 
@@ -92,14 +98,12 @@ function DiagnoseReport() {
 			) : (
 				<Table
           columns={columns}
-          data={[
-            {
-              Date: tableData.prescription[0].dateofprescription,
-              "Field Worker Assigned": tableData.prescription[0].feildworker,
-              Diagnosis: tableData.address,
-              Comments: tableData.prescription[0].doctorcomment,
-            }
-          ]}
+          data={tableData.prescription.map((prescription) => ({
+            Date: prescription.dateofprescription,
+            "Field Worker Assigned": prescription.feildworker,
+            Diagnosis: tableData.address,
+            Comments: prescription.doctorcomment,
+          }))}
         />
 			)}
 		</div>

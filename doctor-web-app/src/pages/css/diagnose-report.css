@@ -1,0 +1,15 @@
+.patient-detail{
+  display: flex;  
+}
+.patients-profile{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.current-diagnose{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
