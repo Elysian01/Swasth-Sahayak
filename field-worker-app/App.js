@@ -21,7 +21,8 @@ function App() {
 				></Image>
 				<Text style={styles.text}>
 					Your device's screen is too small to run this app, This
-					Application is made for Health-worker who uses tablet.
+					Application is made for Health-worker who uses
+					tablet/ipad.
 				</Text>
 			</View>
 		);
