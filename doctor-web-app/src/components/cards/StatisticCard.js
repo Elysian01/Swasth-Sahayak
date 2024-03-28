@@ -1,4 +1,4 @@
-function StatisticCard(props) {
+function StatisticCard(data) {
 	return (
 		<div class="col1">
 			<div class="statistics">
@@ -17,7 +17,7 @@ function StatisticCard(props) {
 					</div>
 				</div>
 			</div>
-			<img src={require(`../../static/imgs/${props.image}`)} alt="" />
+			<img src={require('../../static/imgs/login-bg.png')} alt="" />
 		</div>
 	);
 }

@@ -41,11 +41,16 @@ function DiagnoseRequest() {
   const handleViewClick = (patientId) => {
     navigate("/diagnose-report", { state: { patientId } });
   };
-
+  const handleDashboard = () => {
+    navigate("/doctor-dashboard");
+  };
   const columns = ["User ID", "Name", "Chat", "View"];
 
   const renderChatButton = (chatUrl) => (
-    <button onClick={() => handleChatClick(chatUrl)} className="chat-button">
+    <button
+      onClick={() => handleChatClick(chatUrl)}
+      className="small-primary-btn"
+    >
       Chat
     </button>
   );
@@ -62,6 +67,7 @@ function DiagnoseRequest() {
       <div className="page-setup">
         <div className="table-container">
           <header className="main-header">Patient Diagnose Request</header>
+          <br/>
           {loading ? (
             <p>Loading...</p>
           ) : (
@@ -75,7 +81,9 @@ function DiagnoseRequest() {
               }))}
             />
           )}
-          <button className="pink-btn">Go back to dashboard</button>
+          <button className="pink-btn" onClick={handleDashboard}>
+            Go back to dashboard
+          </button>
         </div>
         <div className="diagnose-options">
           <img

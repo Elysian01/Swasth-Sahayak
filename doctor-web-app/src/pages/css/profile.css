@@ -1,6 +1,7 @@
 .page-setup {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   padding: 30px;
 }
 .profile-options {

@@ -194,9 +194,4 @@
   background-color: var(--green);
   transition: 0.4s;
 }
-.line-graph {
-  display: flex;
-  justify-content: center;
-  margin: 5%;
-  max-height: 60%;
-}
+

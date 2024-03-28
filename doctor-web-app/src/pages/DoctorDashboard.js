@@ -42,7 +42,10 @@ function DoctorDashboard() {
     window.open(chatUrl, "_blank");
   };
 
-  const handleViewClick = (viewUrl) => {
+  const handleViewClick = (patientId) => {
+    navigate("/diagnose-report", { state: { patientId } });
+  };
+  const handleViewMoreClick = () => {
     navigate("/diagnose-request");
   };
 
@@ -54,8 +57,8 @@ function DoctorDashboard() {
   //   </button>
   // );
 
-  const renderViewButton = (viewUrl) => (
-    <button onClick={() => handleViewClick(viewUrl)} className="view-button">
+  const renderViewButton = (patientId) => (
+    <button onClick={() => handleViewClick(patientId)} className="view-button">
       <img src={viewIcon} alt="View" />
     </button>
   );
@@ -66,7 +69,7 @@ function DoctorDashboard() {
 
       <main class="main-container">
         <div class="row1">
-          <StatisticCard image="login-bg.png" />
+          <StatisticCard />
 
           <div class="section2">
             <FeatureCard
@@ -115,12 +118,12 @@ function DoctorDashboard() {
                 data={tableData.map((row) => ({
                   Name: row.name,
                   "Patient ID": row.patientid,
-                  "View Diagnose": renderViewButton(row.View),
+                  "View Diagnose": renderViewButton(row.patientid),
                 }))}
               />
             )}
             <br />
-            <button className="medium-primary-btn" onClick={handleViewClick}>
+            <button className="medium-primary-btn" onClick={handleViewMoreClick}>
               View More
             </button>
           </div>
