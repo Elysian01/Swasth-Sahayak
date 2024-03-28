@@ -69,7 +69,7 @@ function DoctorDashboard() {
 
       <main class="main-container">
         <div class="row1">
-          <StatisticCard image="login-bg.png" />
+          <StatisticCard />
 
           <div class="section2">
             <FeatureCard
