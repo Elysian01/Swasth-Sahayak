@@ -5,7 +5,6 @@
   "follow-up": [
     {
       "follow-up-id": 1,
-      "patient-id": 123,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
       "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
@@ -15,26 +14,24 @@
     },
     {
       "follow-up-id": 2,
-      "patient-id": 124,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
       "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
       "patient-token": "123",
-      "patient-abhaid": "1234567812345678",
+      "patient-abhaid": "1234567812345677",
       "visited-status": false 
     }
   ],
 
   "patient-details": [
     {
-      "patient-id": 123,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
       "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100", 
       "patient-abhaid": "1234567812345678",
       "ongoing-medication-orders": {
         "ICD10-code": "F90.0",
-        "doctor-name": "Abhishek Gupta",
+        "doctor-name": "Abhishek Gupta 1",
         "doctor-comment": "Abhishek lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
         "date": "12-05-2014",
         "questionnaire-type": "default"
@@ -60,14 +57,13 @@
         }
     ]
     }, {
-      "patient-id": 124,
       "fieldworker-id": 1234,
       "patient-name": "Rushikesh Gupta",
       "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100", 
       "patient-abhaid": "1234567812345677",
       "ongoing-medication-orders": {
         "ICD10-code": "F90.0",
-        "doctor-name": "Abhishek Gupta",
+        "doctor-name": "Rushikesh Gupta 2",
         "doctor-comment": "Abhishek lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
         "date": "12-05-2014",
         "questionnaire-type": "default"

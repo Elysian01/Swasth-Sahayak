@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
 		fontWeight: "600",
 		marginVertical: 10,
 		justifyContent: "flex-start",
-		textAlignVertical: "center",
+		verticalAlign: "middle",
 	},
 	perscription: {
 		backgroundColor: "white",

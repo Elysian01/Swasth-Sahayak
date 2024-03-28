@@ -13,7 +13,7 @@ import { lang } from "../database/language";
 
 const PatientToken = (props) => {
 	const navigation = useNavigation();
-	const patientId = props.route.params["patient-id"];
+	patientAbhaId = props.route.params["patient-abhaid"];
 	const followUpID = props.route.params["follow-up-id"];
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
@@ -21,7 +21,6 @@ const PatientToken = (props) => {
 		setPreferredLanguage(lang);
 	});
 
-	patientAbhaId = "";
 	const [token, setToken] = useState("");
 	const tokenChangeHandler = (e) => {
 		setToken(e);
@@ -32,7 +31,7 @@ const PatientToken = (props) => {
 		for (const patient of data["follow-up"]) {
 			// Check if the patient's id and token match the input
 			if (
-				patient["patient-id"] === patientId &&
+				patient["patient-abhaid"] === patientAbhaId &&
 				patient["patient-token"] === patientToken
 			) {
 				patientAbhaId = patient["patient-abhaid"];
@@ -42,14 +41,16 @@ const PatientToken = (props) => {
 		return false; // Patient not found
 	}
 
-	const updateFollowUpVisitedStatusToTrue = async (patientId) => {
+	const updateFollowUpVisitedStatusToTrue = async (patientAbhaId) => {
 		try {
 			let uploadData = await AsyncStorage.getItem("uploadData");
 			if (uploadData) {
 				uploadData = JSON.parse(uploadData);
 				const updatedFollowUp = uploadData["follow-up"].map(
 					(followUp) => {
-						if (followUp["patient-id"] === patientId) {
+						if (
+							followUp["patient-abhaid"] === patientAbhaId
+						) {
 							return {
 								...followUp,
 								"visited-status": true,
@@ -87,7 +88,7 @@ const PatientToken = (props) => {
 			setToken("");
 			return;
 		} else {
-			updateFollowUpVisitedStatusToTrue(patientId);
+			updateFollowUpVisitedStatusToTrue(patientAbhaId);
 			navigation.navigate("PatientDashboard", {
 				"patient-abhaid": patientAbhaId,
 				"new-patient": false,

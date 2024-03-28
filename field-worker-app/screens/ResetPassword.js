@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
 	View,
 	Text,
-	TouchableOpacity,
+	Pressable,
 	StyleSheet,
 	Image,
 	ScrollView,
@@ -87,14 +87,14 @@ const ResetPassword = () => {
 							value={reEnterNewPassword}
 						/>
 
-						<TouchableOpacity
+						<Pressable
 							onPress={resetPassword}
 							style={styles.loginButton}
 						>
 							<Text style={styles.loginButtonText}>
 								Reset Password
 							</Text>
-						</TouchableOpacity>
+						</Pressable>
 					</View>
 				</View>
 			</ScrollView>

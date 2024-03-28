@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
@@ -9,14 +9,14 @@ const Button = (props) => {
 	console.log("Button Navi:", props.navigateTo);
 	let btnStyle = "styles." + props.type;
 	return (
-		<TouchableOpacity
+		<Pressable
 			onPress={() =>
 				props.navigateTo && navigation.navigate(props.navigateTo)
 			}
 			style={styles.primary}
 		>
 			<Text style={styles.ButtonText}>{props.text}</Text>
-		</TouchableOpacity>
+		</Pressable>
 	);
 };
 

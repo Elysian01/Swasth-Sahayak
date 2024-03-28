@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		alignSelf: "center",
 		marginBottom: 50,
+		marginRight: 10,
 	},
 	btns: {
 		display: "flex",

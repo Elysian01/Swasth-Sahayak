@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, Pressable, StyleSheet, Image } from "react-native";
 import { lang } from "../../database/language";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -18,7 +18,7 @@ const FollowUpCard = (props) => {
 
 	const handleViewRecords = () => {
 		navigation.navigate("PatientToken", {
-			"patient-id": props.patientId,
+			"patient-abhaid": props.patientAbhaId,
 			"follow-up-id": followUpID,
 		});
 	};
@@ -47,7 +47,7 @@ const FollowUpCard = (props) => {
 				)}
 			</View>
 			<View style={styles.column3}>
-				<TouchableOpacity
+				<Pressable
 					style={styles.viewRecordsButton}
 					onPress={handleViewRecords}
 				>
@@ -58,7 +58,7 @@ const FollowUpCard = (props) => {
 					<Text style={styles.viewRecordsButtonText}>
 						{lang[preferredlangauge]["View Patient Records"]}
 					</Text>
-				</TouchableOpacity>
+				</Pressable>
 			</View>
 		</View>
 	);

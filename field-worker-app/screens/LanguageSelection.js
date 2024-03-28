@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -51,12 +51,9 @@ const LanguageSelection = () => {
 				lang={preferredlangauge}
 				setLang={setPreferredLanguage}
 			/>
-			<TouchableOpacity
-				style={styles.Button}
-				onPress={() => setLanguage()}
-			>
+			<Pressable style={styles.Button} onPress={() => setLanguage()}>
 				<Text style={styles.ButtonText}>&#x2192;</Text>
-			</TouchableOpacity>
+			</Pressable>
 		</View>
 	);
 };
