@@ -3,7 +3,6 @@ import {
 	View,
 	TextInput,
 	ScrollView,
-	TouchableOpacity,
 	Pressable,
 	Text,
 	Alert,
@@ -164,7 +163,7 @@ const RegisterPatient = () => {
 					/>
 				</View>
 				<View style={styles.group2}>
-					<TouchableOpacity
+					<Pressable
 						style={styles.input}
 						onPress={handleGenderPress}
 					>
@@ -215,15 +214,15 @@ const RegisterPatient = () => {
 								/>
 							</Picker>
 						)}
-					</TouchableOpacity>
-					<TouchableOpacity
+					</Pressable>
+					<Pressable
 						style={styles.input}
 						onPress={showDatePickerAndroid}
 					>
 						<Text style={styles.text}>
 							{selectedDate.toLocaleDateString()}
 						</Text>
-					</TouchableOpacity>
+					</Pressable>
 					{showDatePicker && (
 						<DateTimePicker
 							value={selectedDate}
@@ -281,7 +280,7 @@ const RegisterPatient = () => {
 						keyboardType="number-pad"
 					/>
 				</View>
-				<TouchableOpacity
+				<Pressable
 					style={styles.input}
 					onPress={handleLanguagePress}
 				>
@@ -303,7 +302,7 @@ const RegisterPatient = () => {
 							<Picker.Item label="हिंदी" value="हिंदी" />
 						</Picker>
 					)}
-				</TouchableOpacity>
+				</Pressable>
 
 				<View style={styles.btn}>
 					<Pressable

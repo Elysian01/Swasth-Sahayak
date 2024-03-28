@@ -38,7 +38,7 @@ const PatientRecords = () => {
 							key={index}
 							name={followUp["patient-name"]}
 							address={followUp["patient-address"]}
-							patientId={followUp["patient-id"]}
+							patientAbhaId={followUp["patient-abhaid"]}
 							visitedStatus={followUp["visited-status"]}
 							followUpID={followUp["follow-up-id"]}
 						/>

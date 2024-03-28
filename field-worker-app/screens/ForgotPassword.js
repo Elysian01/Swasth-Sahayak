@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
 	View,
 	Text,
-	TouchableOpacity,
+	Pressable,
 	StyleSheet,
 	Image,
 	ScrollView,
@@ -119,7 +119,7 @@ const ForgotPassword = () => {
 								value={email}
 							/>
 
-							<TouchableOpacity
+							<Pressable
 								onPress={sendOTP}
 								style={styles.loginButton}
 							>
@@ -130,7 +130,7 @@ const ForgotPassword = () => {
 										]
 									}
 								</Text>
-							</TouchableOpacity>
+							</Pressable>
 						</View>
 					)}
 					{emailGivenByUser && !otpGivenByUser && (
@@ -147,7 +147,7 @@ const ForgotPassword = () => {
 								value={otp}
 							/>
 
-							<TouchableOpacity
+							<Pressable
 								onPress={verifyOTP}
 								style={styles.loginButton}
 							>
@@ -158,7 +158,7 @@ const ForgotPassword = () => {
 										]
 									}
 								</Text>
-							</TouchableOpacity>
+							</Pressable>
 						</View>
 					)}
 					{emailGivenByUser && otpGivenByUser && (
@@ -188,7 +188,7 @@ const ForgotPassword = () => {
 								value={reEnterNewPassword}
 							/>
 
-							<TouchableOpacity
+							<Pressable
 								onPress={resetPassword}
 								style={styles.loginButton}
 							>
@@ -199,7 +199,7 @@ const ForgotPassword = () => {
 										]
 									}
 								</Text>
-							</TouchableOpacity>
+							</Pressable>
 						</View>
 					)}
 				</View>

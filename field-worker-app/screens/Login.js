@@ -14,7 +14,7 @@ import "../AppStyles";
 import Navbar from "../components/headers/Navbar";
 import InputField from "../components/inputs/InputField";
 
-import { loginAPI } from "../api/UserAPI";
+import { loginAPI } from "../api/APIs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
 
@@ -68,7 +68,7 @@ const Login = () => {
 
 		// const fieldWorkerId = result.data.fieldWorkerId;
 		// const fieldWorkerId = result.data.fieldWorkerName;
-		
+
 		const fieldWorkerId = "10597";
 		const fieldWorkerName = "Jass Sadana";
 		AsyncStorage.setItem("FieldWorkerId", fieldWorkerId);

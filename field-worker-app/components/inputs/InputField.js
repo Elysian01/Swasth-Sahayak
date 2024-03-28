@@ -37,8 +37,8 @@ const InputField = (props) => {
 					onChangeText={props.onChange}
 					value={props.value}
 					secureTextEntry={props.type === "password"}
-					keyboardType={
-						props.type === "number" ? "numeric" : "default"
+					inputMode={
+						props.type === "number" ? "numeric" : "text"
 					}
 					autoCapitalize="none"
 					autoCorrect={false}
@@ -76,11 +76,10 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		width: "95%",
-		height: 35,
+		height: 36,
 		color: "black",
-		fontSize: 20,
+		fontSize: 18,
 		padding: 8,
-		fontSize: 20,
 	},
 	primaryColor: {
 		color: AppStyles.color.primary,

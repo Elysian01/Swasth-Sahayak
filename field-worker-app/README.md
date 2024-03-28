@@ -15,6 +15,8 @@
 - Run `yarn` or `npm install`
 - Run `yarn start` or `npm run start` to try it out.
 
+- Run `eas build -p android --profile preview` to build Android-Tablet-APK
+
 ## 📝 Notes
 
 - [`react-native-reanimated` docs](https://docs.swmansion.com/react-native-reanimated/)
@@ -39,7 +41,6 @@ data = {
   "follow-up": [
     {
       "follow-up-id": 1,
-      "patient-id": 123,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
       "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
@@ -49,26 +50,56 @@ data = {
     },
     {
       "follow-up-id": 2,
-      "patient-id": 124,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
       "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
       "patient-token": "123",
-      "patient-abhaid": "1234567812345678",
+      "patient-abhaid": "1234567812345677",
       "visited-status": false 
     }
   ],
 
   "patient-details": [
     {
-      "patient-id": 123,
       "fieldworker-id": 1234,
       "patient-name": "Abhishek Gupta",
       "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100", 
       "patient-abhaid": "1234567812345678",
       "ongoing-medication-orders": {
         "ICD10-code": "F90.0",
-        "doctor-name": "Abhishek Gupta",
+        "doctor-name": "Abhishek Gupta 1",
+        "doctor-comment": "Abhishek lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "12-05-2014",
+        "questionnaire-type": "default"
+      },   
+      "recent-3-prescriptions": [
+        {
+        "ICD10-code": "F90.0",
+        "prescription": "prescription-1 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "12-05-2014",
+        "doctor-name":"Aakash Bhardwaj 1"
+        }, 
+        {
+        "ICD10-code": "F90.0",
+        "prescription": "prescription-2 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "13-05-2014",
+        "doctor-name":"Aakash Bhardwaj 2"
+        }, 
+        {
+        "ICD10-code": "F90.0",
+        "prescription": "prescription-3 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "14-05-2014",
+        "doctor-name":"Aakash Bhardwaj 3"
+        }
+    ]
+    }, {
+      "fieldworker-id": 1234,
+      "patient-name": "Rushikesh Gupta",
+      "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100", 
+      "patient-abhaid": "1234567812345677",
+      "ongoing-medication-orders": {
+        "ICD10-code": "F90.0",
+        "doctor-name": "Rushikesh Gupta 2",
         "doctor-comment": "Abhishek lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
         "date": "12-05-2014",
         "questionnaire-type": "default"

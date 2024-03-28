@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, Pressable, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -31,9 +31,7 @@ const Navbar = () => {
 	return (
 		<View style={styles.nav}>
 			<View style={styles.navLogo}>
-				<TouchableOpacity
-					onPress={() => navigation.navigate("Home")}
-				>
+				<Pressable onPress={() => navigation.navigate("Home")}>
 					<View style={styles.navHeading}>
 						<Image
 							style={styles.logo}
@@ -43,50 +41,46 @@ const Navbar = () => {
 							{lang[preferredlangauge]["Swasth Sahayak"]}
 						</Text>
 					</View>
-				</TouchableOpacity>
+				</Pressable>
 			</View>
 
 			<View style={styles.navLinks}>
-				<TouchableOpacity
-					onPress={() => navigation.navigate("Home")}
-				>
+				<Pressable onPress={() => navigation.navigate("Home")}>
 					<Text style={styles.navItem}>
 						{lang[preferredlangauge]["Home"]}
 					</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
+				</Pressable>
+				<Pressable
 					onPress={() => navigation.navigate("RegisterPatient")}
 				>
 					<Text style={styles.navItem}>
 						{lang[preferredlangauge]["Register"]}
 					</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
+				</Pressable>
+				<Pressable
 					onPress={() => navigation.navigate("FindPatient")}
 				>
 					<Text style={styles.navItem}>
 						{lang[preferredlangauge]["Find Patient"]}
 					</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
-					onPress={() => navigation.navigate("Profile")}
-				>
+				</Pressable>
+				<Pressable onPress={() => navigation.navigate("Profile")}>
 					<Text style={styles.navItem}>
 						{lang[preferredlangauge]["Profile"]}
 					</Text>
-				</TouchableOpacity>
+				</Pressable>
 			</View>
 
 			{/* {accessTokenExists && (
 				<View style={styles.navLinks}>
-					<TouchableOpacity
+					<Pressable
 						onPress={() => navigation.navigate("Home")}
 					>
 						<Text style={styles.navItem}>
 							{lang[preferredlangauge]["Home"]}
 						</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
+					</Pressable>
+					<Pressable
 						onPress={() =>
 							navigation.navigate("RegisterPatient")
 						}
@@ -94,21 +88,21 @@ const Navbar = () => {
 						<Text style={styles.navItem}>
 							{lang[preferredlangauge]["Register"]}
 						</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
+					</Pressable>
+					<Pressable
 						onPress={() => navigation.navigate("FindPatient")}
 					>
 						<Text style={styles.navItem}>
 							{lang[preferredlangauge]["Find Patient"]}
 						</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
+					</Pressable>
+					<Pressable
 						onPress={() => navigation.navigate("Profile")}
 					>
 						<Text style={styles.navItem}>
 							{lang[preferredlangauge]["Profile"]}
 						</Text>
-					</TouchableOpacity>
+					</Pressable>
 				</View>
 			)} */}
 		</View>
@@ -159,7 +153,7 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		fontWeight: "600",
 		paddingVertical: 15,
-		paddingHorizontal: 15,
+		paddingHorizontal: 12,
 	},
 });
 

@@ -8,11 +8,10 @@ import FreeVisit from "../components/misc/FreeVisit";
 import PageHeading from "../components/headers/PageHeading";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { lang } from "../database/language";
-
-import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from "expo-file-system";
-import * as Permissions from "expo-permissions";
+
+import { downloadAPI } from "../api/APIs";
+import { lang } from "../database/language";
 
 const Home = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
@@ -45,7 +44,21 @@ const Home = () => {
 	});
 
 	const downloadData = async () => {
-		console.log("Downloading data...");
+		// downloadAPI()
+		// 	.then((result) => {
+		// 		if (result.status === 200) {
+		// 			console.log(result);
+		// 		} else if (result.status === 401) {
+		// 			console.log(result.status);
+		// 			Alert.alert("Error", result.data, []);
+		// 		}
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error);
+		// 		Alert.alert("Unable to Download Data: ", error);
+		// 	});
+
+		// console.log("Downloading data...");
 
 		let data = require("../database/DOWNLOADED_DATA.json");
 		setAssignedSector(
@@ -75,6 +88,7 @@ const Home = () => {
 				JSON.stringify(uploadTemplate)
 			);
 			setDataDownloaded(true);
+			console.log("True");
 		} catch (error) {
 			console.log(
 				"Error setting upload data, please re-download " + error

@@ -7,6 +7,7 @@ import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 
 import AppStyles from "../AppStyles";
+import { uploadAPI } from "../api/APIs";
 import { lang } from "../database/language";
 
 const Profile = () => {
@@ -40,7 +41,25 @@ const Profile = () => {
 		uploadData = await AsyncStorage.getItem("uploadData");
 		if (uploadData) {
 			uploadData = JSON.parse(uploadData);
-			console.log("Data Uploading...", uploadData);
+
+			// uploadAPI(uploadData)
+			// 	.then((result) => {
+			// 		if (result.status === 200) {
+			// 			console.log(result);
+			// 			Alert.alert(
+			// 				"Success",
+			// 				"Data Successfully Uploaded!!"
+			// 			);
+			// 			setSyncDataStatus(true);
+			// 		} else if (result.status === 401) {
+			// 			console.log(result.status);
+			// 			Alert.alert("Error", result.data, []);
+			// 		}
+			// 	})
+			// 	.catch((error) => {
+			// 		console.log(error);
+			// 		Alert.alert("Unable to Upload Data: ", error);
+			// 	});
 
 			Alert.alert("Success", "Data Successfully Uploaded!!");
 			setSyncDataStatus(true);
@@ -48,6 +67,7 @@ const Profile = () => {
 	};
 
 	function deletePatientAccount() {}
+
 	return (
 		<View>
 			<Navbar />
