@@ -72,21 +72,25 @@ function DiagnoseReport() {
         </div>
         <div className="comment-date">
           <h3>Comments added by Field Worker</h3>
+					<br />
           <div className="reading-box">
             <p>
               This is some sample text for your reading passage. You can replace
               this with any text you want the user to read.
             </p>
+						<br />
           </div>
           <div className="button-style">
             <button className="primary-btn">Show Artifacts</button>
           </div>
           <h3>Prescription by Doctor</h3>
+					<br />
           <div className="reading-box">
             <p>
               This is some sample text for your reading passage. You can replace
               this with any text you want the user to read.
             </p>
+						<br />
           </div>
           <button
             className="primary-btn"
