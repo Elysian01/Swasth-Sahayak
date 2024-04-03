@@ -19,7 +19,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Calendar from "./components/misc/Calendar";
 
 function App() {
-	const serverURL = "http://localhost:9191";
 	return (
 		<div className="App">
 			<Router>
