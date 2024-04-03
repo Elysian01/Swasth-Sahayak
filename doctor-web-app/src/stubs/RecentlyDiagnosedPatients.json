@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "visitID": 1,
+      "appointmentDate": "2024-02-10",
+      "status": "cured",
+      "disease": "Flu",
+      "view": "https://example.com"
+    },
+    {
+      "firstName": "Alice",
+      "lastName": "Smith",
+      "visitID": 2,
+      "appointmentDate": "2024-02-11",
+      "status": "ongoing",
+      "disease": "COVID-19",
+      "view": "https://example.com"
+    },
+    {
+      "firstName": "Bob",
+      "lastName": "Johnson",
+      "visitID": 3,
+      "appointmentDate": "2024-02-12",
+      "status": "severe",
+      "disease": "Pneumonia",
+      "view": "https://example.com"
+    }
+  ]
+}
