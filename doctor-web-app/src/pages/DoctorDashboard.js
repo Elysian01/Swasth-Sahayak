@@ -18,6 +18,7 @@ import { getRequest } from "../components/Api/api";
 function DoctorDashboard() {
   const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
+  const [countData, setCountData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const user = useSelector((state) => state.auth.user);
@@ -36,6 +37,20 @@ function DoctorDashboard() {
     };
 
     fetchTop3Patients();
+  }, []);
+  useEffect(() => {
+    const findCount = async () => {
+      try {
+        const headers = { Authorization: `Bearer ${token}` };
+        const response = await getRequest(`/doctor/findcount/${user}`, headers);
+        setCountData(response); // Accessing data property of the response
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    findCount();
   }, []);
 
   const handleChatClick = (chatUrl) => {
@@ -69,7 +84,7 @@ function DoctorDashboard() {
 
       <main class="main-container">
         <div class="row1">
-          <StatisticCard />
+          <StatisticCard countData={countData}/>
 
           <div class="section2">
             <FeatureCard
