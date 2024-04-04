@@ -5,21 +5,24 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   const token = useSelector((state) => state.auth.token);
+
   useEffect(() => {
     const handleToggleNav = () => {
       const navLinks = document.querySelector(".nav-links");
-      navLinks.style.transition = "height 0.3s"; // Adjust transition duration as needed
+      if (navLinks) {
+        navLinks.style.transition = "height 0.3s"; // Adjust transition duration as needed
 
-      if (navLinks.style.display === "block") {
-        navLinks.style.height = "0";
-        setTimeout(() => {
-          navLinks.style.display = "none";
-        }, 50); // Match transition duration
-      } else {
-        navLinks.style.display = "block";
-        setTimeout(() => {
-          navLinks.style.height = "auto";
-        }, 50); // Allow time for display to change before setting height to auto
+        if (navLinks.style.display === "block") {
+          navLinks.style.height = "0";
+          setTimeout(() => {
+            navLinks.style.display = "none";
+          }, 50); // Match transition duration
+        } else {
+          navLinks.style.display = "block";
+          setTimeout(() => {
+            navLinks.style.height = "auto";
+          }, 50); // Allow time for display to change before setting height to auto
+        }
       }
     };
 
@@ -28,26 +31,29 @@ function Navbar() {
       const width = window.innerWidth;
       const nav = document.querySelector("#nav");
 
-      if (scroll >= 70 && width >= 995) {
-        nav.classList.add("new-nav");
-      } else if (scroll === 0 && width >= 995) {
-        nav.classList.remove("new-nav");
-      } else if (scroll >= 70 && width < 995) {
-        nav.classList.add("new-nav");
-      } else if (scroll === 0 && width < 995) {
-        nav.classList.remove("new-nav");
+      if (nav) {
+        if (scroll >= 70 && width >= 995) {
+          nav.classList.add("new-nav");
+        } else if (scroll === 0 && width >= 995) {
+          nav.classList.remove("new-nav");
+        } else if (scroll >= 70 && width < 995) {
+          nav.classList.add("new-nav");
+        } else if (scroll === 0 && width < 995) {
+          nav.classList.remove("new-nav");
+        }
       }
     };
 
-    document
-      .querySelector(".hamburger")
-      .addEventListener("click", handleToggleNav);
+    const hamburger = document.querySelector(".hamburger");
+    if (hamburger) {
+      hamburger.addEventListener("click", handleToggleNav);
+    }
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      document
-        .querySelector(".hamburger")
-        .removeEventListener("click", handleToggleNav);
+      if (hamburger) {
+        hamburger.removeEventListener("click", handleToggleNav);
+      }
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
