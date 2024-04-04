@@ -299,8 +299,7 @@ data = {
   "patient-registeration": [
     {
         "fieldworker-id": 1234,
-        "patient-firstname": "Abhishek",
-        "patient-lastname": "Gupta",
+        "patient-name": "Abhishek Gupta",
         "patient-dob": "12-05-2000",
         "patient-gender": "Male",
 	"patient-abhaid": "1234567812345678",
