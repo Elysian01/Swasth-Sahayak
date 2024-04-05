@@ -20,7 +20,7 @@ function Profile() {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    navigate("/login",{ replace: true });
   };
   useEffect(() => {
     const fetchDoctorDetails = async () => {
@@ -116,7 +116,7 @@ function Profile() {
 
   return (
     <div>
-      <Navbar />
+      {user && token && <Navbar />}
       <div className="page-setup">
         <div className="profile-options">
           <h1 className="profile-name">Profile</h1>

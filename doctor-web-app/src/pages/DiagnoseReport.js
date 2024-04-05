@@ -1,113 +1,145 @@
-// it should be changed
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-
-import Table from "../components/tables/Listings";
 import "./css/common.css";
 import "../components/css/listings.css";
 import "./css/diagnose-report.css";
+import Table from "../components/tables/Listings";
 import Navbar from "../components/misc/Navbar";
-// Import your diagnosis and prescription images
-import diagnosisImage from "../static/icons/eye.png";
-import prescriptionImage from "../static/icons/eye.png";
-
-import { useSelector } from "react-redux";
-import { getRequest } from "../components/Api/api";
-import PatientProfileCard from "../components/cards/PatientProfileCard";
-import CurrentDiagnosisCard from "../components/cards/CurrentDiagnosisCard";
+import DatePicker from "react-multi-date-picker";
+import { useState } from "react";
 
 function DiagnoseReport() {
-	const [tableData, setTableData] = useState([]);
-	const [loading, setLoading] = useState(true);
+  const [dates, setDates] = useState([]);
 
-  const token = useSelector((state) => state.auth.token);
+  const handleDateChange = (values) => {
+    // Convert values to an array if it's not already one
+    const selectedDates = Array.isArray(values) ? values : [values];
 
-	const location = useLocation();
-  const { state } = location;
-  const patientId = state ? state.patientId : null;
+    // Filter out any duplicate dates
+    const uniqueDates = selectedDates.filter(
+      (date, index) => selectedDates.indexOf(date) === index
+    );
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const headers = { Authorization: `Bearer ${token}` };
-        const response = await getRequest(`/doctor/patientdashboard/${patientId}`, headers);
-				setTableData(response);
-				setLoading(false);
-			} catch (error) {
-				console.error("Error fetching data:", error);
-			}
-		};
+    // Update state with unique dates
+    setDates(uniqueDates);
+  };
+  const removeDate = (indexToRemove) => {
+    setDates((prevDates) =>
+      prevDates.filter((_, index) => index !== indexToRemove)
+    );
+  };
 
-		fetchData();
-	}, []);
+  const columns = ["In last two weeks, how frequent were your concerns?", ""];
+  const tableData = [
+    {
+      "In last two weeks, how frequent were your concerns?":
+        "Little interest or pleasure in doing things",
+      "": "Several days",
+    },
+    {
+      "In last two weeks, how frequent were your concerns?":
+        "Feeling down, depressed, or hopeless?",
+      "": "Not at all",
+    },
+    {
+      "In last two weeks, how frequent were your concerns?":
+        "Trouble falling asleep, staying asleep, or sleeping too much?",
+      "": "Fill out answer here", // You haven't provided an answer for this one
+    },
+    {
+      "In last two weeks, how frequent were your concerns?":
+        "Feeling tired or having little energy",
+      "": "More than half the days",
+    },
+    {
+      "In last two weeks, how frequent were your concerns?":
+        "Thoughts that you would be better off dead or of hurting yourself in some way?",
+      "": "Nearly every day",
+    },
+    {
+      "In last two weeks, how frequent were your concerns?":
+        "Poor appetite or overeating",
+      "": "Not at all",
+    },
+    {
+      "In last two weeks, how frequent were your concerns?":
+        "Feeling bad about yourself or that you are a failure or have let yourself or your family down",
+      "": "Several days",
+    },
+    {
+      "In last two weeks, how frequent were your concerns?":
+        "Trouble concentrating on things, such as reading the newspaper or watching television",
+      "": "More than half the days",
+    },
+  ];
 
-	const columns = [
-		"Date",
-		"Field Worker Assigned",
-		"Diagnosis",
-		"Comments",
-	];
+  return (
+    <div>
+      <Navbar />
+      <br />
+      <h2 className="title">Diagnosed Report</h2>
+      <br />
+      <div className="alignment">
+        <div className="quession-table">
+          <Table columns={columns} data={tableData} />
+          <button className="primary-btn">Go back to Patient Dashboard</button>
+        </div>
+        <div className="comment-date">
+          <h3>Comments added by Field Worker</h3>
+          <br />
+          <div className="reading-box">
+            <p>
+              This is some sample text for your reading passage. You can replace
+              this with any text you want the user to read.
+            </p>
+            <br />
+          </div>
+          <div className="button-style">
+            <button className="primary-btn">Show Artifacts</button>
+          </div>
+          <h3>Prescription by Doctor</h3>
+          <br />
+          <div className="reading-box">
+            <p>
+              This is some sample text for your reading passage. You can replace
+              this with any text you want the user to read.
+            </p>
+            <br />
+          </div>
+          <div className="align-calendar">
+            <br />
+            <h3>Selected Dates:</h3>
+            <div className="date-box">
+              <div className="calendar-container">
+                <br />
+                <DatePicker
+                  inputClass="custom-date-picker"
+                  style={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                  }}
+                  multiple
+                  value={dates}
+                  onChange={handleDateChange}
+                />
+              </div>
+            </div>
 
-	// Rendering function for Diagnosis column
-	const renderDiagnosis = (diagnosisUrl) => (
-		<button
-			onClick={() => handleDiagnosisClick(diagnosisUrl)}
-			className="view-button"
-		>
-			<img src={diagnosisImage} alt="Diagnosis" />
-		</button>
-	);
-
-	// Rendering function for Prescription column
-	const renderPrescription = (prescriptionUrl) => (
-		<button
-			onClick={() => handlePrescriptionClick(prescriptionUrl)}
-			className="view-button"
-		>
-			<img src={prescriptionImage} alt="Prescription" />
-		</button>
-	);
-
-	const handleDiagnosisClick = (diagnosisUrl) => {
-		window.open(diagnosisUrl, "_blank");
-	};
-
-	const handlePrescriptionClick = (prescriptionUrl) => {
-		window.open(prescriptionUrl, "_blank");
-	};
-
-	return (
-		<div>
-			<Navbar />
-			<div className="patient-detail">
-				<div className="patients-profile">
-					<header className="main-header">Patient Profile</header>
-					<PatientProfileCard data={tableData}/>
-				</div>
-				<div className="current-diagnose">
-					<header className="main-header">Current Diagnose</header>
-					<CurrentDiagnosisCard data={tableData}/>
-				</div>
-			</div>
-			
-			<header className="main-header">Patient History</header>
-			<br />
-
-			{loading ? (
-				<p>Loading...</p>
-			) : (
-				<Table
-          columns={columns}
-          data={tableData.prescription.map((prescription) => ({
-            Date: prescription.dateofprescription,
-            "Field Worker Assigned": prescription.feildworker,
-            Diagnosis: tableData.address,
-            Comments: prescription.doctorcomment,
-          }))}
-        />
-			)}
-		</div>
-	);
+            <div className="slected-dates">
+              {dates.map((date, index) => (
+                <div key={index} className="selected-date">
+                  <button
+                    className="green-btn"
+                    onClick={() => removeDate(index)}
+                  >
+                    {date.format("YYYY-MM-DD")} ✖
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default DiagnoseReport;

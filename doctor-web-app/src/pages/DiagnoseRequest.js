@@ -39,12 +39,12 @@ function DiagnoseRequest() {
   };
 
   const handleViewClick = (patientId) => {
-    navigate("/diagnose-report", { state: { patientId } });
+    navigate("/patient-dashboard", { state: { patientId } });
   };
   const handleDashboard = () => {
     navigate("/doctor-dashboard");
   };
-  const columns = ["User ID", "Name", "Chat", "View"];
+  const columns = ["User ID", "Name", "View"];
 
   const renderChatButton = (chatUrl) => (
     <button
@@ -76,7 +76,7 @@ function DiagnoseRequest() {
               data={tableData.map((row) => ({
                 "User ID": row.patientid,
                 Name: row.name,
-                Chat: renderChatButton(row.Chat),
+                // Chat: renderChatButton(row.Chat),
                 View: renderViewButton(row.patientid),
               }))}
             />

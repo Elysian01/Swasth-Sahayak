@@ -1,15 +1,66 @@
-.patient-detail{
-  display: flex;  
+.title{
+  text-align: center;
 }
-.patients-profile{
-  align-items: center;
+.reading-box{
+  border: 2px solid #000;
+}
+.alignment{
+  display: flex;
+}
+.quession-table{
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 }
-.current-diagnose{
-  align-items: center;
+.button-style{
+  text-align: right;
+}
+.comment-date{
+  padding-right: 4%;
+}
+.custom-calendar{
+  background-color: #000;
+  border: none;
+  float: center;
+  color: #fff;
+  padding: 10px 55px;
+  font-size: 22px;
+  border-radius: 20px;
+  margin: 10px auto;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+}
+.custom-calendar:focus {
+  scale: 1.1;
+  border: 1px solid var(--primary);
+  background-color: transparent;
+  color: var(--primary);
+  transition: 0.4s;
+}
+.align-calendar{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.custom-date-picker{
+  border-radius: 15px;
+  border: 1px var(--primary) solid;
+  padding: 4px 12px;
+  background-color: white;
+  height: 40px;
+}
+.slected-dates{
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.slected-dates {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Four columns with equal width */
+  grid-gap: 10px; 
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
 }

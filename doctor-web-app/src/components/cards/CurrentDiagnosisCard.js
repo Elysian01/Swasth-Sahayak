@@ -1,14 +1,22 @@
-import React from 'react';
+import React from "react";
 import "../css/cards.css";
-import Eye from "../../static/icons/eye.png"
-function CurrentDiagnosisCard({data}) {
+import "../../pages/css/common.css";
+import Eye from "../../static/icons/eye.png";
+import Slate from "../../static/imgs/slate.png";
+import { useNavigate } from "react-router-dom";
+function CurrentDiagnosisCard({ data }) {
+  const navigate = useNavigate();
   if (!data.prescription || data.prescription.length === 0) {
     return null; // Render nothing if prescription data is unavailable or empty
   }
   const lastPrescription = data.prescription[data.prescription.length - 1];
+  const handleViewDiagnose=()=>{
+    navigate("/diagnose-report");
+  }
   return (
     <div className="current-diagnosis-card">
-      <img src="./static/slate.png" alt="" />
+      <img src={Slate} alt="" />
+
       <div className="col">
         <h1 className="col-heading">Assigned Field Worker</h1>
         <br />
@@ -24,8 +32,10 @@ function CurrentDiagnosisCard({data}) {
         <br />
         <p className="col-value">
           <img src={Eye} alt="hello" />
-          
         </p>
+      </div>
+      <div className="col">
+        <button className="small-primary-btn" onClick={handleViewDiagnose}>View Diagnose</button>
       </div>
     </div>
   );

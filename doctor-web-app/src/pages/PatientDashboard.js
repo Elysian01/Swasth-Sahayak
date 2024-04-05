@@ -1,16 +1,18 @@
+// it should be changed
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import Table from "../components/tables/Listings";
-import axios from "axios";
 import "./css/common.css";
 import "../components/css/listings.css";
-import "../pages/css/patient-dashboard.css";
+import "./css/patient-dashboard.css";
 import Navbar from "../components/misc/Navbar";
-
 // Import your diagnosis and prescription images
 import diagnosisImage from "../static/icons/eye.png";
 import prescriptionImage from "../static/icons/eye.png";
-// import { Chart } from "chart.js";
-import LineGraph from "../components/misc/LineGraph";
+
+import { useSelector } from "react-redux";
+import { getRequest } from "../components/Api/api";
 import PatientProfileCard from "../components/cards/PatientProfileCard";
 import CurrentDiagnosisCard from "../components/cards/CurrentDiagnosisCard";
 
@@ -18,13 +20,18 @@ function PatientDashboard() {
 	const [tableData, setTableData] = useState([]);
 	const [loading, setLoading] = useState(true);
 
+  const token = useSelector((state) => state.auth.token);
+
+	const location = useLocation();
+  const { state } = location;
+  const patientId = state ? state.patientId : null;
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get(
-					"http://localhost:9001/data"
-				);
-				setTableData(response.data);
+				const headers = { Authorization: `Bearer ${token}` };
+        const response = await getRequest(`/doctor/patientdashboard/${patientId}`, headers);
+				setTableData(response);
 				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching data:", error);
@@ -37,9 +44,7 @@ function PatientDashboard() {
 	const columns = [
 		"Date",
 		"Field Worker Assigned",
-		"Questionnaire Score",
 		"Diagnosis",
-		"Prescription",
 		"Comments",
 	];
 
@@ -74,24 +79,17 @@ function PatientDashboard() {
 	return (
 		<div>
 			<Navbar />
-			<div className="header-alignment">
-				<div className="patient-profile">
-					<header className="main-header">
-						Patient Profile
-					</header>
-					<PatientProfileCard />
+			<div className="patient-detail">
+				<div className="patients-profile">
+					<header className="main-header">Patient Profile</header>
+					<PatientProfileCard data={tableData}/>
 				</div>
-				<div>
-					<header className="main-header">
-						Current diagnose
-					</header>
-					<CurrentDiagnosisCard />
+				<div className="current-diagnose">
+					<header className="main-header">Current Diagnose</header>
+					<CurrentDiagnosisCard data={tableData}/>
 				</div>
 			</div>
-			<h1 className="main-header">Patient Progress</h1>
-			<div className="line-graph">
-				<LineGraph />
-			</div>
+			
 			<header className="main-header">Patient History</header>
 			<br />
 
@@ -99,15 +97,14 @@ function PatientDashboard() {
 				<p>Loading...</p>
 			) : (
 				<Table
-					columns={columns}
-					data={tableData.map((row) => ({
-						...row,
-						Diagnosis: renderDiagnosis(row.Diagnosis),
-						Prescription: renderPrescription(
-							row.Prescription
-						),
-					}))}
-				/>
+          columns={columns}
+          data={tableData.prescription.map((prescription) => ({
+            Date: prescription.dateofprescription,
+            "Field Worker Assigned": prescription.feildworker,
+            Diagnosis: tableData.address,
+            Comments: prescription.doctorcomment,
+          }))}
+        />
 			)}
 		</div>
 	);
