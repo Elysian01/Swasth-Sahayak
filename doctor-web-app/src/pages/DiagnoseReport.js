@@ -3,16 +3,28 @@ import "../components/css/listings.css";
 import "./css/diagnose-report.css";
 import Table from "../components/tables/Listings";
 import Navbar from "../components/misc/Navbar";
-
-import { useState } from "react";
-
 import DatePicker from "react-multi-date-picker";
+import { useState } from "react";
 
 function DiagnoseReport() {
   const [dates, setDates] = useState([]);
-  const [openDatePicker, setOpenDatePicker] = useState(false);
-  const handleDateChange = (value) => {
-    setDates(value);
+
+  const handleDateChange = (values) => {
+    // Convert values to an array if it's not already one
+    const selectedDates = Array.isArray(values) ? values : [values];
+
+    // Filter out any duplicate dates
+    const uniqueDates = selectedDates.filter(
+      (date, index) => selectedDates.indexOf(date) === index
+    );
+
+    // Update state with unique dates
+    setDates(uniqueDates);
+  };
+  const removeDate = (indexToRemove) => {
+    setDates((prevDates) =>
+      prevDates.filter((_, index) => index !== indexToRemove)
+    );
   };
 
   const columns = ["In last two weeks, how frequent were your concerns?", ""];
@@ -68,50 +80,61 @@ function DiagnoseReport() {
       <div className="alignment">
         <div className="quession-table">
           <Table columns={columns} data={tableData} />
-					<button className="primary-btn">Go back to Patient Dashboard</button>
+          <button className="primary-btn">Go back to Patient Dashboard</button>
         </div>
         <div className="comment-date">
           <h3>Comments added by Field Worker</h3>
-					<br />
+          <br />
           <div className="reading-box">
             <p>
               This is some sample text for your reading passage. You can replace
               this with any text you want the user to read.
             </p>
-						<br />
+            <br />
           </div>
           <div className="button-style">
             <button className="primary-btn">Show Artifacts</button>
           </div>
           <h3>Prescription by Doctor</h3>
-					<br />
+          <br />
           <div className="reading-box">
             <p>
               This is some sample text for your reading passage. You can replace
               this with any text you want the user to read.
             </p>
-						<br />
+            <br />
           </div>
-          <button
-            className="primary-btn"
-            onClick={() => setOpenDatePicker(true)}
-          >
-            Select Dates
-          </button>
-          {openDatePicker && (
-            <DatePicker
-							inputClass="custom-calendar"
-              multiple
-              value={dates}
-              onChange={handleDateChange}
-              onClose={() => setOpenDatePicker(false)}
-            />
-          )}
-          <div>
+          <div className="align-calendar">
+            <br />
             <h3>Selected Dates:</h3>
-            {dates.map((date, index) => (
-              <p key={index}>{date.format("YYYY-MM-DD")}</p>
-            ))}
+            <div className="date-box">
+              <div className="calendar-container">
+                <br />
+                <DatePicker
+                  inputClass="custom-date-picker"
+                  style={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                  }}
+                  multiple
+                  value={dates}
+                  onChange={handleDateChange}
+                />
+              </div>
+            </div>
+
+            <div className="slected-dates">
+              {dates.map((date, index) => (
+                <div key={index} className="selected-date">
+                  <button
+                    className="green-btn"
+                    onClick={() => removeDate(index)}
+                  >
+                    {date.format("YYYY-MM-DD")} ✖
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
