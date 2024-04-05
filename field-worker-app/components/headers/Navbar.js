@@ -43,7 +43,7 @@ const Navbar = () => {
 					</View>
 				</Pressable>
 			</View>
-
+			{/* 
 			<View style={styles.navLinks}>
 				<Pressable onPress={() => navigation.navigate("Home")}>
 					<Text style={styles.navItem}>
@@ -69,13 +69,11 @@ const Navbar = () => {
 						{lang[preferredlangauge]["Profile"]}
 					</Text>
 				</Pressable>
-			</View>
+			</View> */}
 
-			{/* {accessTokenExists && (
+			{accessTokenExists && (
 				<View style={styles.navLinks}>
-					<Pressable
-						onPress={() => navigation.navigate("Home")}
-					>
+					<Pressable onPress={() => navigation.navigate("Home")}>
 						<Text style={styles.navItem}>
 							{lang[preferredlangauge]["Home"]}
 						</Text>
@@ -104,7 +102,7 @@ const Navbar = () => {
 						</Text>
 					</Pressable>
 				</View>
-			)} */}
+			)}
 		</View>
 	);
 };

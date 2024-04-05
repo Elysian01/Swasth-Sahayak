@@ -6,16 +6,22 @@ import AppStyles from "../../AppStyles";
 
 const InputField = (props) => {
 	let iconSource = null;
+	let type = "text";
+
 	if (props.type === "email") {
+		type = "email";
 		iconSource = require("../../assets/icons/emailIcon.png");
 	} else if (props.type === "password") {
+		type = "text";
 		iconSource = require("../../assets/icons/passwordIcon.png");
 	} else if (props.type === "otp") {
+		type = "numeric";
 		iconSource = require("../../assets/icons/passwordIcon.png");
 	} else if (
 		props.type === "patientDetail" ||
 		props.icon === "PatientDetail"
 	) {
+		type = "text";
 		iconSource = require("../../assets/icons/userIcon.png");
 	}
 
@@ -37,9 +43,7 @@ const InputField = (props) => {
 					onChangeText={props.onChange}
 					value={props.value}
 					secureTextEntry={props.type === "password"}
-					inputMode={
-						props.type === "number" ? "numeric" : "text"
-					}
+					inputMode={type}
 					autoCapitalize="none"
 					autoCorrect={false}
 				/>

@@ -18,10 +18,6 @@ import { loginAPI } from "../api/APIs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
 
-const getLanguage = async () => {
-	return await AsyncStorage.getItem("Language");
-};
-
 const Login = () => {
 	const navigation = useNavigation();
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
@@ -33,38 +29,48 @@ const Login = () => {
 	const [password, setPassword] = useState("");
 
 	const emailChangeHandler = (e) => {
-		setEmail(e.target.value);
+		setEmail(e);
 	};
 
 	const passwordChangeHandler = (e) => {
-		setPassword(e.target.value);
+		setPassword(e);
+	};
+
+	const validateEmail = (email) => {
+		const regex =
+			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return regex.test(email);
 	};
 
 	function handleLogin() {
-		// if (email !== "" && password !== "") {
-		// 	loginAPI({
-		// 		email: email,
-		// 		password: password,
-		// 	})
-		// 		.then((result) => {
-		// 			if (result.status === 200) {
-		// 				console.log(result);
-		// 				AsyncStorage.setItem(
-		// 					"AccessToken",
-		// 					result.data.jwtToken
-		// 				);
-		// 				console.log(result.data.jwtToken);
-		// 				navigation.navigate("Home");
-		// 			} else if (result.status === 401) {
-		// 				console.log(result.status);
-		// 				Alert.alert("Error", result.data, []);
-		// 			}
-		// 		})
-		// 		.catch((error) => {
-		// 			console.log(error);
-		// 			Alert.alert("Error", error);
-		// 		});
-		// }
+		if (validateEmail(email)) {
+			if (email !== "" && password !== "") {
+				loginAPI({
+					username: email,
+					password: password,
+				})
+					.then((result) => {
+						if (result.status === 200) {
+							console.log(result);
+							AsyncStorage.setItem(
+								"AccessToken",
+								result.data.jwtToken
+							);
+							console.log(result.data.jwtToken);
+							navigation.navigate("Home");
+						} else if (result.status === 401) {
+							console.log(result.status);
+							Alert.alert("Error", result.data);
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+						Alert.alert("Error", error);
+					});
+			}
+		} else {
+			Alert.alert("Invalid Email Format", "Please Enter Valid Email");
+		}
 
 		// const fieldWorkerId = result.data.fieldWorkerId;
 		// const fieldWorkerId = result.data.fieldWorkerName;
@@ -73,7 +79,7 @@ const Login = () => {
 		const fieldWorkerName = "Jass Sadana";
 		AsyncStorage.setItem("FieldWorkerId", fieldWorkerId);
 		AsyncStorage.setItem("FieldWorkerName", fieldWorkerName);
-		navigation.navigate("Home");
+		// navigation.navigate("Home");
 	}
 
 	return (

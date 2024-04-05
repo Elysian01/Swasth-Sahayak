@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Login from "../screens/Login";
 import Home from "../screens/Home";
@@ -12,7 +13,6 @@ import FindPatient from "../screens/FindPatient";
 import PatientToken from "../screens/PatientToken";
 import Profile from "../screens/Profile";
 import RegisterPatient from "../screens/RegisterPatient";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import PatientDashboard from "../screens/PatientDashboard";
 import Questionnaire from "../screens/Questionnaire";
 import DoctorSelection from "../screens/DoctorSelection";
@@ -44,24 +44,37 @@ const Navigation = () => {
 	// 				<>
 	// 					<Stack.Screen name="Home" component={Home} />
 	// 					<Stack.Screen
-	// 						name="Followup"
-	// 						component={Followup}
-	// 					/>
-	// 					<Stack.Screen
 	// 						name="PatientToken"
 	// 						component={PatientToken}
+	// 					/>
+
+	// 					<Stack.Screen
+	// 						name="PatientDashboard"
+	// 						component={PatientDashboard}
+	// 					/>
+	// 					<Stack.Screen
+	// 						name="Prescription"
+	// 						component={Prescription}
+	// 					/>
+	// 					<Stack.Screen
+	// 						name="Questionnaire"
+	// 						component={Questionnaire}
+	// 					/>
+	// 					<Stack.Screen
+	// 						name="DoctorSelection"
+	// 						component={DoctorSelection}
+	// 					/>
+	// 					<Stack.Screen
+	// 						name="RegisterPatient"
+	// 						component={RegisterPatient}
 	// 					/>
 	// 					<Stack.Screen
 	// 						name="Profile"
 	// 						component={Profile}
 	// 					/>
 	// 					<Stack.Screen
-	// 						name="PatientDashboard"
-	// 						component={PatientDashboard}
-	// 					/>
-	// 					<Stack.Screen
-	// 						name="RegisterPatient"
-	// 						component={RegisterPatient}
+	// 						name="LanguageSelection"
+	// 						component={LanguageSelection}
 	// 					/>
 	// 				</>
 	// 			) : (
@@ -71,6 +84,7 @@ const Navigation = () => {
 	// 						component={LanguageSelection}
 	// 					/>
 	// 					<Stack.Screen name="Login" component={Login} />
+	// 					<Stack.Screen name="Home" component={Home} />
 	// 					<Stack.Screen
 	// 						name="ForgotPassword"
 	// 						component={ForgotPassword}
@@ -79,15 +93,12 @@ const Navigation = () => {
 	// 						name="ResetPassword"
 	// 						component={ResetPassword}
 	// 					/>
-	// 					<Stack.Screen
-	// 						name="FindPatient"
-	// 						component={FindPatient}
-	// 					/>
 	// 				</>
 	// 			)}
 	// 		</Stack.Navigator>
 	// 	</NavigationContainer>
 	// );
+
 	return (
 		<NavigationContainer>
 			<Stack.Navigator

@@ -86,14 +86,13 @@ const RegisterPatient = () => {
 
 		const patientData = {
 			"fieldworker-id": 1234,
-			"patient-firstname": firstname,
-			"patient-lastname": lastname,
+			"patient-name": `${firstname} ${lastname}`,
 			"patient-dob": selectedDate,
 			"patient-gender": gender,
 			"patient-abhaid": abhaID,
 			"patient-phoneNumber": phoneNumber,
 			"patient-address": address,
-			"patient-sector": sector,
+			"patient-blockCode": sector,
 			"patient-pincode": pincode,
 			"patient-preferred-langauge": registerLanguage,
 		};
@@ -152,6 +151,7 @@ const RegisterPatient = () => {
 						value={firstname}
 						maxLength={40}
 						placeholderTextColor="#666"
+						autoCapitalize="words"
 					/>
 					<TextInput
 						style={styles.input}
@@ -160,6 +160,7 @@ const RegisterPatient = () => {
 						onChangeText={(text) => setLastname(text)}
 						value={lastname}
 						maxLength={40}
+						autoCapitalize="words"
 					/>
 				</View>
 				<View style={styles.group2}>
