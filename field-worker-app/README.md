@@ -151,7 +151,7 @@ data = {
 
   "questionnaire": [
         {
-            "icd10": "ACTIVITY",
+            "icd10": "F32.1",
             "questions": [
                 {
                     "ques_type": "mcq",
@@ -160,16 +160,14 @@ data = {
                     "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
-                    "ques_type": "mcq",
+                    "ques_type": "nat",
                     "question_id": 24,
                     "question_text": "In the last 1 month, spent time thinking constructively about ways to improve myself/my relationship with important person/s in my life",
-                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
-                    "ques_type": "mcq",
+                    "ques_type": "text",
                     "question_id": 25,
                     "question_text": "In the last 1 month, went to party just to have a good time",
-                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
