@@ -19,11 +19,11 @@ function DoctorDashboard() {
   const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const [countData, setCountData] = useState([]);
+  const [countDataDate, setCountDateData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
-  
   useEffect(() => {
     const fetchTop3Patients = async () => {
       try {
@@ -52,7 +52,28 @@ function DoctorDashboard() {
 
     findCount();
   }, []);
+  useEffect(() => {
+    const findCountDate = async () => {
+      try {
+        const headers = { Authorization: `Bearer ${token}` };
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+        const day = String(currentDate.getDate()).padStart(2, "0");
+        const date = `${year}-${month}-${day}`;
+        const response = await getRequest(
+          `/doctor/findoldcount/${user}/${date}`,
+          headers
+        );
+        setCountDateData(response); // Accessing data property of the response
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
+    findCountDate();
+  }, []);
   const handleChatClick = (chatUrl) => {
     window.open(chatUrl, "_blank");
   };
@@ -66,12 +87,6 @@ function DoctorDashboard() {
 
   const columns = ["Patient ID", "Name", "View Diagnose"];
 
-  // const renderChatButton = (chatUrl) => (
-  //   <button onClick={() => handleChatClick(chatUrl)} className="primary-btn">
-  //     Chat
-  //   </button>
-  // );
-
   const renderViewButton = (patientId) => (
     <button onClick={() => handleViewClick(patientId)} className="view-button">
       <img src={viewIcon} alt="View" />
@@ -84,7 +99,7 @@ function DoctorDashboard() {
 
       <main class="main-container">
         <div class="row1">
-          <StatisticCard countData={countData}/>
+          <StatisticCard countData={countData}  countDataDate={countDataDate}/>
 
           <div class="section2">
             <FeatureCard
@@ -105,7 +120,6 @@ function DoctorDashboard() {
           </div>
         </div>
         <br />
-
         <div class="row2">
           <div class="col1">
             <ShortListings
@@ -138,7 +152,10 @@ function DoctorDashboard() {
               />
             )}
             <br />
-            <button className="medium-primary-btn" onClick={handleViewMoreClick}>
+            <button
+              className="medium-primary-btn"
+              onClick={handleViewMoreClick}
+            >
               View More
             </button>
           </div>

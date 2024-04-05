@@ -89,7 +89,7 @@ function ForgotPassword() {
 							<InputField
 								id="Email"
 								type="email"
-								placeholder="Employee Email"
+								placeholder="Enter Username"
 								onChange={emailChangeHandler}
 								value={email}
 							/>

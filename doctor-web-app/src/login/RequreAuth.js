@@ -3,10 +3,10 @@ import { UseSelector, useSelector } from "react-redux";
 const RequreAuth = () => {
   const token = useSelector((state) => state.auth.token);
   const location = useLocation();
-  return token ? (
+  return !!token ? (
     <Outlet />
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to="/" state={{ from: location }} replace />
   );
 };
 
