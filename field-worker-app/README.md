@@ -157,31 +157,31 @@ data = {
                     "ques_type": "mcq",
                     "question_id": 23,
                     "question_text": "In the last 1 month, kept eating something more than necessary just because it tasted so good",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 24,
                     "question_text": "In the last 1 month, spent time thinking constructively about ways to improve myself/my relationship with important person/s in my life",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 25,
                     "question_text": "In the last 1 month, went to party just to have a good time",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 26,
                     "question_text": "In the last 1 month, made my living space/work space cleaner and better organized, out of my own choice",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 27,
                     "question_text": "In the last 1 month, did something to help someone without expecting anything in return",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 }
             ]
         },
@@ -192,37 +192,37 @@ data = {
                     "ques_type": "mcq",
                     "question_id": 11,
                     "question_text": "During the last 30 days, about how often did you feel tired out for no good reason?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 12,
                     "question_text": "During the last 30 days, about how often did you feel nervous?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 13,
                     "question_text": "During the last 30 days, about how often did you feel so nervous that nothing could calm you down?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 14,
                     "question_text": "During the last 30 days, about how often did you feel worthless?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 15,
                     "question_text": "During the last 30 days, about how often did you feel that everything was an effort?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 16,
                     "question_text": "During the last 30 days, about how often did you feel restless or fidgety?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 }
             ]
         },
@@ -233,31 +233,31 @@ data = {
                     "ques_type": "mcq",
                     "question_id": 6,
                     "question_text": "In the last few weeks I have felt that I have little or no interest in things around me",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 7,
                     "question_text": "In the last few weeks I have felt irritated by something",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 8,
                     "question_text": "In the last few weeks I have felt sharp and attentive",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 9,
                     "question_text": "In the last few weeks I have felt that things are dull and boring",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 10,
                     "question_text": "In the last few weeks I have felt guilty about something that I have done or said",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 }
             ]
         },
@@ -268,13 +268,13 @@ data = {
                     "ques_type": "mcq",
                     "question_id": 35,
                     "question_text": "How often do you engage in risky behaviors during manic episodes?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 36,
                     "question_text": "How often do you have difficulty concentrating or making decisions during manic episodes?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "text",
@@ -303,13 +303,13 @@ data = {
                     "ques_type": "mcq",
                     "question_id": 37,
                     "question_text": "How frequently do you experience changes in appetite or weight?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 38,
                     "question_text": "How often do you feel tired or have low energy most days?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "text",
@@ -338,13 +338,13 @@ data = {
                     "ques_type": "mcq",
                     "question_id": 33,
                     "question_text": "How often do you avoid certain places or situations because they cause fear or anxiety?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 34,
                     "question_text": "How often do you worry excessively about different things?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "text",
@@ -373,13 +373,13 @@ data = {
                     "ques_type": "mcq",
                     "question_id": 31,
                     "question_text": "How frequently do you feel constantly overwhelmed or stressed?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 32,
                     "question_text": "How often do you experience changes in sleep patterns or appetite?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "text",
@@ -408,19 +408,19 @@ data = {
                     "ques_type": "mcq",
                     "question_id": 28,
                     "question_text": "How often do you feel restless or unable to sit still?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 29,
                     "question_text": "How frequently do you lose things necessary for tasks or activities?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 30,
                     "question_text": "How often do you feel a need to keep moving or fidgeting?",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "text",
@@ -443,31 +443,31 @@ data = {
                     "ques_type": "mcq",
                     "question_id": 1,
                     "question_text": "I have a sense of direction and purpose in life.",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 2,
                     "question_text": "I gave up trying to make big improvements or changes in my life a long time ago.",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 3,
                     "question_text": "I feel that I get a lot out of my friendships.",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 4,
                     "question_text": "I have difficulty organizing my life in a way that is satisfying to me.",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 5,
                     "question_text": "In many ways, I feel disappointed about my achievements in life.",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 }
             ]
         },
@@ -478,37 +478,37 @@ data = {
                     "ques_type": "mcq",
                     "question_id": 17,
                     "question_text": "I think the world is becoming a better place to live",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 18,
                     "question_text": "I do not feel connected to the society",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 19,
                     "question_text": "I think society has the potential for positive changes",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 20,
                     "question_text": "I believe that the society can become a better place",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 21,
                     "question_text": "I feel I am accepted by other people",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 },
                 {
                     "ques_type": "mcq",
                     "question_id": 22,
                     "question_text": "I feel a sense of belongingness to society",
-                    "option": 1
+                    "option": ["option-1", "option-2", "option-3", "option-4"]
                 }
             ]
         }
