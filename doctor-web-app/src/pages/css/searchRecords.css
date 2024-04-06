@@ -8,4 +8,7 @@
 }
 .dropdown-container select {
   margin-right: 10px; /* Add margin between dropdowns */
+  padding: 12px;
+  font-weight: 500;
+  font-size: medium;
 }

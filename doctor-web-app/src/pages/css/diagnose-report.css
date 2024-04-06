@@ -2,7 +2,20 @@
   text-align: center;
 }
 .reading-box{
-  border: 2px solid #000;
+  border: 1px solid #000;
+  padding: 20px;
+  background-color: #fff;
+  font-weight: 500;
+  border-radius: 25px;
+}
+
+.reading-box input{ 
+  height: 50px;
+  border: none;
+  outline: none;
+  font-size: medium;
+  letter-spacing: 1px;
+  font-weight: 400;
 }
 .alignment{
   display: flex;

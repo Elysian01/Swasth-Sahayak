@@ -8,7 +8,11 @@ import { useState } from "react";
 
 function DiagnoseReport() {
   const [dates, setDates] = useState([]);
-
+  const handleSubmit = () => {
+    // Perform submission logic here
+    // For demonstration purposes, simply show an alert
+    alert("Data submitted successfully!");
+  };
   const handleDateChange = (values) => {
     // Convert values to an array if it's not already one
     const selectedDates = Array.isArray(values) ? values : [values];
@@ -76,7 +80,7 @@ function DiagnoseReport() {
       <Navbar />
       <br />
       <h2 className="title">Diagnosed Report</h2>
-      <br />
+      <br /> <br/>
       <div className="alignment">
         <div className="quession-table">
           <Table columns={columns} data={tableData} />
@@ -98,10 +102,7 @@ function DiagnoseReport() {
           <h3>Prescription by Doctor</h3>
           <br />
           <div className="reading-box">
-            <p>
-              This is some sample text for your reading passage. You can replace
-              this with any text you want the user to read.
-            </p>
+            <input/>
             <br />
           </div>
           <div className="align-calendar">
@@ -135,6 +136,7 @@ function DiagnoseReport() {
                 </div>
               ))}
             </div>
+            <button className="primary-btn" onClick={handleSubmit}>Submit</button>
           </div>
         </div>
       </div>
