@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Table from "../components/tables/Listings";
-import axios from "axios";
 import "./css/common.css";
 import "./css/searchRecords.css";
 import Navbar from "../components/misc/Navbar";
@@ -8,15 +7,16 @@ import viewIcon from "../static/icons/eye.png";
 
 import { useSelector } from "react-redux";
 import { getRequest } from "../components/Api/api";
+import { useNavigate } from "react-router-dom";
 
 function SearchRecords() {
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
   const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
-
+  const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
-
+  const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,15 +30,18 @@ function SearchRecords() {
     };
 
     fetchData();
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     // Apply filters based on dropdown values
     const fetchFilteredData = async () => {
       try {
         const headers = { Authorization: `Bearer ${token}` };
-        const response = await getRequest(`/doctor/searchbydisease/${selectedDropdownValue}`, headers);
-        setTableData(response); 
+        const response = await getRequest(
+          `/doctor/searchbydisease/${selectedDropdownValue}/${user}`,
+          headers
+        );
+        setTableData(response);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -47,35 +50,23 @@ function SearchRecords() {
     if (selectedDropdownValue) {
       fetchFilteredData();
     }
-  }, [selectedDropdownValue]);
+  }, [selectedDropdownValue, token]);
 
-
-  const handleViewClick = (viewUrl) => {
-    window.open(viewUrl, "_blank");
+  const handleViewClick = (abhaid) => {
+    navigate("/patient-dashboard", { state: { abhaid } });
   };
 
   const columns = [
-    "Abha-id", 
-    "Patient Name", 
+    "Abha-id",
+    "Patient Name",
     "Prescription Date",
     "Disease Name",
+    "Diagnosis",
   ];
 
-  const renderDiagnosis = (diagnosisUrl) => (
-    <button
-      onClick={() => handleViewClick(diagnosisUrl)}
-      className="view-button"
-    >
+  const renderDiagnosis = (abhaid) => (
+    <button onClick={() => handleViewClick(abhaid)} className="view-button">
       <img src={viewIcon} alt="View Diagnosis" />
-    </button>
-  );
-
-  const renderPrescription = (prescriptionUrl) => (
-    <button
-      onClick={() => handleViewClick(prescriptionUrl)}
-      className="view-button"
-    >
-      <img src={viewIcon} alt="View Prescription" />
     </button>
   );
 
@@ -108,8 +99,7 @@ function SearchRecords() {
               "Patient Name": row.patientname,
               "Prescription Date": row.prescriptiondate,
               "Disease Name": row.diseasename,
-              "Diagnosis": renderDiagnosis(row.Diagnosis),
-              "Prescription": renderPrescription(row.Prescription),
+              Diagnosis: renderDiagnosis(row.abhaid),
               key: index,
             }))}
           />

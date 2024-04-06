@@ -32,11 +32,7 @@ function DiagnoseRequest() {
     };
 
     fetchData();
-  }, []);
-
-  const handleChatClick = (chatUrl) => {
-    window.open(chatUrl, "_blank");
-  };
+  }, [token,user]);
 
   const handleViewClick = (patientId) => {
     navigate("/patient-dashboard", { state: { patientId } });
@@ -45,15 +41,6 @@ function DiagnoseRequest() {
     navigate("/doctor-dashboard");
   };
   const columns = ["User ID", "Name", "View"];
-
-  const renderChatButton = (chatUrl) => (
-    <button
-      onClick={() => handleChatClick(chatUrl)}
-      className="small-primary-btn"
-    >
-      Chat
-    </button>
-  );
 
   const renderViewButton = (patientId) => (
     <button onClick={() => handleViewClick(patientId)} className="view-button">
@@ -88,7 +75,7 @@ function DiagnoseRequest() {
         <div className="diagnose-options">
           <img
             src={diagnoseImage}
-            alt="diagnose-photo"
+            alt="diagnose"
             className="diagnose-request"
           />
         </div>

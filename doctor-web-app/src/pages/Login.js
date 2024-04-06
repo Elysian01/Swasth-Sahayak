@@ -1,5 +1,4 @@
-import React, { useState,useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../login/authSlice";
@@ -10,7 +9,6 @@ import Navbar from "../components/misc/Navbar";
 import LoginBG from "../components/misc/LoginBG";
 import InputField from "../components/input_fields/InputField";
 import { authApi } from "../login/authApi";
-import {store} from "../login/store";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");

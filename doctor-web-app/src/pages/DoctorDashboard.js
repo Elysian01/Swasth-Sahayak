@@ -1,7 +1,7 @@
 import "./css/common.css";
 import "./css/doctor-dashboard.css";
 
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +37,7 @@ function DoctorDashboard() {
     };
 
     fetchTop3Patients();
-  }, []);
+  }, [token,user]);
   useEffect(() => {
     const findCount = async () => {
       try {
@@ -51,7 +51,7 @@ function DoctorDashboard() {
     };
 
     findCount();
-  }, []);
+  }, [token,user]);
   useEffect(() => {
     const findCountDate = async () => {
       try {
@@ -73,10 +73,7 @@ function DoctorDashboard() {
     };
 
     findCountDate();
-  }, []);
-  const handleChatClick = (chatUrl) => {
-    window.open(chatUrl, "_blank");
-  };
+  }, [token,user]);
 
   const handleViewClick = (patientId) => {
     navigate("/patient-dashboard", { state: { patientId } });
