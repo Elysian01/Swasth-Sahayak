@@ -1,0 +1,12 @@
+.page-heading h2 {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 30px;
+    margin: 40px auto 30px;
+    text-align: center;
+}
+
+.page-heading h2 span {
+    border-bottom: 2px solid #000;
+    padding-bottom: 15px;
+}
