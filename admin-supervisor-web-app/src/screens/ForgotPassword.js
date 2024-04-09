@@ -3,12 +3,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/headers/Navbar";
-import InputField from "../components/inputs/InputFields";
+import InputField from "../components/inputs/InputField";
 import "./css/common.css";
 import "./css/login.css";
 
 import LoginBG from "../components/misc/LoginBG";
-
 
 function ForgotPassword() {
 	const navigate = useNavigate();
