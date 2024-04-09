@@ -5,6 +5,8 @@ import "../css/common.css";
 const Forms = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
@@ -14,9 +16,44 @@ const Forms = () => {
     setGender(event.target.value);
   };
 
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!validateEmail(email) && validatePhone(phone)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (validateEmail(email) && !validatePhone(phone)) {
+      alert("Please enter a valid phone number.");
+      return;
+    }
+    if (!validatePhone(phone) && !validateEmail(email)) {
+      alert("Please enter a valid phone number and email address.");
+      return;
+    }
+  };
+
+  const validateEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    // Regular expression to validate phone number (10 digits)
+    const regex = /^\d{10}$/;
+    return regex.test(phone);
+  };
+
   return (
     <div>
-      <form className="form-style">
+      <form className="form-style" onSubmit={handleSubmit}>
         <div className="user-name">
           <input
             type="text"
@@ -53,16 +90,18 @@ const Forms = () => {
           <input
             type="text"
             name="mobile"
-            pattern="[0-9]{10}"
             placeholder="Enter your 10-digit mobile number"
             className="input-styles"
+            value={phone}
+            onChange={handlePhoneChange}
           />
           <input
             type="text"
             name="emailAddress"
-            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-            placeholder="email address"
+            placeholder="Email Address"
             className="input-styles"
+            value={email}
+            onChange={handleEmailChange}
           />
         </div>
         <button type="submit" className="primary-btn">
