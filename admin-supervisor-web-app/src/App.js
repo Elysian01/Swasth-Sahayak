@@ -7,36 +7,55 @@ import AdminDashboard from "./screens/AdminDashboard";
 import FieldWorkerDashboard from "./screens/FieldWorkerDashboard";
 import PageNotFound from "./screens/PageNotFound";
 import ForgotPassword from "./screens/ForgotPassword";
+import CreateQuestionnaire from "./screens/CreateQuestionnaire";
+import QuestionnaireConfigurations from "./screens/QuestionnaireConfigurations";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Routes>
-          {/* <Route index element={<Login />} /> */}
-          <Route index path="/" element={<Login />} />
-          <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-					<Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="*" element={<PageNotFound />} />
+	return (
+		<div className="App">
+			<Router>
+				<Routes>
+					{/* <Route index element={<Login />} /> */}
+					<Route index path="/" element={<Login />} />
+					<Route
+						path="/doctor-dashboard"
+						element={<DoctorDashboard />}
+					/>
+					<Route
+						path="/admin-dashboard"
+						element={<AdminDashboard />}
+					/>
+					<Route
+						path="/forgot-password"
+						element={<ForgotPassword />}
+					/>
+					<Route path="*" element={<PageNotFound />} />
 
-          <Route
-            path="field-worker-dashboard"
-            element={<FieldWorkerDashboard />}
-          />
-          <Route
-            path="supervisor-dashboard"
-            element={<SupervisorDashboard />}
-          />
-          <Route
-            path="questionnaire-dashboard"
-            element={<QuestionnaireDashboard />}
-          />
-        </Routes>
-      </Router>
-    </div>
-  );
+					<Route
+						path="field-worker-dashboard"
+						element={<FieldWorkerDashboard />}
+					/>
+					<Route
+						path="supervisor-dashboard"
+						element={<SupervisorDashboard />}
+					/>
+					<Route
+						path="questionnaire-dashboard"
+						element={<QuestionnaireDashboard />}
+					/>
+					<Route
+						path="questionnaire-configurations"
+						element={<QuestionnaireConfigurations />}
+					/>
+					<Route
+						path="create-questionnaire"
+						element={<CreateQuestionnaire />}
+					/>
+				</Routes>
+			</Router>
+		</div>
+	);
 }
 
 export default App;
