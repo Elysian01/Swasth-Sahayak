@@ -10,6 +10,7 @@ import ForgotPassword from "./screens/ForgotPassword";
 import CreateQuestionnaire from "./screens/CreateQuestionnaire";
 import QuestionnaireConfigurations from "./screens/QuestionnaireConfigurations";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Forms from "./components/inputs/Forms";
 
 function App() {
 	return (
