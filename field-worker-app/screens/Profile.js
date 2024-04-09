@@ -153,8 +153,8 @@ const styles = StyleSheet.create({
 	doctorImage: {
 		alignSelf: "center",
 		marginTop: 15,
-		width: 230,
-		height: 350,
+		width: 375,
+		height: 375,
 	},
 	doctorName: {
 		textAlign: "center",

@@ -1,0 +1,60 @@
+/* .questionnaire-card {
+    padding: 10px;
+    -webkit-box-shadow: 0 4px 6px -6px #222;
+    -moz-box-shadow: 0 4px 6px -6px #222;
+    box-shadow: 4px 6px 4px -6px #222;
+    font-family: "Lato", sans-serif;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.table-heading {
+    font-size: large;
+    font-weight: bold;
+    color: var(--primary)
+}
+
+.table-date {
+    font-size: large;
+} */
+
+.header-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--primary);
+}
+
+.table-header {
+    padding: 15;
+    text-align: "center";
+    font-size: 20;
+    font-weight: "bold";
+}
+.table-row {
+    display: flex;
+    flex-direction: row;
+    /* border-
+    borderTopWidth: 1,
+    borderBottomWidth: 1, */
+    align-items: center;
+}
+
+.table-header {
+    padding: 15;
+    text-align: "center";
+    font-size: 20;
+    font-weight: "bold";
+}
+
+.table-data {
+    padding: 12px;
+    text-align: "center";
+    font-size: 18;
+    font-weight: "500";
+}
+
+.eyeContainer {
+    align-items: "center";
+}
+

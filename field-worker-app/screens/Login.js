@@ -43,34 +43,34 @@ const Login = () => {
 	};
 
 	function handleLogin() {
-		if (validateEmail(email)) {
-			if (email !== "" && password !== "") {
-				loginAPI({
-					username: email,
-					password: password,
-				})
-					.then((result) => {
-						if (result.status === 200) {
-							console.log(result);
-							AsyncStorage.setItem(
-								"AccessToken",
-								result.data.jwtToken
-							);
-							console.log(result.data.jwtToken);
-							navigation.navigate("Home");
-						} else if (result.status === 401) {
-							console.log(result.status);
-							Alert.alert("Error", result.data);
-						}
-					})
-					.catch((error) => {
-						console.log(error);
-						Alert.alert("Error", error);
-					});
-			}
-		} else {
-			Alert.alert("Invalid Email Format", "Please Enter Valid Email");
-		}
+		// if (validateEmail(email)) {
+		// 	if (email !== "" && password !== "") {
+		// 		loginAPI({
+		// 			username: email,
+		// 			password: password,
+		// 		})
+		// 			.then((result) => {
+		// 				if (result.status === 200) {
+		// 					console.log(result);
+		// 					AsyncStorage.setItem(
+		// 						"AccessToken",
+		// 						result.data.jwtToken
+		// 					);
+		// 					console.log(result.data.jwtToken);
+		// 					navigation.navigate("Home");
+		// 				} else if (result.status === 401) {
+		// 					console.log(result.status);
+		// 					Alert.alert("Error", result.data);
+		// 				}
+		// 			})
+		// 			.catch((error) => {
+		// 				console.log(error);
+		// 				Alert.alert("Error", error);
+		// 			});
+		// 	}
+		// } else {
+		// 	Alert.alert("Invalid Email Format", "Please Enter Valid Email");
+		// }
 
 		// const fieldWorkerId = result.data.fieldWorkerId;
 		// const fieldWorkerId = result.data.fieldWorkerName;
@@ -79,7 +79,7 @@ const Login = () => {
 		const fieldWorkerName = "Jass Sadana";
 		AsyncStorage.setItem("FieldWorkerId", fieldWorkerId);
 		AsyncStorage.setItem("FieldWorkerName", fieldWorkerName);
-		// navigation.navigate("Home");
+		navigation.navigate("Home");
 	}
 
 	return (

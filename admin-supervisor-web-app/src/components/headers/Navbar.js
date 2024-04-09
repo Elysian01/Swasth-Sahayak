@@ -7,6 +7,10 @@ function Navbar() {
 	// const token = useSelector((state) => state.auth.token);
 	const token = true;
 
+	function handleLogout() {
+		alert("Logout");
+	}
+
 	useEffect(() => {
 		const handleToggleNav = () => {
 			const navLinks = document.querySelector(".nav-links");
@@ -119,28 +123,12 @@ function Navbar() {
 						</>
 					)}
 				</li>
+
 				<li>
 					{token && (
-						<>
-							<Link
-								className="nav-item"
-								to="/supervisor-dashboard"
-							>
-								Supervisor
-							</Link>
-						</>
-					)}
-				</li>
-				<li>
-					{token && (
-						<>
-							<Link
-								className="nav-item"
-								to="/questionnaire-dashboard"
-							>
-								Questionnaire
-							</Link>
-						</>
+						<div className="nav-item" onClick={handleLogout}>
+							Logout
+						</div>
 					)}
 				</li>
 			</ul>
