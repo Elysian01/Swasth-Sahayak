@@ -28,6 +28,10 @@ function App() {
 						element={<AdminDashboard />}
 					/>
 					<Route
+						path="/forms"
+						element={<Forms />}
+					/>
+					<Route
 						path="/forgot-password"
 						element={<ForgotPassword />}
 					/>

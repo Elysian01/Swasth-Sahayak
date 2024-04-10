@@ -27,6 +27,7 @@
     justify-content: space-evenly;
     width: 80%;
     margin-bottom: 30px;
+    align-items: flex-end;
 }
 
 .search-input {

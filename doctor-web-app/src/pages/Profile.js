@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../login/authSlice";
 import Table from "../components/tables/Listings";
-import axios from "axios";
 import "./css/common.css";
 import "./css/profile.css";
 import Navbar from "../components/misc/Navbar";
