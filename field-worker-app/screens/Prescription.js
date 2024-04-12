@@ -49,8 +49,8 @@ const Prescription = (props) => {
 
 	function goBackToDashboard() {
 		navigation.navigate("PatientDashboard", {
-			"patient-abhaid": patientAbhaId,
-			"new-patient": false,
+			"patient_abhaid": patientAbhaId,
+			"new_patient": false,
 		});
 	}
 	return (

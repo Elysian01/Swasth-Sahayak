@@ -22,8 +22,8 @@ const Questionnaire = (props) => {
 	const navigation = useNavigation();
 
 	// const QuestionnaireType = "default";
-	const QuestionnaireType = props.route.params["questionnaire-type"];
-	const patientAbhaId = props.route.params["patient-abhaid"];
+	const QuestionnaireType = props.route.params["questionnaire_type"];
+	const patientAbhaId = props.route.params["patient_abhaid"];
 
 	const [questionResponses, setQuestionResponses] = useState([]);
 	const [fieldWorkerComments, setFieldWorkerComments] = useState("");
@@ -55,14 +55,14 @@ const Questionnaire = (props) => {
 		console.log("Field Worker Comments: ", fieldWorkerComments);
 
 		fieldWorkerData = {
-			"patient-abhaid": patientAbhaId,
+			patient_abhaid: patientAbhaId,
 			comment: fieldWorkerComments,
 			date: getDate(),
 		};
 
 		questionnaireData = {
-			"patient-abhaid": patientAbhaId,
-			"questionnaire-type": QuestionnaireType,
+			patient_abhaid: patientAbhaId,
+			questionnaire_type: QuestionnaireType,
 			responses: questionResponses,
 		};
 
@@ -72,8 +72,8 @@ const Questionnaire = (props) => {
 			uploadData = await AsyncStorage.getItem("uploadData");
 			uploadData = JSON.parse(uploadData);
 			console.log("Old Upload data: ", uploadData);
-			uploadData["fieldworker-comments"].push(fieldWorkerData);
-			uploadData["questionnaire-response"].push(questionnaireData);
+			uploadData["fieldworker_comments"].push(fieldWorkerData);
+			uploadData["questionnaire_response"].push(questionnaireData);
 			console.log("Updated Upload data: ", uploadData);
 			await AsyncStorage.setItem(
 				"uploadData",
@@ -82,7 +82,7 @@ const Questionnaire = (props) => {
 			console.log("Questionnaire submitted");
 
 			navigation.navigate("DoctorSelection", {
-				"patient-abhaid": patientAbhaId,
+				patient_abhaid: patientAbhaId,
 			});
 		} catch (error) {
 			console.error("Error saving data, please retry:", error);
@@ -93,7 +93,7 @@ const Questionnaire = (props) => {
 	function responseInput(response) {
 		setQuestionResponses((prevResponses) => {
 			const index = prevResponses.findIndex(
-				(item) => item["question-id"] === response["question-id"]
+				(item) => item["question_id"] === response["question_id"]
 			);
 			if (index !== -1) {
 				// Update if the question id exists

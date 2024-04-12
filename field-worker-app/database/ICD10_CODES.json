@@ -2,191 +2,191 @@
   {
     "code": "F90.0",
     "category": "ADHD",
-    "disease-name": "Attention-deficit hyperactivity disorder, predominantly inattentive type"
+    "disease_name": "Attention-deficit hyperactivity disorder, predominantly inattentive type"
   },
   {
     "code": "F90.1",
     "category": "ADHD",
-    "disease-name": "Attention-deficit hyperactivity disorder, predominantly hyperactive type"
+    "disease_name": "Attention-deficit hyperactivity disorder, predominantly hyperactive type"
   },
   {
     "code": "F90.2",
     "category": "ADHD",
-    "disease-name": "Attention-deficit hyperactivity disorder, combined type"
+    "disease_name": "Attention-deficit hyperactivity disorder, combined type"
   },
   {
     "code": "F90.8",
     "category": "ADHD",
-    "disease-name": "Attention-deficit hyperactivity disorder, other type"
+    "disease_name": "Attention-deficit hyperactivity disorder, other type"
   },
   {
     "code": "F90.9",
     "category": "ADHD",
-    "disease-name": "Attention-deficit hyperactivity disorder, unspecified type"
+    "disease_name": "Attention-deficit hyperactivity disorder, unspecified type"
   },
   {
     "code": "F43.21",
     "category": "Adjustment disorders",
-    "disease-name": "Adjustment disorder with depressed mood"
+    "disease_name": "Adjustment disorder with depressed mood"
   },
   {
     "code": "F43.22",
     "category": "Adjustment disorders",
-    "disease-name": "Adjustment disorder with anxiety"
+    "disease_name": "Adjustment disorder with anxiety"
   },
   {
     "code": "F40.01",
     "category": "Anxiety",
-    "disease-name": "Agoraphobia with panic disorder"
+    "disease_name": "Agoraphobia with panic disorder"
   },
   {
     "code": "F41.0",
     "category": "Anxiety",
-    "disease-name": "Panic disorder without agoraphobia (episodic paroxysmal anxiety)"
+    "disease_name": "Panic disorder without agoraphobia (episodic paroxysmal anxiety)"
   },
   {
     "code": "F41.1",
     "category": "Anxiety",
-    "disease-name": "Generalized anxiety disorder"
+    "disease_name": "Generalized anxiety disorder"
   },
   {
     "code": "F41.8",
     "category": "Anxiety",
-    "disease-name": "Other specified anxiety disorders"
+    "disease_name": "Other specified anxiety disorders"
   },
   {
     "code": "F41.9",
     "category": "Anxiety",
-    "disease-name": "Anxiety disorder, unspecified"
+    "disease_name": "Anxiety disorder, unspecified"
   },
   {
     "code": "F31.0",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, current episode hypomanic"
+    "disease_name": "Bipolar disorder, current episode hypomanic"
   },
   {
     "code": "F31.10",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, current episode manic without psychotic features, unspecified"
+    "disease_name": "Bipolar disorder, current episode manic without psychotic features, unspecified"
   },
   {
     "code": "F31.11",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, current episode manic without psychotic features, mild"
+    "disease_name": "Bipolar disorder, current episode manic without psychotic features, mild"
   },
   {
     "code": "F31.12",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, current episode manic without psychotic features, moderate"
+    "disease_name": "Bipolar disorder, current episode manic without psychotic features, moderate"
   },
   {
     "code": "F31.13",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, current episode manic without psychotic features, severe"
+    "disease_name": "Bipolar disorder, current episode manic without psychotic features, severe"
   },
   {
     "code": "F31.2",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, current episode manic severe with psychotic features"
+    "disease_name": "Bipolar disorder, current episode manic severe with psychotic features"
   },
   {
     "code": "F31.30",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, current episode depressed, mild or moderate severity, unspecified"
+    "disease_name": "Bipolar disorder, current episode depressed, mild or moderate severity, unspecified"
   },
   {
     "code": "F31.31",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, current episode depressed, mild"
+    "disease_name": "Bipolar disorder, current episode depressed, mild"
   },
   {
     "code": "F31.4",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, current episode depressed, severe, without psychotic features"
+    "disease_name": "Bipolar disorder, current episode depressed, severe, without psychotic features"
   },
   {
     "code": "F31.5",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, current episode depressed, severe, with psychotic features"
+    "disease_name": "Bipolar disorder, current episode depressed, severe, with psychotic features"
   },
   {
     "code": "F31.7",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, currently in remission"
+    "disease_name": "Bipolar disorder, currently in remission"
   },
   {
     "code": "F31.81",
     "category": "Bipolar",
-    "disease-name": "Bipolar II disorder"
+    "disease_name": "Bipolar II disorder"
   },
   {
     "code": "F31.9",
     "category": "Bipolar",
-    "disease-name": "Bipolar disorder, unspecified"
+    "disease_name": "Bipolar disorder, unspecified"
   },
   {
     "code": "F32.0",
     "category": "Depression",
-    "disease-name": "Major depressive disorder, single episode, mild"
+    "disease_name": "Major depressive disorder, single episode, mild"
   },
   {
     "code": "F32.1",
     "category": "Depression",
-    "disease-name": "Major depressive disorder, single episode, moderate"
+    "disease_name": "Major depressive disorder, single episode, moderate"
   },
   {
     "code": "F32.2",
     "category": "Depression",
-    "disease-name": "Major depressive disorder: single episode, severe without psychotic features"
+    "disease_name": "Major depressive disorder: single episode, severe without psychotic features"
   },
   {
     "code": "F32.3",
     "category": "Depression",
-    "disease-name": "Major depressive disorder, single episode, severe with psychotic features"
+    "disease_name": "Major depressive disorder, single episode, severe with psychotic features"
   },
   {
     "code": "F32.4",
     "category": "Depression",
-    "disease-name": "Major depressive disorder, single episode, in partial remission"
+    "disease_name": "Major depressive disorder, single episode, in partial remission"
   },
   {
     "code": "F32.5",
     "category": "Depression",
-    "disease-name": "Major depressive disorder, single episode, in full remission"
+    "disease_name": "Major depressive disorder, single episode, in full remission"
   },
   {
     "code": "F32.89",
     "category": "Depression",
-    "disease-name": "Other specified depressive episodes"
+    "disease_name": "Other specified depressive episodes"
   },
   {
     "code": "F32.9",
     "category": "Depression",
-    "disease-name": "Major depressive disorder, single episode, unspecified"
+    "disease_name": "Major depressive disorder, single episode, unspecified"
   },
   {
     "code": "F33.1",
     "category": "Depression",
-    "disease-name": "Major depressive disorder, recurrent, moderate"
+    "disease_name": "Major depressive disorder, recurrent, moderate"
   },
   {
     "code": "F33.2",
     "category": "Depression",
-    "disease-name": "Major depressive disorder, recurrent, severe without psychotic features"
+    "disease_name": "Major depressive disorder, recurrent, severe without psychotic features"
   },
   {
     "code": "F33.3",
     "category": "Depression",
-    "disease-name": "Major depressive disorder, recurrent, severe with psychotic symptoms"
+    "disease_name": "Major depressive disorder, recurrent, severe with psychotic symptoms"
   },
   {
     "code": "F33.4",
     "category": "Depression",
-    "disease-name": "Major depressive disorder recurrent, in remission"
+    "disease_name": "Major depressive disorder recurrent, in remission"
   },
   {
     "code": "F33.9",
     "category": "Depression",
-    "disease-name": "Major depressive disorder, recurrent, unspecified"
+    "disease_name": "Major depressive disorder, recurrent, unspecified"
   }
 ]

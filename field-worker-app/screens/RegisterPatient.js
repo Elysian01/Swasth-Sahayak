@@ -85,23 +85,23 @@ const RegisterPatient = () => {
 		}
 
 		const patientData = {
-			"fieldworker-id": 1234,
-			"patient-name": `${firstname} ${lastname}`,
-			"patient-dob": selectedDate,
-			"patient-gender": gender,
-			"patient-abhaid": abhaID,
-			"patient-phoneNumber": phoneNumber,
-			"patient-address": address,
-			"patient-blockCode": sector,
-			"patient-pincode": pincode,
-			"patient-preferred-langauge": registerLanguage,
+			fieldworker_id: 1234,
+			patient_name: `${firstname} ${lastname}`,
+			patient_dob: selectedDate,
+			patient_gender: gender,
+			patient_abhaid: abhaID,
+			patient_phoneNumber: phoneNumber,
+			patient_address: address,
+			patient_blockCode: sector,
+			patient_pincode: pincode,
+			patient_preferred_langauge: registerLanguage,
 		};
 
 		try {
 			uploadData = await AsyncStorage.getItem("uploadData");
 			uploadData = JSON.parse(uploadData);
 			console.log(uploadData);
-			uploadData["patient-registeration"].push(patientData);
+			uploadData["patient_registeration"].push(patientData);
 			console.log(uploadData);
 			await AsyncStorage.setItem(
 				"uploadData",
@@ -124,8 +124,8 @@ const RegisterPatient = () => {
 
 			Alert.alert("Success", "Patient Registered Successfully.");
 			navigation.navigate("PatientDashboard", {
-				"patient-abhaid": tempAbhaid,
-				"new-patient": true,
+				patient_abhaid: tempAbhaid,
+				new_patient: true,
 			});
 		} catch (error) {
 			console.error("Error saving data, please retry:", error);

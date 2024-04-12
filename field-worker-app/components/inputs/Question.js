@@ -9,8 +9,8 @@ const Question = (props) => {
 	const handleInputChange = (option) => {
 		setUserInput(option);
 		const response = {
-			"question-id": question["question-id"],
-			"user-response": option,
+			"question_id": question["question_id"],
+			"user_response": option,
 		};
 		responseInput(response);
 	};

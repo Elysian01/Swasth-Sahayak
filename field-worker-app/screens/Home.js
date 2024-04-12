@@ -62,24 +62,24 @@ const Home = () => {
 
 		let data = require("../database/DOWNLOADED_DATA.json");
 		setAssignedSector(
-			data["field-worker-details"]["field-worker-assigned-sector"]
+			data["field_worker_details"]["field_worker_assigned_sector"]
 		);
 
 		const uploadTemplate = {
-			// list of all follow-ups
-			"follow-up": data["follow-up"],
+			// list of all follow_ups
+			"follow_up": data["follow_up"],
 			// list of all questionnaire responses
-			"questionnaire-response": [],
+			"questionnaire_response": [],
 			// list of all field workers comments
-			"fieldworker-comments": [],
+			"fieldworker_comments": [],
 			// list of all artifacts
 			artifacts: [],
 			// docters slot booked
 			doctors: data["doctors"],
 			// list of doctor chosen by patient
-			"chosen-doctor": [],
+			"chosen_doctor": [],
 			// upload section
-			"patient-registeration": [],
+			"patient_registeration": [],
 		};
 		console.log(uploadTemplate);
 		try {

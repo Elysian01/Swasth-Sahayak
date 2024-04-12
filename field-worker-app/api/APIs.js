@@ -24,7 +24,7 @@ export const downloadAPI = async () => {
 	try {
 		console.log("Downloading Data...");
 
-		const result = await ApiManager("/auth/login", {
+		const result = await ApiManager("/fieldworker/getdata/1", {
 			method: "GET",
 			headers: {
 				"content-type": "application/json",
@@ -39,16 +39,12 @@ export const downloadAPI = async () => {
 export const uploadAPI = async (uploadData) => {
 	try {
 		console.log("Data Uploading: ", uploadData);
-		proxyData = {
-			username: "xyz",
-			password: "xdyz",
-		};
-		const result = await ApiManager("/auth/login", {
+		const result = await ApiManager("/fieldworker/followupsReschedule", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
 			},
-			data: proxyData,
+			data: uploadData,
 		});
 		return result;
 	} catch (error) {

@@ -31,8 +31,8 @@ const PatientDashboard = (props) => {
 	useEffect(() => {
 		// Retrieve patient-abhaid and new-patient from props
 		const {
-			"patient-abhaid": patientAbhaIdProp,
-			"new-patient": newPatientProp,
+			patient_abhaid: patientAbhaIdProp,
+			new_patient: newPatientProp,
 		} = props.route.params;
 		setPatientAbhaId(patientAbhaIdProp);
 		setNewPatient(newPatientProp);
@@ -43,8 +43,8 @@ const PatientDashboard = (props) => {
 		if (patientAbhaId && !newPatient) {
 			const data = require("../database/DOWNLOADED_DATA.json");
 
-			const foundDetail = data["patient-details"].find(
-				(detail) => detail["patient-abhaid"] === patientAbhaId
+			const foundDetail = data["patient_details"].find(
+				(detail) => detail["patient_abhaid"] === patientAbhaId
 			);
 			if (foundDetail) {
 				setDetails(foundDetail);
@@ -68,15 +68,15 @@ const PatientDashboard = (props) => {
 
 	function goToDefaultQuestionnaire() {
 		navigation.navigate("Questionnaire", {
-			"questionnaire-type": "default",
-			"patient-abhaid": patientAbhaId,
+			questionnaire_type: "default",
+			patient_abhaid: patientAbhaId,
 		});
 	}
 
 	function getDiseaseName(icd10Code) {
 		const icd10Codes = require("../database/ICD10_CODES.json");
 		const entry = icd10Codes.find((entry) => entry.code === icd10Code);
-		return entry ? entry["disease-name"] : null;
+		return entry ? entry["disease_name"] : null;
 	}
 
 	if (newPatient) {
@@ -116,34 +116,34 @@ const PatientDashboard = (props) => {
 				<View style={styles.line}></View>
 				<View>
 					<OngoingMedicationOrders
-						patientAbhaId={details["patient-abhaid"]}
+						patientAbhaId={details["patient_abhaid"]}
 						doctorName={
-							details["ongoing-medication-orders"][
-								"doctor-name"
+							details["ongoing_medication_orders"][
+								"doctor_name"
 							]
 						}
 						doctorComment={
-							details["ongoing-medication-orders"][
-								"doctor-comment"
+							details["ongoing_medication_orders"][
+								"doctor_comment"
 							]
 						}
 						questionnaireType={
-							details["ongoing-medication-orders"][
-								"questionnaire-type"
+							details["ongoing_medication_orders"][
+								"questionnaire_type"
 							]
 						}
 						disease={getDiseaseName(
-							details["ongoing-medication-orders"][
-								"ICD10-code"
+							details["ongoing_medication_orders"][
+								"ICD10_code"
 							]
 						)}
 					/>
 					{/* <Graph /> */}
 					<DiagnoseHistory
-						prescriptions={details["recent-3-prescriptions"]}
-						patientName={details["patient-name"]}
-						patientAbhaId={details["patient-abhaid"]}
-						fieldWorkerId={details["fieldworker-id"]}
+						prescriptions={details["recent_3_prescriptions"]}
+						patientName={details["patient_name"]}
+						patientAbhaId={details["patient_abhaid"]}
+						fieldWorkerId={details["fieldworker_id"]}
 					/>
 				</View>
 			</ScrollView>

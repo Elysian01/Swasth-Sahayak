@@ -18,8 +18,8 @@ const FollowUpCard = (props) => {
 
 	const handleViewRecords = () => {
 		navigation.navigate("PatientToken", {
-			"patient-abhaid": props.patientAbhaId,
-			"follow-up-id": followUpID,
+			"patient_abhaid": props.patientAbhaId,
+			"follow_up_id": followUpID,
 		});
 	};
 	return (

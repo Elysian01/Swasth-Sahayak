@@ -22,8 +22,8 @@ const OngoingMedicationOrders = (props) => {
 
 	function askQuestionnaire() {
 		navigation.navigate("Questionnaire", {
-			"questionnaire-type": questionnaireType,
-			"patient-abhaid": patientAbhaId,
+			"questionnaire_type": questionnaireType,
+			"patient_abhaid": patientAbhaId,
 		});
 	}
 

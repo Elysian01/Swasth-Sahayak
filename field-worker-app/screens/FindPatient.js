@@ -27,9 +27,9 @@ const FindPatient = () => {
 
 	function isPatientInDownloadedJson() {
 		let data = require("../database/DOWNLOADED_DATA.json");
-		for (const patient of data["patient-details"]) {
+		for (const patient of data["patient_details"]) {
 			// Check if the patient's id and token match the input
-			if (patient["patient-abhaid"] === abhaId) {
+			if (patient["patient_abhaid"] === abhaId) {
 				return true; // Patient found
 			}
 		}
@@ -48,8 +48,8 @@ const FindPatient = () => {
 		} else {
 			setAbhaId("");
 			navigation.navigate("PatientDashboard", {
-				"patient-abhaid": abhaId,
-				"new-patient": false,
+				"patient_abhaid": abhaId,
+				"new_patient": false,
 			});
 		}
 	}

@@ -21,9 +21,9 @@ const DiagnoseHistory = (props) => {
 
 	function viewPrescription(prescriptionData) {
 		navigation.navigate("Prescription", {
-			disease: getDiseaseName(prescriptionData["ICD10-code"]),
+			disease: getDiseaseName(prescriptionData["ICD10_code"]),
 			prescriptionDate: prescriptionData["date"],
-			doctorName: prescriptionData["doctor-name"],
+			doctorName: prescriptionData["doctor_name"],
 			prescription: prescriptionData["prescription"],
 			fieldWorkerName: "jass",
 			patientName: patientName,
@@ -35,7 +35,7 @@ const DiagnoseHistory = (props) => {
 	function getDiseaseName(icd10Code) {
 		const icd10Codes = require("../../database/ICD10_CODES.json");
 		const entry = icd10Codes.find((entry) => entry.code === icd10Code);
-		return entry ? entry["disease-name"] : null;
+		return entry ? entry["disease_name"] : null;
 	}
 
 	return (
@@ -62,7 +62,7 @@ const DiagnoseHistory = (props) => {
 							{prescription.date}
 						</Text>
 						<Text style={styles.tableData}>
-							{getDiseaseName(prescription["ICD10-code"])}
+							{getDiseaseName(prescription["ICD10_code"])}
 						</Text>
 						<Pressable
 							onPress={() =>

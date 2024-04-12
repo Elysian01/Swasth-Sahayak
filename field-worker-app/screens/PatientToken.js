@@ -13,8 +13,8 @@ import { lang } from "../database/language";
 
 const PatientToken = (props) => {
 	const navigation = useNavigation();
-	patientAbhaId = props.route.params["patient-abhaid"];
-	const followUpID = props.route.params["follow-up-id"];
+	patientAbhaId = props.route.params["patient_abhaid"];
+	const followUpID = props.route.params["follow_up_id"];
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
@@ -28,13 +28,13 @@ const PatientToken = (props) => {
 
 	function isPatientInDownloadedJson(patientToken) {
 		let data = require("../database/DOWNLOADED_DATA.json");
-		for (const patient of data["follow-up"]) {
+		for (const patient of data["follow_up"]) {
 			// Check if the patient's id and token match the input
 			if (
-				patient["patient-abhaid"] === patientAbhaId &&
-				patient["patient-token"] === patientToken
+				patient["patient_abhaid"] === patientAbhaId &&
+				patient["patient_token"] === patientToken
 			) {
-				patientAbhaId = patient["patient-abhaid"];
+				patientAbhaId = patient["patient_abhaid"];
 				return true; // Patient found
 			}
 		}
@@ -46,20 +46,20 @@ const PatientToken = (props) => {
 			let uploadData = await AsyncStorage.getItem("uploadData");
 			if (uploadData) {
 				uploadData = JSON.parse(uploadData);
-				const updatedFollowUp = uploadData["follow-up"].map(
+				const updatedFollowUp = uploadData["follow_up"].map(
 					(followUp) => {
 						if (
-							followUp["patient-abhaid"] === patientAbhaId
+							followUp["patient_abhaid"] === patientAbhaId
 						) {
 							return {
 								...followUp,
-								"visited-status": true,
+								"visited_status": true,
 							};
 						}
 						return followUp;
 					}
 				);
-				uploadData["follow-up"] = updatedFollowUp;
+				uploadData["follow_up"] = updatedFollowUp;
 				console.log("Updated: ", uploadData);
 				await AsyncStorage.setItem(
 					"uploadData",
@@ -90,8 +90,8 @@ const PatientToken = (props) => {
 		} else {
 			updateFollowUpVisitedStatusToTrue(patientAbhaId);
 			navigation.navigate("PatientDashboard", {
-				"patient-abhaid": patientAbhaId,
-				"new-patient": false,
+				"patient_abhaid": patientAbhaId,
+				"new_patient": false,
 			});
 		}
 	}

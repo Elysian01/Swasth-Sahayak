@@ -1,172 +1,115 @@
 {
-  "field-worker-details": {
-    "field-worker-assigned-sector": 7
+  "field_worker_details": {
+    "field_worker_assigned_sector": 7
   },
-  "follow-up": [
+  "follow_up": [
     {
-      "follow-up-id": 1,
-      "fieldworker-id": 1234,
-      "patient-name": "Abhishek Gupta",
-      "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
-      "patient-token": "123",
-      "patient-abhaid": "1234567812345678",
-      "visited-status": false 
+      "follow_up_id": 1,
+      "accessible": true,
+      "patient_name": "Abhishek Gupta",
+      "patient_address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
+      "patient_token": "123",
+      "patient_abhaid": "1234567812345678",
+      "visited_status": false 
     },
     {
-      "follow-up-id": 2,
-      "fieldworker-id": 1234,
-      "patient-name": "James Bhardwaj",
-      "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
-      "patient-token": "123",
-      "patient-abhaid": "1234567812345677",
-      "visited-status": false 
+      "follow_up_id": 2,
+      "accessible": true,
+      "patient_name": "James Bhardwaj",
+      "patient_address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100",
+      "patient_token": "123",
+      "patient_abhaid": "1234567812345677",
+      "visited_status": false 
     }
   ],
 
-  "patient-details": [
+  "patient_details": [
     {
-      "fieldworker-id": 1234,
-      "patient-name": "Abhishek Gupta",
-      "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100", 
-      "patient-abhaid": "1234567812345678",
-      "ongoing-medication-orders": {
-        "ICD10-code": "F90.0",
-        "doctor-name": "Abhishek Gupta 1",
-        "doctor-comment": "Abhishek lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
-        "date": "12-05-2014",
-        "questionnaire-type": "default"
+      "accessible": true,
+      "patient_name": "Abhishek Gupta",
+      "patient_address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100", 
+      "patient_abhaid": "1234567812345678",
+      "ongoing_medication_orders": {
+        "ICD10_code": "F90.0",
+        "doctor_name": "Abhishek Gupta 1",
+        "doctor_comment": "Abhishek lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "12_05_2014",
+        "questionnaire_type": "default"
       },   
-      "recent-3-prescriptions": [
+      "recent_3_prescriptions": [
         {
-        "ICD10-code": "F90.0",
-        "prescription": "prescription-1 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
-        "date": "12-05-2014",
-        "doctor-name":"Aakash Bhardwaj 1"
+        "ICD10_code": "F90.0",
+        "prescription": "prescription_1 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "12_05_2014",
+        "doctor_name":"Aakash Bhardwaj 1"
         }, 
         {
-        "ICD10-code": "F90.0",
-        "prescription": "prescription-2 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
-        "date": "13-05-2014",
-        "doctor-name":"Aakash Bhardwaj 2"
+        "ICD10_code": "F90.0",
+        "prescription": "prescription_2 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "13_05_2014",
+        "doctor_name":"Aakash Bhardwaj 2"
         }, 
         {
-        "ICD10-code": "F90.0",
-        "prescription": "prescription-3 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
-        "date": "14-05-2014",
-        "doctor-name":"Aakash Bhardwaj 3"
+        "ICD10_code": "F90.0",
+        "prescription": "prescription_3 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "14_05_2014",
+        "doctor_name":"Aakash Bhardwaj 3"
         }
     ]
     }, {
-      "fieldworker-id": 1234,
-      "patient-name": "James Bhardwaj",
-      "patient-address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100", 
-      "patient-abhaid": "1234567812345677",
-      "ongoing-medication-orders": {
-        "ICD10-code": "F90.0",
-        "doctor-name": "Rushikesh Gupta 2",
-        "doctor-comment": "Abhishek lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
-        "date": "12-05-2014",
-        "questionnaire-type": "default"
+      "accessible": true,
+      "patient_name": "James Bhardwaj",
+      "patient_address": "26/C, Hosur Rd, Electronics City Phase 1, Electronic City, Bengaluru, Karnataka 560100", 
+      "patient_abhaid": "1234567812345677",
+      "ongoing_medication_orders": {
+        "ICD10_code": "F90.0",
+        "doctor_name": "Rushikesh Gupta 2",
+        "doctor_comment": "Abhishek lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "12_05_2014",
+        "questionnaire_type": "default"
       },   
-      "recent-3-prescriptions": [
+      "recent_3_prescriptions": [
         {
-        "ICD10-code": "F90.0",
-        "prescription": "prescription-1 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
-        "date": "12-05-2014",
-        "doctor-name":"Aakash Bhardwaj 1"
+        "ICD10_code": "F90.0",
+        "prescription": "prescription_1 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "12_05_2014",
+        "doctor_name":"Aakash Bhardwaj 1"
         }, 
         {
-        "ICD10-code": "F90.0",
-        "prescription": "prescription-2 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
-        "date": "13-05-2014",
-        "doctor-name":"Aakash Bhardwaj 2"
+        "ICD10_code": "F90.0",
+        "prescription": "prescription_2 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "13_05_2014",
+        "doctor_name":"Aakash Bhardwaj 2"
         }, 
         {
-        "ICD10-code": "F90.0",
-        "prescription": "prescription-3 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
-        "date": "14-05-2014",
-        "doctor-name":"Aakash Bhardwaj 3"
+        "ICD10_code": "F90.0",
+        "prescription": "prescription_3 lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it. Lorem Ipsum is Lore than others who receive it and is Lore than others who receive it and is Lore than others who receive it",
+        "date": "14_05_2014",
+        "doctor_name":"Aakash Bhardwaj 3"
         }
     ]
     }
   ],
   "doctors": [
     {
-      "doctor-id": 1,
-      "doctor-name": "Abhishek Gupta",
-      "open-slots": 12
+      "doctor_id": 1,
+      "doctor_name": "Abhishek Gupta",
+      "open_slots": 12
     },
     {
-      "doctor-id": 2,
-      "doctor-name": "Aakash Bhardwaj",
-      "open-slots": 1
+      "doctor_id": 2,
+      "doctor_name": "Aakash Bhardwaj",
+      "open_slots": 1
     },
     {
-      "doctor-id": 3,
-      "doctor-name": "Ajay Gupta",
-      "open-slots": 1
+      "doctor_id": 3,
+      "doctor_name": "Ajay Gupta",
+      "open_slots": 1
     },
     {
-      "doctor-id": 4,
-      "doctor-name": "Guru Bhardwaj",
-      "open-slots": 10
+      "doctor_id": 4,
+      "doctor_name": "Guru Bhardwaj",
+      "open_slots": 10
     }
-  ],
-
-  "questionnaire" :{
-    "default" : [
-      {
-      "type": "MCQ",
-      "question-id": 1,
-      "question": "Trouble falling asleep, staying asleep, or sleeping too much",
-      "options": ["Not qualified","agree","disagree","neutral"]
-      },
-      {
-      "type": "NAT",
-      "question-id": 2,
-      "question": "Feeling down, depressed or hopeless"
-      },
-      {
-      "type": "TEXT",
-      "question-id": 3,
-      "question": "Feeling bad about yourself - or that you’re a failure or have let yourself or your family down"
-      }
-    ],
-    "ICD10-code1" : [
-      {
-      "type": "MCQ",
-      "question": "xyz",
-      "question-id": 1,
-      "options": ["Not qualified","agree","disagree","neutral"]
-      },
-      {
-      "type": "NAT",
-      "question-id": 2,
-      "question": "xyz"
-      },
-      {
-      "type": "TEXT",
-      "question-id": 3,
-      "question": "xyz"
-      }
-    ],
-    "F90.0" : [
-      {
-      "type": "MCQ",
-      "question": "xyz",
-      "question-id": 1,
-      "options": ["Not qualified","agree","disagree","neutral"]
-      },
-      {
-      "type": "NAT",
-      "question-id": 2,
-      "question": "xyz"
-      },
-      {
-      "type": "TEXT",
-      "question-id": 3,
-      "question": "xyz"
-      }
-    ]
-  }
+  ]
 }

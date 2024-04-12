@@ -14,7 +14,7 @@ const PatientRecords = () => {
 				const uploadData = await AsyncStorage.getItem("uploadData");
 				if (uploadData) {
 					const parsedData = JSON.parse(uploadData);
-					const followUpsData = parsedData["follow-up"] || [];
+					const followUpsData = parsedData["follow_up"] || [];
 					setFollowUps(followUpsData);
 					setDataSetted(true);
 				}
@@ -36,11 +36,11 @@ const PatientRecords = () => {
 					followUps.map((followUp, index) => (
 						<FollowUpCard
 							key={index}
-							name={followUp["patient-name"]}
-							address={followUp["patient-address"]}
-							patientAbhaId={followUp["patient-abhaid"]}
-							visitedStatus={followUp["visited-status"]}
-							followUpID={followUp["follow-up-id"]}
+							name={followUp["patient_name"]}
+							address={followUp["patient_address"]}
+							patientAbhaId={followUp["patient_abhaid"]}
+							visitedStatus={followUp["visited_status"]}
+							followUpID={followUp["follow_up_id"]}
 						/>
 					))}
 			</View>

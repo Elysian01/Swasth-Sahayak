@@ -42,24 +42,24 @@ const Profile = () => {
 		if (uploadData) {
 			uploadData = JSON.parse(uploadData);
 
-			// uploadAPI(uploadData)
-			// 	.then((result) => {
-			// 		if (result.status === 200) {
-			// 			console.log(result);
-			// 			Alert.alert(
-			// 				"Success",
-			// 				"Data Successfully Uploaded!!"
-			// 			);
-			// 			setSyncDataStatus(true);
-			// 		} else if (result.status === 401) {
-			// 			console.log(result.status);
-			// 			Alert.alert("Error", result.data, []);
-			// 		}
-			// 	})
-			// 	.catch((error) => {
-			// 		console.log(error);
-			// 		Alert.alert("Unable to Upload Data: ", error);
-			// 	});
+			uploadAPI(uploadData)
+				.then((result) => {
+					if (result.status === 200) {
+						console.log(result);
+						Alert.alert(
+							"Success",
+							"Data Successfully Uploaded!!"
+						);
+						setSyncDataStatus(true);
+					} else if (result.status === 401) {
+						console.log(result.status);
+						Alert.alert("Error", result.data, []);
+					}
+				})
+				.catch((error) => {
+					console.log(error);
+					Alert.alert("Unable to Upload Data: ", error);
+				});
 
 			Alert.alert("Success", "Data Successfully Uploaded!!");
 			setSyncDataStatus(true);

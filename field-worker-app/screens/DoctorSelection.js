@@ -22,7 +22,7 @@ import AppStyles from "../AppStyles";
 const DoctorSelection = (props) => {
 	const navigation = useNavigation();
 
-	const patientAbhaId = props.route.params["patient-abhaid"];
+	const patientAbhaId = props.route.params["patient_abhaid"];
 
 	const [isChecked, setChecked] = useState(false);
 	const [selectedDoctor, setSelectedDoctor] = useState("");
@@ -42,7 +42,7 @@ const DoctorSelection = (props) => {
 
 		availableDoctors = [];
 		for (const detail of tempDoctorList) {
-			if (detail["open-slots"] > 0) {
+			if (detail["open_slots"] > 0) {
 				availableDoctors.push(detail);
 			}
 		}
@@ -56,7 +56,7 @@ const DoctorSelection = (props) => {
 	// useEffect(() => {
 	// 	openSlotList = [];
 	// 	slotList.map((slot) => {
-	// 		if (slot["open-slots"] > 0) {
+	// 		if (slot["open_slots"] > 0) {
 	// 			openSlotList.push(slot);
 	// 		}
 	// 		setAvailableSlotsList(openSlotList);
@@ -71,36 +71,33 @@ const DoctorSelection = (props) => {
 		console.log("Selected Doctor: ", selectedDoctor);
 
 		// const updatedDoctors = availableDoctors.map((doctor) => {
-		// 	if (doctor["doctor-name"] === selectedDoctor) {
+		// 	if (doctor["doctor_name"] === selectedDoctor) {
 		// 		return {
 		// 			...doctor,
-		// 			"open-slots": Math.max(0, doctor["open-slots"] - 1),
+		// 			"open_slots": Math.max(0, doctor["open_slots"] - 1),
 		// 		};
 		// 	}
 		// 	return doctor;
 		// });
 
 		const updatedDoctors = availableDoctors.map((doctor) =>
-			doctor["doctor-name"] === selectedDoctor
+			doctor["doctor_name"] === selectedDoctor
 				? {
 						...doctor,
-						"open-slots": Math.max(
-							0,
-							doctor["open-slots"] - 1
-						),
+						open_slots: Math.max(0, doctor["open_slots"] - 1),
 				  }
 				: doctor
 		);
 
 		chosenDoctorData = {
-			"doctor-id": selectedDoctor,
-			"patient-abhaid": patientAbhaId,
+			doctor_id: selectedDoctor,
+			patient_abhaid: patientAbhaId,
 		};
 
 		uploadData = await AsyncStorage.getItem("uploadData");
 		uploadData = JSON.parse(uploadData);
 		uploadData["doctors"] = updatedDoctors;
-		uploadData["chosen-doctor"].push(chosenDoctorData);
+		uploadData["chosen_doctor"].push(chosenDoctorData);
 		console.log("Updated: ", uploadData);
 		await AsyncStorage.setItem("uploadData", JSON.stringify(uploadData));
 		navigation.navigate("Home");
@@ -130,17 +127,17 @@ const DoctorSelection = (props) => {
 					data={doctorList}
 					search
 					maxHeight={300}
-					labelField="doctor-name"
-					valueField="doctor-id"
+					labelField="doctor_name"
+					valueField="doctor_id"
 					placeholder={!isFocus1 ? "Select Doctor" : "..."}
 					searchPlaceholder="Search Doctor..."
 					value={selectedDoctor}
 					onFocus={() => setIsFocus1(true)}
 					onBlur={() => setIsFocus1(false)}
 					onChange={(item) => {
-						// console.log("Item: ", item["doctor-name"]);
-						setSelectedDoctor(item["doctor-id"]);
-						// setSlotList(item["slot-list"]);
+						// console.log("Item: ", item["doctor_name"]);
+						setSelectedDoctor(item["doctor_id"]);
+						// setSlotList(item["slot_list"]);
 						setIsFocus1(false);
 					}}
 				/>
