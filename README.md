@@ -19,7 +19,7 @@ Figma Design Files: https://www.figma.com/files/project/198350664/Team-project?f
 1. Multilingual Integration:
 2. Tablet App working in offline mode
 3. System Design for hospital, doctor, health-worker, patient management
-4. 
+4. Switch between systems design and app design, there were cases where we were designing app for system instead of designing  system first and then the required application (like we imagined ideal scenario of data upload (upload in chunks is the solution))
 
 ## Assumptions
 
