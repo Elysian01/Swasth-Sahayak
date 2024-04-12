@@ -619,6 +619,616 @@ data = {
 }
 ```
 
+```
+ "questionnaire": [
+        {
+            "icd10": "ACTIVITY",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 23,
+                    "question_text": "In the last 1 month, kept eating something more than necessary just because it tasted so good",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 24,
+                    "question_text": "In the last 1 month, spent time thinking constructively about ways to improve myself/my relationship with important person/s in my life",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 25,
+                    "question_text": "In the last 1 month, went to party just to have a good time",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 26,
+                    "question_text": "In the last 1 month, made my living space/work space cleaner and better organized, out of my own choice",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 27,
+                    "question_text": "In the last 1 month, did something to help someone without expecting anything in return",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                }
+            ]
+        },
+        {
+            "icd10": "DISTRESS",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 11,
+                    "question_text": "During the last 30 days, about how often did you feel tired out for no good reason?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 12,
+                    "question_text": "During the last 30 days, about how often did you feel nervous?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 13,
+                    "question_text": "During the last 30 days, about how often did you feel so nervous that nothing could calm you down?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 14,
+                    "question_text": "During the last 30 days, about how often did you feel worthless?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 15,
+                    "question_text": "During the last 30 days, about how often did you feel that everything was an effort?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 16,
+                    "question_text": "During the last 30 days, about how often did you feel restless or fidgety?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                }
+            ]
+        },
+        {
+            "icd10": "EMOTION",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 6,
+                    "question_text": "In the last few weeks I have felt that I have little or no interest in things around me",
+                    "option": [
+                        "Extremely",
+                        "Quite a bit",
+                        "Moderately",
+                        "A little",
+                        "Very",
+                        "Slightly or not at all"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 7,
+                    "question_text": "In the last few weeks I have felt irritated by something",
+                    "option": [
+                        "Extremely",
+                        "Quite a bit",
+                        "Moderately",
+                        "A little",
+                        "Very",
+                        "Slightly or not at all"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 8,
+                    "question_text": "In the last few weeks I have felt sharp and attentive",
+                    "option": [
+                        "Extremely",
+                        "Quite a bit",
+                        "Moderately",
+                        "A little",
+                        "Very",
+                        "Slightly or not at all"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 9,
+                    "question_text": "In the last few weeks I have felt that things are dull and boring",
+                    "option": [
+                        "Extremely",
+                        "Quite a bit",
+                        "Moderately",
+                        "A little",
+                        "Very",
+                        "Slightly or not at all"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 10,
+                    "question_text": "In the last few weeks I have felt guilty about something that I have done or said",
+                    "option": [
+                        "Extremely",
+                        "Quite a bit",
+                        "Moderately",
+                        "A little",
+                        "Very",
+                        "Slightly or not at all"
+                    ]
+                }
+            ]
+        },
+        {
+            "icd10": "F31.0",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 35,
+                    "question_text": "How often do you engage in risky behaviors during manic episodes?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 36,
+                    "question_text": "How often do you have difficulty concentrating or making decisions during manic episodes?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 47,
+                    "question_text": "Do you experience periods of abnormally elevated mood or irritability?",
+                    "option": null
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 48,
+                    "question_text": "Do you experience a decreased need for sleep during manic episodes?",
+                    "option": null
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 49,
+                    "question_text": "Do you feel overly optimistic or grandiose during manic episodes?",
+                    "option": null
+                }
+            ]
+        },
+        {
+            "icd10": "F32.1",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 37,
+                    "question_text": "How frequently do you experience changes in appetite or weight?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 38,
+                    "question_text": "How often do you feel tired or have low energy most days?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 50,
+                    "question_text": "Do you often feel sad, empty, or hopeless?",
+                    "option": null
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 51,
+                    "question_text": "Have you lost interest or pleasure in activities you used to enjoy?",
+                    "option": null
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 52,
+                    "question_text": "Do you have trouble sleeping or sleeping too much?",
+                    "option": null
+                }
+            ]
+        },
+        {
+            "icd10": "F40.01",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 33,
+                    "question_text": "How often do you avoid certain places or situations because they cause fear or anxiety?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 34,
+                    "question_text": "How often do you worry excessively about different things?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 44,
+                    "question_text": "Do you often feel nervous, anxious, or on edge?",
+                    "option": null
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 45,
+                    "question_text": "Do you experience sudden feelings of terror or panic?",
+                    "option": null
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 46,
+                    "question_text": "Do you experience physical symptoms such as trembling, sweating, or palpitations?",
+                    "option": null
+                }
+            ]
+        },
+        {
+            "icd10": "F43.21",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 31,
+                    "question_text": "How frequently do you feel constantly overwhelmed or stressed?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 32,
+                    "question_text": "How often do you experience changes in sleep patterns or appetite?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 41,
+                    "question_text": "Have you experienced significant changes in your life recently?",
+                    "option": null
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 42,
+                    "question_text": "Do you often feel sad or hopeless?",
+                    "option": null
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 43,
+                    "question_text": "Do you have difficulty concentrating or making decisions?",
+                    "option": null
+                }
+            ]
+        },
+        {
+            "icd10": "F90.0",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 28,
+                    "question_text": "How often do you feel restless or unable to sit still?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 29,
+                    "question_text": "How frequently do you lose things necessary for tasks or activities?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 30,
+                    "question_text": "How often do you feel a need to keep moving or fidgeting?",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "text",
+                    "question_id": 39,
+                    "question_text": "Do you often have trouble paying attention to details or making careless mistakes in your work or other activities?",
+                    "option": null
+                },
+                {
+                    "ques_type": "nat",
+                    "question_id": 40,
+                    "question_text": "Do you often interrupt others or intrude on conversations or games?",
+                    "option": null
+                }
+            ]
+        },
+        {
+            "icd10": "PSYCHO",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 1,
+                    "question_text": "I have a sense of direction and purpose in life.",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 2,
+                    "question_text": "I gave up trying to make big improvements or changes in my life a long time ago.",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 3,
+                    "question_text": "I feel that I get a lot out of my friendships.",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 4,
+                    "question_text": "I have difficulty organizing my life in a way that is satisfying to me.",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 5,
+                    "question_text": "In many ways, I feel disappointed about my achievements in life.",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                }
+            ]
+        },
+        {
+            "icd10": "SOCIAL",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 17,
+                    "question_text": "I think the world is becoming a better place to live",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 18,
+                    "question_text": "I do not feel connected to the society",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 19,
+                    "question_text": "I think society has the potential for positive changes",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 20,
+                    "question_text": "I believe that the society can become a better place",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 21,
+                    "question_text": "I feel I am accepted by other people",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 22,
+                    "question_text": "I feel a sense of belongingness to society",
+                    "option": [
+                        "Strongly disagree",
+                        "Disagree somewhat",
+                        "Disagree slightly",
+                        "Agree slightly",
+                        "Agree somewhat",
+                        "Strongly agree"
+                    ]
+                }
+            ]
+        
+```
+
 
 
 
