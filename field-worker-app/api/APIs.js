@@ -22,7 +22,7 @@ export const loginAPI = async (data) => {
 
 export const downloadAPI = async () => {
 	try {
-		console.log("Downloading Data...");
+		console.log("Downloading Data from server...");
 
 		const result = await ApiManager("/fieldworker/getdata/1", {
 			method: "GET",
