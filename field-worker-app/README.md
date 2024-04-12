@@ -619,6 +619,152 @@ data = {
 }
 ```
 
+```
+ {
+            "icd10": "ACTIVITY",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 23,
+                    "question_text": "In the last 1 month, kept eating something more than necessary just because it tasted so good",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 24,
+                    "question_text": "In the last 1 month, spent time thinking constructively about ways to improve myself/my relationship with important person/s in my life",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 25,
+                    "question_text": "In the last 1 month, went to party just to have a good time",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 26,
+                    "question_text": "In the last 1 month, made my living space/work space cleaner and better organized, out of my own choice",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 27,
+                    "question_text": "In the last 1 month, did something to help someone without expecting anything in return",
+                    "option": [
+                        "Rarely/Never (Once/never)",
+                        "Sometimes (About 2-3 times)",
+                        "Often (About once a week)",
+                        "Very often (About 3-4 times every week)",
+                        "Regularly (Almost every day)"
+                    ]
+                }
+            ]
+        },
+        {
+            "icd10": "DISTRESS",
+            "questions": [
+                {
+                    "ques_type": "mcq",
+                    "question_id": 11,
+                    "question_text": "During the last 30 days, about how often did you feel tired out for no good reason?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 12,
+                    "question_text": "During the last 30 days, about how often did you feel nervous?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 13,
+                    "question_text": "During the last 30 days, about how often did you feel so nervous that nothing could calm you down?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 14,
+                    "question_text": "During the last 30 days, about how often did you feel worthless?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 15,
+                    "question_text": "During the last 30 days, about how often did you feel that everything was an effort?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                },
+                {
+                    "ques_type": "mcq",
+                    "question_id": 16,
+                    "question_text": "During the last 30 days, about how often did you feel restless or fidgety?",
+                    "option": [
+                        "None of the time",
+                        "A Little of the time",
+                        "Some of the time",
+                        "Most of the time",
+                        "All of the time"
+                    ]
+                }
+            ]
+        }
+]       
+```
+
 
 
 
