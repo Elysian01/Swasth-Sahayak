@@ -1333,7 +1333,69 @@ data = {
     ]
 }       
 ```
-
+```
+##Upload Data format
+{
+  "fieldworker_id": 0,
+  "follow_up": [
+    {
+      "follow_up_id": 0,
+      "fieldworker_id": 0,
+      "patient_name": "string",
+      "patient_address": "string",
+      "patient_token": 0,
+      "patient_abhaid": "string",
+      "visited_status": true
+    }
+  ],
+  "questionnaire_response": [
+    {
+      "patient_abhaid": "string",
+      "questionnaire_type": "string",
+      "responses": [
+        {
+          "question_id": 0,
+          "response": "string"
+        }
+      ]
+    }
+  ],
+  "fieldworker_comments": [
+    {
+      "patient_abhaid": "string",
+      "comment": "string",
+      "date": "string"
+    }
+  ],
+  "artifacts": [
+    {
+      "patient_abhaid": "string",
+      "date": "string",
+      "object": "string"
+    }
+  ],
+  "chosen_doctor": [
+    {
+      "doctor_id": 0,
+      "patient_abhaid": "string"
+    }
+  ],
+  "patient_registration": [
+    {
+      "fieldWorker_id": 0,
+      "patient_name": "string",
+      "patient_dob": "2024-04-13T07:17:13.263Z",
+      "patient_gender": "string",
+      "patient_abhaid": "string",
+      "patient_phoneNumber": "string",
+      "patient_address": "string",
+      "patient_pincode": 0,
+      "patient_blockCode": 0,
+      "patient_preferred_language": "string"
+    }
+  ]
+}
+```
 
 
 
