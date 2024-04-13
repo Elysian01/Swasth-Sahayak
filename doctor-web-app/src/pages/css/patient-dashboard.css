@@ -1,5 +1,6 @@
 .patient-detail{
-  display: flex;  
+  display: flex;
+  flex-wrap: wrap;  
 }
 .patients-profile{
   align-items: center;

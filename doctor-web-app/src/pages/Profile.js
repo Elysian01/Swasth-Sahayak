@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { logout } from "../login/authSlice";
 import Table from "../components/tables/Listings";
 import "./css/common.css";
@@ -19,7 +21,7 @@ function Profile() {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login",{ replace: true });
+    navigate("/login", { replace: true });
   };
   useEffect(() => {
     const fetchDoctorDetails = async () => {
@@ -121,10 +123,32 @@ function Profile() {
           <h1 className="profile-name">Profile</h1>
           <img src={doctorImage} alt="profile-photo" className="doctor-image" />
           <div className="doctor-name">
-            {doctorDetails ? doctorDetails.name : "Loading..."}
+            {doctorDetails ? (
+              doctorDetails.name
+            ) : (
+              <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+                <Skeleton
+                  count={1}
+                  style={{
+                    borderRadius: "10px",
+                    display: "flex",
+                  }}
+                />
+              </SkeletonTheme>
+            )}
           </div>
           <div className="qualification">
-            {doctorDetails ? doctorDetails.specialization : "Loading..."}
+            {doctorDetails ? doctorDetails.specialization : (
+              <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+                <Skeleton
+                  count={1}
+                  style={{
+                    borderRadius: "10px",
+                    display: "flex",
+                  }}
+                />
+              </SkeletonTheme>
+            )}
           </div>
 
           <div className="button-arrangement">
@@ -139,7 +163,18 @@ function Profile() {
           <br />
           <br />
           {loading ? (
-            <p>Loading...</p>
+            <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+              <Skeleton
+                count={5}
+                style={{
+                  borderRadius: "10px",
+                  display: "flex",
+                  width:"80%",
+                  margin:"auto",
+                  alignItems:"center",
+                }}
+              />
+            </SkeletonTheme>
           ) : (
             <Table
               columns={columns}

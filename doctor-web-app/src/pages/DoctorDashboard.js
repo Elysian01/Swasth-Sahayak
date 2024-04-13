@@ -1,19 +1,20 @@
 import "./css/common.css";
 import "./css/doctor-dashboard.css";
 
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { useSelector } from "react-redux";
 
 import Table from "../components/tables/Listings";
 import Navbar from "../components/misc/Navbar";
 import FeatureCard from "../components/cards/FeatureCard";
 import StatisticCard from "../components/cards/StatisticCard";
 import ShortListings from "../components/tables/ShortListings";
+import { getRequest } from "../components/Api/api";
 
 import viewIcon from "../static/icons/eye.png";
-import { useSelector } from "react-redux";
-import { getRequest } from "../components/Api/api";
 
 function DoctorDashboard() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ function DoctorDashboard() {
   const [countData, setCountData] = useState([]);
   const [countDataDate, setCountDateData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [columns, setcolumns] = useState([]);
 
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
@@ -29,7 +31,9 @@ function DoctorDashboard() {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const response = await getRequest(`/doctor/top3/${user}`, headers);
-        setTableData(response); // Accessing data property of the response
+        const column = ["Patient ID", "Name", "View Diagnose"];
+        setcolumns(column);
+        setTableData(response);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -37,7 +41,7 @@ function DoctorDashboard() {
     };
 
     fetchTop3Patients();
-  }, [token,user]);
+  }, [token, user]);
   useEffect(() => {
     const findCount = async () => {
       try {
@@ -51,7 +55,7 @@ function DoctorDashboard() {
     };
 
     findCount();
-  }, [token,user]);
+  }, [token, user]);
   useEffect(() => {
     const findCountDate = async () => {
       try {
@@ -73,7 +77,7 @@ function DoctorDashboard() {
     };
 
     findCountDate();
-  }, [token,user]);
+  }, [token, user]);
 
   const handleViewClick = (patientId) => {
     navigate("/patient-dashboard", { state: { patientId } });
@@ -82,7 +86,7 @@ function DoctorDashboard() {
     navigate("/diagnose-request");
   };
 
-  const columns = ["Patient ID", "Name", "View Diagnose"];
+  //const columns = ["Patient ID", "Name", "View Diagnose"];
 
   const renderViewButton = (patientId) => (
     <button onClick={() => handleViewClick(patientId)} className="view-button">
@@ -93,10 +97,9 @@ function DoctorDashboard() {
   return (
     <div>
       <Navbar />
-
       <main class="main-container">
         <div class="row1">
-          <StatisticCard countData={countData}  countDataDate={countDataDate}/>
+          <StatisticCard countData={countData} countDataDate={countDataDate} />
 
           <div class="section2">
             <FeatureCard
@@ -137,7 +140,12 @@ function DoctorDashboard() {
             <h2>Patient Diagnosed Request</h2>
             <br />
             {loading ? (
-              <p>Loading...</p>
+              <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+                <Skeleton
+                  count={4}
+                  style={{ borderRadius: "10px", display: "flex", height:'30px',width:'100%' }}
+                />
+              </SkeletonTheme>
             ) : (
               <Table
                 columns={columns}

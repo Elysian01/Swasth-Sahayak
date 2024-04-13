@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import Table from "../components/tables/Listings";
 import "./css/common.css";
 import "./css/diagnoseRequest.css";
@@ -56,7 +59,12 @@ function DiagnoseRequest() {
           <header className="main-header">Patient Diagnose Request</header>
           <br/>
           {loading ? (
-            <p>Loading...</p>
+            <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+            <Skeleton
+              count={6}
+              style={{ borderRadius: "10px", display: "flex", height:'30px',width:'100%' }}
+            />
+          </SkeletonTheme>
           ) : (
             <Table
               columns={columns}
