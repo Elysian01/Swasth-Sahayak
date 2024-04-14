@@ -4,6 +4,7 @@ import "./css/diagnose-report.css";
 import Table from "../components/tables/Listings";
 import Navbar from "../components/misc/Navbar";
 import DatePicker from "react-multi-date-picker";
+import Icon from "react-multi-date-picker/components/icon";
 import { useState } from "react";
 
 function DiagnoseReport() {
@@ -80,7 +81,7 @@ function DiagnoseReport() {
       <Navbar />
       <br />
       <h2 className="title">Diagnosed Report</h2>
-      <br /> <br/>
+      <br /> <br />
       <div className="alignment">
         <div className="quession-table">
           <Table columns={columns} data={tableData} />
@@ -102,13 +103,13 @@ function DiagnoseReport() {
           <h3>Prescription by Doctor</h3>
           <br />
           <div className="reading-box">
-            <input/>
+            <input />
             <br />
           </div>
           <div className="align-calendar">
             <br />
-            <h3>Selected Dates:</h3>
             <div className="date-box">
+              <h3 className="select-dates">Selected Dates:</h3>
               <div className="calendar-container">
                 <br />
                 <DatePicker
@@ -120,6 +121,7 @@ function DiagnoseReport() {
                   multiple
                   value={dates}
                   onChange={handleDateChange}
+                  render={<Icon />}
                 />
               </div>
             </div>
@@ -136,7 +138,9 @@ function DiagnoseReport() {
                 </div>
               ))}
             </div>
-            <button className="primary-btn" onClick={handleSubmit}>Submit</button>
+            <button className="primary-btn" onClick={handleSubmit}>
+              Submit
+            </button>
           </div>
         </div>
       </div>
