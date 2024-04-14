@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import Table from "../components/tables/Listings";
 import "./css/common.css";
 import "./css/diagnoseRequest.css";
@@ -22,8 +25,13 @@ function DiagnoseRequest() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+        const day = String(currentDate.getDate()).padStart(2, "0");
+        const date = `${year}-${month}-${day}`;
         const headers = { Authorization: `Bearer ${token}` };
-        const response = await getRequest(`/doctor/findall/${user}`, headers);
+        const response = await getRequest(`/doctor/findall/${user}/${date}`, headers);
         setTableData(response);
         setLoading(false);
       } catch (error) {
@@ -56,7 +64,12 @@ function DiagnoseRequest() {
           <header className="main-header">Patient Diagnose Request</header>
           <br/>
           {loading ? (
-            <p>Loading...</p>
+            <SkeletonTheme>
+            <Skeleton
+              count={6}
+              style={{ borderRadius: "10px", display: "flex", height:'30px',width:'100%' }}
+            />
+          </SkeletonTheme>
           ) : (
             <Table
               columns={columns}

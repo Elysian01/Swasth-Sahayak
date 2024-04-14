@@ -77,3 +77,12 @@
   align-items: center; 
   text-align: center; 
 }
+.date-box{
+  display: flex;
+  align-items:  flex-start;
+}
+.select-dates{
+  padding-top: 22px;
+  padding-right: 20px;
+  font-size: large;
+}
