@@ -140,7 +140,7 @@ function DoctorDashboard() {
             <h2>Patient Diagnosed Request</h2>
             <br />
             {loading ? (
-              <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+              <SkeletonTheme>
                 <Skeleton
                   count={4}
                   style={{ borderRadius: "10px", display: "flex", height:'30px',width:'100%' }}

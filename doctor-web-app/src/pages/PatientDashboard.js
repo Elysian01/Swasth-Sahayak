@@ -83,7 +83,7 @@ function PatientDashboard() {
         <div className="patients-profile">
           <header className="main-header">Patient Profile</header>
           {loading ? (
-            <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+            <SkeletonTheme >
               <Skeleton
                 count={1}
                 style={{
@@ -102,7 +102,7 @@ function PatientDashboard() {
         <div className="current-diagnose">
           <header className="main-header">Current Diagnose</header>
           {loading ? (
-            <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+            <SkeletonTheme>
               <Skeleton
                 count={1}
                 style={{
@@ -124,7 +124,7 @@ function PatientDashboard() {
       <br />
 
       {loading ? (
-        <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+        <SkeletonTheme>
           <Skeleton
             count={5}
             style={{

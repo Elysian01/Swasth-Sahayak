@@ -126,7 +126,7 @@ function Profile() {
             {doctorDetails ? (
               doctorDetails.name
             ) : (
-              <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+              <SkeletonTheme>
                 <Skeleton
                   count={1}
                   style={{
@@ -139,7 +139,7 @@ function Profile() {
           </div>
           <div className="qualification">
             {doctorDetails ? doctorDetails.specialization : (
-              <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+              <SkeletonTheme>
                 <Skeleton
                   count={1}
                   style={{
@@ -163,7 +163,7 @@ function Profile() {
           <br />
           <br />
           {loading ? (
-            <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+            <SkeletonTheme >
               <Skeleton
                 count={5}
                 style={{

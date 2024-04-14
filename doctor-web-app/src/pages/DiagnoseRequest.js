@@ -59,7 +59,7 @@ function DiagnoseRequest() {
           <header className="main-header">Patient Diagnose Request</header>
           <br/>
           {loading ? (
-            <SkeletonTheme baseColor="#97a2b5" highlightColor="#97a2b5">
+            <SkeletonTheme>
             <Skeleton
               count={6}
               style={{ borderRadius: "10px", display: "flex", height:'30px',width:'100%' }}
