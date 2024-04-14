@@ -44,19 +44,19 @@ const Home = () => {
 	});
 
 	const downloadData = async () => {
-		await downloadAPI()
-			.then((result) => {
-				if (result.status === 200) {
-					console.log(result.data);
-				} else if (result.status === 401) {
-					console.log(result.status);
-					Alert.alert("Error", result.data, []);
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-				Alert.alert("Unable to Download Data: ", error);
-			});
+		// await downloadAPI()
+		// 	.then((result) => {
+		// 		if (result.status === 200) {
+		// 			console.log(result.data);
+		// 		} else if (result.status === 401) {
+		// 			console.log(result.status);
+		// 			Alert.alert("Error", result.data, []);
+		// 		}
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error);
+		// 		Alert.alert("Unable to Download Data: ", error);
+		// 	});
 
 		console.log("Downloading data...");
 

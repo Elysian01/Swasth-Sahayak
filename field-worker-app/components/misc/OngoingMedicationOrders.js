@@ -15,6 +15,8 @@ const OngoingMedicationOrders = (props) => {
 	const ongoingMedicationOrders = props.doctorComment;
 	const disease = props.disease;
 
+	console.log("got: ", questionnaireType);
+
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
@@ -22,8 +24,8 @@ const OngoingMedicationOrders = (props) => {
 
 	function askQuestionnaire() {
 		navigation.navigate("Questionnaire", {
-			"questionnaire_type": questionnaireType,
-			"patient_abhaid": patientAbhaId,
+			questionnaire_type: questionnaireType,
+			patient_abhaid: patientAbhaId,
 		});
 	}
 

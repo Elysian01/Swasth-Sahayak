@@ -3,23 +3,23 @@ import React, { useState } from "react";
 import AppStyles from "../../AppStyles";
 
 const Question = (props) => {
-	const { question, responseInput } = props;
+	const { questionObject, responseInput } = props;
 	const [userInput, setUserInput] = useState("");
 
 	const handleInputChange = (option) => {
 		setUserInput(option);
 		const response = {
-			"question_id": question["question_id"],
-			"user_response": option,
+			question_id: questionObject["question_id"],
+			user_response: option,
 		};
 		responseInput(response);
 	};
 
 	const renderOptions = () => {
-		if (question.type === "MCQ") {
+		if (questionObject.ques_type === "mcq") {
 			return (
 				<View style={styles.options}>
-					{question.options.map((option, index) => (
+					{questionObject.option.map((option, index) => (
 						<Pressable
 							key={index}
 							onPress={() => handleInputChange(option)}
@@ -42,7 +42,7 @@ const Question = (props) => {
 					))}
 				</View>
 			);
-		} else if (question.type === "NAT") {
+		} else if (questionObject.type === "nat") {
 			return (
 				<TextInput
 					style={styles.input}
@@ -53,7 +53,7 @@ const Question = (props) => {
 					value={userInput}
 				/>
 			);
-		} else if (question.type === "TEXT") {
+		} else if (questionObject.type === "text") {
 			return (
 				<TextInput
 					style={styles.input}
@@ -68,7 +68,9 @@ const Question = (props) => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.questionText}>{question.question}</Text>
+			<Text style={styles.questionText}>
+				{questionObject.question_text}
+			</Text>
 			{renderOptions()}
 		</View>
 	);

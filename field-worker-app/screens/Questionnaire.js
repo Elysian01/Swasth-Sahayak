@@ -8,7 +8,7 @@ import {
 	TextInput,
 } from "react-native";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -21,24 +21,21 @@ import AppStyles from "../AppStyles";
 const Questionnaire = (props) => {
 	const navigation = useNavigation();
 
-	// const QuestionnaireType = "default";
-	const QuestionnaireType = props.route.params["questionnaire_type"];
-	const patientAbhaId = props.route.params["patient_abhaid"];
-
+	const [questionnaireType, setQuestionnaireType] = useState();
+	const [questionnaire, setQuestionnaire] = useState([]);
+	const [patientAbhaId, setPatientAbhaId] = useState();
 	const [questionResponses, setQuestionResponses] = useState([]);
 	const [fieldWorkerComments, setFieldWorkerComments] = useState("");
 
-	function getQuestionnaire() {
-		let data = require("../database/DOWNLOADED_DATA.json");
-		if (data && data["questionnaire"][QuestionnaireType]) {
-			return data["questionnaire"][QuestionnaireType];
-		}
-		console.log("Can't fetch Questionnaire");
-		Alert.alert("Error", "Can't fetch Questionnaire");
-		return false;
-	}
-
-	const questions = getQuestionnaire();
+	useEffect(() => {
+		// Retrieve patient-abhaid and new-patient from props
+		const {
+			patient_abhaid: patientAbhaIdProp,
+			questionnaire_type: questionnaireTypeProp,
+		} = props.route.params;
+		setPatientAbhaId(patientAbhaIdProp);
+		setQuestionnaireType(questionnaireTypeProp);
+	}, [props.route.params]);
 
 	function getDate() {
 		var today = new Date();
@@ -62,7 +59,7 @@ const Questionnaire = (props) => {
 
 		questionnaireData = {
 			patient_abhaid: patientAbhaId,
-			questionnaire_type: QuestionnaireType,
+			questionnaire_type: questionnaireType,
 			responses: questionResponses,
 		};
 
@@ -112,20 +109,56 @@ const Questionnaire = (props) => {
 		setFieldWorkerComments(text);
 	}
 
+	const getQuestionnaire = () => {
+		let data = require("../database/DOWNLOADED_DATA.json");
+		if (data) {
+			console.log("Loading Questionnaire: ", questionnaireType);
+			let filteredQuestionnaire = data["questionnaire"].find(
+				(entry) => entry.icd10 === questionnaireType
+			);
+			if (filteredQuestionnaire) {
+				return filteredQuestionnaire;
+			} else {
+				console.log(
+					"No questionnaire found for the provided icd10 code"
+				);
+				return [];
+			}
+		}
+		console.log("Can't fetch Questionnaire");
+		// You can either return an empty array or handle the error based on your requirement
+		return [];
+	};
+
+	useEffect(() => {
+		setQuestionnaire(getQuestionnaire());
+	}, [questionnaire]);
+
+	const renderQuestions = () => {
+		if (questionnaire.length === 0) {
+			return null;
+		}
+
+		const questions = questionnaire.questions;
+		return questions.map((question, index) => (
+			<View key={index}>
+				<Question
+					key={question.question_id}
+					questionObject={question}
+					responseInput={responseInput}
+				/>
+			</View>
+		));
+	};
+
 	return (
 		<ScrollView automaticallyAdjustKeyboardInsets={true}>
 			<Navbar />
 			<WorkerDetails />
 			<PageHeading text="Questionnaire" />
-			{/* <PageHeading text={lang[preferredlangauge]["Questionnaire"]} /> */}
+			<PageHeading text={lang[preferredlangauge]["Questionnaire"]} />
 			<View style={AppStyles.line}></View>
-			{questions.map((question, index) => (
-				<Question
-					key={index}
-					question={question}
-					responseInput={responseInput}
-				/>
-			))}
+			{renderQuestions()}
 
 			<View style={styles.fieldWorkerComments}>
 				<Text style={AppStyles.subHeading}>
@@ -146,9 +179,9 @@ const Questionnaire = (props) => {
 					onPress={submitQuestionnaire}
 					style={AppStyles.primaryBtn}
 				>
-					{/* <Text style={AppStyles.primaryBtnText}>
+					<Text style={AppStyles.primaryBtnText}>
 						{lang[preferredlangauge]["Submit"]}
-					</Text> */}
+					</Text>
 					<Text style={AppStyles.primaryBtnText}>Submit</Text>
 				</Pressable>
 			</View>
