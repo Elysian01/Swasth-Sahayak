@@ -42,7 +42,7 @@ const Profile = () => {
 		if (uploadData) {
 			uploadData = JSON.parse(uploadData);
 
-			uploadAPI(uploadData)
+			await uploadAPI(uploadData)
 				.then((result) => {
 					if (result.status === 200) {
 						console.log(result);

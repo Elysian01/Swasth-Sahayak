@@ -44,21 +44,21 @@ const Home = () => {
 	});
 
 	const downloadData = async () => {
-		// downloadAPI()
-		// 	.then((result) => {
-		// 		if (result.status === 200) {
-		// 			console.log(result);
-		// 		} else if (result.status === 401) {
-		// 			console.log(result.status);
-		// 			Alert.alert("Error", result.data, []);
-		// 		}
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error);
-		// 		Alert.alert("Unable to Download Data: ", error);
-		// 	});
+		await downloadAPI()
+			.then((result) => {
+				if (result.status === 200) {
+					console.log(result.data);
+				} else if (result.status === 401) {
+					console.log(result.status);
+					Alert.alert("Error", result.data, []);
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+				Alert.alert("Unable to Download Data: ", error);
+			});
 
-		// console.log("Downloading data...");
+		console.log("Downloading data...");
 
 		let data = require("../database/DOWNLOADED_DATA.json");
 		setAssignedSector(
@@ -67,19 +67,19 @@ const Home = () => {
 
 		const uploadTemplate = {
 			// list of all follow_ups
-			"follow_up": data["follow_up"],
+			follow_up: data["follow_up"],
 			// list of all questionnaire responses
-			"questionnaire_response": [],
+			questionnaire_response: [],
 			// list of all field workers comments
-			"fieldworker_comments": [],
+			fieldworker_comments: [],
 			// list of all artifacts
 			artifacts: [],
 			// docters slot booked
 			doctors: data["doctors"],
 			// list of doctor chosen by patient
-			"chosen_doctor": [],
+			chosen_doctor: [],
 			// upload section
-			"patient_registeration": [],
+			patient_registeration: [],
 		};
 		console.log(uploadTemplate);
 		try {
