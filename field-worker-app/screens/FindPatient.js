@@ -25,16 +25,20 @@ const FindPatient = () => {
 		setAbhaId(e);
 	};
 
-	function isPatientInDownloadedJson() {
-		let data = require("../database/DOWNLOADED_DATA.json");
-		for (const patient of data["patient_details"]) {
-			// Check if the patient's id and token match the input
-			if (patient["patient_abhaid"] === abhaId) {
-				return true; // Patient found
+	const isPatientInDownloadedJson = async () => {
+		// let data = require("../database/DOWNLOADED_DATA.json");
+		let data = await AsyncStorage.getItem("DownloadedData");
+		if (data) {
+			data = JSON.parse(data);
+			for (const patient of data["patient_details"]) {
+				// Check if the patient's id and token match the input
+				if (patient["patient_abhaid"] === abhaId) {
+					return true; // Patient found
+				}
 			}
 		}
 		return false; // Patient not found
-	}
+	};
 
 	function handleFindPatient() {
 		const foundPatient = isPatientInDownloadedJson();
@@ -48,8 +52,8 @@ const FindPatient = () => {
 		} else {
 			setAbhaId("");
 			navigation.navigate("PatientDashboard", {
-				"patient_abhaid": abhaId,
-				"new_patient": false,
+				patient_abhaid: abhaId,
+				new_patient: false,
 			});
 		}
 	}

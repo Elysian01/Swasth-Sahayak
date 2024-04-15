@@ -26,20 +26,24 @@ const PatientToken = (props) => {
 		setToken(e);
 	};
 
-	function isPatientInDownloadedJson(patientToken) {
-		let data = require("../database/DOWNLOADED_DATA.json");
-		for (const patient of data["follow_up"]) {
-			// Check if the patient's id and token match the input
-			if (
-				patient["patient_abhaid"] === patientAbhaId &&
-				patient["patient_token"] === patientToken
-			) {
-				patientAbhaId = patient["patient_abhaid"];
-				return true; // Patient found
+	const isPatientInDownloadedJson = async (patientToken) => {
+		// let data = require("../database/DOWNLOADED_DATA.json");
+		let data = await AsyncStorage.getItem("DownloadedData");
+		if (data) {
+			data = JSON.parse(data);
+			for (const patient of data["follow_up"]) {
+				// Check if the patient's id and token match the input
+				if (
+					patient["patient_abhaid"] === patientAbhaId &&
+					patient["patient_token"] === patientToken
+				) {
+					patientAbhaId = patient["patient_abhaid"];
+					return true; // Patient found
+				}
 			}
+			return false; // Patient not found
 		}
-		return false; // Patient not found
-	}
+	};
 
 	const updateFollowUpVisitedStatusToTrue = async (patientAbhaId) => {
 		try {
@@ -53,7 +57,7 @@ const PatientToken = (props) => {
 						) {
 							return {
 								...followUp,
-								"visited_status": true,
+								visited_status: true,
 							};
 						}
 						return followUp;
@@ -90,8 +94,8 @@ const PatientToken = (props) => {
 		} else {
 			updateFollowUpVisitedStatusToTrue(patientAbhaId);
 			navigation.navigate("PatientDashboard", {
-				"patient_abhaid": patientAbhaId,
-				"new_patient": false,
+				patient_abhaid: patientAbhaId,
+				new_patient: false,
 			});
 		}
 	}

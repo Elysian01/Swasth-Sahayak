@@ -38,21 +38,26 @@ const PatientDashboard = (props) => {
 		setNewPatient(newPatientProp);
 	}, [props.route.params]);
 
-	useEffect(() => {
+	useEffect(async () => {
 		// Fetch patient details when patientAbhaId changes
 		if (patientAbhaId && !newPatient) {
-			const data = require("../database/DOWNLOADED_DATA.json");
+			// const data = require("../database/DOWNLOADED_DATA.json");
 
-			const foundDetail = data["patient_details"].find(
-				(detail) => detail["patient_abhaid"] === patientAbhaId
-			);
-			if (foundDetail) {
-				setDetails(foundDetail);
-			} else {
-				Alert.alert(
-					"Error",
-					"Patient Details could not be fetched"
+			let data = await AsyncStorage.getItem("DownloadedData");
+			if (data) {
+				data = JSON.parse(data);
+
+				const foundDetail = data["patient_details"].find(
+					(detail) => detail["patient_abhaid"] === patientAbhaId
 				);
+				if (foundDetail) {
+					setDetails(foundDetail);
+				} else {
+					Alert.alert(
+						"Error",
+						"Patient Details could not be fetched"
+					);
+				}
 			}
 		}
 	}, [patientAbhaId, newPatient]);

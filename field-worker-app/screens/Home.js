@@ -16,6 +16,7 @@ import { lang } from "../database/language";
 const Home = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	const [dataDownloaded, setDataDownloaded] = useState(false);
+	const [downloadedData, setDownloadedData] = useState();
 	const [assignedSector, setAssignedSector] = useState();
 
 	saveFile = async (saveData) => {
@@ -44,26 +45,45 @@ const Home = () => {
 	});
 
 	const downloadData = async () => {
-		// await downloadAPI()
-		// 	.then((result) => {
-		// 		if (result.status === 200) {
-		// 			console.log(result.data);
-		// 		} else if (result.status === 401) {
-		// 			console.log(result.status);
-		// 			Alert.alert("Error", result.data, []);
-		// 		}
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error);
-		// 		Alert.alert("Unable to Download Data: ", error);
-		// 	});
+		await downloadAPI()
+			.then((result) => {
+				if (result.status === 200) {
+					console.log(result.data);
+					setDownloadedData(result.data);
+				} else if (result.status === 401) {
+					console.log(result.status);
+					Alert.alert("Error", result.data, []);
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+				Alert.alert("Unable to Download Data: ", error);
+			});
 
-		console.log("Downloading data...");
+		try {
+			await AsyncStorage.setItem(
+				"DownloadedData",
+				JSON.stringify(downloadedData)
+			);
+			console.log("Async Storage -> Download data storage Success");
+			setAssignedSector(
+				downloadedData["field_worker_details"][
+					"field_worker_assigned_sector"
+				]
+			);
+		} catch (error) {
+			console.log(
+				"Error setting up download data, Async Storage " + error
+			);
+		}
 
-		let data = require("../database/DOWNLOADED_DATA.json");
-		setAssignedSector(
-			data["field_worker_details"]["field_worker_assigned_sector"]
-		);
+		// console.log("Downloading data...");
+
+		// let data = require("../database/DOWNLOADED_DATA.json");
+
+		// setAssignedSector(
+		// 	data["field_worker_details"]["field_worker_assigned_sector"]
+		// );
 
 		const uploadTemplate = {
 			// list of all follow_ups

@@ -109,9 +109,11 @@ const Questionnaire = (props) => {
 		setFieldWorkerComments(text);
 	}
 
-	const getQuestionnaire = () => {
-		let data = require("../database/DOWNLOADED_DATA.json");
+	const getQuestionnaire = async () => {
+		// let data = require("../database/DOWNLOADED_DATA.json");
+		let data = await AsyncStorage.getItem("DownloadedData");
 		if (data) {
+			data = JSON.parse(data);
 			console.log("Loading Questionnaire: ", questionnaireType);
 			let filteredQuestionnaire = data["questionnaire"].find(
 				(entry) => entry.icd10 === questionnaireType
