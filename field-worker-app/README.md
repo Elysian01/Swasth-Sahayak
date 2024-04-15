@@ -29,6 +29,7 @@
 3. AccessToken
 4. Language
 5. uploadData
+6. DownloadedData
 ```
 
 ## Download Region Data Format
