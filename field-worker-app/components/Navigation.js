@@ -17,139 +17,111 @@ import PatientDashboard from "../screens/PatientDashboard";
 import Questionnaire from "../screens/Questionnaire";
 import DoctorSelection from "../screens/DoctorSelection";
 import Prescription from "../screens/Prescription";
-
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-	// const [accessTokenExists, setAccessTokenExists] = useState(false);
-	// useEffect(() => {
-	// 	const checkAccessToken = async () => {
-	// 		try {
-	// 			const token = await AsyncStorage.getItem("AccessToken");
-	// 			if (token !== null) {
-	// 				setAccessTokenExists(true);
-	// 			} else {
-	// 				setAccessTokenExists(false);
-	// 			}
-	// 		} catch (error) {
-	// 			console.error("Error checking access token:", error);
-	// 		}
-	// 	};
-	// 	checkAccessToken();
-	// }, []);
-	// return (
-	// 	<NavigationContainer>
-	// 		<Stack.Navigator screenOptions={{ headerShown: false }}>
-	// 			{accessTokenExists ? (
-	// 				<>
-	// 					<Stack.Screen name="Home" component={Home} />
-	// 					<Stack.Screen
-	// 						name="PatientToken"
-	// 						component={PatientToken}
-	// 					/>
+  // const [accessTokenExists, setAccessTokenExists] = useState(false);
+  // useEffect(() => {
+  // 	const checkAccessToken = async () => {
+  // 		try {
+  // 			const token = await AsyncStorage.getItem("AccessToken");
+  // 			if (token !== null) {
+  // 				setAccessTokenExists(true);
+  // 			} else {
+  // 				setAccessTokenExists(false);
+  // 			}
+  // 		} catch (error) {
+  // 			console.error("Error checking access token:", error);
+  // 		}
+  // 	};
+  // 	checkAccessToken();
+  // }, []);
+  // return (
+  // 	<NavigationContainer>
+  // 		<Stack.Navigator screenOptions={{ headerShown: false }}>
+  // 			{accessTokenExists ? (
+  // 				<>
+  // 					<Stack.Screen name="Home" component={Home} />
+  // 					<Stack.Screen
+  // 						name="PatientToken"
+  // 						component={PatientToken}
+  // 					/>
 
-	// 					<Stack.Screen
-	// 						name="PatientDashboard"
-	// 						component={PatientDashboard}
-	// 					/>
-	// 					<Stack.Screen
-	// 						name="Prescription"
-	// 						component={Prescription}
-	// 					/>
-	// 					<Stack.Screen
-	// 						name="Questionnaire"
-	// 						component={Questionnaire}
-	// 					/>
-	// 					<Stack.Screen
-	// 						name="DoctorSelection"
-	// 						component={DoctorSelection}
-	// 					/>
-	// 					<Stack.Screen
-	// 						name="RegisterPatient"
-	// 						component={RegisterPatient}
-	// 					/>
-	// 					<Stack.Screen
-	// 						name="Profile"
-	// 						component={Profile}
-	// 					/>
-	// 					<Stack.Screen
-	// 						name="LanguageSelection"
-	// 						component={LanguageSelection}
-	// 					/>
-	// 				</>
-	// 			) : (
-	// 				<>
-	// 					<Stack.Screen
-	// 						name="LanguageSelection"
-	// 						component={LanguageSelection}
-	// 					/>
-	// 					<Stack.Screen name="Login" component={Login} />
-	// 					<Stack.Screen name="Home" component={Home} />
-	// 					<Stack.Screen
-	// 						name="ForgotPassword"
-	// 						component={ForgotPassword}
-	// 					/>
-	// 					<Stack.Screen
-	// 						name="ResetPassword"
-	// 						component={ResetPassword}
-	// 					/>
-	// 				</>
-	// 			)}
-	// 		</Stack.Navigator>
-	// 	</NavigationContainer>
-	// );
+  // 					<Stack.Screen
+  // 						name="PatientDashboard"
+  // 						component={PatientDashboard}
+  // 					/>
+  // 					<Stack.Screen
+  // 						name="Prescription"
+  // 						component={Prescription}
+  // 					/>
+  // 					<Stack.Screen
+  // 						name="Questionnaire"
+  // 						component={Questionnaire}
+  // 					/>
+  // 					<Stack.Screen
+  // 						name="DoctorSelection"
+  // 						component={DoctorSelection}
+  // 					/>
+  // 					<Stack.Screen
+  // 						name="RegisterPatient"
+  // 						component={RegisterPatient}
+  // 					/>
+  // 					<Stack.Screen
+  // 						name="Profile"
+  // 						component={Profile}
+  // 					/>
+  // 					<Stack.Screen
+  // 						name="LanguageSelection"
+  // 						component={LanguageSelection}
+  // 					/>
+  // 				</>
+  // 			) : (
+  // 				<>
+  // 					<Stack.Screen
+  // 						name="LanguageSelection"
+  // 						component={LanguageSelection}
+  // 					/>
+  // 					<Stack.Screen name="Login" component={Login} />
+  // 					<Stack.Screen name="Home" component={Home} />
+  // 					<Stack.Screen
+  // 						name="ForgotPassword"
+  // 						component={ForgotPassword}
+  // 					/>
+  // 					<Stack.Screen
+  // 						name="ResetPassword"
+  // 						component={ResetPassword}
+  // 					/>
+  // 				</>
+  // 			)}
+  // 		</Stack.Navigator>
+  // 	</NavigationContainer>
+  // );
 
-	return (
-		<NavigationContainer>
-			<Stack.Navigator
-				screenOptions={{
-					headerShown: false,
-				}}
-			>
-				<Stack.Screen
-					name="LanguageSelection"
-					component={LanguageSelection}
-				/>
-				<Stack.Screen name="Login" component={Login} />
-				<Stack.Screen name="Home" component={Home} />
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="LanguageSelection" component={LanguageSelection} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Home" component={Home} />
 
-				<Stack.Screen
-					name="ForgotPassword"
-					component={ForgotPassword}
-				/>
-				<Stack.Screen
-					name="PatientToken"
-					component={PatientToken}
-				/>
-				<Stack.Screen
-					name="ResetPassword"
-					component={ResetPassword}
-				/>
-				<Stack.Screen name="FindPatient" component={FindPatient} />
-				<Stack.Screen name="Profile" component={Profile} />
-				<Stack.Screen
-					name="PatientDashboard"
-					component={PatientDashboard}
-				/>
-				<Stack.Screen
-					name="Prescription"
-					component={Prescription}
-				/>
-				<Stack.Screen
-					name="Questionnaire"
-					component={Questionnaire}
-				/>
-				<Stack.Screen
-					name="DoctorSelection"
-					component={DoctorSelection}
-				/>
-				<Stack.Screen
-					name="RegisterPatient"
-					component={RegisterPatient}
-				/>
-			</Stack.Navigator>
-		</NavigationContainer>
-	);
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="PatientToken" component={PatientToken} />
+        <Stack.Screen name="ResetPassword" component={ResetPassword} />
+        <Stack.Screen name="FindPatient" component={FindPatient} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="PatientDashboard" component={PatientDashboard} />
+        <Stack.Screen name="Prescription" component={Prescription} />
+        <Stack.Screen name="Questionnaire" component={Questionnaire} />
+        <Stack.Screen name="DoctorSelection" component={DoctorSelection} />
+        <Stack.Screen name="RegisterPatient" component={RegisterPatient} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 };
 
 export default Navigation;
