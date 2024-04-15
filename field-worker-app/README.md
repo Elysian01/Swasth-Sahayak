@@ -1396,6 +1396,74 @@ data = {
   ]
 }
 ```
+```
+### Backend Data format
+{
+  "questionnaire": [
+    {
+      "icd10": "string",
+      "questions": [
+        {
+          "ques_type": "string",
+          "question_id": 0,
+          "question_text": "string",
+          "option": [
+            "string"
+          ]
+        }
+      ]
+    }
+  ],
+  "field_worker_details": {
+    "field_worker_assigned_sector": "string"
+  },
+  "follow_up": [
+    {
+      "follow_up_id": 0,
+      "patient_name": "string",
+      "patient_token": 0,
+      "patient_abhaid": "string",
+      "patient_address": "string",
+      "visited_status": true,
+      "patient_followupdate": "2024-04-15T04:58:52.177Z",
+      "icd10": "string"
+    }
+  ],
+  "patient_details": [
+    {
+      "patient_abhaid": "string",
+      "fieldworker_id": 0,
+      "patient_name": "string",
+      "patient_address": "string",
+      "ongoing_medication_orders": {
+        "icd10_code": "string",
+        "doctor_name": "string",
+        "doctor_comment": "string",
+        "questionnaire_type": "string",
+        "date": "2024-04-15T04:58:52.177Z"
+      },
+      "prescriptions": [
+        {
+          "disease_name": "string",
+          "prescription": "string",
+          "date": "2024-04-15T04:58:52.177Z",
+          "doctor_name": "string"
+        }
+      ],
+      "accessible": true
+    }
+  ],
+  "doctors": [
+    {
+      "doctor_id": 0,
+      "doctor_name": "string",
+      "open_slots": 0,
+      "workingAddress": "string",
+      "specialization": "string"
+    }
+  ]
+}
 
+```
 
 
