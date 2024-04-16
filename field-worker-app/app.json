@@ -1,5 +1,13 @@
 {
   "expo": {
+    "plugins": [
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow SwasthSahayakHealthWorkerApp to use Face ID."
+        }
+      ]
+    ],
     "name": "Swasth-Sahayak-Health-Worker-App",
     "slug": "Swasth-Sahayak-Health-Worker-App",
     "version": "1.0.0",
