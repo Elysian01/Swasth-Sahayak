@@ -47,7 +47,7 @@ const Login = () => {
 
   useEffect(() => {
     checkLoginCredentials();
-    checkBiometrics();
+    
   }, []);
 
   const checkLoginCredentials = async () => {
@@ -115,13 +115,6 @@ const Login = () => {
       // Handle biometric authentication error
       Alert.alert("Biometric Authentication Error", error.message);
     }
-  };
-
-  const [isSupported, setIsSupported] = useState(false);
-
-  const checkBiometrics = async () => {
-    const compatible = await LocalAuthentication.hasHardwareAsync();
-    setIsSupported(compatible);
   };
 
   return (
