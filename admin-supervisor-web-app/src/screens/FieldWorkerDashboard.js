@@ -50,7 +50,7 @@ function FieldWorkerDashboard() {
         </div>
 
         <button className="small-primary-btn">Search</button>
-        <button className="small-primary-btn">Add New Doctor</button>
+        <button className="small-primary-btn">Add New Field Worker</button>
       </div>
       <div className="view-pane">
         {FieldWorkerDetails.map((fieldworker, index) => (
