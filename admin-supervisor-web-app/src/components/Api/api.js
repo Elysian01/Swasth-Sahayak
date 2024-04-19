@@ -4,9 +4,9 @@ import axios from "axios";
 axios.defaults.baseURL = "http://localhost:9191"; // Base URL for your API
 
 // Function to make a GET request
-export const getRequest = async (endpoint) => {
+export const getRequest = async (endpoint, headers) => {
   try {
-    const response = await axios.get(endpoint);
+    const response = await axios.get(endpoint, { headers });
     return response.data;
   } catch (error) {
     throw error; // Propagate the error to handle it in the component
@@ -14,9 +14,9 @@ export const getRequest = async (endpoint) => {
 };
 
 // Function to make a POST request
-export const postRequest = async (endpoint, data ) => {
+export const postRequest = async (endpoint, data, headers) => {
   try {
-    const response = await axios.post(endpoint, data);
+    const response = await axios.post(endpoint, data, { headers });
     return response.data;
   } catch (error) {
     throw error;

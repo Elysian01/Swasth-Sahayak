@@ -1,13 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
+import { getRequest } from "../components/Api/api";
 import "../components/css/common.css";
 import "./css/doctor-dashboard.css";
 
 function DoctorDashboard() {
   const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
   const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
-	
+  const [doctorDetails, setDoctorDetails] = useState([]); // State for storing doctor details array
+  const token =
+    "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYWthc2gxMjMiLCJpYXQiOjE3MTM1NTQyNzMsImV4cCI6MTcxMzU3MjI3M30.IP7aoY0GiXayio5lZsMNQUvj19hqEQtLpPOSeKdJWbfn4yiPpvxmDwWIP3EEpe4hVmdN06MUaAYoYYkzimM7eQ";
+
+  useEffect(() => {
+    const fetchDoctorDetails = async () => {
+      try {
+        const headers = { Authorization: `Bearer ${token}` };
+        // Await the API call
+        const response = await getRequest("/admin/allDoctorDetail", headers);
+        // Update the state with the fetched doctor details
+        setDoctorDetails(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    // Call the fetchDoctorDetails function
+    fetchDoctorDetails();
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -27,53 +47,28 @@ function DoctorDashboard() {
             ))}
           </select>
         </div>
-				
+
         <button className="small-primary-btn">Search</button>
         <button className="small-primary-btn">Add New Doctor</button>
       </div>
       <div className="view-pane">
-        <div className="display-card">
-          <div className="person-details">
-            <div className="person-name">Name: Aakash Bhardwaj</div>
-            <div className="person-region">Region: 31</div>
-            <div className="person-specialisation">
-              Specialisation: Genral Physician
+        {/* Map over the doctor details array and render a display card for each doctor */}
+        {doctorDetails.map((doctor, index) => (
+          <div className="display-card" key={index}>
+            <div className="person-details">
+              <div className="person-name">Name: {doctor.name}</div>
+              <div className="person-region">Region: {doctor.blockCode}</div>
+              <div className="person-specialisation">
+                Specialisation: {doctor.specialization}
+              </div>
+            </div>
+            <div className="button-alignment">
+              <button className="dark-primary-small-btn">View</button>
+              <button className="dark-primary-small-btn">Edit</button>
+              <button className="pink-btn">Inactive</button>
             </div>
           </div>
-          <div className="button-alignment">
-            <button className="dark-primary-small-btn">View</button>
-            <button className="dark-primary-small-btn">Edit</button>
-            <button className="pink-btn">Inactive</button>
-          </div>
-        </div>
-        <div className="display-card">
-          <div className="person-details">
-            <div className="person-name">Name: Aakash Bhardwaj</div>
-            <div className="person-region">Region: 31</div>
-            <div className="person-specialisation">
-              Specialisation: Genral Physician
-            </div>
-          </div>
-          <div className="button-alignment">
-            <button className="dark-primary-small-btn">View</button>
-            <button className="dark-primary-small-btn">Edit</button>
-            <button className="pink-btn">Inactive</button>
-          </div>
-        </div>
-        <div className="display-card">
-          <div className="person-details">
-            <div className="person-name">Name: Aakash Bhardwaj</div>
-            <div className="person-region">Region: 31</div>
-            <div className="person-specialisation">
-              Specialisation: Genral Physician
-            </div>
-          </div>
-          <div className="button-alignment">
-            <button className="dark-primary-small-btn">View</button>
-            <button className="dark-primary-small-btn">Edit</button>
-            <button className="pink-btn">Inactive</button>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

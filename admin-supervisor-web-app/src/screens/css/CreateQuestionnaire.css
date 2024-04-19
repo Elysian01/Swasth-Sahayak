@@ -1,0 +1,21 @@
+.component-style {
+  display: flex;
+  position: relative;
+  align-items: center;
+
+}
+.select-option{
+  display: flex;
+  align-items: stretch;
+}
+.button{
+  margin-bottom: 30px;
+}
+.navbar{
+  display: flex;
+  justify-content: space-between;
+}
+.select-modal{
+  display: flex;
+  justify-items: center;
+}
