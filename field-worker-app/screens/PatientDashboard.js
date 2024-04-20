@@ -38,7 +38,7 @@ const PatientDashboard = (props) => {
 		setNewPatient(newPatientProp);
 	}, [props.route.params]);
 
-	useEffect(async () => {
+	const setData = async() => {
 		// Fetch patient details when patientAbhaId changes
 		if (patientAbhaId && !newPatient) {
 			// const data = require("../database/DOWNLOADED_DATA.json");
@@ -60,6 +60,10 @@ const PatientDashboard = (props) => {
 				}
 			}
 		}
+	}
+
+	useEffect(() => {
+		setData();	
 	}, [patientAbhaId, newPatient]);
 
 	useEffect(() => {
@@ -72,8 +76,9 @@ const PatientDashboard = (props) => {
 	}, []);
 
 	function goToDefaultQuestionnaire() {
+		console.log("Going to Default Questionnaire ... ")
 		navigation.navigate("Questionnaire", {
-			questionnaire_type: "default",
+			questionnaire_type: "ACTIVITY",
 			patient_abhaid: patientAbhaId,
 		});
 	}
@@ -120,7 +125,7 @@ const PatientDashboard = (props) => {
 				/>
 				<View style={styles.line}></View>
 				<View>
-					<OngoingMedicationOrders
+					{details["ongoing_medication_orders"] && (<OngoingMedicationOrders
 						patientAbhaId={details["patient_abhaid"]}
 						doctorName={
 							details["ongoing_medication_orders"][
@@ -142,7 +147,7 @@ const PatientDashboard = (props) => {
 								"ICD10_code"
 							]
 						)}
-					/>
+					/>)}
 					{/* <Graph /> */}
 					<DiagnoseHistory
 						prescriptions={details["recent_3_prescriptions"]}

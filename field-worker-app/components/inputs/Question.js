@@ -42,7 +42,7 @@ const Question = (props) => {
 					))}
 				</View>
 			);
-		} else if (questionObject.type === "nat") {
+		} else if (questionObject.ques_type === "nat") {
 			return (
 				<TextInput
 					style={styles.input}
@@ -53,7 +53,7 @@ const Question = (props) => {
 					value={userInput}
 				/>
 			);
-		} else if (questionObject.type === "text") {
+		} else if (questionObject.ques_type === "text") {
 			return (
 				<TextInput
 					style={styles.input}

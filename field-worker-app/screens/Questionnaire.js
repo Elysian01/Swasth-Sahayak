@@ -17,25 +17,40 @@ import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
 import PageHeading from "../components/headers/PageHeading";
 import AppStyles from "../AppStyles";
+import { lang } from "../database/language";
 
 const Questionnaire = (props) => {
 	const navigation = useNavigation();
 
-	const [questionnaireType, setQuestionnaireType] = useState();
+	const [questionnaireType, setQuestionnaireType] = useState("ACTIVITY");
 	const [questionnaire, setQuestionnaire] = useState([]);
-	const [patientAbhaId, setPatientAbhaId] = useState();
+	const [patientAbhaId, setPatientAbhaId] = useState("15615");
 	const [questionResponses, setQuestionResponses] = useState([]);
+	const [preferredLanguage, setPreferredLanguage] = useState("English");
 	const [fieldWorkerComments, setFieldWorkerComments] = useState("");
+
+	
 
 	useEffect(() => {
 		// Retrieve patient-abhaid and new-patient from props
-		const {
-			patient_abhaid: patientAbhaIdProp,
-			questionnaire_type: questionnaireTypeProp,
-		} = props.route.params;
-		setPatientAbhaId(patientAbhaIdProp);
-		setQuestionnaireType(questionnaireTypeProp);
-	}, [props.route.params]);
+		setPatientAbhaId(props.route.params["patient_abhaid"]);
+		setQuestionnaireType(props.route.params["questionnaire_type"]);
+		console.log("Type: ", questionnaireType); // Check if this logs the correct value
+		getQuestionnaire().then((result) => {
+			console.log("Questionnaire Result: ", result);
+			setQuestionnaire(result);
+		});
+	}, [props.route.params, questionnaireType]); // Added questionnaireType as a dependency
+	
+
+	useEffect(() => {
+		// Retrieve language from AsyncStorage
+		AsyncStorage.getItem("Language").then((lang) => {
+			if (lang) {
+				setPreferredLanguage(lang);
+			}
+		});
+	}, []);
 
 	function getDate() {
 		var today = new Date();
@@ -60,18 +75,19 @@ const Questionnaire = (props) => {
 		questionnaireData = {
 			patient_abhaid: patientAbhaId,
 			questionnaire_type: questionnaireType,
-			responses: questionResponses,
+			responses: questionResponses, 
 		};
 
-		console.log("Hello: ", questionnaireData);
+		// console.log("Hello: ", questionnaireData);
 
 		try {
-			uploadData = await AsyncStorage.getItem("uploadData");
+			let uploadData = await AsyncStorage.getItem("uploadData");
 			uploadData = JSON.parse(uploadData);
-			console.log("Old Upload data: ", uploadData);
 			uploadData["fieldworker_comments"].push(fieldWorkerData);
+			questionnaireData.responses = JSON.stringify(questionnaireData.responses);
 			uploadData["questionnaire_response"].push(questionnaireData);
 			console.log("Updated Upload data: ", uploadData);
+
 			await AsyncStorage.setItem(
 				"uploadData",
 				JSON.stringify(uploadData)
@@ -128,37 +144,45 @@ const Questionnaire = (props) => {
 			}
 		}
 		console.log("Can't fetch Questionnaire");
-		// You can either return an empty array or handle the error based on your requirement
 		return [];
 	};
 
-	useEffect(() => {
-		setQuestionnaire(getQuestionnaire());
-	}, [questionnaire]);
+	// useEffect(() => {
+	// 	setQuestionnaire(getQuestionnaire());
+	// }, [questionnaire]);
 
 	const renderQuestions = () => {
-		if (questionnaire.length === 0) {
-			return null;
+		if (questionnaireType) {
+			console.log("Q: ", questionnaire)
+			if (questionnaire.length === 0) {
+				return null;
+			}
+	
+			const questions = questionnaire.questions;
+			console.log(questions)
+	
+			if (questions.length > 0) {
+				return questions.map((question, index) => (
+					<View key={index}>
+						<Question
+							key={question.question_id}
+							questionObject={question}
+							responseInput={responseInput}
+						/>
+					</View>
+				));
+			} 	
+		} else {
+			Alert("Error", "Questionnaire Not Available")
 		}
-
-		const questions = questionnaire.questions;
-		return questions.map((question, index) => (
-			<View key={index}>
-				<Question
-					key={question.question_id}
-					questionObject={question}
-					responseInput={responseInput}
-				/>
-			</View>
-		));
 	};
 
 	return (
 		<ScrollView automaticallyAdjustKeyboardInsets={true}>
 			<Navbar />
 			<WorkerDetails />
-			<PageHeading text="Questionnaire" />
-			<PageHeading text={lang[preferredlangauge]["Questionnaire"]} />
+			{/* <PageHeading text="Questionnaire" /> */}
+			<PageHeading text={lang[preferredLanguage]["Questionnaire"]} />
 			<View style={AppStyles.line}></View>
 			{renderQuestions()}
 
@@ -182,9 +206,9 @@ const Questionnaire = (props) => {
 					style={AppStyles.primaryBtn}
 				>
 					<Text style={AppStyles.primaryBtnText}>
-						{lang[preferredlangauge]["Submit"]}
+						{lang[preferredLanguage]["Submit"]}
 					</Text>
-					<Text style={AppStyles.primaryBtnText}>Submit</Text>
+					{/* <Text style={AppStyles.primaryBtnText}>Submit</Text> */}
 				</Pressable>
 			</View>
 		</ScrollView>

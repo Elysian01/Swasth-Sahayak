@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, Alert } from "react-native";
 import { useState, useEffect } from "react";
 import Navbar from "../components/headers/Navbar";
 import WorkerDetails from "../components/headers/WorkerDetails";
@@ -16,7 +16,7 @@ import { lang } from "../database/language";
 const Home = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	const [dataDownloaded, setDataDownloaded] = useState(false);
-	const [downloadedData, setDownloadedData] = useState();
+	// const [downloadedData, setDownloadedData] = useState("");
 	const [assignedSector, setAssignedSector] = useState();
 
 	saveFile = async (saveData) => {
@@ -45,14 +45,32 @@ const Home = () => {
 	});
 
 	const downloadData = async () => {
+		let downloadedData;
 		await downloadAPI()
-			.then((result) => {
-				if (result.status === 200) {
-					console.log(result.data);
-					setDownloadedData(result.data);
-				} else if (result.status === 401) {
-					console.log(result.status);
-					Alert.alert("Error", result.data, []);
+			.then(async (result) => {
+				if (result) {
+					console.log("Come: ",result.data);
+					downloadedData = result.data;
+					try {
+						await AsyncStorage.setItem(
+							"DownloadedData",
+							JSON.stringify(downloadedData)
+						);
+						console.log("Async Storage -> Download data storage Success");
+						setAssignedSector(
+							result.data["field_worker_details"][
+								"field_worker_assigned_sector"
+							]
+						);
+					} catch (error) {
+						console.log(
+							"Error setting up download data, Async Storage " + error
+						);
+					}
+				} else  {
+					console.log("Error in fetching the data")
+					console.log(result);
+					Alert.alert("Error", result.data);
 				}
 			})
 			.catch((error) => {
@@ -60,22 +78,22 @@ const Home = () => {
 				Alert.alert("Unable to Download Data: ", error);
 			});
 
-		try {
-			await AsyncStorage.setItem(
-				"DownloadedData",
-				JSON.stringify(downloadedData)
-			);
-			console.log("Async Storage -> Download data storage Success");
-			setAssignedSector(
-				downloadedData["field_worker_details"][
-					"field_worker_assigned_sector"
-				]
-			);
-		} catch (error) {
-			console.log(
-				"Error setting up download data, Async Storage " + error
-			);
-		}
+		// try {
+		// 	await AsyncStorage.setItem(
+		// 		"DownloadedData",
+		// 		JSON.stringify(downloadedData)
+		// 	);
+		// 	console.log("Async Storage -> Download data storage Success");
+		// 	setAssignedSector(
+		// 		downloadedData["field_worker_details"][
+		// 			"field_worker_assigned_sector"
+		// 		]
+		// 	);
+		// } catch (error) {
+		// 	console.log(
+		// 		"Error setting up download data, Async Storage " + error
+		// 	);
+		// }
 
 		// console.log("Downloading data...");
 
@@ -84,10 +102,12 @@ const Home = () => {
 		// setAssignedSector(
 		// 	data["field_worker_details"]["field_worker_assigned_sector"]
 		// );
-
+		
+		console.log("Check: ",downloadedData)
+		// const Ddata = JSON.parse(downloadedData);
 		const uploadTemplate = {
 			// list of all follow_ups
-			follow_up: data["follow_up"],
+			follow_up: downloadedData["follow_up"],
 			// list of all questionnaire responses
 			questionnaire_response: [],
 			// list of all field workers comments
@@ -95,20 +115,21 @@ const Home = () => {
 			// list of all artifacts
 			artifacts: [],
 			// docters slot booked
-			doctors: data["doctors"],
+			doctors: downloadedData["doctors"],
 			// list of doctor chosen by patient
 			chosen_doctor: [],
 			// upload section
 			patient_registeration: [],
 		};
+		
 		console.log(uploadTemplate);
+
 		try {
 			await AsyncStorage.setItem(
 				"uploadData",
 				JSON.stringify(uploadTemplate)
 			);
 			setDataDownloaded(true);
-			console.log("True");
 		} catch (error) {
 			console.log(
 				"Error setting upload data, please re-download " + error
