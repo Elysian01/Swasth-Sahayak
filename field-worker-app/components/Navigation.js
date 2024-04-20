@@ -17,6 +17,7 @@ import PatientDashboard from "../screens/PatientDashboard";
 import Questionnaire from "../screens/Questionnaire";
 import DoctorSelection from "../screens/DoctorSelection";
 import Prescription from "../screens/Prescription";
+import AddArtifacts from "../screens/AddArtifacts";
 
 const Stack = createNativeStackNavigator();
 
@@ -106,6 +107,10 @@ const Navigation = () => {
 					headerShown: false,
 				}}
 			>
+				<Stack.Screen
+					name="AddArtifacts"
+					component={AddArtifacts}
+				/>
 				<Stack.Screen
 					name="LanguageSelection"
 					component={LanguageSelection}

@@ -4,7 +4,7 @@
       [
         "expo-local-authentication",
         {
-          "faceIDPermission": "Allow SwasthSahayakHealthWorkerApp to use Face ID."
+          "faceIDPermission": "Allow Swasth-Sahayak-Health-Worker-App to use Face ID."
         }
       ]
     ],
