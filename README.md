@@ -23,6 +23,14 @@ Figma Design Files: https://www.figma.com/files/project/198350664/Team-project?f
 
 ## Assumptions
 
+## Frontend
+
+1. React-hot-toast
+2. Redux
+3. Redux-Persists
+4. React-Skeleton
+5. Axios
+
 
 ### Use Case Diagram Link
 
