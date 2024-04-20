@@ -20,6 +20,22 @@ export const loginAPI = async (data) => {
 	}
 };
 
+export const getFieldWorkerDetailsAPI = async () => {
+	try {
+		console.log("Fetching Field Worker Details...");
+
+		const result = await ApiManager("/", {
+			method: "GET",
+			headers: {
+				"content-type": "application/json",
+			},
+		});
+		return result;
+	} catch (error) {
+		return error.response;
+	}
+};
+
 export const downloadAPI = async () => {
 	try {
 		console.log("Downloading Data from server...");
@@ -52,15 +68,15 @@ export const uploadAPI = async (uploadData) => {
 	}
 };
 
-export const getFieldWorkerDetailsAPI = async () => {
+export const uploadImagesAPI = async (uploadData) => {
 	try {
-		console.log("Fetching Field Worker Details...");
-
-		const result = await ApiManager("/", {
-			method: "GET",
+		console.log("Data Uploading: ", uploadData);
+		const result = await ApiManager("/fieldworker/followupsReschedule", {
+			method: "POST",
 			headers: {
 				"content-type": "application/json",
 			},
+			data: uploadData,
 		});
 		return result;
 	} catch (error) {

@@ -29,8 +29,6 @@ const Questionnaire = (props) => {
 	const [preferredLanguage, setPreferredLanguage] = useState("English");
 	const [fieldWorkerComments, setFieldWorkerComments] = useState("");
 
-	
-
 	useEffect(() => {
 		// Retrieve patient-abhaid and new-patient from props
 		setPatientAbhaId(props.route.params["patient_abhaid"]);
@@ -41,7 +39,6 @@ const Questionnaire = (props) => {
 			setQuestionnaire(result);
 		});
 	}, [props.route.params, questionnaireType]); // Added questionnaireType as a dependency
-	
 
 	useEffect(() => {
 		// Retrieve language from AsyncStorage
@@ -75,7 +72,7 @@ const Questionnaire = (props) => {
 		questionnaireData = {
 			patient_abhaid: patientAbhaId,
 			questionnaire_type: questionnaireType,
-			responses: questionResponses, 
+			responses: questionResponses,
 		};
 
 		// console.log("Hello: ", questionnaireData);
@@ -84,7 +81,9 @@ const Questionnaire = (props) => {
 			let uploadData = await AsyncStorage.getItem("uploadData");
 			uploadData = JSON.parse(uploadData);
 			uploadData["fieldworker_comments"].push(fieldWorkerData);
-			questionnaireData.responses = JSON.stringify(questionnaireData.responses);
+			questionnaireData.responses = JSON.stringify(
+				questionnaireData.responses
+			);
 			uploadData["questionnaire_response"].push(questionnaireData);
 			console.log("Updated Upload data: ", uploadData);
 
@@ -153,14 +152,14 @@ const Questionnaire = (props) => {
 
 	const renderQuestions = () => {
 		if (questionnaireType) {
-			console.log("Q: ", questionnaire)
+			console.log("Q: ", questionnaire);
 			if (questionnaire.length === 0) {
 				return null;
 			}
-	
+
 			const questions = questionnaire.questions;
-			console.log(questions)
-	
+			console.log(questions);
+
 			if (questions.length > 0) {
 				return questions.map((question, index) => (
 					<View key={index}>
@@ -171,11 +170,17 @@ const Questionnaire = (props) => {
 						/>
 					</View>
 				));
-			} 	
+			}
 		} else {
-			Alert("Error", "Questionnaire Not Available")
+			Alert("Error", "Questionnaire Not Available");
 		}
 	};
+
+	function goToAddImagesScreen() {
+		navigation.navigate("AddImages", {
+			patient_abhaid: patientAbhaId,
+		});
+	}
 
 	return (
 		<ScrollView automaticallyAdjustKeyboardInsets={true}>
@@ -185,6 +190,21 @@ const Questionnaire = (props) => {
 			<PageHeading text={lang[preferredLanguage]["Questionnaire"]} />
 			<View style={AppStyles.line}></View>
 			{renderQuestions()}
+
+			<View style={AppStyles.btn}>
+				<Pressable
+					onPress={goToAddImagesScreen}
+					style={AppStyles.goldBtn}
+				>
+					{/* <Text style={AppStyles.primaryBtnText}>
+						{lang[preferredLanguage]["Add Images"]}
+					</Text> */}
+					<Text style={AppStyles.primaryBtnText}>
+						Add Images
+					</Text>
+					{/* <Text style={AppStyles.primaryBtnText}>Submit</Text> */}
+				</Pressable>
+			</View>
 
 			<View style={styles.fieldWorkerComments}>
 				<Text style={AppStyles.subHeading}>

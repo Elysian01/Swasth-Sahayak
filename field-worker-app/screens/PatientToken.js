@@ -26,7 +26,7 @@ const PatientToken = (props) => {
 		setToken(e);
 	};
 
-	const isPatientInDownloadedJson = async (patientToken) => {
+	const isPatientInDownloadedJson = async () => {
 		// let data = require("../database/DOWNLOADED_DATA.json");
 		let data = await AsyncStorage.getItem("DownloadedData");
 		if (data) {
@@ -35,7 +35,7 @@ const PatientToken = (props) => {
 				// Check if the patient's id and token match the input
 				if (
 					patient["patient_abhaid"] === patientAbhaId &&
-					patient["patient_token"] === patientToken
+					patient["patient_token"] === token
 				) {
 					patientAbhaId = patient["patient_abhaid"];
 					return true; // Patient found
@@ -78,12 +78,13 @@ const PatientToken = (props) => {
 		}
 	};
 
-	function checkToken() {
+	async function checkToken() {
 		if (!token) {
 			Alert.alert("Incomplete Form", "Please fill in all fields.");
 			return;
 		}
-		const response = isPatientInDownloadedJson(token);
+		const response = await isPatientInDownloadedJson();
+		console.log(response);
 		if (!response) {
 			Alert.alert(
 				"Token Incorrect",
