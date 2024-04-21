@@ -6,6 +6,7 @@ import GradientInput from "../components/inputs/GradientInput";
 import { getRequest, putRequest } from "../components/Api/api";
 import viewIcon from "../static/icons/eye.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function QuestionnaireDashboard() {
   const [searchedQuestionnaireName, setSearchedQuestionnaireName] =
@@ -22,9 +23,10 @@ function QuestionnaireDashboard() {
 
   const fetchData = async () => {
     try {
-      const response = await getRequest("/data");
-      setTableData(response);
-      setFilteredTableData(response);
+      const response = await axios.get("http://localhost:9192/data");
+      console.log(response.data);
+      setTableData(response.data);
+      setFilteredTableData(response.data);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -63,7 +65,7 @@ function QuestionnaireDashboard() {
   const changeStatus = async (row) => {
     const newStatus = row.status === "Active" ? "Inactive" : "Active";
     try {
-      await putRequest(`/data/${row.id}`, {
+      await axios.put(`http://localhost:9192/data/${row.id}`, {
         ...row,
         status: newStatus,
       });

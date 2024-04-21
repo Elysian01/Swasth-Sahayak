@@ -1,12 +1,16 @@
 .component-style {
   display: flex;
+  flex-wrap: wrap;
   position: relative;
   align-items: center;
-
+  gap:300px;
 }
 .select-option{
   display: flex;
-  align-items: stretch;
+  margin: 0px;
+  border-radius: 10px;
+  width: 100px;
+  height: 50px;
 }
 .button{
   margin-bottom: 30px;

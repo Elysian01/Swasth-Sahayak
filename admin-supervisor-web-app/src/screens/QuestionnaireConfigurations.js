@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import InputField from "../components/inputs/InputField";
-
+import GradientInput from "../components/inputs/GradientInput";
 function QuestionnaireConfigurations() {
   const navigate = useNavigate();
   const [questionnaireName, setQuestionnaireName] = useState("");
@@ -28,16 +28,17 @@ function QuestionnaireConfigurations() {
       <Navbar />
       <PageHeading title="Questionnaire Configurations" />
       <div className="container">
-        <InputField
-          type="text"
-          placeholder="Enter Questionnaire Name"
+        <GradientInput
+          type="name"
+          name="Enter Questionnaire Name"
           value={questionnaireName}
           onChange={(e) => setQuestionnaireName(e.target.value)}
           required
         />
-        <InputField
+        <br/>
+        <GradientInput
           type="number"
-          placeholder="Enter Number of Questions"
+          name="Enter Number of Questions"
           value={numberOfQuestions}
           onChange={(e) => setNumberOfQuestions(e.target.value)}
           required

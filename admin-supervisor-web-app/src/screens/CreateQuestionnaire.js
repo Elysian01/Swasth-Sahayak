@@ -2,69 +2,114 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
-import InputField from "../components/inputs/InputField";
-import { postRequest } from "../components/Api/api";
-import Modal from "react-modal"; // Import Modal
 import "./css/CreateQuestionnaire.css";
+import GradientInput from "../components/inputs/GradientInput";
+import MCQOptions from "../components/misc/MCQOptions";
+import axios from "axios";
 
+const generateRandomId = () => {
+  return Math.floor(Math.random() * 90000) + (10000).toString(36);
+};
 function CreateQuestionnaire() {
   const location = useLocation();
   const { questionnaireName, numberOfQuestions } = location.state;
   const [questions, setQuestions] = useState(
-    Array.from({ length: numberOfQuestions }, () => "")
+    Array.from({ length: numberOfQuestions }, () => ({
+      value: "",
+      selectedType: "",
+      options: [],
+    }))
   );
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedType, setSelectedType] = useState(""); // State to track selected question type
-
+  const id = generateRandomId();
   const navigate = useNavigate();
 
   const handleQuestionChange = (index, e) => {
     const { value } = e.target;
     const updatedQuestions = [...questions];
-    updatedQuestions[index] = value;
+    updatedQuestions[index].value = value;
+    setQuestions(updatedQuestions);
+  };
+
+  const handleTypeChange = (index, e) => {
+    const { value } = e.target;
+    const updatedQuestions = [...questions];
+    updatedQuestions[index].selectedType = value;
+    // Reset options when type changes
+    updatedQuestions[index].options = [];
+    setQuestions(updatedQuestions);
+  };
+
+  const handleOptionChange = (index, newOptions) => {
+    const updatedQuestions = [...questions];
+    updatedQuestions[index].options = newOptions;
     setQuestions(updatedQuestions);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Format the questions data
+    const formattedQuestions = questions.map((question) => ({
+      question_text: question.value,
+      option: question.options,
+      ques_type: question.selectedType,
+    }));
+
+    // Prepare the data to be sent in the PUT request
+    const dataToLog = {
+      id:id,
+      icd10: "ACTIVITY",
+      questionnaireName: questionnaireName,
+      status: "Active",
+      questions: formattedQuestions,
+    };
+
     try {
-      const response = await postRequest("/data", {
-        questionnaireName: questionnaireName,
-        questions: questions,
-        status: "Active",
-      });
+      // Log the data to be submitted
+      console.log("Submitted Data:", dataToLog);
+
+      // Send the PUT request to the backend API
+      await axios.post(`http://localhost:9192/data`, dataToLog);
       navigate("/questionnaire-dashboard");
     } catch (error) {
-      console.error("Error creating questionnaire:", error);
+      console.log(error);
     }
   };
-
-  const openModal = () => setIsOpen(true); // Function to open modal
-  const closeModal = () => setIsOpen(false); // Function to close modal
 
   const renderQuestionFields = () => {
     return questions.map((question, index) => (
       <div className="page-style" key={index}>
         <div className="component-style">
-          <InputField
+          <GradientInput
             type="text"
             id={`question-${index}`}
-            placeholder={`Question ${index + 1}`}
-            value={question}
+            name={`Question ${index + 1}`}
+            value={question.value}
             onChange={(e) => handleQuestionChange(index, e)}
+            style={{ width: "700px" }}
           />
+
           <div className="select-option">
-            <div className="medium-primary-btn button" onClick={openModal}>
-              Select Option
-            </div>
+            <select
+              className="select-option"
+              onChange={(e) => handleTypeChange(index, e)}
+            >
+              <option>Select Question Type</option>
+              <option value="MCQ">MCQ</option>
+              <option value="NAT">NAT</option>
+              <option value="Descriptive">Descriptive</option>
+            </select>
           </div>
         </div>
+        {/* Render MCQOptions component conditionally */}
+        {question.selectedType === "MCQ" && (
+          <MCQOptions
+            options={question.options}
+            onChange={(newOptions) => handleOptionChange(index, newOptions)}
+          />
+        )}
       </div>
     ));
-  };
-
-  const handleTypeChange = (e) => {
-    setSelectedType(e.target.value); // Update selected question type
   };
 
   return (
@@ -86,29 +131,6 @@ function CreateQuestionnaire() {
           </button>
         </form>
       </div>
-      {/* Modal Component */}
-      <Modal isOpen={isOpen} onRequestClose={closeModal}>
-        <div className="navbar">
-          <h2>Select Choice</h2>
-          <button onClick={closeModal}>Close Modal</button>
-        </div>
-        <br/>
-        <select className="select-modal" onChange={handleTypeChange}>
-          <option value="">Select Question Type</option>
-          <option value="MCQ">MCQ</option>
-          <option value="Nat">Nat</option>
-          <option value="Descriptive">Descriptive</option>
-        </select>
-        {/* Render additional fields for MCQ type */}
-        {selectedType === "MCQ" && (
-          <div>
-            <InputField type="text" placeholder="Option 1" />
-            <InputField type="text" placeholder="Option 2" />
-            <InputField type="text" placeholder="Option 3" />
-            <InputField type="text" placeholder="Option 4" />
-          </div>
-        )}
-      </Modal>
     </div>
   );
 }
