@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import "../components/css/common.css";
@@ -8,9 +9,7 @@ function FieldWorkerDashboard() {
   const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
   const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
   const [FieldWorkerDetails, setFieldWorkerDetails] = useState([]); // State for storing doctor details array
-  const token =
-    "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYWthc2gxMjMiLCJpYXQiOjE3MTM1NTQyNzMsImV4cCI6MTcxMzU3MjI3M30.IP7aoY0GiXayio5lZsMNQUvj19hqEQtLpPOSeKdJWbfn4yiPpvxmDwWIP3EEpe4hVmdN06MUaAYoYYkzimM7eQ";
-
+  const token = useSelector((state) => state.auth.token);
   useEffect(() => {
     const fetchFieldWorkerDetails = async () => {
       try {
