@@ -23,9 +23,9 @@ export const postRequest = async (endpoint, data, headers) => {
   }
 };
 // Function to make a PUT request
-export const putRequest = async (endpoint, data) => {
+export const putRequest = async (endpoint, data,headers) => {
   try {
-    const response = await axios.put(endpoint, data);
+    const response = await axios.put(endpoint, data,{ headers });
     return response.data;
   } catch (error) {
     throw error;

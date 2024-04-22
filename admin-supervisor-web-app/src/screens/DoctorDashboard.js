@@ -7,7 +7,7 @@ import "../components/css/common.css";
 import "./css/doctor-dashboard.css";
 import GradientInput from "../components/inputs/GradientInput";
 import Modal from "react-modal"; // Import react-modal
-
+import { putRequest } from "../components/Api/api";
 function DoctorDashboard() {
   const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
   const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
@@ -17,19 +17,19 @@ function DoctorDashboard() {
   const [editedDoctor, setEditedDoctor] = useState(null); // State for storing edited doctor details
 
   const token = useSelector((state) => state.auth.token);
-
+  const fetchDoctorDetails = async () => {
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      // Await the API call
+      const response = await getRequest("/admin/allDoctorDetail", headers);
+      // Update the state with the fetched doctor details
+      setDoctorDetails(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const fetchDoctorDetails = async () => {
-      try {
-        const headers = { Authorization: `Bearer ${token}` };
-        // Await the API call
-        const response = await getRequest("/admin/allDoctorDetail", headers);
-        // Update the state with the fetched doctor details
-        setDoctorDetails(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    
     // Call the fetchDoctorDetails function
     fetchDoctorDetails();
   }, []);
@@ -54,12 +54,22 @@ function DoctorDashboard() {
     const { name, value } = event.target;
     setEditedDoctor({ ...editedDoctor, [name]: value });
   };
-  const saveEditedDoctor = () => {
+  const saveEditedDoctor = async () => {
     // Save the edited doctor details
     // Here you can send an API request to update the doctor details
-    // For demonstration purpose, I'm just updating the state with edited details
-    setEditedDoctor(editedDoctor);
-    console.log(editedDoctor);
+    
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      const response = await putRequest(
+        `/admin/updatedoctordetails/${editedDoctor.doctorId}`,
+        editedDoctor,
+        headers
+      );
+      setEditedDoctor(editedDoctor);
+      fetchDoctorDetails();
+    } catch (error) {
+      console.log(error);
+    }
     closeModal();
   };
 
@@ -121,6 +131,7 @@ function DoctorDashboard() {
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Doctor Details Modal"
+        ariaHideApp={false}
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.5)", // Darken the background when the modal is open
@@ -250,7 +261,7 @@ function DoctorDashboard() {
                   </tr>
                 </tbody>
               </table>
-              <br/>
+              <br />
               {editedDoctor && (
                 <button
                   onClick={saveEditedDoctor}
