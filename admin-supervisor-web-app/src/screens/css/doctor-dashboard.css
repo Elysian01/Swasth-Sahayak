@@ -63,3 +63,10 @@
   align-items: stretch;
   padding-top: 50px;
 }
+.save-changes{
+  width: 50%;
+  align-self: center;
+}
+.modal-input{
+  border: none;
+}
