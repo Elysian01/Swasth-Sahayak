@@ -112,14 +112,14 @@ function FieldWorkerDashboard() {
         }}
       >
         <div className="modal-view">
-          <div className="modal-doctor-details">
+          <div className="modal-fieldworker-details">
             <h2>Field Worker Details</h2>
             <button onClick={closeModal} className="dark-primary-small-btn">
               X
             </button>
           </div>
           {selectedFieldWorker && (
-            <div className="modal-profile-details">
+            <div className="modal-fieldworker-profile-details">
               <table>
                 <tbody>
                   <tr>

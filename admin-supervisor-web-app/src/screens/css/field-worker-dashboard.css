@@ -49,12 +49,12 @@
   display: flex;
   flex-direction: column;
 }
-.modal-doctor-details{
+.modal-fieldworker-details{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.modal-profile-details{
+.modal-fieldworker-profile-details{
   display: flex;
   flex-direction: column;
   align-items: stretch;
