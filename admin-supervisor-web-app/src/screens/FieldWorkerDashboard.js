@@ -23,7 +23,6 @@ function FieldWorkerDashboard() {
           headers
         );
         // Update the state with the fetched doctor details
-        console.log(response);
         setFieldWorkerDetails(response);
       } catch (error) {
         console.error(error);

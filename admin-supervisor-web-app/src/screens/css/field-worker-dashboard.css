@@ -47,15 +47,18 @@
 }
 .modal-view{
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
 }
 .modal-fieldworker-details{
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
 .modal-fieldworker-profile-details{
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: stretch;
   padding-top: 100px;
