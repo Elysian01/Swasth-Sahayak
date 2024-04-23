@@ -24,7 +24,10 @@ function FieldWorkerDashboard() {
     const nameMatch = fieldworker.name
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-    return nameMatch ;
+    const idMatch = fieldworker.fieldworkerid
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    return nameMatch || idMatch;
   });
 
   useEffect(() => {
@@ -65,8 +68,8 @@ function FieldWorkerDashboard() {
       <div className="dropdown-container">
         <GradientInput
           type="text"
-          placeholder="Search by Name"
-          name="Search by Name"
+          placeholder="Search by Name and Field Worker ID"
+          name="Search by Name and Field Worker ID"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
