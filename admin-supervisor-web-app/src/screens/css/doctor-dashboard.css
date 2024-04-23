@@ -55,18 +55,21 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 .modal-profile-details{
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  align-items: stretch;
+  align-items: start;
   padding-top: 50px;
 }
-.save-changes{
-  width: 50%;
-  align-self: center;
+.modal-static{
+  display: flex;
+  font-size: large;
+  font-weight: bolder;
 }
-.modal-input{
-  border: none;
+.modal-dynamic{
+  display: flex;
+  color: var(--primary);
 }

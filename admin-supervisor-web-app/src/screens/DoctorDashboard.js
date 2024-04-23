@@ -102,11 +102,11 @@ function DoctorDashboard() {
         ariaHideApp={false}
         style={{
           overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)", // Darken the background when the modal is open
+            backgroundColor: "rgba(0, 0, 0, 0.7)", // Darken the background when the modal is open
           },
           content: {
-            width: "80%", // Set the width to 60% of the viewport
-            height: "80%", // Automatically adjust the height based on content
+            width: "30%", // Set the width to 60% of the viewport
+            height: "60%", // Automatically adjust the height based on content
             margin: "auto", // Center the modal horizontally
             padding: "25px",
             backgroundColor: "#fafafa",
@@ -119,45 +119,40 @@ function DoctorDashboard() {
         <div className="modal-view">
           <div className="modal-doctor-details">
             <h2>Doctor Details</h2>
-            <button onClick={closeModal} className="dark-primary-small-btn">
+            <button onClick={closeModal} className="small-primary-btn">
               X
             </button>
           </div>
           {selectedDoctor && (
             <div className="modal-profile-details">
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Name:</td>
-                    <td> {selectedDoctor.name} </td>
-                  </tr>
-                  <tr>
-                    <td>Region:</td>
-                    <td>{selectedDoctor.blockCode}</td>
-                  </tr>
-                  <tr>
-                    <td>Specialisation:</td>
-                    <td>{selectedDoctor.specialization}</td>
-                  </tr>
-                  <tr>
-                    <td>Gender:</td>
-                    <td>{selectedDoctor.gender}</td>
-                  </tr>
-                  <tr>
-                    <td>Mobile No:</td>
-                    <td>{selectedDoctor.mobileno}</td>
-                  </tr>
-                  <tr>
-                    <td>Pin Code:</td>
-                    <td>{selectedDoctor.pinecode}</td>
-                  </tr>
-                  <tr>
-                    <td>Working Address:</td>
-                    <td>{selectedDoctor.workingaddress}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <br />
+              <div className="modal-doctor-details">
+                <div className="modal-static">-Name: </div>
+                <div className="modal-dynamic">{selectedDoctor.name}</div>
+              </div>
+              <div className="modal-doctor-details">
+                <div className="modal-static">-Region:</div>
+                <div className="modal-dynamic">{selectedDoctor.blockCode}</div>
+              </div>
+              <div className="modal-doctor-details">
+                <div className="modal-static">-Specialisation:</div>
+                <div className="modal-dynamic">{selectedDoctor.specialization}</div>
+              </div>
+              <div className="modal-doctor-details">
+                <div className="modal-static">-Gender:</div>
+                <div className="modal-dynamic">{selectedDoctor.gender}</div>
+              </div>
+              <div className="modal-doctor-details">
+                <div className="modal-static">-Mobile No:</div>
+                <div className="modal-dynamic">{selectedDoctor.mobileno}</div>
+              </div>
+              <div className="modal-doctor-details">
+                <div className="modal-static">-Pin Code:</div>
+                <div className="modal-dynamic">{selectedDoctor.pinecode}</div>
+              </div>
+              <div className="modal-doctor-details">
+                <div className="modal-static">-Working Address:</div>
+                <div className="modal-dynamic">{selectedDoctor.workingaddress}</div>
+              </div>
             </div>
           )}
         </div>
