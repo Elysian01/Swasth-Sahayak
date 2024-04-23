@@ -3,12 +3,11 @@ import { useSelector } from "react-redux";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import { getRequest } from "../components/Api/api";
+import Modal from "react-modal"; // Import react-modal
+import { useNavigate } from "react-router-dom";
 import "../components/css/common.css";
 import "./css/doctor-dashboard.css";
-import GradientInput from "../components/inputs/GradientInput";
-import Modal from "react-modal"; // Import react-modal
-import { putRequest } from "../components/Api/api";
-import PrimaryTable from "../components/tables/PrimaryTable";
+
 function DoctorDashboard() {
   const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
   const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
@@ -17,6 +16,7 @@ function DoctorDashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false); // State for managing modal visibility
   const [editedDoctor, setEditedDoctor] = useState(null); // State for storing edited doctor details
 
+  const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
   const fetchDoctorDetails = async () => {
     try {
@@ -44,6 +44,9 @@ function DoctorDashboard() {
   // Function to handle closing the modal
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+  const handleEdit = (doctor) => {
+    navigate("/edit-doctor", { state: { doctor } });
   };
 
   return (
@@ -88,7 +91,12 @@ function DoctorDashboard() {
               >
                 View
               </button>
-              <button className="dark-primary-small-btn">Edit</button>
+              <button
+                onClick={() => handleEdit(doctor)}
+                className="dark-primary-small-btn"
+              >
+                Edit
+              </button>
               <button className="pink-btn">Inactive</button>
             </div>
           </div>
@@ -135,7 +143,9 @@ function DoctorDashboard() {
               </div>
               <div className="modal-doctor-details">
                 <div className="modal-static">-Specialisation:</div>
-                <div className="modal-dynamic">{selectedDoctor.specialization}</div>
+                <div className="modal-dynamic">
+                  {selectedDoctor.specialization}
+                </div>
               </div>
               <div className="modal-doctor-details">
                 <div className="modal-static">-Gender:</div>
@@ -151,7 +161,9 @@ function DoctorDashboard() {
               </div>
               <div className="modal-doctor-details">
                 <div className="modal-static">-Working Address:</div>
-                <div className="modal-dynamic">{selectedDoctor.workingaddress}</div>
+                <div className="modal-dynamic">
+                  {selectedDoctor.workingaddress}
+                </div>
               </div>
             </div>
           )}

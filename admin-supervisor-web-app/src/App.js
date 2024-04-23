@@ -12,6 +12,7 @@ import QuestionnaireConfigurations from "./screens/QuestionnaireConfigurations";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Forms from "./components/inputs/Forms";
 import ViewQuestionnaire from "./screens/ViewQuestionnaire";
+import EditDoctor from "./screens/EditDoctor";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/forms" element={<Forms />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="*" element={<PageNotFound />} />
-
+          <Route path="/edit-doctor" element={<EditDoctor />} />
           <Route
             path="field-worker-dashboard"
             element={<FieldWorkerDashboard />}
