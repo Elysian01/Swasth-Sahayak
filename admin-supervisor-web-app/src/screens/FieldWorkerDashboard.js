@@ -6,19 +6,27 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import { getRequest } from "../components/Api/api";
+import GradientInput from "../components/inputs/GradientInput";
 
 import "../components/css/common.css";
 import "./css/field-worker-dashboard.css";
 
 function FieldWorkerDashboard() {
-  const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
   const [FieldWorkerDetails, setFieldWorkerDetails] = useState([]); // State for storing doctor details array
   const [selectedFieldWorker, setSelectedFieldWorker] = useState(null); // State for storing selected doctor
   const [isModalOpen, setIsModalOpen] = useState(false); // State for managing modal visibility
-  
+  const [searchTerm, setSearchTerm] = useState("");
+
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
+
+  const filteredFieldWorkers = FieldWorkerDetails.filter((fieldworker) => {
+    const nameMatch = fieldworker.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    return nameMatch ;
+  });
+
   useEffect(() => {
     const fetchFieldWorkerDetails = async () => {
       try {
@@ -55,26 +63,18 @@ function FieldWorkerDashboard() {
       <Navbar />
       <PageHeading title="Field Worker Dashboard" />
       <div className="dropdown-container">
-        <div className="dropdown">
-          {/* First Dropdown */}
-          <select
-            value={selectedDropdownValue}
-            onChange={(e) => setSelectedDropdownValue(e.target.value)}
-          >
-            <option value="">Select Region</option>
-            {dropdown1Value.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
+        <GradientInput
+          type="text"
+          placeholder="Search by Name"
+          name="Search by Name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
-        <button className="small-primary-btn">Search</button>
         <button className="small-primary-btn">Add New Field Worker</button>
       </div>
       <div className="view-pane">
-        {FieldWorkerDetails.map((fieldworker, index) => (
+        {filteredFieldWorkers.map((fieldworker, index) => (
           <div className="display-card" key={index}>
             <div className="person-details">
               <div className="person-name">Name: {fieldworker.name}</div>
@@ -93,8 +93,11 @@ function FieldWorkerDashboard() {
                 View
               </button>
               <button
-              onClick={() => handleEdit(fieldworker)}
-              className="dark-primary-small-btn">Edit</button>
+                onClick={() => handleEdit(fieldworker)}
+                className="dark-primary-small-btn"
+              >
+                Edit
+              </button>
               <button className="pink-btn">Inactive</button>
             </div>
           </div>
