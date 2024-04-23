@@ -41,7 +41,7 @@ const DoctorForms = ({ handleEdit, doctor }) => {
     event.preventDefault();
     // Create a doctor object with the updated form data
     const updatedDoctor = {
-      name: doctor.name,
+      name: name,
       gender: gender,
       mobileno: phone,
       specialization: doctor.specialization,

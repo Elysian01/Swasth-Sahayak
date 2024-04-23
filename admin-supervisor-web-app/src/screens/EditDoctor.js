@@ -18,7 +18,7 @@ const EditDoctor = () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       await putRequest(
-        `/admin/updatedoctordetails/${updatedDoctor.doctorId}`,
+        `/admin/updatedoctordetails/${doctor.doctorId}`,
         updatedDoctor,
         headers
       );

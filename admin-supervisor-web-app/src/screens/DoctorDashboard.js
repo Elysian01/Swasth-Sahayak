@@ -11,8 +11,7 @@ import "../components/css/common.css";
 import "./css/doctor-dashboard.css";
 
 function DoctorDashboard() {
-  const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
+  
   const [doctorDetails, setDoctorDetails] = useState([]); // State for storing doctor details array
   const [selectedDoctor, setSelectedDoctor] = useState(null); // State for storing selected doctor
   const [isModalOpen, setIsModalOpen] = useState(false); // State for managing modal visibility
@@ -56,18 +55,7 @@ function DoctorDashboard() {
       <PageHeading title="Doctor Dashboard" />
       <div className="dropdown-container">
         <div className="dropdown">
-          {/* First Dropdown */}
-          <select
-            value={selectedDropdownValue}
-            onChange={(e) => setSelectedDropdownValue(e.target.value)}
-          >
-            <option value="">Select Region</option>
-            {dropdown1Value.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+          {/* implement search funtionality here */}
         </div>
 
         <button className="small-primary-btn">Search</button>
