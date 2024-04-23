@@ -1,10 +1,12 @@
 import React from "react";
 import Navbar from "../components/headers/Navbar";
 import { useSelector } from "react-redux";
-import PageHeading from "../components/headers/PageHeading";
 import { useLocation, useNavigate } from "react-router-dom";
-import Forms from "../components/inputs/DoctorForm";
+
+import PageHeading from "../components/headers/PageHeading";
+import DoctorForms from "../components/inputs/DoctorForm";
 import { putRequest } from "../components/Api/api";
+
 const EditDoctor = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,9 +30,9 @@ const EditDoctor = () => {
   return (
     <div>
       <Navbar />
-      <PageHeading title="Edit Details" />
+      <PageHeading title="Edit Doctor Details" />
 
-      <Forms handleEdit={handleEdit} doctor={doctor} />
+      <DoctorForms handleEdit={handleEdit} doctor={doctor} />
     </div>
   );
 };

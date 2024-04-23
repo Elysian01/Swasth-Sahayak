@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import Modal from "react-modal"; // Import react-modal
+import { useNavigate } from "react-router-dom";
+
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
+import { getRequest } from "../components/Api/api";
+
 import "../components/css/common.css";
 import "./css/field-worker-dashboard.css";
-import { getRequest } from "../components/Api/api";
-import Modal from "react-modal"; // Import react-modal
+
 function FieldWorkerDashboard() {
   const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
   const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
   const [FieldWorkerDetails, setFieldWorkerDetails] = useState([]); // State for storing doctor details array
   const [selectedFieldWorker, setSelectedFieldWorker] = useState(null); // State for storing selected doctor
   const [isModalOpen, setIsModalOpen] = useState(false); // State for managing modal visibility
+  
+  const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
     const fetchFieldWorkerDetails = async () => {
@@ -40,6 +46,9 @@ function FieldWorkerDashboard() {
   // Function to handle closing the modal
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+  const handleEdit = (fieldworker) => {
+    navigate("/edit-field-worker", { state: { fieldworker } });
   };
   return (
     <div>
@@ -83,7 +92,9 @@ function FieldWorkerDashboard() {
               >
                 View
               </button>
-              <button className="dark-primary-small-btn">Edit</button>
+              <button
+              onClick={() => handleEdit(fieldworker)}
+              className="dark-primary-small-btn">Edit</button>
               <button className="pink-btn">Inactive</button>
             </div>
           </div>
@@ -96,10 +107,10 @@ function FieldWorkerDashboard() {
         contentLabel="Doctor Details Modal"
         style={{
           overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)", // Darken the background when the modal is open
+            backgroundColor: "rgba(0, 0, 0, 0.7)", // Darken the background when the modal is open
           },
           content: {
-            width: "60%", // Set the width to 60% of the viewport
+            width: "30%", // Set the width to 60% of the viewport
             height: "60%", // Automatically adjust the height based on content
             margin: "auto", // Center the modal horizontally
             padding: "25px",
@@ -119,26 +130,28 @@ function FieldWorkerDashboard() {
           </div>
           {selectedFieldWorker && (
             <div className="modal-fieldworker-profile-details">
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Name:</td>
-                    <td>{selectedFieldWorker.name}</td>
-                  </tr>
-                  <tr>
-                    <td>Gender:</td>
-                    <td>{selectedFieldWorker.gender}</td>
-                  </tr>
-                  <tr>
-                    <td>Mobile No:</td>
-                    <td>{selectedFieldWorker.mobileno}</td>
-                  </tr>
-                  <tr>
-                    <td>Fieldworker ID:</td>
-                    <td>{selectedFieldWorker.fieldworkerid}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Name: </div>
+                <div className="modal-dynamic">{selectedFieldWorker.name}</div>
+              </div>
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Gender:</div>
+                <div className="modal-dynamic">
+                  {selectedFieldWorker.gender}
+                </div>
+              </div>
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Mobile No:</div>
+                <div className="modal-dynamic">
+                  {selectedFieldWorker.mobileno}
+                </div>
+              </div>
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Fieldworker ID:</div>
+                <div className="modal-dynamic">
+                  {selectedFieldWorker.fieldworkerid}
+                </div>
+              </div>
             </div>
           )}
         </div>

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Modal from "react-modal"; // Import react-modal
+import { useNavigate } from "react-router-dom";
+
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import { getRequest } from "../components/Api/api";
-import Modal from "react-modal"; // Import react-modal
-import { useNavigate } from "react-router-dom";
+
 import "../components/css/common.css";
 import "./css/doctor-dashboard.css";
 
@@ -14,7 +16,7 @@ function DoctorDashboard() {
   const [doctorDetails, setDoctorDetails] = useState([]); // State for storing doctor details array
   const [selectedDoctor, setSelectedDoctor] = useState(null); // State for storing selected doctor
   const [isModalOpen, setIsModalOpen] = useState(false); // State for managing modal visibility
-  const [editedDoctor, setEditedDoctor] = useState(null); // State for storing edited doctor details
+  
 
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
@@ -37,7 +39,6 @@ function DoctorDashboard() {
   // Function to handle opening the modal
   const openModal = (doctor) => {
     setSelectedDoctor(doctor);
-    setEditedDoctor(null);
     setIsModalOpen(true);
   };
 

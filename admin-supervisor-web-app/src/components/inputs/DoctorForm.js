@@ -3,7 +3,7 @@ import GradientInput from "./GradientInput";
 import "../css/form.css";
 import "../css/common.css";
 
-const Forms = ({ handleEdit, doctor }) => {
+const DoctorForms = ({ handleEdit, doctor }) => {
   const [selectedDate, setSelectedDate] = useState(doctor.dateofjoining);
   const [gender, setGender] = useState(doctor.gender);
   const [phone, setPhone] = useState(doctor.mobileno);
@@ -133,4 +133,4 @@ const Forms = ({ handleEdit, doctor }) => {
   );
 };
 
-export default Forms;
+export default DoctorForms;
