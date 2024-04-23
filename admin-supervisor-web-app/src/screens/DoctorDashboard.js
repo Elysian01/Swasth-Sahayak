@@ -8,6 +8,7 @@ import "./css/doctor-dashboard.css";
 import GradientInput from "../components/inputs/GradientInput";
 import Modal from "react-modal"; // Import react-modal
 import { putRequest } from "../components/Api/api";
+import PrimaryTable from "../components/tables/PrimaryTable";
 function DoctorDashboard() {
   const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
   const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
@@ -29,7 +30,6 @@ function DoctorDashboard() {
     }
   };
   useEffect(() => {
-    
     // Call the fetchDoctorDetails function
     fetchDoctorDetails();
   }, []);
@@ -40,37 +40,10 @@ function DoctorDashboard() {
     setEditedDoctor(null);
     setIsModalOpen(true);
   };
-  // Function to handle opening the modal for edit
-  const openEditModal = (doctor) => {
-    setEditedDoctor(doctor);
-    setIsModalOpen(true);
-  };
 
   // Function to handle closing the modal
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-  const handleEditChange = (event) => {
-    const { name, value } = event.target;
-    setEditedDoctor({ ...editedDoctor, [name]: value });
-  };
-  const saveEditedDoctor = async () => {
-    // Save the edited doctor details
-    // Here you can send an API request to update the doctor details
-    
-    try {
-      const headers = { Authorization: `Bearer ${token}` };
-      const response = await putRequest(
-        `/admin/updatedoctordetails/${editedDoctor.doctorId}`,
-        editedDoctor,
-        headers
-      );
-      setEditedDoctor(editedDoctor);
-      fetchDoctorDetails();
-    } catch (error) {
-      console.log(error);
-    }
-    closeModal();
   };
 
   return (
@@ -115,12 +88,7 @@ function DoctorDashboard() {
               >
                 View
               </button>
-              <button
-                className="dark-primary-small-btn"
-                onClick={() => openEditModal(doctor)}
-              >
-                Edit
-              </button>
+              <button className="dark-primary-small-btn">Edit</button>
               <button className="pink-btn">Inactive</button>
             </div>
           </div>
@@ -161,51 +129,15 @@ function DoctorDashboard() {
                 <tbody>
                   <tr>
                     <td>Name:</td>
-                    <td>
-                      {editedDoctor ? (
-                        <GradientInput
-                          type="text"
-                          name="name"
-                          value={editedDoctor.name}
-                          onChange={handleEditChange}
-                          className="modal-input"
-                        />
-                      ) : (
-                        selectedDoctor.name
-                      )}
-                    </td>
+                    <td> {selectedDoctor.name} </td>
                   </tr>
                   <tr>
                     <td>Region:</td>
-                    <td>
-                      {editedDoctor ? (
-                        <GradientInput
-                          type="text"
-                          name="blockCode"
-                          value={editedDoctor.blockCode}
-                          onChange={handleEditChange}
-                          className="modal-input"
-                        />
-                      ) : (
-                        selectedDoctor.blockCode
-                      )}
-                    </td>
+                    <td>{selectedDoctor.blockCode}</td>
                   </tr>
                   <tr>
                     <td>Specialisation:</td>
-                    <td>
-                      {editedDoctor ? (
-                        <GradientInput
-                          type="text"
-                          name="specialization"
-                          value={editedDoctor.specialization}
-                          onChange={handleEditChange}
-                          className="modal-input"
-                        />
-                      ) : (
-                        selectedDoctor.specialization
-                      )}
-                    </td>
+                    <td>{selectedDoctor.specialization}</td>
                   </tr>
                   <tr>
                     <td>Gender:</td>
@@ -213,63 +145,19 @@ function DoctorDashboard() {
                   </tr>
                   <tr>
                     <td>Mobile No:</td>
-                    <td>
-                      {editedDoctor ? (
-                        <GradientInput
-                          type="text"
-                          name="mobileno"
-                          value={editedDoctor.mobileno}
-                          onChange={handleEditChange}
-                          className="modal-input"
-                        />
-                      ) : (
-                        selectedDoctor.mobileno
-                      )}
-                    </td>
+                    <td>{selectedDoctor.mobileno}</td>
                   </tr>
                   <tr>
                     <td>Pin Code:</td>
-                    <td>
-                      {editedDoctor ? (
-                        <GradientInput
-                          type="text"
-                          name="pinecode"
-                          value={editedDoctor.pinecode}
-                          onChange={handleEditChange}
-                          className="modal-input"
-                        />
-                      ) : (
-                        selectedDoctor.pinecode
-                      )}
-                    </td>
+                    <td>{selectedDoctor.pinecode}</td>
                   </tr>
                   <tr>
                     <td>Working Address:</td>
-                    <td>
-                      {editedDoctor ? (
-                        <GradientInput
-                          type="text"
-                          name="workingaddress"
-                          value={editedDoctor.workingaddress}
-                          onChange={handleEditChange}
-                          className="modal-input"
-                        />
-                      ) : (
-                        selectedDoctor.workingaddress
-                      )}
-                    </td>
+                    <td>{selectedDoctor.workingaddress}</td>
                   </tr>
                 </tbody>
               </table>
               <br />
-              {editedDoctor && (
-                <button
-                  onClick={saveEditedDoctor}
-                  className="dark-primary-small-btn save-changes"
-                >
-                  Save Changes
-                </button>
-              )}
             </div>
           )}
         </div>
