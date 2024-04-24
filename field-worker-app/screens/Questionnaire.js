@@ -59,32 +59,80 @@ const Questionnaire = (props) => {
 		return today;
 	}
 
+	// const submitQuestionnaire = async () => {
+	// 	console.log("Response: ", questionResponses);
+	// 	console.log("Field Worker Comments: ", fieldWorkerComments);
+
+	// 	fieldWorkerData = {
+	// 		patient_abhaid: patientAbhaId,
+	// 		comment: fieldWorkerComments,
+	// 		date: getDate(),
+	// 	};
+
+	// 	questionnaireData = {
+	// 		patient_abhaid: patientAbhaId,
+	// 		questionnaire_type: questionnaireType,
+	// 		responses: questionResponses,
+	// 	};
+
+	// 	// console.log("Hello: ", questionnaireData);
+
+	// 	try {
+	// 		let uploadData = await AsyncStorage.getItem("uploadData");
+	// 		uploadData = JSON.parse(uploadData);
+	// 		uploadData["fieldworker_comments"].push(fieldWorkerData);
+	// 		questionnaireData.responses = JSON.stringify(
+	// 			questionnaireData.responses
+	// 		);
+	// 		uploadData["questionnaire_response"].push(questionnaireData);
+	// 		console.log("Updated Upload data: ", uploadData);
+
+	// 		await AsyncStorage.setItem(
+	// 			"uploadData",
+	// 			JSON.stringify(uploadData)
+	// 		);
+	// 		console.log("Questionnaire submitted");
+
+	// 		navigation.navigate("DoctorSelection", {
+	// 			patient_abhaid: patientAbhaId,
+	// 		});
+	// 	} catch (error) {
+	// 		console.error("Error saving data, please retry:", error);
+	// 		Alert.alert("Error", "Error saving data");
+	// 	}
+	// };
+
 	const submitQuestionnaire = async () => {
 		console.log("Response: ", questionResponses);
 		console.log("Field Worker Comments: ", fieldWorkerComments);
 
-		fieldWorkerData = {
+		const fieldWorkerData = {
 			patient_abhaid: patientAbhaId,
 			comment: fieldWorkerComments,
 			date: getDate(),
 		};
 
-		questionnaireData = {
+		const questionnaireData = {
 			patient_abhaid: patientAbhaId,
 			questionnaire_type: questionnaireType,
-			responses: questionResponses,
+			responses: questionResponses, 
 		};
-
-		// console.log("Hello: ", questionnaireData);
 
 		try {
 			let uploadData = await AsyncStorage.getItem("uploadData");
 			uploadData = JSON.parse(uploadData);
 			uploadData["fieldworker_comments"].push(fieldWorkerData);
+
+			// Stringify questionnaireData's responses here
 			questionnaireData.responses = JSON.stringify(
 				questionnaireData.responses
 			);
-			uploadData["questionnaire_response"].push(questionnaireData);
+
+			uploadData["questionnaire_response"] = [
+				...uploadData["questionnaire_response"],
+				questionnaireData,
+			];
+
 			console.log("Updated Upload data: ", uploadData);
 
 			await AsyncStorage.setItem(
