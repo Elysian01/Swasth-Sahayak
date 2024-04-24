@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../login/authSlice";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import InputField from "../components/inputs/InputField";
 import LoginBG from "../components/misc/LoginBG";
+import { authApi } from "../login/authApi";
+
 import "./css/login.css";
 
 function Login() {
@@ -12,8 +16,17 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const handleSubmit = async (e) => {};
+  const dispatch = useDispatch();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const userData = await authApi.login({ username: email, password });
+      dispatch(setCredentials(userData));
+      navigate("/admin-dashboard");
+    } catch (err) {
+      setError("Invalid email or password"); // Set error message for invalid credentials
+    }
+  };
   return (
     <div>
       <Navbar />
@@ -28,7 +41,7 @@ function Login() {
           <div className="subtext">
             <h3>Please Enter Below Details</h3>
           </div>
-          <form>
+          <form onSubmit={handleSubmit}>
             <InputField
               type="text"
               placeholder="Enter Username"

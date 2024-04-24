@@ -1,15 +1,34 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import Modal from "react-modal"; // Import react-modal
+import { useNavigate } from "react-router-dom";
+
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
+import { getRequest } from "../components/Api/api";
+import GradientInput from "../components/inputs/GradientInput";
+
 import "../components/css/common.css";
 import "./css/field-worker-dashboard.css";
-import { getRequest } from "../components/Api/api";
+
 function FieldWorkerDashboard() {
-  const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
   const [FieldWorkerDetails, setFieldWorkerDetails] = useState([]); // State for storing doctor details array
-  const token =
-    "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYWthc2gxMjMiLCJpYXQiOjE3MTM1NTQyNzMsImV4cCI6MTcxMzU3MjI3M30.IP7aoY0GiXayio5lZsMNQUvj19hqEQtLpPOSeKdJWbfn4yiPpvxmDwWIP3EEpe4hVmdN06MUaAYoYYkzimM7eQ";
+  const [selectedFieldWorker, setSelectedFieldWorker] = useState(null); // State for storing selected doctor
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for managing modal visibility
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
+
+  const filteredFieldWorkers = FieldWorkerDetails.filter((fieldworker) => {
+    const nameMatch = fieldworker.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const idMatch = fieldworker.fieldworkerid
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    return nameMatch || idMatch;
+  });
 
   useEffect(() => {
     const fetchFieldWorkerDetails = async () => {
@@ -29,31 +48,36 @@ function FieldWorkerDashboard() {
     // Call the fetchDoctorDetails function
     fetchFieldWorkerDetails();
   }, []);
+  // Function to handle opening the modal
+  const openModal = (fieldworker) => {
+    setSelectedFieldWorker(fieldworker);
+    setIsModalOpen(true);
+  };
+
+  // Function to handle closing the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleEdit = (fieldworker) => {
+    navigate("/edit-field-worker", { state: { fieldworker } });
+  };
   return (
     <div>
       <Navbar />
       <PageHeading title="Field Worker Dashboard" />
       <div className="dropdown-container">
-        <div className="dropdown">
-          {/* First Dropdown */}
-          <select
-            value={selectedDropdownValue}
-            onChange={(e) => setSelectedDropdownValue(e.target.value)}
-          >
-            <option value="">Select Region</option>
-            {dropdown1Value.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
+        <GradientInput
+          type="text"
+          placeholder="Search by Name and Field Worker ID"
+          name="Search by Name and Field Worker ID"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
-        <button className="small-primary-btn">Search</button>
         <button className="small-primary-btn">Add New Field Worker</button>
       </div>
       <div className="view-pane">
-        {FieldWorkerDetails.map((fieldworker, index) => (
+        {filteredFieldWorkers.map((fieldworker, index) => (
           <div className="display-card" key={index}>
             <div className="person-details">
               <div className="person-name">Name: {fieldworker.name}</div>
@@ -65,13 +89,79 @@ function FieldWorkerDashboard() {
               </div>
             </div>
             <div className="button-alignment">
-              <button className="dark-primary-small-btn">View</button>
-              <button className="dark-primary-small-btn">Edit</button>
+              <button
+                className="dark-primary-small-btn"
+                onClick={() => openModal(fieldworker)}
+              >
+                View
+              </button>
+              <button
+                onClick={() => handleEdit(fieldworker)}
+                className="dark-primary-small-btn"
+              >
+                Edit
+              </button>
               <button className="pink-btn">Inactive</button>
             </div>
           </div>
         ))}
       </div>
+      {/* Use react-modal for the modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Doctor Details Modal"
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.7)", // Darken the background when the modal is open
+          },
+          content: {
+            width: "30%", // Set the width to 60% of the viewport
+            height: "60%", // Automatically adjust the height based on content
+            margin: "auto", // Center the modal horizontally
+            padding: "25px",
+            backgroundColor: "#fafafa",
+            borderRadius: "10px",
+
+            border: "none", // Remove border
+          },
+        }}
+      >
+        <div className="modal-view">
+          <div className="modal-fieldworker-details">
+            <h2>Field Worker Details</h2>
+            <button onClick={closeModal} className="dark-primary-small-btn">
+              X
+            </button>
+          </div>
+          {selectedFieldWorker && (
+            <div className="modal-fieldworker-profile-details">
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Name: </div>
+                <div className="modal-dynamic">{selectedFieldWorker.name}</div>
+              </div>
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Gender:</div>
+                <div className="modal-dynamic">
+                  {selectedFieldWorker.gender}
+                </div>
+              </div>
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Mobile No:</div>
+                <div className="modal-dynamic">
+                  {selectedFieldWorker.mobileno}
+                </div>
+              </div>
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Fieldworker ID:</div>
+                <div className="modal-dynamic">
+                  {selectedFieldWorker.fieldworkerid}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </Modal>
     </div>
   );
 }

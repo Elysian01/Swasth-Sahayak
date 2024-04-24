@@ -1,5 +1,5 @@
 import "../css/Navbar.css";
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 // import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,21 @@ function Navbar() {
 	function handleLogout() {
 		alert("Logout");
 	}
+	const [show, setShow] = useState(false);
+  const controlNavbar = () => {
+    if (window.scrollY > 20) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  };  
 
+  useEffect(() => {
+    window.addEventListener('scroll', controlNavbar);
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, []);
 	useEffect(() => {
 		const handleToggleNav = () => {
 			const navLinks = document.querySelector(".nav-links");
@@ -64,7 +78,7 @@ function Navbar() {
 	}, []);
 
 	return (
-		<nav id="nav">
+		<nav id={`nav${!show ? '' : '-hidden'}`}>
 			<div className="nav-logo">
 				<Link to="/admin-dashboard">
 					<div className="nav-heading">

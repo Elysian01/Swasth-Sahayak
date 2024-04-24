@@ -45,3 +45,31 @@
   font-size: medium;
   border-radius: 10px;
 }
+.modal-view{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.modal-fieldworker-details{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.modal-profile-details{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: start;
+  padding-top: 20px;
+}
+.modal-static{
+  display: flex;
+  font-size: large;
+  font-weight: bolder;
+}
+.modal-dynamic{
+  display: flex;
+  color: var(--primary);
+}

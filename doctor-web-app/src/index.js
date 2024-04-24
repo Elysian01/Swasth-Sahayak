@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import Skeleton from "react-loading-skeleton"; // Import Skeleton
+import Skeleton from "react-loading-skeleton"; 
 import { store, persistor } from "./login/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
