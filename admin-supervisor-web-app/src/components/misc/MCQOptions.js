@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import GradientInput from "../inputs/GradientInput";
+import "./css/MCQOptions.css";
 
 function MCQOptions({ options, onChange }) {
   const handleAddOption = () => {
@@ -13,18 +14,22 @@ function MCQOptions({ options, onChange }) {
   };
 
   return (
-    <div>
+    <div className="mcq-options">
       {options.map((option, index) => (
-        <div key={index}>
-          <GradientInput
-            type="text"
-            placeholder={`Option ${index + 1}`}
-            value={option}
-            onChange={(e) => handleOptionChange(index, e)}
-          />
-        </div>
+        <GradientInput
+          type="text"
+          placeholder={`Option ${index + 1}`}
+          name={`Option ${index + 1}`}
+          value={option}
+          onChange={(e) => handleOptionChange(index, e)}
+          style={{ width: "200%" }}
+        />
       ))}
-      <button onClick={handleAddOption} className="small-primary-btn">+</button>
+      <div className="button-div">
+        <button onClick={handleAddOption} className="small-primary-btn">
+          +
+        </button>
+      </div>
     </div>
   );
 }

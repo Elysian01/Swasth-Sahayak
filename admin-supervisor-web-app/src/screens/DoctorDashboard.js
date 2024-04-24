@@ -62,6 +62,7 @@ function DoctorDashboard() {
   };
   const handleEdit = (doctor) => {
     navigate("/edit-doctor", { state: { doctor } });
+    fetchDoctorDetails();
   };
 
   return (

@@ -1,0 +1,18 @@
+.mcq-options{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.input-ques{
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  width: 200%;
+}
+.small-primary-btn{
+  width: 10%;
+}
+.button-div{
+  display: flex;
+  justify-content: center;
+}

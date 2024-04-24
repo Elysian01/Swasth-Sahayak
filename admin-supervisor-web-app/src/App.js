@@ -8,7 +8,7 @@ import FieldWorkerDashboard from "./screens/FieldWorkerDashboard";
 import PageNotFound from "./screens/PageNotFound";
 import ForgotPassword from "./screens/ForgotPassword";
 import CreateQuestionnaire from "./screens/CreateQuestionnaire";
-import QuestionnaireConfigurations from "./screens/QuestionnaireConfigurations";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import ViewQuestionnaire from "./screens/ViewQuestionnaire";
@@ -40,10 +40,7 @@ function App() {
             path="questionnaire-dashboard"
             element={<QuestionnaireDashboard />}
           />
-          <Route
-            path="questionnaire-configurations"
-            element={<QuestionnaireConfigurations />}
-          />
+          
           <Route
             path="create-questionnaire"
             element={<CreateQuestionnaire />}

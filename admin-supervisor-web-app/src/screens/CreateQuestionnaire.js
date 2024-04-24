@@ -1,27 +1,34 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
-import "./css/CreateQuestionnaire.css";
 import GradientInput from "../components/inputs/GradientInput";
 import MCQOptions from "../components/misc/MCQOptions";
 import axios from "axios";
+import "./css/CreateQuestionnaire.css";
 
 const generateRandomId = () => {
   return Math.floor(Math.random() * 90000) + (10000).toString(36);
 };
+
 function CreateQuestionnaire() {
-  const location = useLocation();
-  const { questionnaireName, numberOfQuestions } = location.state;
-  const [questions, setQuestions] = useState(
-    Array.from({ length: numberOfQuestions }, () => ({
-      value: "",
-      selectedType: "",
-      options: [],
-    }))
-  );
-  const id = generateRandomId();
+  const [questionnaireName, setQuestionnaireName] = useState("");
+  const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
+
+  const handleQuestionnaireNameChange = (e) => {
+    setQuestionnaireName(e.target.value);
+  };
+
+  const addQuestion = () => {
+    setQuestions([...questions, { id: generateRandomId(), value: "", selectedType: "", options: [] }]);
+  };
+
+  const removeQuestion = (index) => {
+    const updatedQuestions = [...questions];
+    updatedQuestions.splice(index, 1);
+    setQuestions(updatedQuestions);
+  };
 
   const handleQuestionChange = (index, e) => {
     const { value } = e.target;
@@ -34,8 +41,7 @@ function CreateQuestionnaire() {
     const { value } = e.target;
     const updatedQuestions = [...questions];
     updatedQuestions[index].selectedType = value;
-    // Reset options when type changes
-    updatedQuestions[index].options = [];
+    updatedQuestions[index].options = []; // Reset options when type changes
     setQuestions(updatedQuestions);
   };
 
@@ -48,16 +54,14 @@ function CreateQuestionnaire() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Format the questions data
     const formattedQuestions = questions.map((question) => ({
       question_text: question.value,
       option: question.options,
       ques_type: question.selectedType,
     }));
 
-    // Prepare the data to be sent in the PUT request
     const dataToLog = {
-      id:id,
+      id: generateRandomId(),
       icd10: "ACTIVITY",
       questionnaireName: questionnaireName,
       status: "Active",
@@ -65,10 +69,7 @@ function CreateQuestionnaire() {
     };
 
     try {
-      // Log the data to be submitted
       console.log("Submitted Data:", dataToLog);
-
-      // Send the PUT request to the backend API
       await axios.post(`http://localhost:9192/data`, dataToLog);
       navigate("/questionnaire-dashboard");
     } catch (error) {
@@ -89,25 +90,33 @@ function CreateQuestionnaire() {
             style={{ width: "700px" }}
           />
 
-          <div className="select-option">
-            <select
-              className="select-option"
-              onChange={(e) => handleTypeChange(index, e)}
+          <select
+            className="form__field "
+            onChange={(e) => handleTypeChange(index, e)}
+          >
+            <option>Select Question Type</option>
+            <option value="MCQ">MCQ</option>
+            <option value="NAT">NAT</option>
+            <option value="Descriptive">Descriptive</option>
+          </select>
+
+          {questions.length > 1 && (
+            <button
+              type="button"
+              onClick={() => removeQuestion(index)}
+              className="pink-btn"
             >
-              <option>Select Question Type</option>
-              <option value="MCQ">MCQ</option>
-              <option value="NAT">NAT</option>
-              <option value="Descriptive">Descriptive</option>
-            </select>
-          </div>
+              Remove
+            </button>
+          )}
+
+          {question.selectedType === "MCQ" && (
+            <MCQOptions
+              options={question.options}
+              onChange={(newOptions) => handleOptionChange(index, newOptions)}
+            />
+          )}
         </div>
-        {/* Render MCQOptions component conditionally */}
-        {question.selectedType === "MCQ" && (
-          <MCQOptions
-            options={question.options}
-            onChange={(newOptions) => handleOptionChange(index, newOptions)}
-          />
-        )}
       </div>
     ));
   };
@@ -115,22 +124,40 @@ function CreateQuestionnaire() {
   return (
     <div>
       <Navbar />
-      <PageHeading title={`Create Questionnaire: ${questionnaireName}`} />
-      <div className="container">
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: "flex", flexDirection: "column" }}
+      <PageHeading title="Create Questionnaire" />
+
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", padding: "40px" }}
+      >
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <GradientInput
+            type="text"
+            placeholder="Enter Questionnaire Name"
+            name="Enter Questionnaire Name"
+            value={questionnaireName}
+            onChange={handleQuestionnaireNameChange}
+          />
+        </div>
+
+        {renderQuestionFields()}
+        <button
+          type="button"
+          onClick={addQuestion}
+          className="medium-primary-btn"
+          style={{ width: "20%", alignSelf: "center" }}
         >
-          {renderQuestionFields()}
-          <button
-            type="submit"
-            className="medium-primary-btn"
-            style={{ width: "70%", alignSelf: "center" }}
-          >
-            Create Questionnaire
-          </button>
-        </form>
-      </div>
+          Add Question
+        </button>
+
+        <button
+          type="submit"
+          className="medium-primary-btn"
+          style={{ width: "20%", alignSelf: "center" }}
+        >
+          Create Questionnaire
+        </button>
+      </form>
     </div>
   );
 }

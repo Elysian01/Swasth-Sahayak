@@ -46,7 +46,7 @@ function QuestionnaireDashboard() {
     setFilteredTableData(filteredData);
   }, [searchedQuestionnaireName, tableData]);
   const handleCreateQuestionClick = () => {
-    navigate("/questionnaire-configurations");
+    navigate("/create-questionnaire");
   };
   const renderViewButton = (viewUrl) => (
     <button className="view-button">
@@ -93,7 +93,9 @@ function QuestionnaireDashboard() {
             onChange={setName}
             value={searchedQuestionnaireName}
           />
-          <button className="create-btn" onClick={handleCreateQuestionClick}>Create New Questionnaire</button>
+          <button className="create-btn" onClick={handleCreateQuestionClick}>
+            Create New Questionnaire
+          </button>
         </div>
       </div>
       <PrimaryTable
