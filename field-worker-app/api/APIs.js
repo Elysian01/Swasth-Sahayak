@@ -55,7 +55,7 @@ export const downloadAPI = async () => {
 export const uploadAPI = async (uploadData) => {
 	try {
 		console.log("Data Uploading: ", uploadData);
-		const result = await ApiManager("/fieldworker/followupsReschedule", {
+		const result = await ApiManager("/fieldworker/recievedata", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
