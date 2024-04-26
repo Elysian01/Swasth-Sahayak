@@ -14,13 +14,14 @@ import "./css/login.css";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const role = "ADMIN";
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = await authApi.login({ username: email, password });
+      const userData = await authApi.login({ username: email, password, role });
       dispatch(setCredentials(userData));
       navigate("/admin-dashboard");
     } catch (err) {

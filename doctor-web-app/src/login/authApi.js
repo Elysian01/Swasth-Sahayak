@@ -1,6 +1,7 @@
 import axios from "axios";
+import { LOCALHOST } from "../config";
 
-const baseURL = "http://localhost:9191/auth";
+const baseURL = `${LOCALHOST}/auth`;
 
 const authApi = {
   login: async (userData) => {

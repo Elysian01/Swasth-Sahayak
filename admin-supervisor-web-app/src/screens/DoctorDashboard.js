@@ -64,6 +64,9 @@ function DoctorDashboard() {
     navigate("/edit-doctor", { state: { doctor } });
     fetchDoctorDetails();
   };
+  const addNewDoctor=()=>{
+    navigate("/add-doctor")
+  }
 
   return (
     <div>
@@ -78,7 +81,7 @@ function DoctorDashboard() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <button className="small-primary-btn">Add New Doctor</button>
+        <button className="small-primary-btn" onClick={addNewDoctor}>Add New Doctor</button>
       </div>
       <div className="view-pane">
         {/* Map over the doctor details array and render a display card for each doctor */}

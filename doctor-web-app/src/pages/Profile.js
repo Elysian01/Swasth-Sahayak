@@ -10,7 +10,7 @@ import "./css/profile.css";
 import Navbar from "../components/misc/Navbar";
 import viewIcon from "../static/icons/eye.png";
 import doctorImage from "../static/imgs/doctor-page-profile-photo.png";
-import { getRequest } from "../components/Api/api";
+import { getRequest, postRequest } from "../components/Api/api";
 function Profile() {
   const navigate = useNavigate();
   const [doctorDetails, setDoctorDetails] = useState(null);
@@ -22,6 +22,20 @@ function Profile() {
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login", { replace: true });
+    const fetchDoctorDetails = async () => {
+      try {
+        const headers = { Authorization: `Bearer ${token}` };
+        const response = await postRequest(
+          `/auth/logout`,
+          token,
+          headers
+        );
+        setDoctorDetails(response);
+      } catch (error) {
+        console.error("Error fetching doctor details:", error);
+      }
+    };
+    fetchDoctorDetails();
   };
   useEffect(() => {
     const fetchDoctorDetails = async () => {

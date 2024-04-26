@@ -8,12 +8,12 @@ import FieldWorkerDashboard from "./screens/FieldWorkerDashboard";
 import PageNotFound from "./screens/PageNotFound";
 import ForgotPassword from "./screens/ForgotPassword";
 import CreateQuestionnaire from "./screens/CreateQuestionnaire";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import ViewQuestionnaire from "./screens/ViewQuestionnaire";
 import EditDoctor from "./screens/EditDoctor";
 import EditFieldWorker from "./screens/EditFieldWorker";
+import AddDoctor from "./screens/AddDoctor";
 
 function App() {
   return (
@@ -39,6 +39,10 @@ function App() {
           <Route
             path="questionnaire-dashboard"
             element={<QuestionnaireDashboard />}
+          />
+          <Route
+            path="add-doctor"
+            element={<AddDoctor />}
           />
           
           <Route
