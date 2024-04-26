@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
-import { getRequest } from "../components/Api/api";
+import { deleteRequest, getRequest } from "../components/Api/api";
 import GradientInput from "../components/inputs/GradientInput";
 
 import "../components/css/common.css";
@@ -45,10 +45,6 @@ function DoctorDashboard() {
       console.error(error);
     }
   };
-  useEffect(() => {
-    // Call the fetchDoctorDetails function
-    fetchDoctorDetails();
-  }, []);
 
   // Function to handle opening the modal
   const openModal = (doctor) => {
@@ -64,9 +60,28 @@ function DoctorDashboard() {
     navigate("/edit-doctor", { state: { doctor } });
     fetchDoctorDetails();
   };
-  const addNewDoctor=()=>{
-    navigate("/add-doctor")
-  }
+  const addNewDoctor = () => {
+    navigate("/add-doctor");
+  };
+  const handleInactive = async (doctor) => {
+    // console.log(doctor.doctorId);
+    const id = doctor.doctorId;
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      // Await the API call
+      const response = await deleteRequest(
+        `/admin/doctordelete/${id}`,
+        headers
+      );
+      fetchDoctorDetails();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    // Call the fetchDoctorDetails function
+    fetchDoctorDetails();
+  }, []);
 
   return (
     <div>
@@ -81,7 +96,9 @@ function DoctorDashboard() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <button className="small-primary-btn" onClick={addNewDoctor}>Add New Doctor</button>
+        <button className="small-primary-btn" onClick={addNewDoctor}>
+          Add New Doctor
+        </button>
       </div>
       <div className="view-pane">
         {/* Map over the doctor details array and render a display card for each doctor */}
@@ -108,7 +125,12 @@ function DoctorDashboard() {
               >
                 Edit
               </button>
-              <button className="pink-btn">Inactive</button>
+              <button
+                className="pink-btn"
+                onClick={() => handleInactive(doctor)}
+              >
+                Inactive
+              </button>
             </div>
           </div>
         ))}

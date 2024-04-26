@@ -34,4 +34,12 @@ export const putRequest = async (endpoint, data,headers) => {
 };
 
 
-// Add more functions for other types of requests if needed
+// Function to make a DELETE request
+export const deleteRequest = async (endpoint, headers) => {
+  try {
+    const response = await axios.delete(endpoint, { headers });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
