@@ -92,8 +92,8 @@ const RegisterPatient = () => {
 			patient_abhaid: abhaID,
 			patient_phoneNumber: phoneNumber,
 			patient_address: address,
-			patient_blockCode: sector,
-			patient_pincode: pincode,
+			patient_blockCode: parseInt(sector),
+			patient_pincode: parseInt(pincode),
 			patient_preferred_langauge: registerLanguage,
 		};
 
