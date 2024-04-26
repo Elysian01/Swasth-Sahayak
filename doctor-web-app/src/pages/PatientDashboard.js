@@ -37,6 +37,7 @@ function PatientDashboard() {
           headers
         );
         setTableData(response);
+        console.log(response)
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
