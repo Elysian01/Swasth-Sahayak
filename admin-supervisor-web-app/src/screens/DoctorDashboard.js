@@ -68,9 +68,10 @@ function DoctorDashboard() {
     const id = doctor.doctorId;
     try {
       const headers = { Authorization: `Bearer ${token}` };
+      const status = 1-doctor.status;
       // Await the API call
       const response = await deleteRequest(
-        `/admin/doctordelete/${id}`,
+        `/admin/doctordelete/${id}/${status}`,
         headers
       );
       fetchDoctorDetails();
@@ -126,10 +127,12 @@ function DoctorDashboard() {
                 Edit
               </button>
               <button
-                className="pink-btn"
+                className={
+                  doctor.status ? "dark-primary-small-btn" : "pink-btn"
+                }
                 onClick={() => handleInactive(doctor)}
               >
-                Inactive
+                {doctor.status ? "Make ACTIVE" : "Make Inactive"}
               </button>
             </div>
           </div>

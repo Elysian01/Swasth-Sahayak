@@ -70,7 +70,6 @@ function FieldWorkerDashboard() {
         `/admin/fieldworkerdelete/${id}/${status}`,
         headers
       );
-      console.log(response);
       fetchFieldWorkerDetails();
     } catch (error) {
       console.error(error);
