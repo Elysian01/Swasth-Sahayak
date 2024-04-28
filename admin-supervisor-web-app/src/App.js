@@ -18,6 +18,23 @@ import EditSuervisor from "./screens/EditSupervisor";
 import EditQuestion from "./screens/EditQuestion";
 import AddFieldworker from "./screens/AddFieldworker";
 import Addsupervisor from "./screens/Addsupervisor"
+import { useSelector } from "react-redux";
+
+import { useEffect } from 'react';
+import { useNavigate, Outlet } from 'react-router-dom';
+
+const ProtectedRoute = ({ children }) => {
+  const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token == null) {
+      navigate('/');
+    }
+  }, [token, navigate]);
+
+  return token ? children : null;
+};
 
 function App() {
   return (
@@ -26,42 +43,42 @@ function App() {
         <Routes>
           {/* <Route index element={<Login />} /> */}
           <Route index path="/" element={<Login />} />
-          <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/doctor-dashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
+          <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+          <Route path="/forgot-password" element={<ProtectedRoute><ForgotPassword /></ProtectedRoute>} />
           <Route path="*" element={<PageNotFound />} />
-          <Route path="/edit-doctor" element={<EditDoctor />} />
-          <Route path="/edit-field-worker" element={<EditFieldWorker />} />
-          <Route path="/edit-supervisor" element={<EditSuervisor />} />
-          <Route path="/edit-question" element={<EditQuestion />} />
+          <Route path="/edit-doctor" element={<ProtectedRoute><EditDoctor /></ProtectedRoute>} />
+          <Route path="/edit-field-worker" element={<ProtectedRoute><EditFieldWorker /></ProtectedRoute>} />
+          <Route path="/edit-supervisor" element={<ProtectedRoute><EditSuervisor /></ProtectedRoute>} />
+          <Route path="/edit-question" element={<ProtectedRoute><EditQuestion /></ProtectedRoute>} />
           <Route
             path="field-worker-dashboard"
-            element={<FieldWorkerDashboard />}
+            element={<ProtectedRoute><FieldWorkerDashboard /></ProtectedRoute>}
           />
           <Route
             path="supervisor-dashboard"
-            element={<SupervisorDashboard />}
+            element={<ProtectedRoute><SupervisorDashboard /></ProtectedRoute>}
           />
           <Route
             path="questionnaire-dashboard"
-            element={<QuestionnaireDashboard />}
+            element={<ProtectedRoute><QuestionnaireDashboard /></ProtectedRoute>}
           />
           <Route
             path="add-doctor"
-            element={<AddDoctor />}
+            element={<ProtectedRoute><AddDoctor /></ProtectedRoute>}
           />
           <Route
             path="add-supervisor"
-            element={<Addsupervisor />}
+            element={<ProtectedRoute><Addsupervisor /></ProtectedRoute>}
           /><Route
           path="add-fieldworker"
-          element={<AddFieldworker />}
-        />
+          element={<ProtectedRoute><AddFieldworker /></ProtectedRoute>}
+          />
           <Route
             path="create-questionnaire"
-            element={<CreateQuestionnaire />}
+            element={<ProtectedRoute><CreateQuestionnaire /></ProtectedRoute>}
           />
-          <Route path="/view-questionnaire" element={<ViewQuestionnaire />} />
+          <Route path="/view-questionnaire" element={<ProtectedRoute><ViewQuestionnaire /></ProtectedRoute>} />
         </Routes>
       </Router>
     </div>

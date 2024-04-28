@@ -149,7 +149,7 @@ function DoctorDashboard() {
             backgroundColor: "rgba(0, 0, 0, 0.7)", // Darken the background when the modal is open
           },
           content: {
-            width: "30%", // Set the width to 60% of the viewport
+            width: "50%", // Set the width to 60% of the viewport
             height: "60%", // Automatically adjust the height based on content
             margin: "auto", // Center the modal horizontally
             padding: "25px",
@@ -168,7 +168,12 @@ function DoctorDashboard() {
             </button>
           </div>
           {selectedDoctor && (
+            
             <div className="modal-profile-details">
+              <div className="modal-doctor-details">
+                <div className="modal-static">-Doctor ID: </div>
+                <div className="modal-dynamic">{selectedDoctor.doctorId}</div>
+              </div>
               <div className="modal-doctor-details">
                 <div className="modal-static">-Name: </div>
                 <div className="modal-dynamic">{selectedDoctor.name}</div>

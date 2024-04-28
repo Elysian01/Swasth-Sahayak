@@ -9,13 +9,25 @@ const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
   const [gender, setGender] = useState(fieldworker.gender);
   const [phone, setPhone] = useState(fieldworker.mobileno);
   const [name, setName] = useState(fieldworker.name);
+  const [phoneError, setPhoneError] = useState('');
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
   };
 
   const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
+  const value = event.target.value;
+  const re = /^[0-9\b]+$/; // Regular expression to allow only numbers
+
+  // Allow backspace and delete for editing
+  if (value === '' || re.test(value)) {
+    if (value.length <= 10) {
+      setPhone(value);
+      setPhoneError(''); // Clear any existing error
+    } else {
+      setPhoneError('Please enter a correct 10-digit mobile number.');
+    }
+  }
   };
 
   const handleNameChange = (event) => {
@@ -24,6 +36,10 @@ const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (phone.length !== 10) {
+      setPhoneError('Please enter a correct 10-digit mobile number.');
+      return; // Prevent form submission if phone number is invalid
+    }
     // Create a doctor object with the updated form data
     const updatedFieldWorker = {
       name: name,
@@ -36,6 +52,20 @@ const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
 
   return (
     <div>
+      <style>
+        {`
+          .error-message {
+            color: #ff0000; /* Red color for the error message */
+            background-color: #ffebeb; /* Light red background */
+            border: 1px solid #ff0000; /* Red border */
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: left;
+          }
+        `}
+      </style>
+
       <form className="form-style" onSubmit={handleSubmit}>
         <GradientInput
           type="text"
@@ -68,7 +98,7 @@ const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
           value={phone}
           onChange={handlePhoneChange}
         />
-
+        {phoneError && <div className="error-message">{phoneError}</div>}
         <button type="submit" className="primary-btn">
           Submit
         </button>

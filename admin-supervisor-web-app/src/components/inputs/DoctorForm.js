@@ -11,11 +11,21 @@ const DoctorForms = ({ handleEdit, doctor }) => {
   const [address, setAddress] = useState(doctor.workingaddress);
   const [pincode, setPincode] = useState(doctor.pinecode);
   const [blockCode, setBlockCode] = useState(doctor.blockCode);
+  const [phoneError, setPhoneError] = useState('');
+  const [pincodeError, setPincodeError] = useState('');
+  const [blockCodeError, setBlockCodeError] = useState('');
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
   const handleBlockCode = (event) => {
-    setBlockCode(event.target.value);
+    const value = event.target.value;
+    const blockCodeRegex = /^[A-Za-z0-9]+$/; // Allow alphanumeric characters
+    if (value === '' || (blockCodeRegex.test(value) && value.length <= 7)) {
+      setBlockCode(value);
+      setBlockCodeError('');
+    } else {
+      setBlockCodeError('Please enter a valid 7-character block code.');
+    }
   };
 
   const handleGenderChange = (event) => {
@@ -23,7 +33,14 @@ const DoctorForms = ({ handleEdit, doctor }) => {
   };
 
   const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
+    const value = event.target.value;
+    const phoneRegex = /^[0-9\b]+$/; // Allow numbers only
+    if (value === '' || (phoneRegex.test(value) && value.length <= 10)) {
+      setPhone(value);
+      setPhoneError('');
+    } else {
+      setPhoneError('Please enter a valid 10-digit mobile number.');
+    }
   };
 
   const handleNameChange = (event) => {
@@ -34,11 +51,26 @@ const DoctorForms = ({ handleEdit, doctor }) => {
     setAddress(event.target.value);
   };
   const handlePincodeChange = (event) => {
-    setPincode(event.target.value);
+    const value = event.target.value;
+    const pincodeRegex = /^[0-9\b]+$/; // Allow numbers only
+    if (value === '' || (pincodeRegex.test(value) && value.length <= 6)) {
+      setPincode(value);
+      setPincodeError('');
+    } else {
+      setPincodeError('Please enter a valid 6-digit pincode.');
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (phone.length !== 10) {
+      setPhoneError('Please enter a correct 10-digit mobile number.');
+      return; // Prevent form submission if phone number is invalid
+    }
+    if (pincode.length !== 6) {
+      setPhoneError('Please enter a valid 6-digit pincode.');
+      return; // Prevent form submission if phone number is invalid
+    }
     // Create a doctor object with the updated form data
     const updatedDoctor = {
       name: name,
@@ -58,6 +90,19 @@ const DoctorForms = ({ handleEdit, doctor }) => {
 
   return (
     <div>
+      <style>
+        {`
+          .error-message {
+            color: #ff0000; /* Red color for the error message */
+            background-color: #ffebeb; /* Light red background */
+            border: 1px solid #ff0000; /* Red border */
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: left;
+          }
+        `}
+      </style>
       <form className="form-style" onSubmit={handleSubmit}>
         <GradientInput
           type="text"
@@ -124,7 +169,9 @@ const DoctorForms = ({ handleEdit, doctor }) => {
           value={phone}
           onChange={handlePhoneChange}
         />
-
+        {phoneError && <div className="error-message">{phoneError}</div>}
+        {pincodeError && <div className="error-message">{pincodeError}</div>}
+        {blockCodeError && <div className="error-message">{blockCodeError}</div>}
         <button type="submit" className="primary-btn">
           Submit
         </button>
