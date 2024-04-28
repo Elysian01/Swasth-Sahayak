@@ -5,13 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../login/authSlice";
+import { postRequest } from "../Api/api";
 
 function Navbar() {
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  function handleLogout() {
+  async  function handleLogout() {
     dispatch(logout());
+    const headers = { Authorization: `Bearer ${token}` };
+        const response = await postRequest(
+          `/auth/logout`,
+          token,
+          headers
+        );
     navigate("/", { replace: true });
   }
   const [show, setShow] = useState(false);
