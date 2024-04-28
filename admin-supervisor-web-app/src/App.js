@@ -14,6 +14,8 @@ import ViewQuestionnaire from "./screens/ViewQuestionnaire";
 import EditDoctor from "./screens/EditDoctor";
 import EditFieldWorker from "./screens/EditFieldWorker";
 import AddDoctor from "./screens/AddDoctor";
+import EditSuervisor from "./screens/EditSupervisor";
+import EditQuestion from "./screens/EditQuestion";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
           <Route path="/edit-doctor" element={<EditDoctor />} />
           <Route path="/edit-field-worker" element={<EditFieldWorker />} />
+          <Route path="/edit-supervisor" element={<EditSuervisor />} />
+          <Route path="/edit-question" element={<EditQuestion />} />
           <Route
             path="field-worker-dashboard"
             element={<FieldWorkerDashboard />}

@@ -5,32 +5,52 @@ import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
-import { getRequest } from "../components/Api/api";
-
+import { getRequest,deleteRequest } from "../components/Api/api";
+function GradientInput(props) {
+  return (
+    <div className="form__group field">
+      <input
+        type={props.type}
+        className="form__field"
+        placeholder={props.name}
+        name={props.name}
+        id={props.name}
+        value={props.value}
+        onChange={props.onChange}
+        required
+        style={props.style} 
+      />
+      <label htmlFor={props.name} className="form__label">
+        {props.name}
+      </label>
+    </div>
+  );
+}
 function SupervisorDashboard() {
-	const [dropdown1Value, setDropdown1Value] = useState([]); // State for the first dropdown
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState(""); // State for selected dropdown value
   const [FieldWorkerDetails, setFieldWorkerDetails] = useState([]); // State for storing doctor details array
   const [selectedFieldWorker, setSelectedFieldWorker] = useState(null); // State for storing selected doctor
   const [isModalOpen, setIsModalOpen] = useState(false); // State for managing modal visibility
-  
+  const [searchTerm, setSearchTerm] = useState("");
+
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
+  
+  const fetchFieldWorkerDetails = async () => {
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      // Await the API call
+      const response = await getRequest(
+        "/admin/allsupervisordetail",
+        headers
+      );
+      console.log(response)
+      // Update the state with the fetched doctor details
+      setFieldWorkerDetails(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const fetchFieldWorkerDetails = async () => {
-      try {
-        const headers = { Authorization: `Bearer ${token}` };
-        // Await the API call
-        const response = await getRequest(
-          "/admin/allfieldworkerDetail",
-          headers
-        );
-        // Update the state with the fetched doctor details
-        setFieldWorkerDetails(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     // Call the fetchDoctorDetails function
     fetchFieldWorkerDetails();
   }, []);
@@ -45,30 +65,40 @@ function SupervisorDashboard() {
     setIsModalOpen(false);
   };
   const handleEdit = (fieldworker) => {
-    navigate("/edit-field-worker", { state: { fieldworker } });
+    navigate("/edit-supervisor", { state: { fieldworker } });
+  };
+
+  const handleInactive = async (fieldworker) => {
+    // console.log(doctor.doctorId);
+    const id = fieldworker.supervisorid;
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      // Await the API call
+      const status = 1 - fieldworker.status;
+      const response = await deleteRequest(
+        `/admin/deletesupervisor/${id}`,
+        headers
+      );
+      fetchFieldWorkerDetails();
+      
+    } catch (error) {
+      console.error(error);
+    }
   };
 	return (
 		<div>
 			<Navbar />
 			<PageHeading title="Supervisor Dashboard" />
 			<div className="dropdown-container">
-        <div className="dropdown">
-          {/* First Dropdown */}
-          <select
-            value={selectedDropdownValue}
-            onChange={(e) => setSelectedDropdownValue(e.target.value)}
-          >
-            <option value="">Select Region</option>
-            {dropdown1Value.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
+      <GradientInput
+          type="text"
+          placeholder="Search by Name and Supervisor ID"
+          name="Search by Name and Supervisor ID"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
-        <button className="small-primary-btn">Search</button>
-        <button className="small-primary-btn">Add New Field Worker</button>
+        <button className="small-primary-btn">Add New Supervisor</button>
       </div>
 			<div className="view-pane">
         {FieldWorkerDetails.map((fieldworker, index) => (
@@ -76,7 +106,7 @@ function SupervisorDashboard() {
             <div className="person-details">
               <div className="person-name">Name: {fieldworker.name}</div>
               <div className="person-region">
-                Field Worker ID: {fieldworker.fieldworkerid}
+                Field Worker ID: {fieldworker.supervisorid}
               </div>
               <div className="person-specialisation">
                 Gender: {fieldworker.gender}
@@ -92,7 +122,8 @@ function SupervisorDashboard() {
               <button
               onClick={() => handleEdit(fieldworker)}
               className="dark-primary-small-btn">Edit</button>
-              <button className="pink-btn">Inactive</button>
+              
+              <button className="pink-btn" onClick={() => handleInactive(fieldworker)}>Inactive</button>
             </div>
           </div>
         ))}
@@ -120,7 +151,7 @@ function SupervisorDashboard() {
       >
         <div className="modal-view">
           <div className="modal-fieldworker-details">
-            <h2>Field Worker Details</h2>
+            <h2>Supervisor Details</h2>
             <button onClick={closeModal} className="dark-primary-small-btn">
               X
             </button>
@@ -146,7 +177,7 @@ function SupervisorDashboard() {
               <div className="modal-fieldworker-details">
                 <div className="modal-static">-Fieldworker ID:</div>
                 <div className="modal-dynamic">
-                  {selectedFieldWorker.fieldworkerid}
+                  {selectedFieldWorker.supervisorid}
                 </div>
               </div>
             </div>

@@ -3,10 +3,15 @@ import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import PrimaryTable from "../components/tables/PrimaryTable";
 import GradientInput from "../components/inputs/GradientInput";
-import { getRequest, putRequest } from "../components/Api/api";
+import { getRequest, putRequest, deleteRequest } from "../components/Api/api";
 import viewIcon from "../static/icons/eye.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import Modal from "react-modal"; // Import react-modal
+
+
+
 
 function QuestionnaireDashboard() {
   const [searchedQuestionnaireName, setSearchedQuestionnaireName] =
@@ -15,18 +20,23 @@ function QuestionnaireDashboard() {
   const [filteredTableData, setFilteredTableData] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
+  const [selectedFieldWorker, setSelectedFieldWorker] = useState(null); // State for storing selected doctor
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for managing modal visibility
+
   function setName(e) {
     setSearchedQuestionnaireName(e.target.value);
   }
-
-  const columns = ["ID", "Questionnaire Name", "Status", "View Questionnaire"];
+  const columns = ["Question_ID", "Questionnaire Name", "Question", "Status", " ", ""];
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:9192/data");
-      console.log(response.data);
-      setTableData(response.data);
-      setFilteredTableData(response.data);
+      const headers = { Authorization: `Bearer ${token}` };
+      // Await the API call
+      const response = await getRequest("/admin/allquestion", headers);
+      console.log(response);
+      setTableData(response);
+      setFilteredTableData(response);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -37,46 +47,68 @@ function QuestionnaireDashboard() {
     fetchData();
   }, []);
 
+  const openModal = (fieldworker) => {
+    setSelectedFieldWorker(fieldworker);
+    setIsModalOpen(true);
+  };
+
+  // Function to handle closing the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleEdit = (fieldworker) => {
+    navigate("/edit-question", { state: { fieldworker } });
+  };
+
   useEffect(() => {
     const filteredData = tableData.filter((row) =>
-      row.questionnaireName
-        .toLowerCase()
-        .includes(searchedQuestionnaireName.toLowerCase())
+      row.icd10
+        .includes(searchedQuestionnaireName)
     );
     setFilteredTableData(filteredData);
   }, [searchedQuestionnaireName, tableData]);
   const handleCreateQuestionClick = () => {
     navigate("/create-questionnaire");
   };
-  const renderViewButton = (viewUrl) => (
-    <button className="view-button">
+  const renderViewButton = (row) => (
+    <button
+      className="view-button"
+      onClick={() => openModal(row)}
+    >
       <img src={viewIcon} alt="View" />
     </button>
   );
 
   const getStatusClassName = (status) => {
-    if (status === "Active") {
+    if (status === 0) {
       return "status-active";
-    } else if (status === "Inactive") {
+    } else if (status === 1) {
       return "status-inactive";
     }
   };
 
   const changeStatus = async (row) => {
-    const newStatus = row.status === "Active" ? "Inactive" : "Active";
+    const id = row.id;
     try {
-      await axios.put(`http://localhost:9192/data/${row.id}`, {
-        ...row,
-        status: newStatus,
-      });
-      setTableData((prevData) =>
-        prevData.map((prevRow) => {
-          if (prevRow.id === row.id) {
-            return { ...prevRow, status: newStatus };
-          }
-          return prevRow;
-        })
+      const headers = { Authorization: `Bearer ${token}` };
+      const response = await deleteRequest(
+        `/admin/deletequestion/${id}`,
+        headers
       );
+      // await axios.put(`http://localhost:9192/data/${row.id}`, {
+      //   ...row,
+      //   status: newStatus,
+      // });
+      // setTableData((prevData) =>
+      //   prevData.map((prevRow) => {
+      //     if (prevRow.id === row.id) {
+      //       return { ...prevRow, status: newStatus };
+      //     }
+      //     return prevRow;
+      //   })
+      // );
+      fetchData();
     } catch (error) {
       console.error("Error updating status:", error);
     }
@@ -101,20 +133,99 @@ function QuestionnaireDashboard() {
       <PrimaryTable
         columns={columns}
         data={filteredTableData.map((row) => ({
-          ID: row.id,
-          "Questionnaire Name": row.questionnaireName,
+          "Question_ID": row.id,
+          "Questionnaire Name": row.icd10,
+          Question: row.ques_text,
           Status: (
             <button
               className={getStatusClassName(row.status)}
               onClick={() => changeStatus(row)}
             >
-              {row.status}
+              {row.status ? "Inactive" : "Active"}
             </button>
           ),
-          Disease: row.disease,
-          "View Questionnaire": renderViewButton(row.view),
+          " ": renderViewButton(row),
+          "": (
+            <button
+              className="dark-primary-small-btn"
+              onClick={() => handleEdit(row)}
+            >
+              Edit
+            </button>
+          ),
+
         }))}
       />
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Question Details Modal"
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.7)", // Darken the background when the modal is open
+          },
+          content: {
+            width: "40%", // Set the width to 60% of the viewport
+            height: "60%", // Automatically adjust the height based on content
+            margin: "auto", // Center the modal horizontally
+            padding: "25px",
+            backgroundColor: "#fafafa",
+            borderRadius: "10px",
+
+            border: "none", // Remove border
+          },
+        }}
+      >
+        <div className="modal-view">
+          <div className="modal-fieldworker-details">
+            <h2>Question Details</h2>
+            <button onClick={closeModal} className="dark-primary-small-btn">
+              X
+            </button>
+          </div>
+          {selectedFieldWorker && (
+            <div className="modal-fieldworker-profile-details">
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Question_ID: </div>
+                <div className="modal-dynamic">{selectedFieldWorker.id}</div>
+              </div>
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Questionnaire Name:</div>
+                <div className="modal-dynamic">
+                  {selectedFieldWorker.icd10}
+                </div>
+              </div>
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Question type:</div>
+                <div className="modal-dynamic">
+                  {selectedFieldWorker.type}
+                </div>
+              </div>
+              <div className="modal-fieldworker-details">
+                <div className="modal-static">-Question:</div>
+                <div className="modal-dynamic">
+                  {selectedFieldWorker.ques_text}
+                </div>
+              </div>
+              {selectedFieldWorker.type === 'mcq' && (
+                <>
+                  <div className="modal-fieldworker-details">
+                    <div className="modal-static">-Options:</div>
+                  </div>
+                  {selectedFieldWorker.option.map((op, index) => (
+                    <div className="modal-fieldworker-details" key={index}>
+                      <div className="modal-static">{index + 1}.</div>
+                      <div className="modal-dynamic">
+                        {op}
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+          )}
+        </div>
+      </Modal>
     </div>
   );
 }

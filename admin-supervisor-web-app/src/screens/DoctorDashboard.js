@@ -91,8 +91,8 @@ function DoctorDashboard() {
       <div className="dropdown-container">
         <GradientInput
           type="text"
-          placeholder="Search by Name, Region, or Specialisation"
-          name="Search by Name, Region, or Specialisation"
+          placeholder="Search by Name or Specialisation"
+          name="Search by Name or Specialisation"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
