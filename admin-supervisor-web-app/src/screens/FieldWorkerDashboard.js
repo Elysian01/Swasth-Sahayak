@@ -75,7 +75,9 @@ function FieldWorkerDashboard() {
       console.error(error);
     }
   };
-
+  const addNewfieldworker = () => {
+    navigate("/add-fieldworker");
+  };
   return (
     <div>
       <Navbar />
@@ -89,7 +91,7 @@ function FieldWorkerDashboard() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <button className="small-primary-btn">Add New Field Worker</button>
+        <button className="small-primary-btn" onClick={addNewfieldworker}>Add New Field Worker</button>
       </div>
       <div className="view-pane">
         {filteredFieldWorkers.map((fieldworker, index) => (

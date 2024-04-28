@@ -16,6 +16,8 @@ import EditFieldWorker from "./screens/EditFieldWorker";
 import AddDoctor from "./screens/AddDoctor";
 import EditSuervisor from "./screens/EditSupervisor";
 import EditQuestion from "./screens/EditQuestion";
+import AddFieldworker from "./screens/AddFieldworker";
+import Addsupervisor from "./screens/Addsupervisor"
 
 function App() {
   return (
@@ -48,7 +50,13 @@ function App() {
             path="add-doctor"
             element={<AddDoctor />}
           />
-          
+          <Route
+            path="add-supervisor"
+            element={<Addsupervisor />}
+          /><Route
+          path="add-fieldworker"
+          element={<AddFieldworker />}
+        />
           <Route
             path="create-questionnaire"
             element={<CreateQuestionnaire />}

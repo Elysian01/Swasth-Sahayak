@@ -6,6 +6,9 @@ import GradientInput from "../components/inputs/GradientInput";
 import MCQOptions from "../components/misc/MCQOptions";
 import axios from "axios";
 import "./css/CreateQuestionnaire.css";
+import { useSelector } from "react-redux";
+import { postRequest } from "../components/Api/api";
+
 
 const generateRandomId = () => {
   return Math.floor(Math.random() * 90000) + (10000).toString(36);
@@ -15,6 +18,8 @@ function CreateQuestionnaire() {
   const [questionnaireName, setQuestionnaireName] = useState("");
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
+
 
   const handleQuestionnaireNameChange = (e) => {
     setQuestionnaireName(e.target.value);
@@ -55,22 +60,26 @@ function CreateQuestionnaire() {
     e.preventDefault();
 
     const formattedQuestions = questions.map((question) => ({
-      question_text: question.value,
-      option: question.options,
-      ques_type: question.selectedType,
+      ques_text: question.value,
+      options: question.options,
+      type: question.selectedType,
     }));
 
     const dataToLog = {
-      id: generateRandomId(),
-      icd10: "ACTIVITY",
-      questionnaireName: questionnaireName,
-      status: "Active",
-      questions: formattedQuestions,
+      icd10: questionnaireName,
+      question: formattedQuestions,
     };
 
     try {
-      console.log("Submitted Data:", dataToLog);
-      await axios.post(`http://localhost:9192/data`, dataToLog);
+      console.log(dataToLog)
+      const headers = { Authorization: `Bearer ${token}` };
+      await postRequest(
+        `/admin/addquestion`,
+        dataToLog,
+        headers
+      );
+      // console.log("Submitted Data:", dataToLog);
+      // await axios.post(`http://localhost:9192/data`, dataToLog);
       navigate("/questionnaire-dashboard");
     } catch (error) {
       console.log(error);
@@ -95,9 +104,9 @@ function CreateQuestionnaire() {
             onChange={(e) => handleTypeChange(index, e)}
           >
             <option>Select Question Type</option>
-            <option value="MCQ">MCQ</option>
-            <option value="NAT">NAT</option>
-            <option value="Descriptive">Descriptive</option>
+            <option value="mcq">MCQ</option>
+            <option value="nat">NAT</option>
+            <option value="descriptive">Descriptive</option>
           </select>
 
           {questions.length > 1 && (
@@ -110,7 +119,7 @@ function CreateQuestionnaire() {
             </button>
           )}
 
-          {question.selectedType === "MCQ" && (
+          {question.selectedType === "mcq" && (
             <MCQOptions
               options={question.options}
               onChange={(newOptions) => handleOptionChange(index, newOptions)}
@@ -124,7 +133,7 @@ function CreateQuestionnaire() {
   return (
     <div>
       <Navbar />
-      <PageHeading title="Create Questionnaire" />
+      <PageHeading title="Create Question" />
 
       <form
         onSubmit={handleSubmit}
@@ -155,7 +164,7 @@ function CreateQuestionnaire() {
           className="medium-primary-btn"
           style={{ width: "20%", alignSelf: "center" }}
         >
-          Create Questionnaire
+          Create Question
         </button>
       </form>
     </div>

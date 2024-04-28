@@ -67,7 +67,9 @@ function SupervisorDashboard() {
   const handleEdit = (fieldworker) => {
     navigate("/edit-supervisor", { state: { fieldworker } });
   };
-
+  const addNewsupervisor = () => {
+    navigate("/add-supervisor");
+  };
   const handleInactive = async (fieldworker) => {
     // console.log(doctor.doctorId);
     const id = fieldworker.supervisorid;
@@ -98,7 +100,7 @@ function SupervisorDashboard() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <button className="small-primary-btn">Add New Supervisor</button>
+        <button className="small-primary-btn" onClick={addNewsupervisor}>Add New Supervisor</button>
       </div>
 			<div className="view-pane">
         {FieldWorkerDetails.map((fieldworker, index) => (
