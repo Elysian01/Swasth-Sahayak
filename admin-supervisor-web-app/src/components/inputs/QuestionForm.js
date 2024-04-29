@@ -4,11 +4,11 @@ import "../css/form.css";
 import "../css/common.css";
 import { type } from "@testing-library/user-event/dist/type";
 
-const QuestionForms = ({ handleEdit, question }) => {
-    console.log(question)
+const QuestionForms = ({ handleEdit, question,DiseaseData }) => {
     const [questionnaireName, setquestionnaireName] = useState(question.icd10);
     const [Question, setQuestion] = useState(question.ques_text);
     const [option, setoption] = useState(question.option);
+    console.log(questionnaireName)
 
     const handleDateChange = (event) => {
         setquestionnaireName(event.target.value);
@@ -42,21 +42,22 @@ const QuestionForms = ({ handleEdit, question }) => {
         <div>
             <form className="form-style" onSubmit={handleSubmit}>
 
-                {/* Questionnaire Selector */}
-                <br />
-                <div style={{ width: "50%" }}>
-                    <select
-                        name="Questionnaire Name"
-                        value={questionnaireName}
-                        onChange={handleDateChange}
-                        className="form__field "
-                    >
-                        <option value="">Select Questionnaire Name</option>
-                        <option value="C50">xyz</option>
-                        <option value="general">General</option>
-                    </select>
-                </div>
-                <br />
+
+          <div style={{ width: "50%" }}>
+            <select
+              name="Questionnaire Name"
+              value={questionnaireName}
+              onChange={handleDateChange}
+              className="form__field"
+            >
+              {DiseaseData.map((disease, index) => (
+                <option key={index} value={disease.icd10}>
+                  {disease.diseasename}
+                </option>
+              ))}
+            </select>
+          </div>
+
 
                 <GradientInput
                     type="text"

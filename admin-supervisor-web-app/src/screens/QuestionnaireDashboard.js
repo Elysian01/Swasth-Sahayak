@@ -17,6 +17,7 @@ function QuestionnaireDashboard() {
   const [searchedQuestionnaireName, setSearchedQuestionnaireName] =
     useState("");
   const [tableData, setTableData] = useState([]);
+  const [DiseaseData, setDiaseaseData] = useState([]);
   const [filteredTableData, setFilteredTableData] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function QuestionnaireDashboard() {
   function setName(e) {
     setSearchedQuestionnaireName(e.target.value);
   }
-  const columns = ["Question_ID", "Questionnaire Name", "Question", "Status", " ", ""];
+  const columns = ["Question_ID", "Questionnaire Name", "Question", "Status", "View", "Edit"];
 
   const fetchData = async () => {
     try {
@@ -43,8 +44,21 @@ function QuestionnaireDashboard() {
     }
   };
 
+  const fetchdiseasename = async () => {
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      // Await the API call
+      const response = await getRequest("/admin/diseasename", headers);
+      console.log(response);
+      setDiaseaseData(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
+    fetchdiseasename();
   }, []);
 
   const openModal = (fieldworker) => {
@@ -58,7 +72,7 @@ function QuestionnaireDashboard() {
   };
 
   const handleEdit = (fieldworker) => {
-    navigate("/edit-question", { state: { fieldworker } });
+    navigate("/edit-question", { state: { fieldworker, DiseaseData } });
   };
 
   useEffect(() => {
@@ -69,7 +83,7 @@ function QuestionnaireDashboard() {
     setFilteredTableData(filteredData);
   }, [searchedQuestionnaireName, tableData]);
   const handleCreateQuestionClick = () => {
-    navigate("/create-questionnaire");
+    navigate("/create-questionnaire",{ state: { DiseaseData } });
   };
   const renderViewButton = (row) => (
     <button
@@ -120,11 +134,24 @@ function QuestionnaireDashboard() {
       <PageHeading title="Questionnaire Dashboard" />
       <div className="container">
         <div className="search">
-          <GradientInput
-            name="Questionnaire Name"
-            onChange={setName}
-            value={searchedQuestionnaireName}
-          />
+          <br />
+          <div style={{ width: "50%" }}>
+            <select
+              name="Questionnaire Name"
+              value={searchedQuestionnaireName}
+              onChange={setName}
+              className="form__field"
+            >
+              <option value="">Select Questionnaire Name</option>
+              {DiseaseData.map((disease, index) => (
+                <option key={index} value={disease.diseasename}>
+                  {disease.diseasename}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <br />
           <button className="create-btn" onClick={handleCreateQuestionClick}>
             Create New Questionnaire
           </button>
@@ -144,8 +171,8 @@ function QuestionnaireDashboard() {
               {row.status ? "Inactive" : "Active"}
             </button>
           ),
-          " ": renderViewButton(row),
-          "": (
+          "View": renderViewButton(row),
+          "Edit": (
             <button
               className="dark-primary-small-btn"
               onClick={() => handleEdit(row)}

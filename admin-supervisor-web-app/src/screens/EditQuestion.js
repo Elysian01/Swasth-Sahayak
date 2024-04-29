@@ -10,7 +10,7 @@ import QuestionForm from "../components/inputs/QuestionForm";
 const EditQuestion = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { fieldworker } = location.state;
+  const { fieldworker,DiseaseData } = location.state;
   console.log(fieldworker);
   const token = useSelector((state) => state.auth.token);
   const handleEdit = async (updatedFieldWorker) => {
@@ -32,7 +32,7 @@ const EditQuestion = () => {
     <div>
       <Navbar />
       <PageHeading title="Question Details"/>
-      <QuestionForm handleEdit={handleEdit} question={fieldworker} />
+      <QuestionForm handleEdit={handleEdit} question={fieldworker} DiseaseData={DiseaseData}/>
     </div>
   );
 };

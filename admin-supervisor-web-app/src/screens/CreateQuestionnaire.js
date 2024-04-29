@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import GradientInput from "../components/inputs/GradientInput";
@@ -15,10 +15,14 @@ const generateRandomId = () => {
 };
 
 function CreateQuestionnaire() {
+  const location = useLocation();
+
   const [questionnaireName, setQuestionnaireName] = useState("");
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
+  const { DiseaseData } = location.state;
+
 
 
   const handleQuestionnaireNameChange = (e) => {
@@ -140,13 +144,22 @@ function CreateQuestionnaire() {
         style={{ display: "flex", flexDirection: "column", padding: "40px" }}
       >
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <GradientInput
-            type="text"
-            placeholder="Enter Questionnaire Name"
-            name="Enter Questionnaire Name"
-            value={questionnaireName}
-            onChange={handleQuestionnaireNameChange}
-          />
+
+          <div style={{ width: "50%" }}>
+            <select
+              name="Questionnaire Name"
+              value={questionnaireName}
+              onChange={handleQuestionnaireNameChange}
+              className="form__field"
+            >
+              <option value="">Select Questionnaire Name</option>
+              {DiseaseData.map((disease, index) => (
+                <option key={index} value={disease.icd10}>
+                  {disease.diseasename}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {renderQuestionFields()}
