@@ -5,10 +5,36 @@ import Table from "../components/tables/Listings";
 import Navbar from "../components/misc/Navbar";
 import DatePicker from "react-multi-date-picker";
 import Icon from "react-multi-date-picker/components/icon";
-import { useState } from "react";
-
+import { useState,useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getRequest } from "../components/Api/api";
 function DiagnoseReport() {
   const [dates, setDates] = useState([]);
+  const [tableData, setTableData] = useState([]);
+  const [fieldworkerComment,setfieldworkerComment]=useState("");
+  const location = useLocation();
+  const {state}=location;
+  const patientId=state?state.patientId:null;
+  const token = useSelector((state) => state.auth.token);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const headers = { Authorization: `Bearer ${token}` };
+        const response = await getRequest(
+          `/doctor/getdiagonosedetail/${patientId}`,
+          headers
+        );
+        setfieldworkerComment(response.fieldworkercomment);
+        setTableData(response.patientanswers);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [patientId, token]);
   const handleSubmit = () => {
     // Perform submission logic here
     // For demonstration purposes, simply show an alert
@@ -32,49 +58,7 @@ function DiagnoseReport() {
     );
   };
 
-  const columns = ["In last two weeks, how frequent were your concerns?", ""];
-  const tableData = [
-    {
-      "In last two weeks, how frequent were your concerns?":
-        "Little interest or pleasure in doing things",
-      "": "Several days",
-    },
-    {
-      "In last two weeks, how frequent were your concerns?":
-        "Feeling down, depressed, or hopeless?",
-      "": "Not at all",
-    },
-    {
-      "In last two weeks, how frequent were your concerns?":
-        "Trouble falling asleep, staying asleep, or sleeping too much?",
-      "": "Fill out answer here", // You haven't provided an answer for this one
-    },
-    {
-      "In last two weeks, how frequent were your concerns?":
-        "Feeling tired or having little energy",
-      "": "More than half the days",
-    },
-    {
-      "In last two weeks, how frequent were your concerns?":
-        "Thoughts that you would be better off dead or of hurting yourself in some way?",
-      "": "Nearly every day",
-    },
-    {
-      "In last two weeks, how frequent were your concerns?":
-        "Poor appetite or overeating",
-      "": "Not at all",
-    },
-    {
-      "In last two weeks, how frequent were your concerns?":
-        "Feeling bad about yourself or that you are a failure or have let yourself or your family down",
-      "": "Several days",
-    },
-    {
-      "In last two weeks, how frequent were your concerns?":
-        "Trouble concentrating on things, such as reading the newspaper or watching television",
-      "": "More than half the days",
-    },
-  ];
+  const columns = ["question", "answer"];
 
   return (
     <div>
@@ -82,7 +66,7 @@ function DiagnoseReport() {
       <br />
       <h2 className="title">Diagnosed Report</h2>
       <br /> <br />
-      <div className="alignment">
+      
         <div className="quession-table">
           <Table columns={columns} data={tableData} />
           <button className="primary-btn">Go back to Patient Dashboard</button>
@@ -91,10 +75,7 @@ function DiagnoseReport() {
           <h3>Comments added by Field Worker</h3>
           <br />
           <div className="reading-box">
-            <p>
-              This is some sample text for your reading passage. You can replace
-              this with any text you want the user to read.
-            </p>
+            {fieldworkerComment}
             <br />
           </div>
           <div className="button-style">
@@ -143,7 +124,7 @@ function DiagnoseReport() {
             </button>
           </div>
         </div>
-      </div>
+      
     </div>
   );
 }
