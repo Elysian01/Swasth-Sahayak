@@ -1,15 +1,16 @@
-.title{
+.title {
   text-align: center;
 }
-.reading-box{
+.reading-box {
   border: 1px solid #000;
   padding: 20px;
   background-color: #fff;
   font-weight: 500;
   border-radius: 25px;
+  width: 100%;
 }
 
-.reading-box input{ 
+.reading-box input {
   height: 50px;
   border: none;
   outline: none;
@@ -17,17 +18,17 @@
   letter-spacing: 1px;
   font-weight: 400;
 }
-.quession-table{
+.quession-table {
   display: flex;
   flex-direction: column;
 }
-.button-style{
+.button-style {
   text-align: right;
 }
-.comment-date{
-  padding-right: 4%;
+.comment-date {
+  padding: 4%;
 }
-.custom-calendar{
+.custom-calendar {
   background-color: #000;
   border: none;
   float: center;
@@ -47,19 +48,19 @@
   color: var(--primary);
   transition: 0.4s;
 }
-.align-calendar{
+.align-calendar {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
-.custom-date-picker{
+.custom-date-picker {
   border-radius: 15px;
   border: 1px var(--primary) solid;
   padding: 4px 12px;
   background-color: white;
   height: 40px;
 }
-.slected-dates{
+.slected-dates {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,17 +70,78 @@
 .slected-dates {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* Four columns with equal width */
-  grid-gap: 10px; 
-  justify-content: center; 
-  align-items: center; 
-  text-align: center; 
+  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-.date-box{
+.date-box {
   display: flex;
-  align-items:  flex-start;
+  align-items: center;
 }
-.select-dates{
+.select-dates {
   padding-top: 22px;
   padding-right: 20px;
   font-size: large;
+}
+
+.full-width-input {
+  width: "500%";
+  height: "100%";
+  resize: "both";
+}
+.form__group {
+  position: relative;
+  /* padding: 15px 0 0; */
+  padding: 20px 0 0 ;
+  margin-top: 5px;
+  width: 50%;
+}
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 18px;
+  color: var(--primary);
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.form__field::placeholder {
+  color: transparent;
+}
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 18px;
+  cursor: text;
+  top: 15px;
+}
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 12px;
+  color: #9b9b9b;
+}
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 500;
+  border-width: 3px;
+  border-image: linear-gradient(to right, var(--primary-dark), var(--primary));
+  border-image-slice: 1;
+}
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 700;
+}
+/* reset input */
+.form__field:required, .form__field:invalid {
+  box-shadow: none;
 }

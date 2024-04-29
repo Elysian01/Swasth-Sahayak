@@ -4,7 +4,7 @@ import "../../pages/css/common.css";
 import Eye from "../../static/icons/eye.png";
 import Slate from "../../static/imgs/slate.png";
 import { useNavigate } from "react-router-dom";
-function CurrentDiagnosisCard({ data, patientId }) {
+function CurrentDiagnosisCard({ data, diagnoseID,patientId }) {
   const navigate = useNavigate();
   
   // if (!data.prescription || data.prescription.length === 0) {
@@ -14,7 +14,7 @@ function CurrentDiagnosisCard({ data, patientId }) {
   // console.log(lastPrescription.did)
   const size = data.did.length;
   const handleViewDiagnose = () => {
-    navigate("/diagnose-report", { state: { patientId } });
+    navigate("/diagnose-report", { state: { diagnoseID } });
   };
   return (
     <div className="current-diagnosis-card">
