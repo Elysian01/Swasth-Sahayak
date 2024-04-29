@@ -14,12 +14,24 @@ const Doctoraddform = ({ adddoctor }) => {
   const [specialization, setspecialization] = useState();
   const [countofpatient, setcountofpatient] = useState();
   const [username, setusername] = useState();
+  const [phoneError, setPhoneError] = useState('');
+  const [pincodeError, setPincodeError] = useState('');
+  const [blockCodeError, setBlockCodeError] = useState('');
+  const [countofpatientError, setcountofpatientError] = useState('');
+  const [emailError, setEmailError] = useState('');
   
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
   const handleBlockCode = (event) => {
-    setBlockCode(event.target.value);
+    const value = event.target.value;
+    const blockCodeRegex = /^[A-Za-z0-9]+$/; // Allow alphanumeric characters
+    if (value === '' || (blockCodeRegex.test(value) && value.length <= 7)) {
+      setBlockCode(value);
+      setBlockCodeError('');
+    } else {
+      setBlockCodeError('Please enter a valid 7-character block code.');
+    }
   };
 
   const handleGenderChange = (event) => {
@@ -27,13 +39,43 @@ const Doctoraddform = ({ adddoctor }) => {
   };
 
   const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
+    const value = event.target.value;
+    const phoneRegex = /^[0-9\b]+$/; // Allow numbers only
+    if (value === '' || (phoneRegex.test(value) && value.length <= 10)) {
+      setPhone(value);
+      setPhoneError('');
+    } else {
+      setPhoneError('Please enter a valid 10-digit mobile number.');
+    }
   };
   const handlecountofpatient = (event) => {
-    setcountofpatient(event.target.value);
+    const value = event.target.value;
+    const blockCodeRegex = /^[0-9]+$/; // Allow alphanumeric characters
+    if (value === '' || (blockCodeRegex.test(value))) {
+      setcountofpatient(value);
+      setcountofpatientError('');
+    } else {
+      setcountofpatientError('Please enter the number.');
+    }
   };
   const handleusername = (event) => {
-    setusername(event.target.value);
+    const value = event.target.value;
+    setusername(value);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex pattern
+    const simpleEmailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // Regex for simple email validation
+    const wrongEmailList = ['example@example.com', 'test@test.com']; // List of known wrong emails
+
+    if (emailRegex.test(value)) {
+      if (simpleEmailRegex.test(value) && !wrongEmailList.includes(value.toLowerCase())) {
+        setEmailError('');
+      } else {
+      setEmailError('Please enter a valid email address.');
+
+      }
+    } else {
+      setEmailError('Please enter a valid email address.');
+    }
   };
   const handlespecialization = (event) => {
     setspecialization(event.target.value);
@@ -46,11 +88,29 @@ const Doctoraddform = ({ adddoctor }) => {
     setAddress(event.target.value);
   };
   const handlePincodeChange = (event) => {
-    setPincode(event.target.value);
+    const value = event.target.value;
+    const pincodeRegex = /^[0-9\b]+$/; // Allow numbers only
+    if (value === '' || (pincodeRegex.test(value) && value.length <= 6)) {
+      setPincode(value);
+      setPincodeError('');
+    } else {
+      setPincodeError('Please enter a valid 6-digit pincode.');
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!phone ||phone.length !== 10) {
+      setPhoneError('Please enter a correct 10-digit mobile number.');
+      alert("Invalid data enter");
+      return; // Prevent form submission if phone number is invalid
+    }
+    
+    if (!pincode ||pincode.length !== 6) {
+      setPhoneError('Please enter a valid 6-digit pincode.');
+      alert("Invalid data enter");
+      return; // Prevent form submission if phone number is invalid
+    }
     // Create a doctor object with the updated form data
     const Doctordetail = {
       username: username,
@@ -72,6 +132,19 @@ const Doctoraddform = ({ adddoctor }) => {
 
   return (
     <div>
+      <style>
+        {`
+          .error-message {
+            color: #ff0000; /* Red color for the error message */
+            background-color: #ffebeb; /* Light red background */
+            border: 1px solid #ff0000; /* Red border */
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: left;
+          }
+        `}
+      </style>
       <form className="form-style" onSubmit={handleSubmit}>
         <GradientInput
           type="text"
@@ -162,6 +235,11 @@ const Doctoraddform = ({ adddoctor }) => {
           value={username}
           onChange={handleusername}
         />
+        {phoneError && <div className="error-message">{phoneError}</div>}
+        {pincodeError && <div className="error-message">{pincodeError}</div>}
+        {blockCodeError && <div className="error-message">{blockCodeError}</div>}
+        {emailError && <div className="error-message">{emailError}</div>}
+        {countofpatientError && <div className="error-message">{countofpatientError}</div>}
         <button type="submit" className="primary-btn">
           Submit
         </button>

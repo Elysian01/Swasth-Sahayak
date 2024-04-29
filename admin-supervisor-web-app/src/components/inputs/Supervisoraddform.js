@@ -8,6 +8,9 @@ const Supervisoraddform = ({ addsupervisor }) => {
   const [phone, setPhone] = useState();
   const [name, setName] = useState();
   const [username, setusername] = useState();
+  const [phoneError, setPhoneError] = useState('');
+  const [emailError, setEmailError] = useState('');
+
 
 
   const handleGenderChange = (event) => {
@@ -15,11 +18,34 @@ const Supervisoraddform = ({ addsupervisor }) => {
   };
 
   const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
+    const value = event.target.value;
+    const phoneRegex = /^[0-9\b]+$/; // Allow numbers only
+    if (value === '' || (phoneRegex.test(value) && value.length <= 10)) {
+      setPhone(value);
+      setPhoneError('');
+    } else {
+      setPhoneError('Please enter a valid 10-digit mobile number.');
+    }
   };
   
   const handleusername = (event) => {
-    setusername(event.target.value);
+    const value = event.target.value;
+    setusername(value);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex pattern
+    const simpleEmailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // Regex for simple email validation
+    const wrongEmailList = ['example@example.com', 'test@test.com']; // List of known wrong emails
+
+    if (emailRegex.test(value)) {
+      if (simpleEmailRegex.test(value) && !wrongEmailList.includes(value.toLowerCase())) {
+        setEmailError('');
+      } else {
+      setEmailError('Please enter a valid email address.');
+
+      }
+    } else {
+      setEmailError('Please enter a valid email address.');
+    }
   };
   
   const handleNameChange = (event) => {
@@ -31,6 +57,11 @@ const Supervisoraddform = ({ addsupervisor }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!phone ||phone.length !== 10) {
+      setPhoneError('Please enter a correct 10-digit mobile number.');
+      alert("Invalid data enter");
+      return; // Prevent form submission if phone number is invalid
+    }
     // Create a doctor object with the updated form data
     const supervisordetail = {
         supervisorid: username,
@@ -46,6 +77,19 @@ const Supervisoraddform = ({ addsupervisor }) => {
 
   return (
     <div>
+      <style>
+        {`
+          .error-message {
+            color: #ff0000; /* Red color for the error message */
+            background-color: #ffebeb; /* Light red background */
+            border: 1px solid #ff0000; /* Red border */
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: left;
+          }
+        `}
+      </style>
       <form className="form-style" onSubmit={handleSubmit}>
         <GradientInput
           type="text"
@@ -89,6 +133,8 @@ const Supervisoraddform = ({ addsupervisor }) => {
           value={username}
           onChange={handleusername}
         />
+        {phoneError && <div className="error-message">{phoneError}</div>}
+        {emailError && <div className="error-message">{emailError}</div>}
         <button type="submit" className="primary-btn">
           Submit
         </button>
