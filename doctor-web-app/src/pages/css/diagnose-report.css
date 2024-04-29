@@ -17,9 +17,6 @@
   letter-spacing: 1px;
   font-weight: 400;
 }
-.alignment{
-  display: flex;
-}
 .quession-table{
   display: flex;
   flex-direction: column;

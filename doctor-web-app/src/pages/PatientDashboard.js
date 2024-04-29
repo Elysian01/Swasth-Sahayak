@@ -37,7 +37,6 @@ function PatientDashboard() {
           headers
         );
         setTableData(response);
-        console.log(response)
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -116,7 +115,7 @@ function PatientDashboard() {
               />
             </SkeletonTheme>
           ) : (
-            <CurrentDiagnosisCard data={tableData} />
+            <CurrentDiagnosisCard data={tableData} patientId={patientId}/>
           )}
         </div>
       </div>
