@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
-import { getRequest,deleteRequest } from "../components/Api/api";
+import { getRequest, deleteRequest } from "../components/Api/api";
 function GradientInput(props) {
   return (
     <div className="form__group field">
@@ -18,7 +18,7 @@ function GradientInput(props) {
         value={props.value}
         onChange={props.onChange}
         required
-        style={props.style} 
+        style={props.style}
       />
       <label htmlFor={props.name} className="form__label">
         {props.name}
@@ -34,16 +34,13 @@ function SupervisorDashboard() {
 
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
-  
+
   const fetchFieldWorkerDetails = async () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       // Await the API call
-      const response = await getRequest(
-        "/admin/allsupervisordetail",
-        headers
-      );
-      console.log(response)
+      const response = await getRequest("/admin/allsupervisordetail", headers);
+      console.log(response);
       // Update the state with the fetched doctor details
       setFieldWorkerDetails(response);
     } catch (error) {
@@ -82,17 +79,16 @@ function SupervisorDashboard() {
         headers
       );
       fetchFieldWorkerDetails();
-      
     } catch (error) {
       console.error(error);
     }
   };
-	return (
-		<div>
-			<Navbar />
-			<PageHeading title="Supervisor Dashboard" />
-			<div className="dropdown-container">
-      <GradientInput
+  return (
+    <div>
+      <Navbar />
+      <PageHeading title="Supervisor Dashboard" />
+      <div className="dropdown-container">
+        <GradientInput
           type="text"
           placeholder="Search by Name and Supervisor ID"
           name="Search by Name and Supervisor ID"
@@ -100,9 +96,11 @@ function SupervisorDashboard() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <button className="small-primary-btn" onClick={addNewsupervisor}>Add New Supervisor</button>
+        <button className="small-primary-btn" onClick={addNewsupervisor}>
+          Add New Supervisor
+        </button>
       </div>
-			<div className="view-pane">
+      <div className="view-pane">
         {FieldWorkerDetails.map((fieldworker, index) => (
           <div className="display-card" key={index}>
             <div className="person-details">
@@ -122,10 +120,18 @@ function SupervisorDashboard() {
                 View
               </button>
               <button
-              onClick={() => handleEdit(fieldworker)}
-              className="dark-primary-small-btn">Edit</button>
-              
-              <button className="pink-btn" onClick={() => handleInactive(fieldworker)}>Inactive</button>
+                onClick={() => handleEdit(fieldworker)}
+                className="dark-primary-small-btn"
+              >
+                Edit
+              </button>
+
+              <button
+                className="pink-btn"
+                onClick={() => handleInactive(fieldworker)}
+              >
+                Inactive
+              </button>
             </div>
           </div>
         ))}
@@ -186,8 +192,8 @@ function SupervisorDashboard() {
           )}
         </div>
       </Modal>
-		</div>
-	);
+    </div>
+  );
 }
 
 export default SupervisorDashboard;
