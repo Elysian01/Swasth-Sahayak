@@ -28,7 +28,7 @@ function PatientDashboard() {
   const location = useLocation();
   const { state } = location;
 
-  const patientId = state ? state.patientId : null;
+  const patientId = state ? state.patientId : "";
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -118,7 +118,7 @@ function PatientDashboard() {
               />
             </SkeletonTheme>
           ) : (
-            <CurrentDiagnosisCard data={tableData} diagnoseID={diagnoseID} patientId={[patientId]}/>
+            <CurrentDiagnosisCard data={tableData} diagnoseID={diagnoseID} patientId={patientId}/>
           )}
         </div>
       </div>

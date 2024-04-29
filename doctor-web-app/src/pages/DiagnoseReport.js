@@ -58,9 +58,7 @@ function DiagnoseReport() {
     // For demonstration purposes, simply show an alert
     alert("Data submitted successfully!");
   };
-  const handleNavigate = () => {
-    navigate("/patient-dashboard", { state: { patientId } });
-  };
+  
   const handleDateChange = (values) => {
     // Convert values to an array if it's not already one
     const selectedDates = Array.isArray(values) ? values : [values];
@@ -122,9 +120,7 @@ function DiagnoseReport() {
         <Table columns={columns} data={tableData} />
         <br />
         <br />
-        <button className="primary-btn" onClick={handleNavigate}>
-          Go back to Patient Dashboard
-        </button>
+        
       </div>
       <div className="comment-date">
         <h3>Comments added by Field Worker</h3>
