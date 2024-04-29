@@ -38,7 +38,6 @@ function PatientDashboard() {
           headers
         );
         const len= response.did.length;
-        console.log(response);
         setDiagnoseID(response.did[len-1].diagnoseid)
         setTableData(response);
         setLoading(false);
