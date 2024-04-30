@@ -18,6 +18,7 @@ import EditSuervisor from "./screens/EditSupervisor";
 import EditQuestion from "./screens/EditQuestion";
 import AddFieldworker from "./screens/AddFieldworker";
 import Addsupervisor from "./screens/Addsupervisor"
+import ChatApp from "./screens/ChatApp";
 import { useSelector } from "react-redux";
 
 import { useEffect } from 'react';
@@ -54,6 +55,10 @@ function App() {
           <Route
             path="field-worker-dashboard"
             element={<ProtectedRoute><FieldWorkerDashboard /></ProtectedRoute>}
+          />
+          <Route
+            path="chat-app"
+            element={<ProtectedRoute><ChatApp /></ProtectedRoute>}
           />
           <Route
             path="supervisor-dashboard"
