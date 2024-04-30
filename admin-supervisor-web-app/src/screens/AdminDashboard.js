@@ -23,12 +23,12 @@ function AdminDashboard() {
     const uploadDoctorsToChatEngine = async () => {
         try {
           const promises = doctors.map(async doctor => {
-            const { doctorId, mobileno,} = doctor;
+            const { doctorId} = doctor;
             const data = {
               username: doctorId, // doctorId as username
-              secret: mobileno,   // mobileno as secret
+              secret: doctorId,   // mobileno as secret
             };
-            
+            console.log(data)
             const config = {
               method: 'post',
               url: 'https://api.chatengine.io/users/',
