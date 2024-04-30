@@ -6,30 +6,36 @@ import Navbar from "../components/misc/Navbar";
 import Modal from "react-modal"; // Import react-modal
 import DatePicker from "react-multi-date-picker";
 import Icon from "react-multi-date-picker/components/icon";
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation ,useNavigate} from "react-router-dom";
 import { useSelector } from "react-redux";
-import { getRequest } from "../components/Api/api";
+import { getRequest, postRequest } from "../components/Api/api";
 function DiagnoseReport() {
+  const user = useSelector((state) => state.auth.user);
   const [dates, setDates] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [firstDate, setFirstDate] = useState("");
   const [images, setImages] = useState([]);
   const [dieseaseData, setDieseaseData] = useState([]);
+  const [uploadDiesease, setUploadDiesease] = useState("select questionare name");
   const [fieldworkerComment, setfieldworkerComment] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [doctorPrescription, setDoctorPrescription] = useState("");
+  const [doctorComment, setDoctorComment] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
   const { state } = location;
   const patientId = state ? state.patientId : null;
   const diagnoseID = state ? state.diagnoseID : null;
+  const [uploadDieseaseError, setuploadDieseaseError] = useState('');
+  const navigate = useNavigate();
+
+
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
     getDiesease();
     fetchData();
-  }, [patientId, token]);
+  }, []);
   const fetchData = async () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
@@ -40,6 +46,9 @@ function DiagnoseReport() {
       setfieldworkerComment(response.fieldworkercomment);
       setTableData(response.patientanswers);
       setFirstDate(response.date);
+      console.log(response.icd10)
+      if(response.icd10)setUploadDiesease(response.icd10)
+      console.log(uploadDiesease)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -53,16 +62,53 @@ function DiagnoseReport() {
       console.error("Error fetching data:", error);
     }
   };
-  const handleSubmit = () => {
-    // Perform submission logic here
-    // For demonstration purposes, simply show an alert
-    alert("Data submitted successfully!");
+  const setDiesease = (event) => {
+    const value=event.target.value
+    if(value != "select questionare name"){
+      setUploadDiesease(value);
+      setuploadDieseaseError('');
+    }
+    else setuploadDieseaseError("select questionare name")
   };
-  
+  const handleSubmit = async() => {
+    if(uploadDiesease == "select questionare name"){
+      setuploadDieseaseError("select questionare name");
+      return;
+    }
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const date = `${year}-${month}-${day}`;
+    const formattedDates = dates.map(date => date.format("YYYY-MM-DD"));
+    const data = {
+      pid: patientId,
+      prescriptiondate: date,
+      prescription: doctorPrescription,
+      doctorcomment: doctorComment,
+      diseasename: uploadDiesease,
+      doctorid: user,
+      followUpDate: formattedDates,
+      diagnosisid: diagnoseID,
+    };
+    console.log(data);
+    try{
+      const headers = { Authorization: `Bearer ${token}` };
+        const response = await postRequest(
+          `/doctor/addprescription`,
+          data,
+          headers
+        );
+        navigate("/doctor-dashboard")
+        console.log(response);
+    }catch(error){
+      console.log(error);
+    }
+  };
+
   const handleDateChange = (values) => {
     // Convert values to an array if it's not already one
     const selectedDates = Array.isArray(values) ? values : [values];
-
     // Filter out any duplicate dates
     const uniqueDates = selectedDates.filter(
       (date, index) => selectedDates.indexOf(date) === index
@@ -75,6 +121,14 @@ function DiagnoseReport() {
     setDates((prevDates) =>
       prevDates.filter((_, index) => index !== indexToRemove)
     );
+  };
+
+  const handlePrescriptionChange = (event) => {
+    setDoctorPrescription(event.target.value);
+  };
+
+  const handleCommentChange = (event) => {
+    setDoctorComment(event.target.value);
   };
 
   // Function to handle opening the modal
@@ -112,6 +166,19 @@ function DiagnoseReport() {
 
   return (
     <div>
+      <style>
+        {`
+          .error-message {
+            color: #ff0000; /* Red color for the error message */
+            background-color: #ffebeb; /* Light red background */
+            border: 1px solid #ff0000; /* Red border */
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: left;
+          }
+        `}
+      </style>
       <Navbar />
       <br />
       <h2 className="title">Diagnosed Report</h2>
@@ -120,7 +187,6 @@ function DiagnoseReport() {
         <Table columns={columns} data={tableData} />
         <br />
         <br />
-        
       </div>
       <div className="comment-date">
         <h3>Comments added by Field Worker</h3>
@@ -138,7 +204,21 @@ function DiagnoseReport() {
         <h3>Prescription by Doctor</h3>
         <br />
         {/* <div className="reading-box"> */}
-        <textarea className="reading-box" />
+        <textarea
+          className="reading-box"
+          value={doctorPrescription}
+          onChange={handlePrescriptionChange}
+        />
+        <br />
+        <br />
+        <h3>Comments by Doctor</h3>
+        <br />
+        {/* <div className="reading-box"> */}
+        <textarea
+          className="reading-box"
+          value={doctorComment}
+          onChange={handleCommentChange}
+        />
         <br />
         {/* </div> */}
         <div className="align-calendar">
@@ -150,27 +230,29 @@ function DiagnoseReport() {
 
             <div className="calendar-container">
               <br />
-              {!firstDate ? (
-                <DatePicker
-                  inputClass="custom-date-picker"
-                  style={{
-                    width: "100%",
-                    boxSizing: "border-box",
-                  }}
-                  multiple
-                  value={dates}
-                  onChange={handleDateChange}
-                  render={<Icon />}
-                />
-              ) : (
-                <select onClick={getDiesease} className="form__field">
-                  {dieseaseData.map((disease) => (
-                    <option
-                      key={disease.icd10}
-                    >{`${disease.diseasename} : ${disease.icd10}`}</option>
-                  ))}
-                </select>
-              )}
+              {!firstDate && (
+              <DatePicker
+                inputClass="custom-date-picker"
+                style={{
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+                multiple
+                value={dates}
+                onChange={handleDateChange}
+                render={<Icon />}
+              />
+            ) }
+              <select onChange={setDiesease} className="form__field"value={uploadDiesease}>
+                <option value="select questionare name">select questionare name</option>
+                {dieseaseData.map((disease) => (
+
+                  <option
+                    value={disease.diseasename}
+                  >{`${disease.diseasename} : ${disease.icd10}`}</option>
+                ))}
+              </select>
+              
             </div>
           </div>
 
@@ -183,6 +265,7 @@ function DiagnoseReport() {
               </div>
             ))}
           </div>
+          {uploadDieseaseError && <div className="error-message">{uploadDieseaseError}</div>}
           <button className="primary-btn" onClick={handleSubmit}>
             Submit
           </button>

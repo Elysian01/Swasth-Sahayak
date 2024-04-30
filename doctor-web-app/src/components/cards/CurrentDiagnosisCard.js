@@ -14,7 +14,7 @@ function CurrentDiagnosisCard({ data, diagnoseID,patientId }) {
   // console.log(lastPrescription.did)
   const size = data.did.length;
   const handleViewDiagnose = () => {
-    navigate("/diagnose-report", { state: { diagnoseID } });
+    navigate("/diagnose-report", { state: { diagnoseID,patientId } });
   };
   return (
     <div className="current-diagnosis-card">
