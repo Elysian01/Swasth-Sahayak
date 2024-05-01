@@ -21,7 +21,7 @@ function DiagnoseRequest() {
 
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
-
+  const pids = useSelector(state => state.auth.pids);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,7 +49,9 @@ function DiagnoseRequest() {
     navigate("/doctor-dashboard");
   };
   const columns = ["User ID", "Name", "View"];
-
+  const isPatientIdInPids = (patientId) => {
+    return pids.includes(patientId);
+  };
   const renderViewButton = (patientId) => (
     <button onClick={() => handleViewClick(patientId)} className="view-button">
       <img src={viewIcon} alt="View" />
@@ -73,7 +75,7 @@ function DiagnoseRequest() {
           ) : (
             <Table
               columns={columns}
-              data={tableData.map((row) => ({
+              data={tableData.filter(row => !isPatientIdInPids(row.patientid)).map((row) => ({
                 "User ID": row.patientid,
                 Name: row.name,
                 // Chat: renderChatButton(row.Chat),

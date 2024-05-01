@@ -26,6 +26,7 @@ function DoctorDashboard() {
 
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
+  const pids = useSelector(state => state.auth.pids);
   useEffect(() => {
     const fetchTop3Patients = async () => {
       try {
@@ -92,7 +93,9 @@ function DoctorDashboard() {
   };
 
   //const columns = ["Patient ID", "Name", "View Diagnose"];
-
+  const isPatientIdInPids = (patientId) => {
+    return pids.includes(patientId);
+  };
   const renderViewButton = (patientId) => (
     <button onClick={() => handleViewClick(patientId)} className="view-button">
       <img src={viewIcon} alt="View" />
@@ -154,7 +157,7 @@ function DoctorDashboard() {
             ) : (
               <Table
                 columns={columns}
-                data={tableData.map((row) => ({
+                data={tableData.filter(row => !isPatientIdInPids(row.patientid)).map((row) => ({
                   Name: row.name,
                   "Patient ID": row.patientid,
                   "View Diagnose": renderViewButton(row.patientid),

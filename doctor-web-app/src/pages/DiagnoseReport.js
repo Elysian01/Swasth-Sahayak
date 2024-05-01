@@ -3,12 +3,14 @@ import "../components/css/listings.css";
 import "./css/diagnose-report.css";
 import Table from "../components/tables/Listings";
 import Navbar from "../components/misc/Navbar";
+import { setPids } from "../login/authSlice";
 import Modal from "react-modal"; // Import react-modal
 import DatePicker from "react-multi-date-picker";
 import Icon from "react-multi-date-picker/components/icon";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getRequest, postRequest } from "../components/Api/api";
 function DiagnoseReport() {
   const user = useSelector((state) => state.auth.user);
@@ -25,13 +27,17 @@ function DiagnoseReport() {
   const [doctorPrescription, setDoctorPrescription] = useState("");
   const [doctorComment, setDoctorComment] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const location = useLocation();
   const { state } = location;
   const patientId = state ? state.patientId : null;
   const diagnoseID = state ? state.diagnoseID : null;
   const [uploadDieseaseError, setuploadDieseaseError] = useState("");
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const pids = useSelector((state) => state.auth.pids); // Assuming auth is the name of your slice
 
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
@@ -72,7 +78,7 @@ function DiagnoseReport() {
   };
   const handleSubmit = async () => {
     if (uploadDiesease == "select questionare name") {
-      setuploadDieseaseError("select questionare name");  
+      setuploadDieseaseError("select questionare name");
       return;
     }
     const currentDate = new Date();
@@ -98,7 +104,8 @@ function DiagnoseReport() {
         data,
         headers
       );
-      //here it should navigate to doctor-dashboard and state should hold all the patientId
+      dispatch(setPids([...pids, response.pid])); // Assuming pids is already defined
+
       navigate("/doctor-dashboard");
       console.log(response);
     } catch (error) {
@@ -230,8 +237,6 @@ function DiagnoseReport() {
             </h3>
 
             <div className="calendar-container">
-              
-
               {!firstDate && (
                 <DatePicker
                   inputClass="custom-date-picker"
