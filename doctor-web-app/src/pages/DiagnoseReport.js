@@ -15,6 +15,7 @@ import { getRequest, postRequest } from "../components/Api/api";
 function DiagnoseReport() {
   const user = useSelector((state) => state.auth.user);
   const [dates, setDates] = useState([]);
+  const [diagnoseDate, setDiagnoseDate] = useState("");
   const [tableData, setTableData] = useState([]);
   const [firstDate, setFirstDate] = useState("");
   const [images, setImages] = useState([]);
@@ -55,6 +56,7 @@ function DiagnoseReport() {
       setfieldworkerComment(response.fieldworkercomment);
       setTableData(response.patientanswers);
       setFirstDate(response.date);
+      setDiagnoseDate(response.diagonsedate);
       if (response.icd10) setUploadDiesease(response.icd10);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -143,7 +145,7 @@ function DiagnoseReport() {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const response = await getRequest(
-        `/doctor/download_images/${diagnoseID}`,
+        `/doctor/download_images/${patientId}/${diagnoseDate}`,
         headers
       );
       console.log("artificats array:", response);
