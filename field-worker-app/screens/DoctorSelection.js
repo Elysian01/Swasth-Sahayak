@@ -100,6 +100,7 @@ const DoctorSelection = (props) => {
 		uploadData["chosen_doctor"].push(chosenDoctorData);
 		console.log("Updated: ", uploadData);
 		await AsyncStorage.setItem("uploadData", JSON.stringify(uploadData));
+		await AsyncStorage.setItem("DataChangeStatus", "true");
 		navigation.navigate("Home");
 	};
 

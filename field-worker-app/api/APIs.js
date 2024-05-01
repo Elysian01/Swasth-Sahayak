@@ -1,4 +1,6 @@
 import ApiManager from "./ApiManager";
+import AuthApiManager from "./AuthApiManager";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const loginAPI = async (data) => {
 	try {
@@ -39,12 +41,40 @@ export const getFieldWorkerDetailsAPI = async () => {
 export const downloadAPI = async () => {
 	try {
 		console.log("Downloading Data from server...");
+		const fwid = await AsyncStorage.getItem("FieldWorkerID");
+		const token = await AsyncStorage.getItem("AccessToken");
 
-		const result = await ApiManager("/fieldworker/getdata/1", {
+		const result = await AuthApiManager(`/fieldworker/getdata/${fwid}`, {
 			method: "GET",
 			headers: {
-				"content-type": "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
 			},
+		});
+		return result.data; // Return only the data
+	} catch (error) {
+		console.error("Error downloading data: ", error);
+		return { error: error.message }; // Return error message
+	}
+};
+
+export const tempUploadAPI = async () => {
+	try {
+		console.log("Temp Data Uploading ...");
+		const fwid = await AsyncStorage.getItem("FieldWorkerID");
+		const token = await AsyncStorage.getItem("AccessToken");
+
+		temp = {
+			msg: "Marja Priyanshuo",
+		};
+
+		const result = await ApiManager("/fieldworker/getdata", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			data: temp,
 		});
 		return result;
 	} catch (error) {
@@ -52,13 +82,18 @@ export const downloadAPI = async () => {
 	}
 };
 
-export const uploadAPI = async (uploadData) => {
+export const uploadAPI = async () => {
 	try {
-		console.log("Data Uploading: ", uploadData);
-		const result = await ApiManager("/fieldworker/followupsReschedule", {
+		const token = await AsyncStorage.getItem("AccessToken");
+		const uploadData = await AsyncStorage.getItem("uploadData");
+		console.log("Uploading data to server ... ");
+		console.log(uploadData);
+
+		const result = await ApiManager("/fieldworker/recievedata", {
 			method: "POST",
 			headers: {
-				"content-type": "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
 			},
 			data: uploadData,
 		});

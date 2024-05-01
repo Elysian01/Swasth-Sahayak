@@ -13,7 +13,7 @@ import { lang } from "../database/language";
 const Profile = () => {
 	const navigation = useNavigation();
 
-	const [syncDataStatus, setSyncDataStatus] = useState(false);
+	const [syncDataStatus, setSyncDataStatus] = useState(true);
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	const [fieldWorkerName, setFieldWorkerName] = useState("");
 
@@ -37,34 +37,34 @@ const Profile = () => {
 		}
 	}
 
-	const synchronizeData = async () => {
-		uploadData = await AsyncStorage.getItem("uploadData");
-		if (uploadData) {
-			uploadData = JSON.parse(uploadData);
+	// const synchronizeData = async () => {
+	// 	uploadData = await AsyncStorage.getItem("uploadData");
+	// 	if (uploadData) {
+	// 		uploadData = JSON.parse(uploadData);
 
-			await uploadAPI(uploadData)
-				.then((result) => {
-					if (result.status === 200) {
-						console.log(result);
-						Alert.alert(
-							"Success",
-							"Data Successfully Uploaded!!"
-						);
-						setSyncDataStatus(true);
-					} else if (result.status === 401) {
-						console.log(result.status);
-						Alert.alert("Error", result.data, []);
-					}
-				})
-				.catch((error) => {
-					console.log(error);
-					Alert.alert("Unable to Upload Data: ", error);
-				});
+	// 		await uploadAPI(uploadData)
+	// 			.then((result) => {
+	// 				if (result.status === 200) {
+	// 					console.log(result);
+	// 					Alert.alert(
+	// 						"Success",
+	// 						"Data Successfully Uploaded!!"
+	// 					);
+	// 					setSyncDataStatus(true);
+	// 				} else if (result.status === 401) {
+	// 					console.log(result.status);
+	// 					Alert.alert("Error", result.data, []);
+	// 				}
+	// 			})
+	// 			.catch((error) => {
+	// 				console.log(error);
+	// 				Alert.alert("Unable to Upload Data: ", error);
+	// 			});
 
-			Alert.alert("Success", "Data Successfully Uploaded!!");
-			setSyncDataStatus(true);
-		}
-	};
+	// 		Alert.alert("Success", "Data Successfully Uploaded!!");
+	// 		setSyncDataStatus(true);
+	// 	}
+	// };
 
 	function deletePatientAccount() {}
 

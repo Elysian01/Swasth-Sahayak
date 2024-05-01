@@ -8,7 +8,6 @@ import FreeVisit from "../components/misc/FreeVisit";
 import PageHeading from "../components/headers/PageHeading";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as FileSystem from "expo-file-system";
 
 import { downloadAPI } from "../api/APIs";
 import { lang } from "../database/language";
@@ -19,27 +18,6 @@ const Home = () => {
 	// const [downloadedData, setDownloadedData] = useState("");
 	const [assignedSector, setAssignedSector] = useState();
 
-	saveFile = async (saveData) => {
-		let fileUri = FileSystem.documentDirectory + "test.json";
-		await FileSystem.writeAsStringAsync(
-			fileUri,
-			JSON.stringify(saveData),
-			{
-				encoding: FileSystem.EncodingType.UTF8,
-			}
-		);
-
-		let data = await FileSystem.readAsStringAsync(fileUri);
-		console.log("File data: ", data);
-	};
-
-	// useEffect(() => {
-	// 	const saveData = {
-	// 		test: "working",
-	// 	};
-	// 	saveFile(saveData);
-	// }, []);
-
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
@@ -49,28 +27,35 @@ const Home = () => {
 		await downloadAPI()
 			.then(async (result) => {
 				if (result) {
-					console.log("Come: ",result.data);
-					downloadedData = result.data;
+					console.log("Come: ", result);
+					downloadedData = result;
 					try {
 						await AsyncStorage.setItem(
 							"DownloadedData",
 							JSON.stringify(downloadedData)
 						);
-						console.log("Async Storage -> Download data storage Success");
+						console.log(
+							"Async Storage -> Download data storage Success"
+						);
+						await AsyncStorage.setItem(
+							"DataChangeStatus",
+							"false"
+						);
 						setAssignedSector(
-							result.data["field_worker_details"][
+							result["field_worker_details"][
 								"field_worker_assigned_sector"
 							]
 						);
 					} catch (error) {
 						console.log(
-							"Error setting up download data, Async Storage " + error
+							"Error setting up download data, Async Storage " +
+								error
 						);
 					}
-				} else  {
-					console.log("Error in fetching the data")
+				} else {
+					console.log("Error in fetching the data");
 					console.log(result);
-					Alert.alert("Error", result.data);
+					Alert.alert("Error", result);
 				}
 			})
 			.catch((error) => {
@@ -102,12 +87,14 @@ const Home = () => {
 		// setAssignedSector(
 		// 	data["field_worker_details"]["field_worker_assigned_sector"]
 		// );
-		
-		console.log("Check: ",downloadedData)
+
 		// const Ddata = JSON.parse(downloadedData);
+
+		let data = await AsyncStorage.getItem("DownloadedData");
+		data = JSON.parse(data);
 		const uploadTemplate = {
 			// list of all follow_ups
-			follow_up: downloadedData["follow_up"],
+			follow_up: data["follow_up"],
 			// list of all questionnaire responses
 			questionnaire_response: [],
 			// list of all field workers comments
@@ -115,14 +102,14 @@ const Home = () => {
 			// list of all artifacts
 			artifacts: [],
 			// docters slot booked
-			doctors: downloadedData["doctors"],
+			doctors: data["doctors"],
 			// list of doctor chosen by patient
 			chosen_doctor: [],
 			// upload section
 			patient_registeration: [],
 		};
-		
-		console.log(uploadTemplate);
+
+		console.log("U: ", uploadTemplate);
 
 		try {
 			await AsyncStorage.setItem(

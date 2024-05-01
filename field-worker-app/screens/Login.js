@@ -28,22 +28,22 @@ const Login = () => {
 		setPreferredLanguage(lang);
 	});
 
-	const handleAuthenticate = async () => {
-		try {
-			const result = await LocalAuthentication.authenticateAsync();
-			if (result.success) {
-				// Biometric authentication successful, proceed with login
-				navigation.navigate("Home");
-			} else {
-				// Biometric authentication failed, handle accordingly
-				Alert.alert("Biometric Authentication Failed");
-			}
-		} catch (error) {
-			console.error("Biometric Authentication Error:", error);
-			// Handle biometric authentication error
-			Alert.alert("Biometric Authentication Error", error.message);
-		}
-	};
+	// const handleAuthenticate = async () => {
+	// 	try {
+	// 		const result = await LocalAuthentication.authenticateAsync();
+	// 		if (result.success) {
+	// 			// Biometric authentication successful, proceed with login
+	// 			navigation.navigate("Home");
+	// 		} else {
+	// 			// Biometric authentication failed, handle accordingly
+	// 			Alert.alert("Biometric Authentication Failed");
+	// 		}
+	// 	} catch (error) {
+	// 		console.error("Biometric Authentication Error:", error);
+	// 		// Handle biometric authentication error
+	// 		Alert.alert("Biometric Authentication Error", error.message);
+	// 	}
+	// };
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -62,58 +62,64 @@ const Login = () => {
 		return regex.test(email);
 	};
 
-	useEffect(() => {
-		checkLoginCredentials();
-	}, []);
+	// useEffect(() => {
+	// 	checkLoginCredentials();
+	// }, []);
 
-	const checkLoginCredentials = async () => {
-		const storedEmail = await AsyncStorage.getItem("FieldWorkerId");
-		const storedPassword = await AsyncStorage.getItem("FieldWorkerName");
+	// const checkLoginCredentials = async () => {
+	// 	const storedEmail = await AsyncStorage.getItem("FieldWorkerId");
+	// 	const storedPassword = await AsyncStorage.getItem("FieldWorkerName");
 
-		if (storedEmail && storedPassword) {
-			// Both email and password are stored, attempt login via biometric
-			handleAuthenticate();
-		}
-	};
+	// 	if (storedEmail && storedPassword) {
+	// 		// Both email and password are stored, attempt login via biometric
+	// 		handleAuthenticate();
+	// 	}
+	// };
 
 	const handleLogin = () => {
-		// if (validateEmail(email)) {
-		// 	if (email !== "" && password !== "") {
-		// 		loginAPI({
-		// 			username: email,
-		// 			password: password,
-		// 		})
-		// 			.then((result) => {
-		// 				if (result.status === 200) {
-		// 					console.log(result);
-		// 					AsyncStorage.setItem(
-		// 						"AccessToken",
-		// 						result.data.jwtToken
-		// 					);
-		// 					console.log(result.data.jwtToken);
-		// 					navigation.navigate("Home");
-		// 				} else if (result.status === 401) {
-		// 					console.log(result.status);
-		// 					Alert.alert("Error", result.data);
-		// 				}
-		// 			})
-		// 			.catch((error) => {
-		// 				console.log(error);
-		// 				Alert.alert("Error", error);
-		// 			});
-		// 	}
-		// } else {
-		// 	Alert.alert("Invalid Email Format", "Please Enter Valid Email");
-		// }
+		if (validateEmail(email)) {
+			if (email !== "" && password !== "") {
+				loginAPI({
+					username: email,
+					password: password,
+				})
+					.then((result) => {
+						if (result.status === 200) {
+							console.log(result);
+							AsyncStorage.setItem(
+								"AccessToken",
+								result.data.jwtToken
+							);
+							AsyncStorage.setItem(
+								"FieldWorkerID",
+								result.data.username
+							);
+
+							console.log(result.data.username);
+							console.log(result.data.jwtToken);
+							navigation.navigate("Home");
+						} else if (result.status === 401) {
+							console.log(result.status);
+							Alert.alert("Error", result.data);
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+						Alert.alert("Error", error);
+					});
+			}
+		} else {
+			Alert.alert("Invalid Email Format", "Please Enter Valid Email");
+		}
 
 		// const fieldWorkerId = result.data.fieldWorkerId;
 		// const fieldWorkerId = result.data.fieldWorkerName;
 
-		const fieldWorkerId = "10597";
+		// const fieldWorkerId = "10597";
 		const fieldWorkerName = "Jass Sadana";
-		AsyncStorage.setItem("FieldWorkerId", fieldWorkerId);
+		// AsyncStorage.setItem("FieldWorkerId", fieldWorkerId);
 		AsyncStorage.setItem("FieldWorkerName", fieldWorkerName);
-		navigation.navigate("Home");
+		// navigation.navigate("Home");
 	};
 
 	return (
