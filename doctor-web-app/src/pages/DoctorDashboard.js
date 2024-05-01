@@ -19,6 +19,7 @@ import viewIcon from "../static/icons/eye.png";
 function DoctorDashboard() {
   const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
+  const [latesttableData, setLatestTableData] = useState([]);
   const [countData, setCountData] = useState([]);
   const [countDataDate, setCountDateData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,7 +27,7 @@ function DoctorDashboard() {
 
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
-  const pids = useSelector(state => state.auth.pids);
+  const pids = useSelector((state) => state.auth.pids);
   useEffect(() => {
     const fetchTop3Patients = async () => {
       try {
@@ -36,7 +37,10 @@ function DoctorDashboard() {
         const day = String(currentDate.getDate()).padStart(2, "0");
         const date = `${year}-${month}-${day}`;
         const headers = { Authorization: `Bearer ${token}` };
-        const response = await getRequest(`/doctor/top3/${user}/${date}`, headers);
+        const response = await getRequest(
+          `/doctor/top3/${user}/${date}`,
+          headers
+        );
         const column = ["Patient ID", "Name", "View Diagnose"];
         setcolumns(column);
         setTableData(response);
@@ -59,7 +63,20 @@ function DoctorDashboard() {
         console.error("Error fetching data:", error);
       }
     };
-
+    const latestTreatedPatients = async () => {
+      try {
+        const headers = { Authorization: `Bearer ${token}` };
+        const response = await getRequest(
+          `/doctor/recentlytop3treated/${user}`,
+          headers
+        );
+        setLatestTableData(response);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    latestTreatedPatients();
     findCount();
   }, [token, user]);
   useEffect(() => {
@@ -92,7 +109,7 @@ function DoctorDashboard() {
     navigate("/diagnose-request");
   };
 
-  //const columns = ["Patient ID", "Name", "View Diagnose"];
+  const latestcolumns = ["Patient Name", "Follow Update", "Disease"];
   const isPatientIdInPids = (patientId) => {
     return pids.includes(patientId);
   };
@@ -129,39 +146,43 @@ function DoctorDashboard() {
         </div>
         <br />
         <div class="row2">
-          <div class="col1">
-            <ShortListings
-              listingClass="section1"
-              title="Appointments"
-              noOfCards="3"
-              link="/appointments"
-            />
-
-            <ShortListings
-              listingClass="section2"
-              title="Recently Treated"
-              noOfCards="3"
-              link="/recent-diagnose"
+          <div class="col2">
+            <h2>Latest Treated Patient</h2>
+            <br />
+            <Table
+              columns={latestcolumns}
+              data={latesttableData.map((row) => ({
+                "Patient Name": row.patientname,
+                "Follow Update": row.followupdate,
+                "Disease": row.disease,
+              }))}
             />
           </div>
-          <div class="col2" style={{ paddingLeft: "50px" }}>
+          <div class="col2">
             <h2>Patient Diagnosed Request</h2>
             <br />
             {loading ? (
               <SkeletonTheme>
                 <Skeleton
                   count={4}
-                  style={{ borderRadius: "10px", display: "flex", height:'30px',width:'100%' }}
+                  style={{
+                    borderRadius: "10px",
+                    display: "flex",
+                    height: "30px",
+                    width: "100%",
+                  }}
                 />
               </SkeletonTheme>
             ) : (
               <Table
                 columns={columns}
-                data={tableData.filter(row => !isPatientIdInPids(row.patientid)).map((row) => ({
-                  Name: row.name,
-                  "Patient ID": row.patientid,
-                  "View Diagnose": renderViewButton(row.patientid),
-                }))}
+                data={tableData
+                  .filter((row) => !isPatientIdInPids(row.patientid))
+                  .map((row) => ({
+                    Name: row.name,
+                    "Patient ID": row.patientid,
+                    "View Diagnose": renderViewButton(row.patientid),
+                  }))}
               />
             )}
             <br />
