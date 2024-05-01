@@ -30,6 +30,8 @@
 4. Language
 5. uploadData
 6. DownloadedData
+7. DataChangeStatus
+8. ImageAddedStatus
 ```
 
 ## Download Region Data Format
