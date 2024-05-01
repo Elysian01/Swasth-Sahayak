@@ -29,8 +29,13 @@ function DoctorDashboard() {
   useEffect(() => {
     const fetchTop3Patients = async () => {
       try {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+        const day = String(currentDate.getDate()).padStart(2, "0");
+        const date = `${year}-${month}-${day}`;
         const headers = { Authorization: `Bearer ${token}` };
-        const response = await getRequest(`/doctor/top3/${user}`, headers);
+        const response = await getRequest(`/doctor/top3/${user}/${date}`, headers);
         const column = ["Patient ID", "Name", "View Diagnose"];
         setcolumns(column);
         setTableData(response);

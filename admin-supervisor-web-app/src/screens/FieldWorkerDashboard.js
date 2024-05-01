@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
-import { getRequest } from "../components/Api/api";
+import { getRequest, deleteRequest } from "../components/Api/api";
 import GradientInput from "../components/inputs/GradientInput";
 
 import "../components/css/common.css";
@@ -30,21 +30,19 @@ function FieldWorkerDashboard() {
     return nameMatch || idMatch;
   });
 
+  const fetchFieldWorkerDetails = async () => {
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      // Await the API call
+      const response = await getRequest("/admin/allfieldworkerDetail", headers);
+      console.log(response);
+      // Update the state with the fetched doctor details
+      setFieldWorkerDetails(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const fetchFieldWorkerDetails = async () => {
-      try {
-        const headers = { Authorization: `Bearer ${token}` };
-        // Await the API call
-        const response = await getRequest(
-          "/admin/allfieldworkerDetail",
-          headers
-        );
-        // Update the state with the fetched doctor details
-        setFieldWorkerDetails(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     // Call the fetchDoctorDetails function
     fetchFieldWorkerDetails();
   }, []);
@@ -61,6 +59,25 @@ function FieldWorkerDashboard() {
   const handleEdit = (fieldworker) => {
     navigate("/edit-field-worker", { state: { fieldworker } });
   };
+  const handleInactive = async (fieldworker) => {
+    // console.log(doctor.doctorId);
+    const id = fieldworker.fieldworkerid;
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      // Await the API call
+      const status = 1 - fieldworker.status;
+      const response = await deleteRequest(
+        `/admin/fieldworkerdelete/${id}/${status}`,
+        headers
+      );
+      fetchFieldWorkerDetails();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const addNewfieldworker = () => {
+    navigate("/add-fieldworker");
+  };
   return (
     <div>
       <Navbar />
@@ -74,7 +91,7 @@ function FieldWorkerDashboard() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <button className="small-primary-btn">Add New Field Worker</button>
+        <button className="small-primary-btn" onClick={addNewfieldworker}>Add New Field Worker</button>
       </div>
       <div className="view-pane">
         {filteredFieldWorkers.map((fieldworker, index) => (
@@ -101,7 +118,14 @@ function FieldWorkerDashboard() {
               >
                 Edit
               </button>
-              <button className="pink-btn">Inactive</button>
+              <button
+                className={
+                  fieldworker.status ? "dark-primary-small-btn" : "pink-btn"
+                }
+                onClick={() => handleInactive(fieldworker)}
+              >
+                {fieldworker.status ? "Make ACTIVE" : "Make Inactive"}
+              </button>
             </div>
           </div>
         ))}

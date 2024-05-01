@@ -1,25 +1,22 @@
+.page-style {
+  display: flex;
+  justify-content: center;
+}
 .component-style {
   display: flex;
-  flex-wrap: wrap;
-  position: relative;
-  align-items: center;
-  gap:300px;
+  justify-content: center;
+  flex-direction: column;
 }
-.select-option{
+.select-option {
   display: flex;
   margin: 0px;
   border-radius: 10px;
-  width: 100px;
-  height: 50px;
+  width: 1000px;
 }
-.button{
+.button {
   margin-bottom: 30px;
 }
-.navbar{
+.navbar {
   display: flex;
   justify-content: space-between;
-}
-.select-modal{
-  display: flex;
-  justify-items: center;
 }

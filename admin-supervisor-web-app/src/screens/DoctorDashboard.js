@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
-import { getRequest } from "../components/Api/api";
+import { deleteRequest, getRequest } from "../components/Api/api";
 import GradientInput from "../components/inputs/GradientInput";
 
 import "../components/css/common.css";
@@ -45,10 +45,6 @@ function DoctorDashboard() {
       console.error(error);
     }
   };
-  useEffect(() => {
-    // Call the fetchDoctorDetails function
-    fetchDoctorDetails();
-  }, []);
 
   // Function to handle opening the modal
   const openModal = (doctor) => {
@@ -62,7 +58,31 @@ function DoctorDashboard() {
   };
   const handleEdit = (doctor) => {
     navigate("/edit-doctor", { state: { doctor } });
+    fetchDoctorDetails();
   };
+  const addNewDoctor = () => {
+    navigate("/add-doctor");
+  };
+  const handleInactive = async (doctor) => {
+    // console.log(doctor.doctorId);
+    const id = doctor.doctorId;
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+      const status = 1-doctor.status;
+      // Await the API call
+      const response = await deleteRequest(
+        `/admin/doctordelete/${id}/${status}`,
+        headers
+      );
+      fetchDoctorDetails();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    // Call the fetchDoctorDetails function
+    fetchDoctorDetails();
+  }, []);
 
   return (
     <div>
@@ -71,13 +91,15 @@ function DoctorDashboard() {
       <div className="dropdown-container">
         <GradientInput
           type="text"
-          placeholder="Search by Name, Region, or Specialisation"
-          name="Search by Name, Region, or Specialisation"
+          placeholder="Search by Name or Specialisation"
+          name="Search by Name or Specialisation"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <button className="small-primary-btn">Add New Doctor</button>
+        <button className="small-primary-btn" onClick={addNewDoctor}>
+          Add New Doctor
+        </button>
       </div>
       <div className="view-pane">
         {/* Map over the doctor details array and render a display card for each doctor */}
@@ -104,7 +126,14 @@ function DoctorDashboard() {
               >
                 Edit
               </button>
-              <button className="pink-btn">Inactive</button>
+              <button
+                className={
+                  doctor.status ? "dark-primary-small-btn" : "pink-btn"
+                }
+                onClick={() => handleInactive(doctor)}
+              >
+                {doctor.status ? "Make ACTIVE" : "Make Inactive"}
+              </button>
             </div>
           </div>
         ))}
@@ -120,7 +149,7 @@ function DoctorDashboard() {
             backgroundColor: "rgba(0, 0, 0, 0.7)", // Darken the background when the modal is open
           },
           content: {
-            width: "30%", // Set the width to 60% of the viewport
+            width: "50%", // Set the width to 60% of the viewport
             height: "60%", // Automatically adjust the height based on content
             margin: "auto", // Center the modal horizontally
             padding: "25px",
@@ -139,7 +168,12 @@ function DoctorDashboard() {
             </button>
           </div>
           {selectedDoctor && (
+            
             <div className="modal-profile-details">
+              <div className="modal-doctor-details">
+                <div className="modal-static">-Doctor ID: </div>
+                <div className="modal-dynamic">{selectedDoctor.doctorId}</div>
+              </div>
               <div className="modal-doctor-details">
                 <div className="modal-static">-Name: </div>
                 <div className="modal-dynamic">{selectedDoctor.name}</div>

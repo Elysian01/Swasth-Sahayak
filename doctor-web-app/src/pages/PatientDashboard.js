@@ -21,13 +21,14 @@ import CurrentDiagnosisCard from "../components/cards/CurrentDiagnosisCard";
 function PatientDashboard() {
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [diagnoseID,setDiagnoseID]=useState("");
 
   const token = useSelector((state) => state.auth.token);
 
   const location = useLocation();
   const { state } = location;
-  const patientId = state ? state.patientId : null;
 
+  const patientId = state ? state.patientId : "";
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,6 +37,8 @@ function PatientDashboard() {
           `/doctor/patientdashboard/${patientId}`,
           headers
         );
+        const len= response.did.length;
+        setDiagnoseID(response.did[len-1].diagnoseid)
         setTableData(response);
         setLoading(false);
       } catch (error) {
@@ -115,7 +118,7 @@ function PatientDashboard() {
               />
             </SkeletonTheme>
           ) : (
-            <CurrentDiagnosisCard data={tableData} />
+            <CurrentDiagnosisCard data={tableData} diagnoseID={diagnoseID} patientId={patientId}/>
           )}
         </div>
       </div>

@@ -14,19 +14,28 @@ import "./css/login.css";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [roles, setRoles] = useState("ADMIN");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const handleRoleChange = (event) => {
+    setRoles(event.target.value);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = await authApi.login({ username: email, password });
+      const userData = await authApi.login({
+        username: email,
+        password,
+        roles,
+      });
       dispatch(setCredentials(userData));
-      navigate("/admin-dashboard");
+      navigate(roles === "ADMIN" ? "/admin-dashboard" : "/supervisor-dashboard");
     } catch (err) {
       setError("Invalid email or password"); // Set error message for invalid credentials
     }
   };
+  
   return (
     <div>
       <Navbar />
@@ -56,6 +65,15 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <br/>
+            <select
+              className="form__field"
+              value={roles}
+              onChange={handleRoleChange}
+            >
+              <option value="ADMIN">ADMIN</option>
+              <option value="SUPERVISOR">SUPERVISOR</option>
+            </select>
             <div className="login-subtext-right">
               <Link to="/forgot-password" className="forgot-password">
                 Forgot Password?

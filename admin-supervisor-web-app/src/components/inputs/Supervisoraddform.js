@@ -1,53 +1,78 @@
 import React, { useState } from "react";
-
 import GradientInput from "./GradientInput";
-
 import "../css/form.css";
 import "../css/common.css";
 
-const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
-  const [gender, setGender] = useState(fieldworker.gender);
-  const [phone, setPhone] = useState(fieldworker.mobileno);
-  const [name, setName] = useState(fieldworker.name);
+const Supervisoraddform = ({ addsupervisor }) => {
+  const [gender, setGender] = useState();
+  const [phone, setPhone] = useState();
+  const [name, setName] = useState();
+  const [username, setusername] = useState();
   const [phoneError, setPhoneError] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
   };
 
   const handlePhoneChange = (event) => {
-  const value = event.target.value;
-  const re = /^[0-9\b]+$/; // Regular expression to allow only numbers
-
-  // Allow backspace and delete for editing
-  if (value === '' || re.test(value)) {
-    if (value.length <= 10) {
+    const value = event.target.value;
+    const phoneRegex = /^[0-9\b]+$/; // Allow numbers only
+    if (value === '' || (phoneRegex.test(value) && value.length <= 10)) {
       setPhone(value);
-      setPhoneError(''); // Clear any existing error
+      setPhoneError('');
     } else {
-      setPhoneError('Please enter a correct 10-digit mobile number.');
+      setPhoneError('Please enter a valid 10-digit mobile number.');
     }
-  }
   };
+  
+  const handleusername = (event) => {
+    const value = event.target.value;
+    setusername(value);
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex pattern
+    const simpleEmailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // Regex for simple email validation
+    const wrongEmailList = ['example@example.com', 'test@test.com']; // List of known wrong emails
+
+    if (emailRegex.test(value)) {
+      if (simpleEmailRegex.test(value) && !wrongEmailList.includes(value.toLowerCase())) {
+        setEmailError('');
+      } else {
+      setEmailError('Please enter a valid email address.');
+
+      }
+    } else {
+      setEmailError('Please enter a valid email address.');
+    }
+  };
+  
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
 
+  
+  
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (phone.length !== 10) {
+    if (!phone ||phone.length !== 10) {
       setPhoneError('Please enter a correct 10-digit mobile number.');
+      alert("Invalid data enter");
       return; // Prevent form submission if phone number is invalid
     }
     // Create a doctor object with the updated form data
-    const updatedFieldWorker = {
-      name: name,
-      gender: gender,
-      mobileno: phone,
+    const supervisordetail = {
+        supervisorid: username,
+    sid:{
+        name: name,
+        gender: gender,
+        mobileno: phone,
+        }
     };
     // Call the handleEdit function with the updated doctor object
-    handleEdit(updatedFieldWorker);
+    addsupervisor(supervisordetail);
   };
 
   return (
@@ -65,7 +90,6 @@ const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
           }
         `}
       </style>
-
       <form className="form-style" onSubmit={handleSubmit}>
         <GradientInput
           type="text"
@@ -83,13 +107,15 @@ const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
             name="gender"
             value={gender}
             onChange={handleGenderChange}
-            className="form__field"
+            className="form__field "
           >
             <option value="">Select Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
         </div>
+        <br />
+        
         <GradientInput
           type="text"
           name="mobile"
@@ -98,7 +124,17 @@ const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
           value={phone}
           onChange={handlePhoneChange}
         />
+        
+        <GradientInput
+          type="text"
+          name="Email-ID"
+          placeholder="Email-ID"
+          className="input-styles"
+          value={username}
+          onChange={handleusername}
+        />
         {phoneError && <div className="error-message">{phoneError}</div>}
+        {emailError && <div className="error-message">{emailError}</div>}
         <button type="submit" className="primary-btn">
           Submit
         </button>
@@ -107,4 +143,4 @@ const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
   );
 };
 
-export default FieldWorkerForms;
+export default Supervisoraddform;

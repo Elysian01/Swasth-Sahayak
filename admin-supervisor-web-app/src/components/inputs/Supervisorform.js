@@ -5,17 +5,19 @@ import GradientInput from "./GradientInput";
 import "../css/form.css";
 import "../css/common.css";
 
-const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
+const SupervisorForms = ({ handleEdit, fieldworker }) => {
   const [gender, setGender] = useState(fieldworker.gender);
   const [phone, setPhone] = useState(fieldworker.mobileno);
   const [name, setName] = useState(fieldworker.name);
   const [phoneError, setPhoneError] = useState('');
+
 
   const handleGenderChange = (event) => {
     setGender(event.target.value);
   };
 
   const handlePhoneChange = (event) => {
+
   const value = event.target.value;
   const re = /^[0-9\b]+$/; // Regular expression to allow only numbers
 
@@ -65,7 +67,6 @@ const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
           }
         `}
       </style>
-
       <form className="form-style" onSubmit={handleSubmit}>
         <GradientInput
           type="text"
@@ -107,4 +108,4 @@ const FieldWorkerForms = ({ handleEdit, fieldworker }) => {
   );
 };
 
-export default FieldWorkerForms;
+export default SupervisorForms;

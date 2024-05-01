@@ -1,7 +1,8 @@
 import axios from "axios";
-
+import {LOCALHOST} from "../../config";
 // Common headers or configurations can be set here
-axios.defaults.baseURL = "http://localhost:9191"; // Base URL for your API
+
+axios.defaults.baseURL = LOCALHOST; // Base URL for your API
 
 // Function to make a GET request
 export const getRequest = async (endpoint, headers) => {
@@ -33,4 +34,12 @@ export const putRequest = async (endpoint, data,headers) => {
 };
 
 
-// Add more functions for other types of requests if needed
+// Function to make a DELETE request
+export const deleteRequest = async (endpoint, headers) => {
+  try {
+    const response = await axios.delete(endpoint, { headers });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

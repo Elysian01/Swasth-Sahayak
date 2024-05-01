@@ -13,15 +13,16 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const role = "DOCTOR";
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = await authApi.login({ username: email, password });
+      const userData = await authApi.login({ username: email, password, role });
       dispatch(setCredentials(userData));
-      navigate('/doctor-dashboard');
+      navigate("/doctor-dashboard");
     } catch (err) {
       setError("Invalid email or password"); // Set error message for invalid credentials
     }
