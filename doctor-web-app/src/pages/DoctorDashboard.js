@@ -11,7 +11,6 @@ import Table from "../components/tables/Listings";
 import Navbar from "../components/misc/Navbar";
 import FeatureCard from "../components/cards/FeatureCard";
 import StatisticCard from "../components/cards/StatisticCard";
-import ShortListings from "../components/tables/ShortListings";
 import { getRequest } from "../components/Api/api";
 
 import viewIcon from "../static/icons/eye.png";

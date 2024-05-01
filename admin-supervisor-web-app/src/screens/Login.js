@@ -30,7 +30,7 @@ function Login() {
         roles,
       });
       dispatch(setCredentials(userData));
-      navigate(roles === "ADMIN" ? "/admin-dashboard" : "/supervisor-dashboard");
+      navigate(roles === "ADMIN" ? "/admin-dashboard" : "/super-dashboard");
     } catch (err) {
       setError("Invalid email or password"); // Set error message for invalid credentials
     }

@@ -1,10 +1,11 @@
 import React from "react";
 import Navbar from "../../components/headers/Navbar";
+import SuperNavbar from "./components/SuperNavbar"
 import PageHeading from "../../components/headers/PageHeading";
 const AssignRegion = () => {
   return (
     <div>
-      <Navbar />
+      <SuperNavbar />
       <PageHeading title="Assign Region" />
       <div className="display-card">
         <div className="person-details">
