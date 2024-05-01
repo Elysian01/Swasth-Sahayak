@@ -145,3 +145,8 @@
 .form__field:required, .form__field:invalid {
   box-shadow: none;
 }
+.calendar-container{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}

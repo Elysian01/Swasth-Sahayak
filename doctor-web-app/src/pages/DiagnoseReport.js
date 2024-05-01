@@ -7,7 +7,7 @@ import Modal from "react-modal"; // Import react-modal
 import DatePicker from "react-multi-date-picker";
 import Icon from "react-multi-date-picker/components/icon";
 import { useState, useEffect } from "react";
-import { useLocation ,useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getRequest, postRequest } from "../components/Api/api";
 function DiagnoseReport() {
@@ -17,19 +17,21 @@ function DiagnoseReport() {
   const [firstDate, setFirstDate] = useState("");
   const [images, setImages] = useState([]);
   const [dieseaseData, setDieseaseData] = useState([]);
-  const [uploadDiesease, setUploadDiesease] = useState("select questionare name");
+  const [uploadDiesease, setUploadDiesease] = useState(
+    "select questionare name"
+  );
   const [fieldworkerComment, setfieldworkerComment] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [doctorPrescription, setDoctorPrescription] = useState("");
   const [doctorComment, setDoctorComment] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const location = useLocation();
   const { state } = location;
   const patientId = state ? state.patientId : null;
   const diagnoseID = state ? state.diagnoseID : null;
-  const [uploadDieseaseError, setuploadDieseaseError] = useState('');
+  const [uploadDieseaseError, setuploadDieseaseError] = useState("");
   const navigate = useNavigate();
-
 
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
@@ -43,12 +45,11 @@ function DiagnoseReport() {
         `/doctor/getdiagonosedetail/${diagnoseID}`,
         headers
       );
+      console.log(response);
       setfieldworkerComment(response.fieldworkercomment);
       setTableData(response.patientanswers);
       setFirstDate(response.date);
-      console.log(response.icd10)
-      if(response.icd10)setUploadDiesease(response.icd10)
-      console.log(uploadDiesease)
+      if (response.icd10) setUploadDiesease(response.icd10);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -63,16 +64,15 @@ function DiagnoseReport() {
     }
   };
   const setDiesease = (event) => {
-    const value=event.target.value
-    if(value != "select questionare name"){
+    const value = event.target.value;
+    if (value != "select questionare name") {
       setUploadDiesease(value);
-      setuploadDieseaseError('');
-    }
-    else setuploadDieseaseError("select questionare name")
+      setuploadDieseaseError("");
+    } else setuploadDieseaseError("select questionare name");
   };
-  const handleSubmit = async() => {
-    if(uploadDiesease == "select questionare name"){
-      setuploadDieseaseError("select questionare name");
+  const handleSubmit = async () => {
+    if (uploadDiesease == "select questionare name") {
+      setuploadDieseaseError("select questionare name");  
       return;
     }
     const currentDate = new Date();
@@ -80,7 +80,7 @@ function DiagnoseReport() {
     const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
     const day = String(currentDate.getDate()).padStart(2, "0");
     const date = `${year}-${month}-${day}`;
-    const formattedDates = dates.map(date => date.format("YYYY-MM-DD"));
+    const formattedDates = dates.map((date) => date.format("YYYY-MM-DD"));
     const data = {
       pid: patientId,
       prescriptiondate: date,
@@ -91,17 +91,17 @@ function DiagnoseReport() {
       followUpDate: formattedDates,
       diagnosisid: diagnoseID,
     };
-    console.log(data);
-    try{
+    try {
       const headers = { Authorization: `Bearer ${token}` };
-        const response = await postRequest(
-          `/doctor/addprescription`,
-          data,
-          headers
-        );
-        navigate("/doctor-dashboard")
-        console.log(response);
-    }catch(error){
+      const response = await postRequest(
+        `/doctor/addprescription`,
+        data,
+        headers
+      );
+      //here it should navigate to doctor-dashboard and state should hold all the patientId
+      navigate("/doctor-dashboard");
+      console.log(response);
+    } catch (error) {
       console.log(error);
     }
   };
@@ -223,36 +223,42 @@ function DiagnoseReport() {
         {/* </div> */}
         <div className="align-calendar">
           <br />
+          <br />
           <div className="date-box">
             <h3 className="select-dates">
               {!firstDate ? "Selected Dates:" : firstDate}
             </h3>
 
             <div className="calendar-container">
-              <br />
-              {!firstDate && (
-              <DatePicker
-                inputClass="custom-date-picker"
-                style={{
-                  width: "100%",
-                  boxSizing: "border-box",
-                }}
-                multiple
-                value={dates}
-                onChange={handleDateChange}
-                render={<Icon />}
-              />
-            ) }
-              <select onChange={setDiesease} className="form__field"value={uploadDiesease}>
-                <option value="select questionare name">select questionare name</option>
-                {dieseaseData.map((disease) => (
+              
 
+              {!firstDate && (
+                <DatePicker
+                  inputClass="custom-date-picker"
+                  style={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                  }}
+                  multiple
+                  value={dates}
+                  onChange={handleDateChange}
+                  render={<Icon />}
+                />
+              )}
+              <select
+                onChange={setDiesease}
+                className="form__field"
+                value={uploadDiesease}
+              >
+                <option value="select questionare name">
+                  select questionare name
+                </option>
+                {dieseaseData.map((disease) => (
                   <option
                     value={disease.diseasename}
                   >{`${disease.diseasename} : ${disease.icd10}`}</option>
                 ))}
               </select>
-              
             </div>
           </div>
 
@@ -265,7 +271,9 @@ function DiagnoseReport() {
               </div>
             ))}
           </div>
-          {uploadDieseaseError && <div className="error-message">{uploadDieseaseError}</div>}
+          {uploadDieseaseError && (
+            <div className="error-message">{uploadDieseaseError}</div>
+          )}
           <button className="primary-btn" onClick={handleSubmit}>
             Submit
           </button>

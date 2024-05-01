@@ -23,6 +23,7 @@ import { useSelector } from "react-redux";
 
 import { useEffect } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
+import SuperDashboard from "./screens/Super/SuperDashboard";
 
 const ProtectedRoute = ({ children }) => {
   const token = useSelector((state) => state.auth.token);
@@ -44,6 +45,7 @@ function App() {
         <Routes>
           {/* <Route index element={<Login />} /> */}
           <Route index path="/" element={<Login />} />
+          <Route path="/super-dashboard" element={<SuperDashboard/>} />
           <Route path="/doctor-dashboard" element={<ProtectedRoute><DoctorDashboard /></ProtectedRoute>} />
           <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           <Route path="/forgot-password" element={<ProtectedRoute><ForgotPassword /></ProtectedRoute>} />
