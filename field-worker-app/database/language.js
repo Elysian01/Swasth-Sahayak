@@ -71,6 +71,8 @@ export const lang = {
 		"Health Worker": "Health Worker",
 		"Sync Data": "Sync Data",
 		"Delete Patient Account": "Delete Patient Account",
+		"Data Not Synced": "Data Not Synced",
+		"Data is Synced": "Data is Synced",
 	},
 	Hindi: {
 		login: "लॉग इन",
@@ -124,6 +126,8 @@ export const lang = {
 		"Diagnose History": "इतिहास का निदान करें",
 		Date: "तारीख",
 		Disease: "बीमारी",
+		"Data Not Synced": "डेटा सिंक नहीं हुआ",
+		"Data is Synced": "डेटा सिंक हो गया है",
 		"Questionnaire Score": "प्रश्नावली स्कोर",
 		Prescription: "प्रस्ताव",
 		"A doctor is a person who heals, while a nurse is a person who cares":

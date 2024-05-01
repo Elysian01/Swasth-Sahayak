@@ -54,11 +54,9 @@ const Questionnaire = (props) => {
 		var dd = String(today.getDate()).padStart(2, "0");
 		var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
 		var yyyy = today.getFullYear();
-
 		today = dd + "-" + mm + "-" + yyyy;
 		return today;
 	}
-
 
 	const submitQuestionnaire = async () => {
 		console.log("Response: ", questionResponses);
@@ -74,6 +72,7 @@ const Questionnaire = (props) => {
 			patient_abhaid: patientAbhaId,
 			questionnaire_type: questionnaireType,
 			responses: questionResponses,
+			comment: fieldWorkerComments,
 		};
 
 		try {
@@ -100,9 +99,11 @@ const Questionnaire = (props) => {
 			console.log("Questionnaire submitted");
 			await AsyncStorage.setItem("DataChangeStatus", "true");
 
-			navigation.navigate("DoctorSelection", {
+			navigation.navigate("AddImages", {
 				patient_abhaid: patientAbhaId,
 			});
+
+			
 		} catch (error) {
 			console.error("Error saving data, please retry:", error);
 			Alert.alert("Error", "Error saving data");
@@ -197,21 +198,6 @@ const Questionnaire = (props) => {
 			<View style={AppStyles.line}></View>
 			{renderQuestions()}
 
-			<View style={AppStyles.btn}>
-				<Pressable
-					onPress={goToAddImagesScreen}
-					style={AppStyles.goldBtn}
-				>
-					{/* <Text style={AppStyles.primaryBtnText}>
-						{lang[preferredLanguage]["Add Images"]}
-					</Text> */}
-					<Text style={AppStyles.primaryBtnText}>
-						Add Images
-					</Text>
-					{/* <Text style={AppStyles.primaryBtnText}>Submit</Text> */}
-				</Pressable>
-			</View>
-
 			<View style={styles.fieldWorkerComments}>
 				<Text style={AppStyles.subHeading}>
 					Field Worker Comments
@@ -226,13 +212,28 @@ const Questionnaire = (props) => {
 				/>
 			</View>
 
-			<View style={AppStyles.btn}>
+			{/* <View style={AppStyles.btn}>
 				<Pressable
 					onPress={submitQuestionnaire}
 					style={AppStyles.primaryBtn}
 				>
 					<Text style={AppStyles.primaryBtnText}>
-						{lang[preferredLanguage]["Submit"]}
+						Submit
+					</Text>
+				</Pressable>
+			</View> */}
+
+			<View style={AppStyles.btn}>
+				<Pressable
+					onPress={submitQuestionnaire}
+					// onPress={goToAddImagesScreen}
+					style={AppStyles.goldBtn}
+				>
+					{/* <Text style={AppStyles.primaryBtnText}>
+						{lang[preferredLanguage]["Add Images"]}
+					</Text> */}
+					<Text style={AppStyles.primaryBtnText}>
+						Add Images
 					</Text>
 					{/* <Text style={AppStyles.primaryBtnText}>Submit</Text> */}
 				</Pressable>

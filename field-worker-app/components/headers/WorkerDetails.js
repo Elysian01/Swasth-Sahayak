@@ -15,7 +15,7 @@ const WorkerDetails = () => {
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
-	AsyncStorage.getItem("FieldWorkerId").then((id) => {
+	AsyncStorage.getItem("FieldWorkerID").then((id) => {
 		setFieldWorkerId(id);
 	});
 	AsyncStorage.getItem("FieldWorkerName").then((name) => {

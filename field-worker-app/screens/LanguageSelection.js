@@ -4,40 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Dropdown from "../components/inputs/Dropdown";
-import dbFunctions from "../api/Queries";
 
 const LanguageSelection = () => {
-	// async function someFunction() {
-	// 	try {
-	// 		const result = await dbFunctions.createImagesTable();
-	// 		console.log(result);
-
-	// 		await dbFunctions.deleteAllImages();
-
-	// 		const r = await dbFunctions.insertImage(
-	// 			"1234567887654321",
-	// 			"oergvngoejnvzsdo niu3qtoi3lkfvbjfvheifdkjvj h diuf g"
-	// 		);
-	// 		console.log(r);
-	// 		const r2 = await dbFunctions.insertImage(
-	// 			"1234567887654321",
-	// 			"dksd"
-	// 		);
-	// 		console.log(r2);
-	// 		const r3 = await dbFunctions.insertImage(
-	// 			"1234567887654321",
-	// 			"asas"
-	// 		);
-	// 		console.log(r3);
-	// 		const r4 = await dbFunctions.getAllImages();
-	// 		console.log(r4);
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// }
-
-	// someFunction();
-
 	const navigation = useNavigation();
 	const [preferredlangauge, setPreferredLanguage] = useState("");
 

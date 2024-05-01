@@ -6,8 +6,9 @@ import NetInfo from "@react-native-community/netinfo";
 import { tempUploadAPI } from "./api/APIs";
 import AppStyles from "./AppStyles";
 import { useEffect } from "react";
-import { uploadAPI } from "./api/APIs";
-import { INTERVAL_TIME } from "./config";
+import { uploadAPI, uploadImagesAPI } from "./api/APIs";
+import { SYNC_INTERVAL_TIME } from "./config";
+import dbFunctions from "./api/Queries";
 
 const minimumScreenWidth = Dimensions.get("window").width;
 
@@ -27,14 +28,21 @@ function App() {
 			const state = await NetInfo.fetch();
 			console.log("Is connected?", state.isConnected);
 			const status = await AsyncStorage.getItem("DataChangeStatus");
+			const imageStatus = await AsyncStorage.getItem(
+				"ImageAddedStatus"
+			);
+
 			if (state.isConnected && status === "true") {
 				await uploadAPI();
 				console.log("Uploaded data to server");
 
 				let data = await AsyncStorage.getItem("DownloadedData");
+				const fwid = await AsyncStorage.getItem("FieldWorkerID");
+
 				data = JSON.parse(data);
 
 				const uploadTemplate = {
+					fieldworker_id: fwid,
 					follow_up: data["follow_up"],
 					questionnaire_response: [],
 					fieldworker_comments: [],
@@ -51,6 +59,11 @@ function App() {
 					JSON.stringify(uploadTemplate)
 				);
 				await AsyncStorage.setItem("DataChangeStatus", "false");
+			} else if (state.isConnected && imageStatus === "true") {
+				await uploadImagesAPI();
+				console.log("Uploaded images to server");
+				await dbFunctions.deleteAllImages();
+				await AsyncStorage.setItem("ImageAddedStatus", "false");
 			}
 		} catch (error) {
 			console.error("Error checking network and data change:", error);
@@ -61,7 +74,7 @@ function App() {
 		useEffect(() => {
 			const interval = setInterval(
 				checkNetworkAndDataChange,
-				INTERVAL_TIME
+				SYNC_INTERVAL_TIME
 			); // Check every INTERVAL_TIME
 
 			// Clean up the interval on unmount

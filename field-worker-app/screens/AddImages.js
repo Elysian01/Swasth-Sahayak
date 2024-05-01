@@ -12,13 +12,13 @@ import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 import AppStyles from "../AppStyles";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import WorkerDetails from "../components/headers/WorkerDetails";
+import dbFunctions from "../api/Queries";
 
-const AddArtifacts = (props) => {
+const AddImages = (props) => {
 	const navigation = useNavigation();
 
 	const [patientAbhaId, setPatientAbhaId] = useState("");
@@ -27,8 +27,8 @@ const AddArtifacts = (props) => {
 
 	useEffect(() => {
 		if (props.route.params) {
-			const { patientAbhaId } = props.route.params;
-			setPatientAbhaId(patientAbhaId);
+			const { patient_abhaid } = props.route.params;
+			setPatientAbhaId(patient_abhaid);
 		}
 	}, [props.route.params]);
 
@@ -36,6 +36,15 @@ const AddArtifacts = (props) => {
 		console.log("Number of images: ", selectedImages.length);
 		console.log("Updated selected images:", selectedImages);
 	}, [selectedImages]);
+
+	function getDate() {
+		var today = new Date();
+		var dd = String(today.getDate()).padStart(2, "0");
+		var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+		var yyyy = today.getFullYear();
+		today = yyyy + "-" + mm + "-" + dd;
+		return today;
+	}
 
 	const handleImagePickerPress = async () => {
 		let result = await ImagePicker.launchImageLibraryAsync({
@@ -51,7 +60,7 @@ const AddArtifacts = (props) => {
 			const newImage = result.assets.map((asset) => ({
 				fileName: asset.fileName,
 				uri: asset.uri,
-				base64: asset.base64.substring(0, 50),
+				base64: asset.base64,
 			}));
 
 			if (selectedImages.length + newImage.length <= 6) {
@@ -60,6 +69,23 @@ const AddArtifacts = (props) => {
 					...newImage,
 				]);
 				setImageAvailable(true);
+
+				// Insert each new image into the database
+				newImage.forEach(async (image) => {
+					try {
+						await dbFunctions.insertImage(
+							patientAbhaId,
+							image.base64,
+							getDate()
+						);
+					} catch (error) {
+						console.error(
+							"Error inserting image into database:",
+							error
+						);
+					}
+				});
+				await AsyncStorage.setItem("ImageAddedStatus", "true");
 			} else {
 				Alert.alert("Error", "You can't add more than 6 images.", [
 					{ text: "OK" },
@@ -68,10 +94,17 @@ const AddArtifacts = (props) => {
 		}
 	};
 
-	const handleResetImages = () => {
+	const addImages = async () => {
+		navigation.navigate("DoctorSelection", {
+			patient_abhaid: patientAbhaId,
+		});
+	};
+
+	const handleResetImages = async () => {
 		setSelectedImages([]);
 		setImageAvailable(false);
 		console.log("All Images Cleared");
+		await AsyncStorage.setItem("ImageAddedStatus", "false");
 	};
 
 	function goBackToDashboard() {
@@ -80,15 +113,6 @@ const AddArtifacts = (props) => {
 			new_patient: false,
 		});
 	}
-
-	const addImages = async () => {
-		let uploadData = await AsyncStorage.getItem("uploadData");
-		uploadData = JSON.parse(uploadData);
-		uploadData["artifacts"].push(selectedImages);
-		console.log("Updated Upload data: ", uploadData);
-		await AsyncStorage.setItem("uploadData", JSON.stringify(uploadData));
-		console.log("Images stored in async storage");
-	};
 
 	return (
 		<View style={styles.container}>
@@ -148,7 +172,7 @@ const AddArtifacts = (props) => {
 	);
 };
 
-export default AddArtifacts;
+export default AddImages;
 
 const styles = StyleSheet.create({
 	container: {

@@ -10,7 +10,8 @@ const createImagesTable = () => {
 				`CREATE TABLE IF NOT EXISTS Images (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     abhaId TEXT,
-                    image TEXT
+                    image TEXT,
+					date TEXT
                 );`,
 				[],
 				(_, result) => {
@@ -48,12 +49,12 @@ const deleteAllImages = () => {
 	});
 };
 
-const insertImage = (abhaId, image) => {
+const insertImage = (abhaId, image, date) => {
 	return new Promise((resolve, reject) => {
 		db.transaction((tx) => {
 			tx.executeSql(
-				"INSERT INTO Images (abhaId, image) VALUES (?, ?)",
-				[abhaId, image],
+				"INSERT INTO Images (abhaId, image, date) VALUES (?, ?,?)",
+				[abhaId, image, date],
 				(_, { rowsAffected }) => {
 					if (rowsAffected > 0) {
 						resolve(

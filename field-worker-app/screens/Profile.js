@@ -37,36 +37,18 @@ const Profile = () => {
 		}
 	}
 
-	// const synchronizeData = async () => {
-	// 	uploadData = await AsyncStorage.getItem("uploadData");
-	// 	if (uploadData) {
-	// 		uploadData = JSON.parse(uploadData);
-
-	// 		await uploadAPI(uploadData)
-	// 			.then((result) => {
-	// 				if (result.status === 200) {
-	// 					console.log(result);
-	// 					Alert.alert(
-	// 						"Success",
-	// 						"Data Successfully Uploaded!!"
-	// 					);
-	// 					setSyncDataStatus(true);
-	// 				} else if (result.status === 401) {
-	// 					console.log(result.status);
-	// 					Alert.alert("Error", result.data, []);
-	// 				}
-	// 			})
-	// 			.catch((error) => {
-	// 				console.log(error);
-	// 				Alert.alert("Unable to Upload Data: ", error);
-	// 			});
-
-	// 		Alert.alert("Success", "Data Successfully Uploaded!!");
-	// 		setSyncDataStatus(true);
-	// 	}
-	// };
-
 	function deletePatientAccount() {}
+
+	AsyncStorage.getItem("DataChangeStatus").then((s) => {
+		if (s === "true") {
+			setSyncDataStatus(false);
+		}
+	});
+	AsyncStorage.getItem("ImageAddedStatus").then((s) => {
+		if (s === "true") {
+			setSyncDataStatus(false);
+		}
+	});
 
 	return (
 		<View>
@@ -84,16 +66,18 @@ const Profile = () => {
 			</Text>
 			<View style={AppStyles.btn}>
 				{!syncDataStatus && (
-					<Pressable
-						onPress={() => {
-							synchronizeData();
-						}}
-						style={AppStyles.redBtn}
-					>
+					<View style={AppStyles.redBtn}>
 						<Text style={AppStyles.primaryBtnText}>
-							{lang[preferredlangauge]["Sync Data"]}
+							{lang[preferredlangauge]["Data Not Synced"]}
 						</Text>
-					</Pressable>
+					</View>
+				)}
+				{syncDataStatus && (
+					<View style={AppStyles.primaryBtn}>
+						<Text style={AppStyles.primaryBtnText}>
+							{lang[preferredlangauge]["Data is Synced"]}
+						</Text>
+					</View>
 				)}
 
 				{syncDataStatus && (
@@ -120,7 +104,7 @@ const Profile = () => {
 					</Text>
 				</Pressable>
 
-				<Pressable
+				{/* <Pressable
 					onPress={() => {
 						navigation.navigate("ResetPassword");
 					}}
@@ -129,7 +113,7 @@ const Profile = () => {
 					<Text style={AppStyles.primaryBtnText}>
 						{lang[preferredlangauge]["Reset Password"]}
 					</Text>
-				</Pressable>
+				</Pressable> */}
 			</View>
 		</View>
 	);

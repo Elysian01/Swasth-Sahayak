@@ -1,6 +1,7 @@
 import ApiManager from "./ApiManager";
 import AuthApiManager from "./AuthApiManager";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import dbFunctions from "../api/Queries";
 
 export const loginAPI = async (data) => {
 	try {
@@ -58,30 +59,6 @@ export const downloadAPI = async () => {
 	}
 };
 
-export const tempUploadAPI = async () => {
-	try {
-		console.log("Temp Data Uploading ...");
-		const fwid = await AsyncStorage.getItem("FieldWorkerID");
-		const token = await AsyncStorage.getItem("AccessToken");
-
-		temp = {
-			msg: "Marja Priyanshuo",
-		};
-
-		const result = await ApiManager("/fieldworker/getdata", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
-			data: temp,
-		});
-		return result;
-	} catch (error) {
-		return error.response;
-	}
-};
-
 export const uploadAPI = async () => {
 	try {
 		const token = await AsyncStorage.getItem("AccessToken");
@@ -103,13 +80,18 @@ export const uploadAPI = async () => {
 	}
 };
 
-export const uploadImagesAPI = async (uploadData) => {
+export const uploadImagesAPI = async () => {
 	try {
-		console.log("Data Uploading: ", uploadData);
-		const result = await ApiManager("/fieldworker/followupsReschedule", {
+		const token = await AsyncStorage.getItem("AccessToken");
+		const uploadData = await dbFunctions.getAllImages();
+		console.log("Uploading Images to server ... ");
+		console.log(uploadData);
+
+		const result = await ApiManager("/fieldworker/save", {
 			method: "POST",
 			headers: {
-				"content-type": "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
 			},
 			data: uploadData,
 		});

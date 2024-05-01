@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { downloadAPI } from "../api/APIs";
 import { lang } from "../database/language";
+import dbFunctions from "../api/Queries";
 
 const Home = () => {
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
@@ -21,6 +22,17 @@ const Home = () => {
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
+
+	async function initDB() {
+		try {
+			const r1 = await dbFunctions.createImagesTable();
+			console.log(r1);
+			const r2 = await dbFunctions.deleteAllImages();
+			console.log(r2);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
 	const downloadData = async () => {
 		let downloadedData;
@@ -46,6 +58,8 @@ const Home = () => {
 								"field_worker_assigned_sector"
 							]
 						);
+
+						initDB();
 					} catch (error) {
 						console.log(
 							"Error setting up download data, Async Storage " +
@@ -91,8 +105,12 @@ const Home = () => {
 		// const Ddata = JSON.parse(downloadedData);
 
 		let data = await AsyncStorage.getItem("DownloadedData");
+		const fwid = await AsyncStorage.getItem("FieldWorkerID");
+
 		data = JSON.parse(data);
+
 		const uploadTemplate = {
+			fieldworker_id: fwid,
 			// list of all follow_ups
 			follow_up: data["follow_up"],
 			// list of all questionnaire responses
