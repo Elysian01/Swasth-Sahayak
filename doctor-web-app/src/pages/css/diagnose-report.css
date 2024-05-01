@@ -150,3 +150,7 @@
   align-items: baseline;
   gap: 10px;
 }
+.align-button{
+  display: flex;
+  justify-content: space-between;
+}
