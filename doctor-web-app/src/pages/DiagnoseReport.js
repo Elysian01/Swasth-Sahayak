@@ -15,6 +15,7 @@ import { getRequest, postRequest } from "../components/Api/api";
 function DiagnoseReport() {
   const user = useSelector((state) => state.auth.user);
   const [dates, setDates] = useState([]);
+  const [diagnoseDate, setDiagnoseDate] = useState("");
   const [tableData, setTableData] = useState([]);
   const [firstDate, setFirstDate] = useState("");
   const [images, setImages] = useState([]);
@@ -55,6 +56,7 @@ function DiagnoseReport() {
       setfieldworkerComment(response.fieldworkercomment);
       setTableData(response.patientanswers);
       setFirstDate(response.date);
+      setDiagnoseDate(response.diagonsedate);
       if (response.icd10) setUploadDiesease(response.icd10);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -143,10 +145,16 @@ function DiagnoseReport() {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const response = await getRequest(
-        `/doctor/download_images/${patientId}`,
+        `/doctor/download_images/${patientId}/${diagnoseDate}`,
         headers
       );
-      setImages(response.image);
+      console.log("artificats array:", response);
+      const imageElements = response.map((base64String) => {
+        const img = new Image();
+        img.src = `data:image/jpeg;base64,${base64String.image}`;
+        return img;
+      });
+      setImages(imageElements);
       setIsModalOpen(true);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -288,29 +296,44 @@ function DiagnoseReport() {
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Doctor Details Modal"
+        shouldCloseOnOverlayClick={true} // Close the modal when clicking anywhere outside
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.7)", // Darken the background when the modal is open
           },
           content: {
-            width: "30%", // Set the width to 60% of the viewport
-            height: "60%", // Automatically adjust the height based on content
+            width: "60%", // Set the width to 60% of the viewport
+            height: "95%", // Automatically adjust the height based on content
             margin: "auto", // Center the modal horizontally
             padding: "25px",
             backgroundColor: "#fafafa",
             borderRadius: "10px",
-
             border: "none", // Remove border
           },
         }}
       >
-        <img
-          src={images[currentIndex]}
-          alt="Doctor Image"
-          style={{ width: "100%", height: "auto" }}
-        />
-        <button onClick={goToPrevious}>Previous</button>
-        <button onClick={goToNext}>Next</button>
+        {images[currentIndex] && (
+          <img
+            src={images[currentIndex].src}
+            alt="Doctor Image"
+            style={{ width: "100%", height: "auto" }}
+          />
+        )}
+        <div className="align-button">
+          {images.length > 1 && (
+            <button onClick={goToPrevious} className="medium-primary-btn">
+              Previous
+            </button>
+          )}
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            {currentIndex + 1} of {images.length}
+          </div>
+          {images.length > 1 && (
+            <button onClick={goToNext} className="medium-primary-btn">
+              Next
+            </button>
+          )}
+        </div>
       </Modal>
     </div>
   );
