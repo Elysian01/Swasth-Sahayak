@@ -8,7 +8,7 @@ import "./css/login.css";
 import Navbar from "../components/misc/Navbar";
 import LoginBG from "../components/misc/LoginBG";
 import InputField from "../components/input_fields/InputField";
-import { useAuthApi } from "../login/authApi";
+import { authApi } from "../login/authApi";
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -20,7 +20,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = await useAuthApi.login({ username: email, password, role });
+      const userData = await authApi.login({ username: email, password, role });
       dispatch(setCredentials(userData));
       navigate("/doctor-dashboard");
     } catch (err) {

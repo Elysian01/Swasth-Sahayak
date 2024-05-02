@@ -28,15 +28,17 @@ function PatientDashboard() {
   const location = useLocation();
   const { state } = location;
 
-  const patientId = state ? state.patientId : "";
+  const patientId = (state ? state.abhaid : "").toString();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const response = await getRequest(
-          `/doctor/patientdashboard/${patientId}`,
+          `/doctor/search-patient-by-abha-id/${patientId}`,
           headers
         );
+        console.log(response);
         const len= response.did.length;
         setDiagnoseID(response.did[len-1].diagnoseid)
         setTableData(response);

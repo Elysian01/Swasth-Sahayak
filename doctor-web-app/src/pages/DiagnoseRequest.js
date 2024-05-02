@@ -32,6 +32,7 @@ function DiagnoseRequest() {
         const date = `${year}-${month}-${day}`;
         const headers = { Authorization: `Bearer ${token}` };
         const response = await getRequest(`/doctor/findall/${user}/${date}`, headers);
+        console.log(response);
         setTableData(response);
         setLoading(false);
       } catch (error) {
@@ -48,7 +49,7 @@ function DiagnoseRequest() {
   const handleDashboard = () => {
     navigate("/doctor-dashboard");
   };
-  const columns = ["User ID", "Name", "View"];
+  const columns = ["Abha ID","User ID", "Name", "View"];
   const isPatientIdInPids = (patientId) => {
     return pids.includes(patientId);
   };
@@ -76,10 +77,12 @@ function DiagnoseRequest() {
             <Table
               columns={columns}
               data={tableData.filter(row => !isPatientIdInPids(row.patientid)).map((row) => ({
+                "Abha ID": row.abhaid,
                 "User ID": row.patientid,
                 Name: row.name,
                 // Chat: renderChatButton(row.Chat),
                 View: renderViewButton(row.patientid),
+
               }))}
             />
           )}
