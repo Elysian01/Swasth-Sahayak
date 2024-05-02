@@ -7,7 +7,7 @@ import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import InputField from "../components/inputs/InputField";
 import LoginBG from "../components/misc/LoginBG";
-import { authApi } from "../login/authApi";
+import { useAuthApi } from "../login/authApi";
 
 import "./css/login.css";
 
@@ -24,7 +24,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = await authApi.login({
+      const userData = await useAuthApi.login({
         username: email,
         password,
         roles,
