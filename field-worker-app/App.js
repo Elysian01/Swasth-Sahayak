@@ -36,7 +36,7 @@ function App() {
 				await uploadAPI();
 				console.log("Uploaded data to server");
 
-				let data = await AsyncStorage.getItem("DownloadedData");
+				let data = await AsyncStorage.getItem("uploadData");
 				const fwid = await AsyncStorage.getItem("FieldWorkerID");
 
 				data = JSON.parse(data);

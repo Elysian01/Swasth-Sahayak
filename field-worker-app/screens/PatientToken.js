@@ -15,6 +15,7 @@ const PatientToken = (props) => {
 	const navigation = useNavigation();
 	patientAbhaId = props.route.params["patient_abhaid"];
 	const followUpID = props.route.params["follow_up_id"];
+	const followUpDate = props.route.params["follow_up_date"];
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
@@ -97,6 +98,7 @@ const PatientToken = (props) => {
 			navigation.navigate("PatientDashboard", {
 				patient_abhaid: patientAbhaId,
 				new_patient: false,
+				followUpDate: followUpDate,
 			});
 		}
 	}

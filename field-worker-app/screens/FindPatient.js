@@ -25,7 +25,7 @@ const FindPatient = () => {
 		setAbhaId(e);
 	};
 
-	const isPatientInDownloadedJson = async () => {
+	const isPatientInDownloadedData = async () => {
 		// let data = require("../database/DOWNLOADED_DATA.json");
 		let data = await AsyncStorage.getItem("DownloadedData");
 		if (data) {
@@ -40,8 +40,23 @@ const FindPatient = () => {
 		return false; // Patient not found
 	};
 
-	function handleFindPatient() {
-		const foundPatient = isPatientInDownloadedJson();
+	const isPatientInFollowUp = async () => {
+		let data = await AsyncStorage.getItem("DownloadedData");
+		if (data) {
+			data = JSON.parse(data);
+			for (const patient of data["follow_up"]) {
+				// Check if the patient's id and token match the input
+				if (patient["patient_abhaid"] === abhaId) {
+					return true; // Patient found
+				}
+			}
+		}
+		return false; // Patient not found
+	};
+
+	async function handleFindPatient() {
+		const foundPatient = await isPatientInDownloadedData();
+		console.log("d: ", foundPatient);
 		if (!foundPatient) {
 			Alert.alert(
 				"Abha-ID Not Found",
@@ -50,11 +65,21 @@ const FindPatient = () => {
 			setAbhaId("");
 			return;
 		} else {
-			setAbhaId("");
-			navigation.navigate("PatientDashboard", {
-				patient_abhaid: abhaId,
-				new_patient: false,
-			});
+			const foundPatientInFollowUp = await isPatientInFollowUp();
+			if (!foundPatientInFollowUp) {
+				setAbhaId("");
+				navigation.navigate("PatientDashboard", {
+					patient_abhaid: abhaId,
+					new_patient: false,
+				});
+			} else {
+				Alert.alert(
+					"Abha-ID Found in Follow Up",
+					"Abha-ID Found in follow, please go to dashboard to access patient records"
+				);
+				setAbhaId("");
+				return;
+			}
 		}
 	}
 

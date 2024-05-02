@@ -27,15 +27,18 @@ const PatientDashboard = (props) => {
 	const [preferredLanguage, setPreferredLanguage] = useState("English");
 	const [patientAbhaId, setPatientAbhaId] = useState(null);
 	const [newPatient, setNewPatient] = useState(null);
+	const [followUpDate, setFollowUpDate] = useState(null);
 
 	useEffect(() => {
 		// Retrieve patient-abhaid and new-patient from props
 		const {
 			patient_abhaid: patientAbhaIdProp,
 			new_patient: newPatientProp,
+			followUpDate: followUpDateProp,
 		} = props.route.params;
 		setPatientAbhaId(patientAbhaIdProp);
 		setNewPatient(newPatientProp);
+		setFollowUpDate(followUpDateProp);
 	}, [props.route.params]);
 
 	const setData = async () => {
@@ -80,6 +83,8 @@ const PatientDashboard = (props) => {
 		navigation.navigate("Questionnaire", {
 			questionnaire_type: "general",
 			patient_abhaid: patientAbhaId,
+			new_patient: true,
+			followUpDate: followUpDate,
 		});
 	}
 
@@ -148,6 +153,7 @@ const PatientDashboard = (props) => {
 									"ICD10_code"
 								]
 							)}
+							followUpDate={followUpDate}
 						/>
 					)}
 					{/* <Graph /> */}

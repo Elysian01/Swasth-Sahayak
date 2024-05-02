@@ -24,11 +24,16 @@ const AddImages = (props) => {
 	const [patientAbhaId, setPatientAbhaId] = useState("");
 	const [selectedImages, setSelectedImages] = useState([]);
 	const [imageAvailable, setImageAvailable] = useState(false);
+	const [newPatient, setNewPatient] = useState(true);
+	const [followUpDate, setFollowUpDate] = useState("");
 
 	useEffect(() => {
 		if (props.route.params) {
-			const { patient_abhaid } = props.route.params;
+			const patient_abhaid = props.route.params["patient_abhaid"];
+			const status = props.route.params["new_patient"];
+			setFollowUpDate(props.route.params["followUpDate"]);
 			setPatientAbhaId(patient_abhaid);
+			setNewPatient(status);
 		}
 	}, [props.route.params]);
 
@@ -76,7 +81,7 @@ const AddImages = (props) => {
 						await dbFunctions.insertImage(
 							patientAbhaId,
 							image.base64,
-							getDate()
+							followUpDate
 						);
 					} catch (error) {
 						console.error(
@@ -95,9 +100,13 @@ const AddImages = (props) => {
 	};
 
 	const addImages = async () => {
-		navigation.navigate("DoctorSelection", {
-			patient_abhaid: patientAbhaId,
-		});
+		if (newPatient) {
+			navigation.navigate("DoctorSelection", {
+				patient_abhaid: patientAbhaId,
+			});
+		} else {
+			navigation.navigate("Home");
+		}
 	};
 
 	const handleResetImages = async () => {
@@ -111,6 +120,7 @@ const AddImages = (props) => {
 		navigation.navigate("PatientDashboard", {
 			patient_abhaid: patientAbhaId,
 			new_patient: false,
+			followUpDate: followUpDate,
 		});
 	}
 
@@ -167,6 +177,19 @@ const AddImages = (props) => {
 						</Pressable>
 					</View>
 				</ScrollView>
+			)}
+
+			{!imageAvailable && (
+				<View style={AppStyles.btn}>
+					<Pressable
+						onPress={addImages}
+						style={AppStyles.redBtn}
+					>
+						<Text style={AppStyles.primaryBtnText}>
+							Submit
+						</Text>
+					</Pressable>
+				</View>
 			)}
 		</View>
 	);

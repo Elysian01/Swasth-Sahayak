@@ -25,14 +25,19 @@ const Questionnaire = (props) => {
 	const [questionnaireType, setQuestionnaireType] = useState("ACTIVITY");
 	const [questionnaire, setQuestionnaire] = useState([]);
 	const [patientAbhaId, setPatientAbhaId] = useState("15615");
+	const [newPatient, setNewPatient] = useState(true);
 	const [questionResponses, setQuestionResponses] = useState([]);
 	const [preferredLanguage, setPreferredLanguage] = useState("English");
 	const [fieldWorkerComments, setFieldWorkerComments] = useState("");
+	const [followUpDate, setFollowUpDate] = useState("");
 
 	useEffect(() => {
 		// Retrieve patient-abhaid and new-patient from props
 		setPatientAbhaId(props.route.params["patient_abhaid"]);
 		setQuestionnaireType(props.route.params["questionnaire_type"]);
+		setNewPatient(props.route.params["new_patient"]);
+		setFollowUpDate(props.route.params["followUpDate"]);
+
 		console.log("Type: ", questionnaireType); // Check if this logs the correct value
 		getQuestionnaire().then((result) => {
 			console.log("Questionnaire Result: ", result);
@@ -101,9 +106,9 @@ const Questionnaire = (props) => {
 
 			navigation.navigate("AddImages", {
 				patient_abhaid: patientAbhaId,
+				new_patient: newPatient,
+				followUpDate: followUpDate,
 			});
-
-			
 		} catch (error) {
 			console.error("Error saving data, please retry:", error);
 			Alert.alert("Error", "Error saving data");

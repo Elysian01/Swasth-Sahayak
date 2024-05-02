@@ -10,6 +10,7 @@ const FollowUpCard = (props) => {
 
 	const visitedStatus = props.visitedStatus;
 	const followUpID = props.followUpID;
+	const followUpDate = props.followUpDate;
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
@@ -18,8 +19,9 @@ const FollowUpCard = (props) => {
 
 	const handleViewRecords = () => {
 		navigation.navigate("PatientToken", {
-			"patient_abhaid": props.patientAbhaId,
-			"follow_up_id": followUpID,
+			patient_abhaid: props.patientAbhaId,
+			follow_up_id: followUpID,
+			follow_up_date: followUpDate,
 		});
 	};
 	return (

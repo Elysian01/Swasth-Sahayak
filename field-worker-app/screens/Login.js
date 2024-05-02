@@ -94,6 +94,10 @@ const Login = () => {
 								"FieldWorkerID",
 								result.data.username
 							);
+							AsyncStorage.setItem(
+								"FieldWorkerName",
+								result.data.name
+							);
 
 							console.log(result.data.username);
 							console.log(result.data.jwtToken);
@@ -112,13 +116,9 @@ const Login = () => {
 			Alert.alert("Invalid Email Format", "Please Enter Valid Email");
 		}
 
-		// const fieldWorkerId = result.data.fieldWorkerId;
-		// const fieldWorkerId = result.data.fieldWorkerName;
-
-		// const fieldWorkerId = "10597";
-		const fieldWorkerName = "Jass Sadana";
+		// const fieldWorkerName = "Jass Sadana";
 		// AsyncStorage.setItem("FieldWorkerId", fieldWorkerId);
-		AsyncStorage.setItem("FieldWorkerName", fieldWorkerName);
+		// AsyncStorage.setItem("FieldWorkerName", fieldWorkerName);
 		// navigation.navigate("Home");
 	};
 

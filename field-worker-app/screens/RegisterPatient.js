@@ -94,7 +94,7 @@ const RegisterPatient = () => {
 			patient_address: address,
 			patient_blockCode: sector,
 			patient_pincode: pincode,
-			patient_preferred_langauge: registerLanguage,
+			patient_preferred_language: registerLanguage,
 		};
 
 		try {
@@ -128,11 +128,21 @@ const RegisterPatient = () => {
 			navigation.navigate("PatientDashboard", {
 				patient_abhaid: tempAbhaid,
 				new_patient: true,
+				followUpDate: getDate(),
 			});
 		} catch (error) {
 			console.error("Error saving data, please retry:", error);
 		}
 	};
+
+	function getDate() {
+		var today = new Date();
+		var dd = String(today.getDate()).padStart(2, "0");
+		var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+		var yyyy = today.getFullYear();
+		today = yyyy + "-" + mm + "-" + dd;
+		return today;
+	}
 
 	return (
 		<ScrollView automaticallyAdjustKeyboardInsets={true}>

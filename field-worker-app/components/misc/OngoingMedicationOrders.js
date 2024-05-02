@@ -26,6 +26,8 @@ const OngoingMedicationOrders = (props) => {
 		navigation.navigate("Questionnaire", {
 			questionnaire_type: questionnaireType,
 			patient_abhaid: patientAbhaId,
+			new_patient: false,
+			followUpDate: props.followUpDate,
 		});
 	}
 

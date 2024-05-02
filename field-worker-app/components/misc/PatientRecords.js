@@ -41,6 +41,9 @@ const PatientRecords = () => {
 							patientAbhaId={followUp["patient_abhaid"]}
 							visitedStatus={followUp["visited_status"]}
 							followUpID={followUp["follow_up_id"]}
+							followUpDate={
+								followUp["patient_followupdate"]
+							}
 						/>
 					))}
 			</View>
