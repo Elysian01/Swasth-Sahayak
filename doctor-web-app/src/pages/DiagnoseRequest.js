@@ -43,8 +43,8 @@ function DiagnoseRequest() {
     fetchData();
   }, [token,user]);
 
-  const handleViewClick = (patientId) => {
-    navigate("/patient-dashboard", { state: { patientId } });
+  const handleViewClick = (abhaid) => {
+    navigate("/patient-dashboard", { state: { abhaid } });
   };
   const handleDashboard = () => {
     navigate("/doctor-dashboard");
@@ -53,8 +53,8 @@ function DiagnoseRequest() {
   const isPatientIdInPids = (patientId) => {
     return pids.includes(patientId);
   };
-  const renderViewButton = (patientId) => (
-    <button onClick={() => handleViewClick(patientId)} className="view-button">
+  const renderViewButton = (abhaid) => (
+    <button onClick={() => handleViewClick(abhaid)} className="view-button">
       <img src={viewIcon} alt="View" />
     </button>
   );
@@ -81,7 +81,7 @@ function DiagnoseRequest() {
                 "User ID": row.patientid,
                 Name: row.name,
                 // Chat: renderChatButton(row.Chat),
-                View: renderViewButton(row.patientid),
+                View: renderViewButton(row.abhaid),
 
               }))}
             />
