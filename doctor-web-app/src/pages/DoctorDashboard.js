@@ -11,7 +11,6 @@ import Table from "../components/tables/Listings";
 import Navbar from "../components/misc/Navbar";
 import FeatureCard from "../components/cards/FeatureCard";
 import StatisticCard from "../components/cards/StatisticCard";
-import ShortListings from "../components/tables/ShortListings";
 import { getRequest } from "../components/Api/api";
 
 import viewIcon from "../static/icons/eye.png";
@@ -38,10 +37,11 @@ function DoctorDashboard() {
         const date = `${year}-${month}-${day}`;
         const headers = { Authorization: `Bearer ${token}` };
         const response = await getRequest(
-          `/doctor/top3/${user}/${date}`,
+          `/doctor/findall/${user}/${date}`,
           headers
         );
-        const column = ["Patient ID", "Name", "View Diagnose"];
+        const column = ["Abha ID", "Patient ID", "Name", "View Diagnose"];
+        console.log(response);
         setcolumns(column);
         setTableData(response);
         setLoading(false);
@@ -102,8 +102,8 @@ function DoctorDashboard() {
     findCountDate();
   }, [token, user]);
 
-  const handleViewClick = (patientId) => {
-    navigate("/patient-dashboard", { state: { patientId } });
+  const handleViewClick = (abhaid) => {
+    navigate("/patient-dashboard", { state: { abhaid } });
   };
   const handleViewMoreClick = () => {
     navigate("/diagnose-request");
@@ -113,8 +113,8 @@ function DoctorDashboard() {
   const isPatientIdInPids = (patientId) => {
     return pids.includes(patientId);
   };
-  const renderViewButton = (patientId) => (
-    <button onClick={() => handleViewClick(patientId)} className="view-button">
+  const renderViewButton = (abhaid) => (
+    <button onClick={() => handleViewClick(abhaid)} className="view-button">
       <img src={viewIcon} alt="View" />
     </button>
   );
@@ -154,7 +154,7 @@ function DoctorDashboard() {
               data={latesttableData.map((row) => ({
                 "Patient Name": row.patientname,
                 "Follow Update": row.followupdate,
-                "Disease": row.disease,
+                Disease: row.disease,
               }))}
             />
           </div>
@@ -176,13 +176,17 @@ function DoctorDashboard() {
             ) : (
               <Table
                 columns={columns}
-                data={tableData
-                  .filter((row) => !isPatientIdInPids(row.patientid))
-                  .map((row) => ({
-                    Name: row.name,
-                    "Patient ID": row.patientid,
-                    "View Diagnose": renderViewButton(row.patientid),
-                  }))}
+                data={
+                  tableData
+                    .filter((row) => !isPatientIdInPids(row.patientid))
+                    .map((row) => ({
+                      "Abha ID": row.abhaid,
+                      Name: row.name,
+                      "Patient ID": row.patientid,
+                      "View Diagnose": renderViewButton(row.abhaid),
+                    }))
+                    .slice(0, 3) // This limits the entries to only the first three
+                }
               />
             )}
             <br />

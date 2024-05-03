@@ -1,0 +1,31 @@
+.modal-dynamic{
+  display: flex;
+  flex-direction: column;
+}
+.modal-fieldworker-detail{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+}
+.modal-reassign{
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
+  align-items: center;
+}
+.small-primary-btn{
+  background-color: transparent;
+  border: none;
+  /* float: center; */
+  font-weight: bold;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  
+  font-size: 12px;
+  border-radius: 10px;
+  width: auto;
+  
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+}

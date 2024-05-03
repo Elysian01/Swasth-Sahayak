@@ -6,14 +6,14 @@ import Navbar from "../components/misc/Navbar";
 
 function SearchPatient() {
   const navigate = useNavigate();
-  const [patientId, setPatientId] = useState("");
+  const [abhaid, setAbhaid] = useState("");
 
   const handleInputChange = (event) => {
-    setPatientId(event.target.value);
+    setAbhaid(event.target.value);
   };
 
   const handleViewClick = () => {
-    navigate("/patient-dashboard", { state: { patientId } });
+    navigate("/patient-dashboard", { state: { abhaid } });
   };
 
   return (
@@ -37,7 +37,7 @@ function SearchPatient() {
           <InputField
             type="text"
             placeholder="Please Enter ABHA-ID"
-            value={patientId}
+            value={abhaid}
             onChange={handleInputChange}
           />
           <div className="login-submit">

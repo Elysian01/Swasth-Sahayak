@@ -39,6 +39,37 @@ export const downloadAPI = async () => {
 	}
 };
 
+export const uploadVisitedFollowUpsAPI = async () => {
+	// this function uploads all the data available in uploadData, except for follow_up data in it, which only uploads the visited ones.
+	try {
+		const token = await AsyncStorage.getItem("AccessToken");
+		let uploadData = await AsyncStorage.getItem("uploadData");
+		uploadData = JSON.parse(uploadData); // Parse the uploadData string to object
+		console.log("Uploading data to server ... ");
+		console.log(uploadData);
+
+		// Filter the follow_up array to include only the visited follow-ups
+		const visitedFollowUps = uploadData.follow_up.filter(
+			(followUp) => followUp.visited_status
+		);
+
+		// Replace the follow_up array in uploadData with the filtered visited follow-ups
+		uploadData.follow_up = visitedFollowUps;
+
+		const result = await ApiManager("/fieldworker/recievedata", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			data: JSON.stringify(uploadData), // Stringify the uploadData object back to JSON
+		});
+		return result;
+	} catch (error) {
+		return error.response;
+	}
+};
+
 export const uploadAPI = async () => {
 	try {
 		const token = await AsyncStorage.getItem("AccessToken");

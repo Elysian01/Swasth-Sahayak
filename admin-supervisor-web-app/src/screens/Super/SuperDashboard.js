@@ -1,12 +1,12 @@
 import React from "react";
-import Navbar from "../../components/headers/Navbar";
+import SuperNavbar from "./components/SuperNavbar";
 import PageHeading from "../../components/headers/PageHeading";
 import FeatureCard from "../../components/cards/FeatureCard";
 import "./css/SuperDashboard.css";
 const SuperDashboard = () => {
   return (
     <div>
-      <Navbar />
+      <SuperNavbar />
       <PageHeading title="Welcome to Supervisor Dashboard" />
       <div className="row">
         <FeatureCard

@@ -7,7 +7,7 @@ import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import InputField from "../components/inputs/InputField";
 import LoginBG from "../components/misc/LoginBG";
-import { authApi } from "../login/authApi";
+import { useAuthApi } from "../login/authApi";
 
 import "./css/login.css";
 
@@ -24,13 +24,13 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = await authApi.login({
+      const userData = await useAuthApi.login({
         username: email,
         password,
         roles,
       });
       dispatch(setCredentials(userData));
-      navigate(roles === "ADMIN" ? "/admin-dashboard" : "/supervisor-dashboard");
+      navigate(roles === "ADMIN" ? "/admin-dashboard" : "/super-dashboard");
     } catch (err) {
       setError("Invalid email or password"); // Set error message for invalid credentials
     }

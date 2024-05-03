@@ -141,6 +141,7 @@ function SupervisorDashboard() {
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Doctor Details Modal"
+        shouldCloseOnOverlayClick={true}
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.7)", // Darken the background when the modal is open
