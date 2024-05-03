@@ -150,7 +150,7 @@ const PatientDashboard = (props) => {
 							}
 							disease={getDiseaseName(
 								details["ongoing_medication_orders"][
-									"ICD10_code"
+									"icd10_code"
 								]
 							)}
 							followUpDate={followUpDate}

@@ -6,6 +6,7 @@ import dbFunctions from "../api/Queries";
 export const loginAPI = async (data) => {
 	try {
 		console.log("Sending: ", data);
+		data["role"] = "FIELDWORKER";
 		const result = await ApiManager("/auth/login", {
 			method: "POST",
 			headers: {
@@ -40,21 +41,22 @@ export const downloadAPI = async () => {
 };
 
 export const uploadVisitedFollowUpsAPI = async () => {
-	// this function uploads all the data available in uploadData, except for follow_up data in it, which only uploads the visited ones.
+	// this function uploads all the visited follow-up data available in uploadData
 	try {
 		const token = await AsyncStorage.getItem("AccessToken");
 		let uploadData = await AsyncStorage.getItem("uploadData");
 		uploadData = JSON.parse(uploadData); // Parse the uploadData string to object
-		console.log("Uploading data to server ... ");
-		console.log(uploadData);
-
+		
 		// Filter the follow_up array to include only the visited follow-ups
 		const visitedFollowUps = uploadData.follow_up.filter(
-			(followUp) => followUp.visited_status
+			(followUp) => followUp.visited_status === true
 		);
-
+		
 		// Replace the follow_up array in uploadData with the filtered visited follow-ups
 		uploadData.follow_up = visitedFollowUps;
+		
+		console.log("Uploading data to server ... ");
+		console.log(uploadData);
 
 		const result = await ApiManager("/fieldworker/recievedata", {
 			method: "POST",

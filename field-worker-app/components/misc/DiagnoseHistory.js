@@ -19,13 +19,18 @@ const DiagnoseHistory = (props) => {
 		setPreferredLanguage(lang);
 	});
 
+	const [fieldWorkerName, setFieldWorkerName] = useState("");
+	AsyncStorage.getItem("FieldWorkerName").then((name) => {
+		setFieldWorkerName(name);
+	});
+
 	function viewPrescription(prescriptionData) {
 		navigation.navigate("Prescription", {
-			disease: getDiseaseName(prescriptionData["ICD10_code"]),
+			disease: getDiseaseName(prescriptionData["disease_name"]),
 			prescriptionDate: prescriptionData["date"],
 			doctorName: prescriptionData["doctor_name"],
 			prescription: prescriptionData["prescription"],
-			fieldWorkerName: "jass",
+			fieldWorkerName: fieldWorkerName,
 			patientName: patientName,
 			patientAbhaId: patientAbhaId,
 			fieldWorkerId: fieldWorkerId,
@@ -62,7 +67,7 @@ const DiagnoseHistory = (props) => {
 							{prescription.date}
 						</Text>
 						<Text style={styles.tableData}>
-							{getDiseaseName(prescription["ICD10_code"])}
+							{prescription["disease_name"]}
 						</Text>
 						<Pressable
 							onPress={() =>

@@ -92,7 +92,7 @@ const Login = () => {
 							);
 							AsyncStorage.setItem(
 								"FieldWorkerID",
-								result.data.username
+								result.data.refreshToken.logins.username
 							);
 							AsyncStorage.setItem(
 								"FieldWorkerName",

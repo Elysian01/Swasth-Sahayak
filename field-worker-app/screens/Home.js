@@ -77,32 +77,6 @@ const Home = () => {
 				Alert.alert("Unable to Download Data: ", error);
 			});
 
-		// try {
-		// 	await AsyncStorage.setItem(
-		// 		"DownloadedData",
-		// 		JSON.stringify(downloadedData)
-		// 	);
-		// 	console.log("Async Storage -> Download data storage Success");
-		// 	setAssignedSector(
-		// 		downloadedData["field_worker_details"][
-		// 			"field_worker_assigned_sector"
-		// 		]
-		// 	);
-		// } catch (error) {
-		// 	console.log(
-		// 		"Error setting up download data, Async Storage " + error
-		// 	);
-		// }
-
-		// console.log("Downloading data...");
-
-		// let data = require("../database/DOWNLOADED_DATA.json");
-
-		// setAssignedSector(
-		// 	data["field_worker_details"]["field_worker_assigned_sector"]
-		// );
-
-		// const Ddata = JSON.parse(downloadedData);
 
 		let data = await AsyncStorage.getItem("DownloadedData");
 		const fwid = await AsyncStorage.getItem("FieldWorkerID");
@@ -127,7 +101,7 @@ const Home = () => {
 			patient_registeration: [],
 		};
 
-		console.log("U: ", uploadTemplate);
+		// console.log("U: ", uploadTemplate);
 
 		try {
 			await AsyncStorage.setItem(

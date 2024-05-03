@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
 import { uploadAPI, uploadImagesAPI, uploadVisitedFollowUpsAPI } from "./APIs";
-import dbFunctions from "./api/Queries";
+import dbFunctions from "../api/Queries";
 import { UPLOUD_HOUR, UPLOUD_MINUTE } from "../config";
 
 const checkNetworkAndDataChange = async () => {
@@ -21,7 +21,7 @@ const checkNetworkAndDataChange = async () => {
 		uploadTime.setMinutes(UPLOUD_MINUTE); // Setting the minutes to 30
 
 		if (state.isConnected && dataChangeStatus === "true") {
-			if (currentTime < uploadTime) {
+			if (currentTime > uploadTime) {
 				await uploadAPI();
 				console.log("Uploaded All data to server");
 			} else {

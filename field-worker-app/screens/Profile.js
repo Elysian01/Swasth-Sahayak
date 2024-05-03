@@ -91,7 +91,7 @@ const Profile = () => {
 					</Pressable>
 				)}
 
-				<Pressable
+				{/* <Pressable
 					onPress={() => deletePatientAccount()}
 					style={AppStyles.darkRedBtn}
 				>
@@ -102,7 +102,7 @@ const Profile = () => {
 							]
 						}
 					</Text>
-				</Pressable>
+				</Pressable> */}
 
 				{/* <Pressable
 					onPress={() => {

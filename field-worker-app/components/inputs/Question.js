@@ -53,7 +53,7 @@ const Question = (props) => {
 					value={userInput}
 				/>
 			);
-		} else if (questionObject.ques_type === "text") {
+		} else if (questionObject.ques_type === "descriptive") {
 			return (
 				<TextInput
 					style={styles.input}

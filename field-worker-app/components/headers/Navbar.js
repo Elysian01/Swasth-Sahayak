@@ -13,21 +13,21 @@ const Navbar = () => {
 	});
 
 	const navigation = useNavigation();
-	const [accessTokenExists, setAccessTokenExists] = useState(true);
-	// const [accessTokenExists, setAccessTokenExists] = useState(false);
+	// const [accessTokenExists, setAccessTokenExists] = useState(true);
+	const [accessTokenExists, setAccessTokenExists] = useState(false);
 
-	// useEffect(() => {
-	// 	const checkAccessToken = async () => {
-	// 		try {
-	// 			const token = await AsyncStorage.getItem("AccessToken");
-	// 			setAccessTokenExists(token !== null);
-	// 		} catch (error) {
-	// 			console.error("Error checking access token:", error);
-	// 		}
-	// 	};
+	useEffect(() => {
+		const checkAccessToken = async () => {
+			try {
+				const token = await AsyncStorage.getItem("AccessToken");
+				setAccessTokenExists(token !== null);
+			} catch (error) {
+				console.error("Error checking access token:", error);
+			}
+		};
 
-	// 	checkAccessToken();
-	// }, []);
+		checkAccessToken();
+	}, []);
 
 	return (
 		<View style={styles.nav}>
