@@ -85,16 +85,11 @@ function DoctorDashboard() {
     navigate("/add-doctor");
   };
   const handleInactive = async (doctor) => {
-    // console.log(doctor.doctorId);
     const id = doctor.doctorId;
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const status = 1-doctor.status;
       // Await the API call
-      const response = await deleteRequest(
-        `/admin/doctordelete/${id}/${status}`,
-        headers
-      );
       fetchDoctorDetails();
     } catch (error) {
       console.error(error);
