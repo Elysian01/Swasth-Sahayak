@@ -29,7 +29,6 @@ function Login() {
         password,
         role,
       });
-      console.log("passig this data"+userData);
       dispatch(setCredentials(userData));
       navigate(role === "ADMIN" ? "/admin-dashboard" : "/super-dashboard");
     } catch (err) {
