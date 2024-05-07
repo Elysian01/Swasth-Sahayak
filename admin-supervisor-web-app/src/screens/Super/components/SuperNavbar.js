@@ -88,7 +88,7 @@ function SuperNavbar() {
   return (
     <nav id={`nav${!show ? "" : "-hidden"}`}>
       <div className="nav-logo">
-        <Link to="/admin-dashboard">
+        <Link to="/super-dashboard">
           <div className="nav-heading">
             <span>
               <img id="logo" src={require(`../../../static/logo.png`)} alt="" />
