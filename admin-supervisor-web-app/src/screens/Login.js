@@ -75,9 +75,9 @@ function Login() {
               <option value="SUPERVISOR">SUPERVISOR</option>
             </select>
             <div className="login-subtext-right">
-              <Link to="/forgot-password" className="forgot-password">
+              {/* <Link to="/forgot-password" className="forgot-password">
                 Forgot Password?
-              </Link>
+              </Link> */}
             </div>
             <div className="login-submit">
               <button type="submit" className="login-btn">

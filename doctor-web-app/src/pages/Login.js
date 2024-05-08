@@ -65,9 +65,9 @@ function Login() {
             />
 
             <div className="login-subtext-right">
-              <Link to="/forgot-password" className="forgot-password">
+              {/* <Link to="/forgot-password" className="forgot-password">
                 Forgot Password?
-              </Link>
+              </Link> */}
             </div>
 
             {error && <div className="error">{error}</div>}
