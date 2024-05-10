@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Modal from "react-modal"; // Import react-modal
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import { deleteRequest, getRequest } from "../components/Api/api";
@@ -39,6 +39,27 @@ function DoctorDashboard() {
       const headers = { Authorization: `Bearer ${token}` };
       // Await the API call
       const response = await getRequest("/admin/allDoctorDetail", headers);
+  
+      // Iterate over the response array using for...of loop
+      for (const doctor of response) {
+        const data = {
+          username: doctor.doctorId,
+          secret: doctor.doctorId // You might want to use a different value for the secret
+        };
+  
+        const config = {
+          method: 'put',
+          url: 'https://api.chatengine.io/users/',
+          headers: {
+            'PRIVATE-KEY': 'ff81a502-c2dd-4c07-b0d8-ca93c03591dd'
+          },
+          data: data
+        };
+  
+        // Use axios to make the HTTP request
+        const response = await axios(config);
+      }
+  
       // Update the state with the fetched doctor details
       setDoctorDetails(response);
     } catch (error) {
@@ -64,16 +85,11 @@ function DoctorDashboard() {
     navigate("/add-doctor");
   };
   const handleInactive = async (doctor) => {
-    // console.log(doctor.doctorId);
     const id = doctor.doctorId;
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const status = 1-doctor.status;
       // Await the API call
-      const response = await deleteRequest(
-        `/admin/doctordelete/${id}/${status}`,
-        headers
-      );
       fetchDoctorDetails();
     } catch (error) {
       console.error(error);

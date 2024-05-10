@@ -7,14 +7,14 @@ import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import InputField from "../components/inputs/InputField";
 import LoginBG from "../components/misc/LoginBG";
-import { useAuthApi } from "../login/authApi";
+import { authApi } from "../login/authApi";
 
 import "./css/login.css";
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [roles, setRoles] = useState("ADMIN");
+  const [role, setRoles] = useState("ADMIN");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -24,13 +24,13 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = await useAuthApi.login({
+      const userData = await authApi.login({
         username: email,
         password,
-        roles,
+        role,
       });
       dispatch(setCredentials(userData));
-      navigate(roles === "ADMIN" ? "/admin-dashboard" : "/super-dashboard");
+      navigate(role === "ADMIN" ? "/admin-dashboard" : "/super-dashboard");
     } catch (err) {
       setError("Invalid email or password"); // Set error message for invalid credentials
     }
@@ -68,16 +68,16 @@ function Login() {
             <br/>
             <select
               className="form__field"
-              value={roles}
+              value={role}
               onChange={handleRoleChange}
             >
               <option value="ADMIN">ADMIN</option>
               <option value="SUPERVISOR">SUPERVISOR</option>
             </select>
             <div className="login-subtext-right">
-              <Link to="/forgot-password" className="forgot-password">
+              {/* <Link to="/forgot-password" className="forgot-password">
                 Forgot Password?
-              </Link>
+              </Link> */}
             </div>
             <div className="login-submit">
               <button type="submit" className="login-btn">
@@ -90,5 +90,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;
