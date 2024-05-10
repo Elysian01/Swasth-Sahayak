@@ -260,7 +260,7 @@ const RegisterPatient = () => {
 					placeholderTextColor="#666"
 					onChangeText={(text) => setPhoneNumber(text)}
 					value={phoneNumber}
-					maxLength={10}
+					maxLength={13}
 					inputMode="numeric"
 					keyboardType="phone-pad"
 				/>

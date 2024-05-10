@@ -1,20 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Dropdown from "../components/inputs/Dropdown";
+import * as LocalAuthentication from "expo-local-authentication";
 
 const LanguageSelection = () => {
 	const navigation = useNavigation();
 	const [preferredlangauge, setPreferredLanguage] = useState("");
 
+	const handleAuthenticate = async () => {
+		try {
+			const result = await LocalAuthentication.authenticateAsync();
+			if (result.success) {
+				// Biometric authentication successful, proceed with login
+				navigation.navigate("Home");
+			} else {
+				// Biometric authentication failed, handle accordingly
+				Alert.alert("Biometric Authentication Failed");
+			}
+		} catch (error) {
+			console.error("Biometric Authentication Error:", error);
+			// Handle biometric authentication error
+			Alert.alert("Biometric Authentication Error", error.message);
+		}
+	};
+
 	const checkForLogin = async () => {
 		const token = await AsyncStorage.getItem("AccessToken");
+		console.log("Checking: ", token);
 		if (!token) {
 			navigation.navigate("LanguageSelection");
 		} else {
-			navigation.navigate("Home");
+			handleAuthenticate();
+			// navigation.navigate("Home");
 		}
 	};
 

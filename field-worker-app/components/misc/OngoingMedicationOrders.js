@@ -47,11 +47,12 @@ const OngoingMedicationOrders = (props) => {
 							Dr. {doctorName}
 						</Text>
 						<Text style={styles.doctorInfoStatus}>
-							Added new Follow-up Instructions
+							{
+								lang[preferredlangauge][
+									"Added new Follow-up Instructions"
+								]
+							}
 						</Text>
-						{/* <Text style={AppStyles.subHeading}>
-							{lang[preferredlangauge]["Added new Follow-up Instructions"]}
-						</Text> */}
 					</View>
 				</View>
 			</View>
@@ -68,12 +69,10 @@ const OngoingMedicationOrders = (props) => {
 					onPress={askQuestionnaire}
 					style={AppStyles.primaryBtn}
 				>
-					{/* <Text style={AppStyles.primaryBtnText}>
-						{lang[preferredlangauge]["Ask Questionnaire"]} 
-					</Text> */}
 					<Text style={AppStyles.primaryBtnText}>
-						Ask Questionnaire
+						{lang[preferredlangauge]["Ask Questionnaire"]}
 					</Text>
+					
 				</Pressable>
 			</View>
 		</View>
