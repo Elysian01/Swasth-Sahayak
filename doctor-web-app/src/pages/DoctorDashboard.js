@@ -5,14 +5,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 
 import Table from "../components/tables/Listings";
 import Navbar from "../components/misc/Navbar";
 import FeatureCard from "../components/cards/FeatureCard";
 import StatisticCard from "../components/cards/StatisticCard";
 import { getRequest } from "../components/Api/api";
-
+import {setSendPatientId} from "../login/authSlice";
 import viewIcon from "../static/icons/eye.png";
 
 function DoctorDashboard() {
@@ -23,6 +23,8 @@ function DoctorDashboard() {
   const [countDataDate, setCountDateData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [columns, setcolumns] = useState([]);
+
+  const dispatch=useDispatch();
 
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
@@ -102,7 +104,9 @@ function DoctorDashboard() {
     findCountDate();
   }, [token, user]);
 
-  const handleViewClick = (abhaid) => {
+  const handleViewClick = (abhaid,patientId) => {
+    dispatch(setSendPatientId(patientId));
+    console.log(patientId);
     navigate("/patient-dashboard", { state: { abhaid } });
   };
   const handleViewMoreClick = () => {
@@ -113,8 +117,8 @@ function DoctorDashboard() {
   const isPatientIdInPids = (patientId) => {
     return pids.includes(patientId);
   };
-  const renderViewButton = (abhaid) => (
-    <button onClick={() => handleViewClick(abhaid)} className="view-button">
+  const renderViewButton = (abhaid,patientId) => (
+    <button onClick={() => handleViewClick(abhaid,patientId)} className="view-button">
       <img src={viewIcon} alt="View" />
     </button>
   );
@@ -183,7 +187,7 @@ function DoctorDashboard() {
                       "Abha ID": row.abhaid,
                       Name: row.name,
                       "Patient ID": row.patientid,
-                      "View Diagnose": renderViewButton(row.abhaid),
+                      "View Diagnose": renderViewButton(row.abhaid, row.patientid),
                     }))
                     .slice(0, 3) // This limits the entries to only the first three
                 }

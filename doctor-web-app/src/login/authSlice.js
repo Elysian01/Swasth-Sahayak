@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; 
+import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
   key: "auth",
@@ -15,6 +15,7 @@ const authSlice = createSlice({
     error: null,
     role: null,
     pids: [], // Add pids array to the initial state
+    sendPatientId: null,
   },
   reducers: {
     setCredentials: (state, action) => {
@@ -23,7 +24,11 @@ const authSlice = createSlice({
       state.role = action.payload.role;
       state.error = null;
     },
-    setPids: (state, action) => { // New reducer to set pids array
+    setSendPatientId: (state, action) => {
+      state.sendPatientId = action.payload;
+    },
+    setPids: (state, action) => {
+      // New reducer to set pids array
       state.pids = action.payload;
     },
     setError: (state, action) => {
@@ -42,7 +47,14 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, setPids, setError, clearError, logout } = authSlice.actions;
+export const {
+  setSendPatientId,
+  setCredentials,
+  setPids,
+  setError,
+  clearError,
+  logout,
+} = authSlice.actions;
 
 const persistedReducer = persistReducer(persistConfig, authSlice.reducer);
 export default persistedReducer;

@@ -39,9 +39,10 @@ function DiagnoseReport() {
   const navigate = useNavigate();
 
   const pids = useSelector((state) => state.auth.pids); // Assuming auth is the name of your slice
-
+  const sendPatientId = useSelector((state) => state.auth.sendPatientId);
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
+     console.log("this patiient id need to send:"+sendPatientId);
     getDiesease();
     fetchData();
   }, []);
@@ -145,7 +146,7 @@ function DiagnoseReport() {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const response = await getRequest(
-        `/doctor/download_images/${patientId}/${diagnoseDate}`,
+        `/doctor/download_images/${sendPatientId}/${diagnoseDate}`,
         headers
       );
       console.log("artificats array:", response);
