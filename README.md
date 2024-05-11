@@ -15,6 +15,10 @@ Figma Design Files: https://www.figma.com/files/project/198350664/Team-project?f
    3. [Supervisor Admin Web Application](./supervisor-admin-web-app)
 2. Backend (common server for all frontend applications)
    1. [Server](./server)
+
+## Run the App
+
+Download the Expo SDK 50 from https://expo.dev/go
   
 ## Major Challenge Encountered
 
