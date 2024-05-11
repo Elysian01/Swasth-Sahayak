@@ -7,7 +7,6 @@ import {
 	Image,
 	ScrollView,
 	Alert,
-	Button,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -19,31 +18,12 @@ import { loginAPI } from "../api/APIs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../database/language";
 
-import * as LocalAuthentication from "expo-local-authentication";
-
 const Login = () => {
 	const navigation = useNavigation();
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
 		setPreferredLanguage(lang);
 	});
-
-	// const handleAuthenticate = async () => {
-	// 	try {
-	// 		const result = await LocalAuthentication.authenticateAsync();
-	// 		if (result.success) {
-	// 			// Biometric authentication successful, proceed with login
-	// 			navigation.navigate("Home");
-	// 		} else {
-	// 			// Biometric authentication failed, handle accordingly
-	// 			Alert.alert("Biometric Authentication Failed");
-	// 		}
-	// 	} catch (error) {
-	// 		console.error("Biometric Authentication Error:", error);
-	// 		// Handle biometric authentication error
-	// 		Alert.alert("Biometric Authentication Error", error.message);
-	// 	}
-	// };
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -61,20 +41,6 @@ const Login = () => {
 			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		return regex.test(email);
 	};
-
-	// useEffect(() => {
-	// 	checkLoginCredentials();
-	// }, []);
-
-	// const checkLoginCredentials = async () => {
-	// 	const storedEmail = await AsyncStorage.getItem("FieldWorkerId");
-	// 	const storedPassword = await AsyncStorage.getItem("FieldWorkerName");
-
-	// 	if (storedEmail && storedPassword) {
-	// 		// Both email and password are stored, attempt login via biometric
-	// 		handleAuthenticate();
-	// 	}
-	// };
 
 	const handleLogin = () => {
 		if (validateEmail(email)) {

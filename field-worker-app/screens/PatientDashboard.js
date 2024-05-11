@@ -81,7 +81,7 @@ const PatientDashboard = (props) => {
 	function goToDefaultQuestionnaire() {
 		console.log("Going to Default Questionnaire ... ");
 		navigation.navigate("Questionnaire", {
-			questionnaire_type: "general",
+			questionnaire_type: "F31.0",
 			patient_abhaid: patientAbhaId,
 			new_patient: true,
 			followUpDate: followUpDate,

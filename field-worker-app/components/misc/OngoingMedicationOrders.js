@@ -6,14 +6,22 @@ import { lang } from "../../database/language";
 import AppStyles from "../../AppStyles";
 import { useNavigation } from "@react-navigation/native";
 
-const OngoingMedicationOrders = (props) => {
+const OngoingMedicationOrders = ({
+	questionnaireType,
+	patientAbhaId,
+	doctorComment,
+	doctorName,
+	disease,
+	followUpDate,
+}) => {
 	const navigation = useNavigation();
 
-	const questionnaireType = props.questionnaireType;
-	const patientAbhaId = props.patientAbhaId;
-	const doctorName = props.doctorName;
-	const ongoingMedicationOrders = props.doctorComment;
-	const disease = props.disease;
+	// const questionnaireType = props.questionnaireType;
+	// const patientAbhaId = props.patientAbhaId;
+	// const doctorName = props.doctorName;
+	// const ongoingMedicationOrders = props.doctorComment;
+	const ongoingMedicationOrders = doctorComment;
+	// const disease = props.disease;
 
 	console.log("got: ", questionnaireType);
 
@@ -27,7 +35,7 @@ const OngoingMedicationOrders = (props) => {
 			questionnaire_type: questionnaireType,
 			patient_abhaid: patientAbhaId,
 			new_patient: false,
-			followUpDate: props.followUpDate,
+			followUpDate: followUpDate,
 		});
 	}
 
@@ -72,7 +80,6 @@ const OngoingMedicationOrders = (props) => {
 					<Text style={AppStyles.primaryBtnText}>
 						{lang[preferredlangauge]["Ask Questionnaire"]}
 					</Text>
-					
 				</Pressable>
 			</View>
 		</View>

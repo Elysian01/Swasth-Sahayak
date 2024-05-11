@@ -6,13 +6,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../../database/language";
 import AppStyles from "../../AppStyles";
 
-const DiagnoseHistory = (props) => {
+const DiagnoseHistory = ({
+	prescriptions,
+	patientName,
+	patientAbhaId,
+	fieldWorkerId,
+}) => {
 	const navigation = useNavigation();
 
-	const prescriptions = props.prescriptions;
-	const patientName = props.patientName;
-	const patientAbhaId = props.patientAbhaId;
-	const fieldWorkerId = props.fieldWorkerId;
+	// const prescriptions = props.prescriptions;
+	// const patientName = props.patientName;
+	// const patientAbhaId = props.patientAbhaId;
+	// const fieldWorkerId = props.fieldWorkerId;
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {

@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const PageHeading = (props) => {
+const PageHeading = ({ text }) => {
 	return (
 		<View>
-			<Text style={styles.heading}>{props.text}</Text>
+			<Text style={styles.heading}>{text}</Text>
 		</View>
 	);
 };

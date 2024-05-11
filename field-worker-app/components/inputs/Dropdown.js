@@ -9,7 +9,7 @@ const data = [
 	{ id: 2, label: "हिन्दी", labelInEnglish: "Hindi" },
 ];
 
-const Dropdown = (props) => {
+const Dropdown = ({ setLang }) => {
 	const [isOpen, setOpen] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);
 
@@ -18,7 +18,8 @@ const Dropdown = (props) => {
 	const handleItemClick = (id, label) => {
 		selectedItem == id ? setSelectedItem(null) : setSelectedItem(id);
 		console.log(label);
-		props.setLang(label);
+		setLang(label);
+		// props.setLang(label);
 		toggleDropdown();
 	};
 

@@ -5,11 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { lang } from "../../database/language";
 
-
-const FreeVisit = (props) => {
+const FreeVisit = ({ assignedSector }) => {
 	const navigation = useNavigation();
 
-	const assignedSector = props.assignedSector;
+	// const assignedSector = props.assignedSector;
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {

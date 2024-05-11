@@ -5,12 +5,19 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AppStyles from "../../AppStyles";
 
-const FollowUpCard = (props) => {
+const FollowUpCard = ({
+	visitedStatus,
+	followUpID,
+	followUpDate,
+	patientAbhaId,
+	name,
+	address,
+}) => {
 	const navigation = useNavigation();
 
-	const visitedStatus = props.visitedStatus;
-	const followUpID = props.followUpID;
-	const followUpDate = props.followUpDate;
+	// const visitedStatus = props.visitedStatus;
+	// const followUpID = props.followUpID;
+	// const followUpDate = props.followUpDate;
 
 	const [preferredlangauge, setPreferredLanguage] = useState("English");
 	AsyncStorage.getItem("Language").then((lang) => {
@@ -19,17 +26,24 @@ const FollowUpCard = (props) => {
 
 	const handleViewRecords = () => {
 		navigation.navigate("PatientToken", {
-			patient_abhaid: props.patientAbhaId,
+			patient_abhaid: patientAbhaId,
 			follow_up_id: followUpID,
 			follow_up_date: followUpDate,
 		});
+		// navigation.navigate("PatientToken", {
+		// 	patient_abhaid: props.patientAbhaId,
+		// 	follow_up_id: followUpID,
+		// 	follow_up_date: followUpDate,
+		// });
 	};
 	return (
 		<View style={styles.header}>
 			<View style={styles.column}>
 				<View style={styles.addressContainer}>
-					<Text style={styles.name}>{props.name}</Text>
-					<Text style={styles.address}>{props.address}</Text>
+					<Text style={styles.name}>{name}</Text>
+					<Text style={styles.address}>{address}</Text>
+					{/* <Text style={styles.name}>{props.name}</Text>
+					<Text style={styles.address}>{props.address}</Text> */}
 				</View>
 			</View>
 			<View style={styles.column2}>

@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		fontWeight: "600",
 		paddingVertical: 15,
-		paddingHorizontal: 12,
+		paddingHorizontal: 4,
 	},
 });
 
