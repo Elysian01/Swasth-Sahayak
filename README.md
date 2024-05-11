@@ -22,10 +22,14 @@ Download the Expo SDK 50 from https://expo.dev/go
   
 ## Major Challenge Encountered
 
-1. Multilingual Integration:
-2. Tablet App working in offline mode
-3. System Design for hospital, doctor, health-worker, patient management
-4. Switch between systems design and app design, there were cases where we were designing app for system instead of designing  system first and then the required application (like we imagined ideal scenario of data upload (upload in chunks is the solution))
+1. Multilingual Integration
+2. System Design for hospital, doctor, health-worker, patient management
+3. Switch between systems design and app design, there were cases where we were designing app for system instead of designing  system first and then the required application (like we imagined ideal scenario of data upload (upload in chunks is the solution))
+4. JWT Security: Employing JSON Web Tokens (JWT) for security measures involves implementing a token-based authentication system, which presents complexities in execution. We took measures to ensure the secure storage and validation of these tokens to mitigate potential security vulnerabilities effectively.
+5. Mitigation of Cross-Origin Resource Sharing (CORS) Issues: During the integration of the ReactJS frontend with the Spring Boot backend, we encountered CORS errors, necessitating resolution. This involved configuring the backend infrastructure to permit cross-origin requests originating from the frontend, thus resolving the CORS issues and facilitating seamless communication between client and server components.
+6. Offline Functionality Implementation: Achieving full offline functionality for the application post-initial data download posed considerable challenges, particularly in managing various edge cases and ensuring data segregation to enable individual component updates via AutoSync seamlessly.
+7. AutoSync Integration: The incorporation of the AutoSync feature utilizing Netinfo presented notable complexities. Our aim was to ensure that data uploads occurred only once whenever connectivity was established, with subsequent deletion of data upon successful upload completion.
+
 
 ## Assumptions
 
