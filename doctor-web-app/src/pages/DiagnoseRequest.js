@@ -11,14 +11,16 @@ import Navbar from "../components/misc/Navbar";
 import viewIcon from "../static/icons/eye.png";
 import diagnoseImage from "../static/imgs/diagnose-request.png";
 
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { getRequest } from "../components/Api/api";
+import {setSendPatientId} from "../login/authSlice";
 
 function DiagnoseRequest() {
   const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const dispatch=useDispatch();
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
   const pids = useSelector(state => state.auth.pids);
@@ -43,7 +45,8 @@ function DiagnoseRequest() {
     fetchData();
   }, [token,user]);
 
-  const handleViewClick = (abhaid) => {
+  const handleViewClick = (abhaid,patientid) => {
+    dispatch(setSendPatientId(patientid));
     navigate("/patient-dashboard", { state: { abhaid } });
   };
   const handleDashboard = () => {
@@ -53,8 +56,8 @@ function DiagnoseRequest() {
   const isPatientIdInPids = (patientId) => {
     return pids.includes(patientId);
   };
-  const renderViewButton = (abhaid) => (
-    <button onClick={() => handleViewClick(abhaid)} className="view-button">
+  const renderViewButton = (abhaid,patientid) => (
+    <button onClick={() => handleViewClick(abhaid,patientid)} className="view-button">
       <img src={viewIcon} alt="View" />
     </button>
   );
@@ -81,7 +84,7 @@ function DiagnoseRequest() {
                 "User ID": row.patientid,
                 Name: row.name,
                 // Chat: renderChatButton(row.Chat),
-                View: renderViewButton(row.abhaid),
+                View: renderViewButton(row.abhaid,row.patientid),
 
               }))}
             />

@@ -1,1 +1,1 @@
-export const LOCALHOST = "http://192.168.122.103:9191";
+export const LOCALHOST = "http://localhost:9191";
