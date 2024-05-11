@@ -22,7 +22,9 @@ function SearchRecords() {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const response = await getRequest("/doctor/diseasename", headers);
-        setDropdown1Value(response); // Set dropdown1Value to the array of options
+        console.log(response);
+        const diseaseNames = response.map(item => item.diseasename); // Extract disease names from the response
+        setDropdown1Value(diseaseNames); // Set dropdown1Value to the array of options
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -41,12 +43,14 @@ function SearchRecords() {
           `/doctor/searchbydisease/${selectedDropdownValue}/${user}`,
           headers
         );
-        setTableData(response);
-        setLoading(false);
+        console.log("Filtered Data Response:", response); // Log the response
+        // setTableData(response);
+        // setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
+    
     if (selectedDropdownValue) {
       fetchFilteredData();
     }

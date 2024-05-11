@@ -7,19 +7,15 @@ import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import { deleteRequest, getRequest } from "../components/Api/api";
 import GradientInput from "../components/inputs/GradientInput";
-
 import "../components/css/common.css";
 import "./css/doctor-dashboard.css";
-
 function DoctorDashboard() {
   const [doctorDetails, setDoctorDetails] = useState([]); // State for storing doctor details array
   const [selectedDoctor, setSelectedDoctor] = useState(null); // State for storing selected doctor
   const [isModalOpen, setIsModalOpen] = useState(false); // State for managing modal visibility
   const [searchTerm, setSearchTerm] = useState("");
-
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
-
   const filteredDoctors = doctorDetails.filter((doctor) => {
     const nameMatch = doctor.name
       .toLowerCase()
@@ -33,32 +29,30 @@ function DoctorDashboard() {
       .includes(searchTerm.toLowerCase());
     return nameMatch || regionMatch || specialisationMatch;
   });
-
   const fetchDoctorDetails = async () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       // Await the API call
       const response = await getRequest("/admin/allDoctorDetail", headers);
-  
       // Iterate over the response array using for...of loop
-      for (const doctor of response) {
-        const data = {
-          username: doctor.doctorId,
-          secret: doctor.doctorId // You might want to use a different value for the secret
-        };
+      // for (const doctor of response) {
+      //   const data = {
+      //     username: doctor.doctorId,
+      //     secret: doctor.doctorId // You might want to use a different value for the secret
+      //   };
   
-        const config = {
-          method: 'put',
-          url: 'https://api.chatengine.io/users/',
-          headers: {
-            'PRIVATE-KEY': 'ff81a502-c2dd-4c07-b0d8-ca93c03591dd'
-          },
-          data: data
-        };
+      //   const config = {
+      //     method: 'put',
+      //     url: 'https://api.chatengine.io/users/',
+      //     headers: {
+      //       'PRIVATE-KEY': 'ff81a502-c2dd-4c07-b0d8-ca93c03591dd'
+      //     },
+      //     data: data
+      //   };
   
-        // Use axios to make the HTTP request
-        const response = await axios(config);
-      }
+      //   // Use axios to make the HTTP request
+      //   const response = await axios(config);
+      // }
   
       // Update the state with the fetched doctor details
       setDoctorDetails(response);
@@ -66,13 +60,11 @@ function DoctorDashboard() {
       console.error(error);
     }
   };
-
   // Function to handle opening the modal
   const openModal = (doctor) => {
     setSelectedDoctor(doctor);
     setIsModalOpen(true);
   };
-
   // Function to handle closing the modal
   const closeModal = () => {
     setIsModalOpen(false);
@@ -99,7 +91,6 @@ function DoctorDashboard() {
     // Call the fetchDoctorDetails function
     fetchDoctorDetails();
   }, []);
-
   return (
     <div>
       <Navbar />
@@ -112,7 +103,6 @@ function DoctorDashboard() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-
         <button className="small-primary-btn" onClick={addNewDoctor}>
           Add New Doctor
         </button>
@@ -171,7 +161,6 @@ function DoctorDashboard() {
             padding: "25px",
             backgroundColor: "#fafafa",
             borderRadius: "10px",
-
             border: "none", // Remove border
           },
         }}
@@ -229,5 +218,4 @@ function DoctorDashboard() {
     </div>
   );
 }
-
 export default DoctorDashboard;
