@@ -7,6 +7,7 @@ Report: https://docs.google.com/document/d/1Yx6KPnWj27cXy02DpWT6YFuB4hkk9GDJG9ek
 
 Figma Design Files: https://www.figma.com/files/project/198350664/Team-project?fuid=1113531776039202105
 
+
 ## Project Structure
 
 1. Frontend Application
@@ -19,6 +20,15 @@ Figma Design Files: https://www.figma.com/files/project/198350664/Team-project?f
 ## Run the App
 
 Download the Expo SDK 50 from https://expo.dev/go
+
+## Abstract
+
+‘Swasth Sahayak’ - Swasth Sahayak is a pioneering initiative aimed at extending healthcare services directly into the homes of individuals, especially those in underserved communities. The project harnesses the power of technology to facilitate efficient and comprehensive health screenings, and follow-up care, thereby ensuring that individuals receive the support they need, right at their doorstep. Through a combination of field health workers equipped with standardized questionnaires and a tablet-based application, Swasth Sahayak streamlines the process of identifying and addressing various health concerns, including mental health conditions, within local communities. Furthermore, the project emphasizes data-driven decision-making, with comprehensive records maintained using ICD10 codes and accessible to both healthcare providers and authorities at various levels. By leveraging multilingual capabilities and offline functionality, Swasth Sahayak aims to bridge the gap in healthcare accessibility, ultimately contributing to improved health outcomes and well-being for all.
+
+The foundation of Swasth Sahayak rests on a multifaceted approach that integrates technology, community engagement, and data-driven strategies to optimize healthcare delivery. Through the deployment of field health workers armed with standardized questionnaires, the project ensures comprehensive health screenings for all members of a family, thereby facilitating early detection and intervention for various health conditions. Notably, Swasth Sahayak places a special emphasis on mental health, recognizing its often-overlooked significance and the need for stigmatization and support within communities.
+
+In essence, Swasth Sahayak represents a paradigm shift in healthcare delivery, reimagining the role of technology and community engagement in ensuring equitable access to healthcare for all. By extending care to the home and enabling health workers to serve as trusted allies and advocates for individuals and families, the project not only addresses immediate health needs but also lays the groundwork for sustainable health systems that prioritize prevention, inclusivity, and holistic well-being. As Swasth Sahayak continues to expand its reach and impact, it stands as a testament to the transformative power of innovation and collaboration in building healthier, more resilient communities.
+
   
 ## Major Challenge Encountered
 
@@ -33,13 +43,17 @@ Download the Expo SDK 50 from https://expo.dev/go
 
 ## Assumptions
 
-## Frontend
+1. Each Patient has Unique ABHA-ID
+
+## Frontend Technologies Used
 
 1. React-hot-toast
 2. Redux
 3. Redux-Persists
 4. React-Skeleton
 5. Axios
+6. Expo-Sqlite
+7. Async-Storage (React Native)
 
 
 ### Use Case Diagram Link
