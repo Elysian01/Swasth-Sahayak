@@ -10,17 +10,17 @@ import QuestionForm from "../components/inputs/QuestionForm";
 const EditQuestion = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { fieldworker,DiseaseData } = location.state;
-  console.log(fieldworker);
+  const { question,DiseaseData } = location.state;
+  console.log(question);
   const token = useSelector((state) => state.auth.token);
-  const handleEdit = async (updatedFieldWorker) => {
+  const handleEdit = async (updatedQuestion) => {
     // Handle the updated FieldWorker object
-    console.log("Updated FieldWorker:", updatedFieldWorker);
+    console.log("Updated FieldWorker:", updatedQuestion);
     try {
       const headers = { Authorization: `Bearer ${token}` };
       await putRequest(
-        `/admin/updateQuestion/${fieldworker.id}`,
-        updatedFieldWorker,
+        `/admin/updateQuestion/${question.id}`,
+        updatedQuestion,
         headers
       );
       navigate("/questionnaire-dashboard");
@@ -32,7 +32,7 @@ const EditQuestion = () => {
     <div>
       <Navbar />
       <PageHeading title="Question Details"/>
-      <QuestionForm handleEdit={handleEdit} question={fieldworker} DiseaseData={DiseaseData}/>
+      <QuestionForm handleEdit={handleEdit} question={question} DiseaseData={DiseaseData}/>
     </div>
   );
 };

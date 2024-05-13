@@ -4,9 +4,9 @@ import "../../pages/css/common.css";
 import Eye from "../../static/icons/eye.png";
 import Slate from "../../static/imgs/slate.png";
 import { useNavigate } from "react-router-dom";
-function CurrentDiagnosisCard({ data, diagnoseID,patientId }) {
+function CurrentDiagnosisCard({ data, diagnoseID,abhaid,patientId }) {
   const navigate = useNavigate();
-  
+  console.log('patient id in current diagnosis card is '+patientId)
   // if (!data.prescription || data.prescription.length === 0) {
   //   return null; // Render nothing if prescription data is unavailable or empty
   // }
@@ -14,7 +14,7 @@ function CurrentDiagnosisCard({ data, diagnoseID,patientId }) {
   // console.log(lastPrescription.did)
   const size = data.did.length;
   const handleViewDiagnose = () => {
-    navigate("/diagnose-report", { state: { diagnoseID,patientId } });
+    navigate("/diagnose-report", { state: { diagnoseID,abhaid,patientId } });
   };
   return (
     <div className="current-diagnosis-card">

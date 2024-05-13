@@ -106,8 +106,8 @@ function DoctorDashboard() {
 
   const handleViewClick = (abhaid,patientId) => {
     dispatch(setSendPatientId(patientId));
-    console.log(patientId);
-    navigate("/patient-dashboard", { state: { abhaid } });
+    console.log('patient id is '+patientId);
+    navigate("/patient-dashboard", { state: { abhaid ,patientId} });
   };
   const handleViewMoreClick = () => {
     navigate("/diagnose-request");

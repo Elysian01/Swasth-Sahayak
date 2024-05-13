@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/headers/Navbar";
 import PageHeading from "../components/headers/PageHeading";
 import PrimaryTable from "../components/tables/PrimaryTable";
-import GradientInput from "../components/inputs/GradientInput";
 import { getRequest, putRequest, deleteRequest } from "../components/Api/api";
 import viewIcon from "../static/icons/eye.png";
 import { useNavigate } from "react-router-dom";
@@ -61,8 +60,8 @@ function QuestionnaireDashboard() {
     fetchdiseasename();
   }, []);
 
-  const openModal = (fieldworker) => {
-    setSelectedFieldWorker(fieldworker);
+  const openModal = (question) => {
+    setSelectedFieldWorker(question);
     setIsModalOpen(true);
   };
 
@@ -71,8 +70,8 @@ function QuestionnaireDashboard() {
     setIsModalOpen(false);
   };
 
-  const handleEdit = (fieldworker) => {
-    navigate("/edit-question", { state: { fieldworker, DiseaseData } });
+  const handleEdit = (question) => {
+    navigate("/edit-question", { state: { question, DiseaseData } });
   };
 
   useEffect(() => {
@@ -110,18 +109,6 @@ function QuestionnaireDashboard() {
         `/admin/deletequestion/${id}`,
         headers
       );
-      // await axios.put(`http://localhost:9192/data/${row.id}`, {
-      //   ...row,
-      //   status: newStatus,
-      // });
-      // setTableData((prevData) =>
-      //   prevData.map((prevRow) => {
-      //     if (prevRow.id === row.id) {
-      //       return { ...prevRow, status: newStatus };
-      //     }
-      //     return prevRow;
-      //   })
-      // );
       fetchData();
     } catch (error) {
       console.error("Error updating status:", error);

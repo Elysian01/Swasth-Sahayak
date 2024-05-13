@@ -8,7 +8,6 @@ const QuestionForms = ({ handleEdit, question,DiseaseData }) => {
     const [questionnaireName, setquestionnaireName] = useState(question.icd10);
     const [Question, setQuestion] = useState(question.ques_text);
     const [option, setoption] = useState(question.option);
-    console.log(questionnaireName)
 
     const handleDateChange = (event) => {
         setquestionnaireName(event.target.value);
@@ -29,6 +28,7 @@ const QuestionForms = ({ handleEdit, question,DiseaseData }) => {
         event.preventDefault();
         // Create a doctor object with the updated form data
         const updatedquestion = {
+            ...question,
             icd10: questionnaireName,
             ques_text: Question,
             options: option,

@@ -28,14 +28,15 @@ function PatientDashboard() {
   const location = useLocation();
   const { state } = location;
 
-  const patientId = (state ? state.abhaid : "").toString();
-
+  const abhaid = (state ? state.abhaid : "").toString();
+  const patientId=(state? state.patientId:"");
+  console.log('pateint id in patient dashoboard is '+patientId)
   useEffect(() => {
     const fetchData = async () => {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const response = await getRequest(
-          `/doctor/search-patient-by-abha-id/${patientId}`,
+          `/doctor/search-patient-by-abha-id/${abhaid}`,
           headers
         );
         console.log(response);
@@ -49,7 +50,7 @@ function PatientDashboard() {
     };
 
     fetchData();
-  }, [patientId, token]);
+  }, [abhaid, token]);
 
   const columns = ["Date", "Field Worker Assigned", "Diagnosis", "Comments"];
 
@@ -120,7 +121,7 @@ function PatientDashboard() {
               />
             </SkeletonTheme>
           ) : (
-            <CurrentDiagnosisCard data={tableData} diagnoseID={diagnoseID} patientId={patientId}/>
+            <CurrentDiagnosisCard data={tableData} diagnoseID={diagnoseID} abhaid={abhaid} patientId={patientId}/>
           )}
         </div>
       </div>

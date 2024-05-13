@@ -28,21 +28,20 @@ function DiagnoseReport() {
   const [doctorPrescription, setDoctorPrescription] = useState("");
   const [doctorComment, setDoctorComment] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const location = useLocation();
   const { state } = location;
-  const patientId = state ? state.patientId : null;
+  const abhaid = state ? state.abhaid : null;
   const diagnoseID = state ? state.diagnoseID : null;
+  const patientId = state ? state.patientId : null;
+  console.log('patient id via navigate is in diagnose report is : '+patientId)
   const [uploadDieseaseError, setuploadDieseaseError] = useState("");
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const pids = useSelector((state) => state.auth.pids); // Assuming auth is the name of your slice
-  const sendPatientId = useSelector((state) => state.auth.sendPatientId);
+
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
-     console.log("this patiient id need to send:"+sendPatientId);
     getDiesease();
     fetchData();
   }, []);
@@ -54,6 +53,7 @@ function DiagnoseReport() {
         headers
       );
       console.log(response);
+      
       setfieldworkerComment(response.fieldworkercomment);
       setTableData(response.patientanswers);
       setFirstDate(response.date);
@@ -74,6 +74,7 @@ function DiagnoseReport() {
   };
   const setDiesease = (event) => {
     const value = event.target.value;
+    console.log("value is"+value);
     if (value != "select questionare name") {
       setUploadDiesease(value);
       setuploadDieseaseError("");
@@ -90,18 +91,24 @@ function DiagnoseReport() {
     const day = String(currentDate.getDate()).padStart(2, "0");
     const date = `${year}-${month}-${day}`;
     const formattedDates = dates.map((date) => date.format("YYYY-MM-DD"));
-    const data = {
-      pid: patientId,
-      prescriptiondate: date,
-      prescription: doctorPrescription,
-      doctorcomment: doctorComment,
-      diseasename: uploadDiesease,
-      doctorid: user,
-      followUpDate: formattedDates,
-      diagnosisid: diagnoseID,
-    };
+
     try {
       const headers = { Authorization: `Bearer ${token}` };
+      
+      console.log('patient id via navigate is in diagnose report is just before data us  : '+patientId);
+      const data = {
+        pid: patientId,
+        prescriptiondate: date,
+        prescription: doctorPrescription,
+        doctorcomment: doctorComment,
+        diseasename: uploadDiesease,
+        doctorid: user,
+        followUpDate: formattedDates,
+        diagnosisid: diagnoseID,
+      };
+      console.log('afeter sending data is pid is  : '+data.pid);
+      console.log("I amd sending this data:" + data);
+
       const response = await postRequest(
         `/doctor/addprescription`,
         data,
@@ -110,7 +117,7 @@ function DiagnoseReport() {
       dispatch(setPids([...pids, response.pid])); // Assuming pids is already defined
 
       navigate("/doctor-dashboard");
-      console.log(response);
+      console.log("response from server is :"+response.pid);
     } catch (error) {
       console.log(error);
     }
@@ -146,7 +153,7 @@ function DiagnoseReport() {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const response = await getRequest(
-        `/doctor/download_images/${sendPatientId}/${diagnoseDate}`,
+        `/doctor/download_images/${abhaid}/${diagnoseDate}`,
         headers
       );
       console.log("artificats array:", response);
