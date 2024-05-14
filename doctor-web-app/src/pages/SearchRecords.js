@@ -44,8 +44,8 @@ function SearchRecords() {
           headers
         );
         console.log("Filtered Data Response:", response); // Log the response
-        // setTableData(response);
-        // setLoading(false);
+        setTableData(response);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
