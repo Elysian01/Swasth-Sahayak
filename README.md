@@ -15,7 +15,7 @@ Figma Design Files: https://www.figma.com/files/project/198350664/Team-project?f
    2. [Doctor Web Application](./doctor-web-app)
    3. [Supervisor Admin Web Application](./supervisor-admin-web-app)
 2. Backend (common server for all frontend applications)
-   1. [Server](./server)
+   1. [Server](https://github.com/Priyansuvaish/Backend)
 
 ## Run the App
 
