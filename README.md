@@ -1,9 +1,14 @@
 # Swasth-Sahayak
-App for field workers to extend health service from the hospital to the home
+An app for field workers to extend health service from the hospital to the home. It also includes for following actors in our system
 
-Report Link: (Click here)[https://docs.google.com/document/d/1Yx6KPnWj27cXy02DpWT6YFuB4hkk9GDJG9ekf41Qm18/edit?usp=sharing]
+1. Field Worker: To get patient details and images via set questionnaire, and follows instruction of docter.
+2. Supervisor: To Schedule Field Worker
+3. Admin: Add/Delete/Revoke permission of other actors, and also add questionnaire
+4. Docter: View all patient-records, diagnose it and send instruction and prescription to field worker for patient.
 
-Figma Design Files: https://www.figma.com/files/project/198350664/Team-project?fuid=1113531776039202105
+Report Link: [Click here](https://docs.google.com/document/d/1Yx6KPnWj27cXy02DpWT6YFuB4hkk9GDJG9ekf41Qm18/edit?usp=sharing)
+
+Figma Design Files: [Click here](https://www.figma.com/files/project/198350664/Team-project?fuid=1113531776039202105)
 
 
 ## Project Structure
@@ -37,6 +42,7 @@ In essence, Swasth Sahayak represents a paradigm shift in healthcare delivery, r
 5. Mitigation of Cross-Origin Resource Sharing (CORS) Issues: During the integration of the ReactJS frontend with the Spring Boot backend, we encountered CORS errors, necessitating resolution. This involved configuring the backend infrastructure to permit cross-origin requests originating from the frontend, thus resolving the CORS issues and facilitating seamless communication between client and server components.
 6. Offline Functionality Implementation: Achieving full offline functionality for the application post-initial data download posed considerable challenges, particularly in managing various edge cases and ensuring data segregation to enable individual component updates via AutoSync seamlessly.
 7. AutoSync Integration: The incorporation of the AutoSync feature utilizing Netinfo presented notable complexities. Our aim was to ensure that data uploads occurred only once whenever connectivity was established, with subsequent deletion of data upon successful upload completion.
+8. Scheduling Algorithm
 
 
 ## Assumptions
