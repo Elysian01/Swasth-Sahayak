@@ -10,7 +10,7 @@ Report Link: [Click here](https://docs.google.com/document/d/1Yx6KPnWj27cXy02DpW
 
 Figma Design Files: [Click here](https://www.figma.com/files/project/198350664/Team-project?fuid=1113531776039202105)
 
-
+Video Link: [Click here](https://drive.google.com/drive/folders/1kKMFu-v1r27rtQF-g2krN7QVKQjXrBgo?usp=sharing)
 ## Project Structure
 
 1. Frontend Application
