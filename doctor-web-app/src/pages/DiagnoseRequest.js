@@ -47,7 +47,7 @@ function DiagnoseRequest() {
 
   const handleViewClick = (abhaid,patientid) => {
     dispatch(setSendPatientId(patientid));
-    navigate("/patient-dashboard", { state: { abhaid } });
+    navigate("/patient-dashboard", { state: { abhaid, patientid } });
   };
   const handleDashboard = () => {
     navigate("/doctor-dashboard");

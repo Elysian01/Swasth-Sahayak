@@ -27,16 +27,17 @@ function PatientDashboard() {
 
   const location = useLocation();
   const { state } = location;
-
   const abhaid = (state ? state.abhaid : "").toString();
   const patientId=(state? state.patientId:"");
-  console.log('pateint id in patient dashoboard is '+patientId)
+
+  //console.log('pateint id in patient dashoboard is '+patientId);
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("State of application is "+state.abhaid);
         const headers = { Authorization: `Bearer ${token}` };
         const response = await getRequest(
-          `/doctor/search-patient-by-abha-id/${abhaid}`,
+          `/doctor/search-patient-by-abha-id/${state.abhaid.toString()}`,
           headers
         );
         console.log(response);

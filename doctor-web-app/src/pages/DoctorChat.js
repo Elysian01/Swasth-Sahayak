@@ -13,7 +13,7 @@ function DoctorChat() {
       <Navbar />
       <ChatEngine
         height="90vh"
-        projectID="a726c989-24aa-4104-bbc6-678e11880f84"
+        projectID="82db3e77-b9a8-49bf-9424-9e15c1cd40b8"
         userName={user}
         userSecret={user}
       />
