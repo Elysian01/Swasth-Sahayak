@@ -6,6 +6,10 @@ An app for field workers to extend health service from the hospital to the home.
 3. Admin: Add/Delete/Revoke permission of other actors, and also add questionnaire
 4. Docter: View all patient-records, diagnose it and send instruction and prescription to field worker for patient.
 
+Website URL:
+1. Administrator: [Click Here](https://swasth-sahayak-admin.firebaseapp.com)
+2. Doctor: [Click Here](https://swasth-sahayak-f7c6d.firebaseapp.com)
+
 Report Link: [Click here](https://docs.google.com/document/d/1Yx6KPnWj27cXy02DpWT6YFuB4hkk9GDJG9ekf41Qm18/edit?usp=sharing)
 
 Figma Design Files: [Click here](https://www.figma.com/files/project/198350664/Team-project?fuid=1113531776039202105)
