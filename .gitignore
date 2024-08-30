@@ -1,9 +1,6 @@
 .DS_Store
 .vscode
-.fire*
-.firebase
-firebase.json
-/.firebase/*
+
 **/android/
 node_modules
 npm-debug.log
